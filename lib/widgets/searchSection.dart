@@ -1,0 +1,125 @@
+import 'package:commerce_app/style/my_flutter_app_icons.dart';
+import 'package:commerce_app/widgets/textField.dart';
+import 'package:flutter/material.dart';
+
+import '../consts.dart';
+
+//////////////////////////////////////////////////* SearchSection
+class SearchSection extends StatefulWidget {
+  @override
+  _SearchSectionState createState() => _SearchSectionState();
+}
+
+class _SearchSectionState extends State<SearchSection> {
+  String? _chosenOption;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      titleSpacing: 0 //* for  deleting unexpected padding of title
+      // automaticallyImplyLeading: false,
+      ,
+      toolbarHeight: 130,
+      expandedHeight: 130, //* IMPORTANT: making space for whole Bar
+      // pinned: true,
+      floating: true, ////* instance appearance when slid up
+      // centerTitle: true,
+      // flexibleSpace: FlexibleSpaceBar(
+      //   background: Column(children: [
+      //     SizedBox(height: 40),
+      //     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      //       SizedBox(width: 400, child: TextFieldWithIcon()),
+      //       SizedBox(width: 10),
+      //       IconButton(icon: Icon(MyFlutterApp.params), onPressed: null)
+      //     ]),
+      //   ]),
+      // ),
+      title: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 25),
+        child: Column(children: [
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Expanded(child: TextFieldWithIcon()),
+            SizedBox(width: 20),
+            IconButton(
+              icon: Icon(
+                MyFlutterApp.params,
+                color: appBargrey,
+              ),
+              onPressed: () {},
+              // splashColor: Colors.red,
+            )
+          ]),
+          Container(
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                CategoryTextButton(
+                  isChosen: _chosenOption == "Popular" ? true : false,
+                  text: "Popular",
+                  function: (var e) {
+                    setState(() {
+                      _chosenOption = e;
+                    });
+                    print(this._chosenOption);
+                  },
+                ),
+                CategoryTextButton(
+                  isChosen: _chosenOption == "Recommended" ? true : false,
+                  text: "Recommended",
+                  function: (var e) {
+                    setState(() {
+                      _chosenOption = e;
+                    });
+                    print(this._chosenOption);
+                  },
+                ),
+                CategoryTextButton(
+                  isChosen: _chosenOption == "Top Brands" ? true : false,
+                  text: "Top Brands",
+                  function: (var e) {
+                    setState(() {
+                      _chosenOption = e;
+                    });
+                    print(this._chosenOption);
+                  },
+                ),
+              ],
+            ),
+          )
+        ]),
+      ),
+
+      backgroundColor: appBarWhite,
+      // title:
+    );
+  }
+}
+
+///
+
+class CategoryTextButton extends StatelessWidget {
+  final String text;
+  final function;
+  final isChosen;
+
+  CategoryTextButton(
+      {required this.text, required this.function, this.isChosen});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      decoration: isChosen == true
+          ? BoxDecoration(border: Border(bottom: BorderSide(width: 1)))
+          : BoxDecoration(
+              border: Border.all(
+                  width: 0.0, color: Colors.blueGrey.withOpacity(0))),
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: TextButton(
+        onPressed: () => this.function(this.text),
+        child: Text(this.text, style: categoryFontStyle),
+      ),
+    );
+  }
+}
