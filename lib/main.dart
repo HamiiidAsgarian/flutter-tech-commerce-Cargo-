@@ -1,5 +1,10 @@
 import 'package:commerce_app/providerModel.dart';
+import 'package:commerce_app/screens/CartScreen.dart';
+import 'package:commerce_app/screens/categoryScreen.dart';
+import 'package:commerce_app/screens/favoritesScreen.dart';
+import 'package:commerce_app/screens/itemDetailScreen.dart';
 import 'package:commerce_app/screens/mainScreen.dart';
+import 'package:commerce_app/screens/profileScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,9 +26,14 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          "/Main": (context) => MainScreen(),
+          "/": (context) => MainScreen(),
+          "/Item": (context) => ItemDetailScreen(),
+          "/Cart": (context) => CartScreen(),
+          "/Favorite": (context) => FavoriteScreen(),
+          "/Category": (context) => CategoryScreen(),
+          "/Profile": (context) => ProfileScreen(),
         },
-        initialRoute: "/Main",
+        initialRoute: "/",
       ),
     );
   }

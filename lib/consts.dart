@@ -43,3 +43,5 @@ const priceFontStyle = TextStyle(
 
 const greySelectedCircule = Color.fromRGBO(112, 112, 112, 1);
 const greyUnselectedCircule = Color.fromRGBO(183, 183, 183, 1);
+
+//* category ==> itemBrandFontStyle.copyWith(fontSize: 20),
