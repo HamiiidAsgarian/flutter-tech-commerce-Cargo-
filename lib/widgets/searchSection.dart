@@ -43,7 +43,7 @@ class _SearchSectionState extends State<SearchSection> {
               hint: 'Type something to search',
               icon: MyFlutterApp.search_5,
             )),
-            SizedBox(width: 20),
+            // SizedBox(width: 20),
             IconButton(
               icon: Icon(
                 MyFlutterApp.params,

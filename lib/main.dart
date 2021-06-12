@@ -3,6 +3,7 @@ import 'package:commerce_app/screens/CartScreen.dart';
 import 'package:commerce_app/screens/categoryScreen.dart';
 import 'package:commerce_app/screens/favoritesScreen.dart';
 import 'package:commerce_app/screens/itemDetailScreen.dart';
+import 'package:commerce_app/screens/listeddItemsScreen.dart';
 import 'package:commerce_app/screens/mainScreen.dart';
 import 'package:commerce_app/screens/profileScreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
           "/Favorite": (context) => FavoriteScreen(),
           "/Category": (context) => CategoryScreen(),
           "/Profile": (context) => ProfileScreen(),
+          "/ListedItems": (context) => ListedItemsScreen(),
         },
         initialRoute: "/",
       ),

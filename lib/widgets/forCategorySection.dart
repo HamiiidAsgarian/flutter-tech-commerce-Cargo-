@@ -19,7 +19,7 @@ class ForCategorySection extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/Category");
+                Navigator.pushNamed(context, "/ListedItems");
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,23 +114,29 @@ class Item extends StatelessWidget {
                     },
                   )),
             ),
-            SizedBox(height: 5),
-
-            Text(
-              "${this.title != null ? this.title : ""} Classical",
-              style: itemTitleFontStyle,
-              overflow: TextOverflow.ellipsis,
-            ),
-            Text("Boomerage", style: itemBrandFontStyle),
-            // SizedBox(height: 2),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("\$250.00", style: priceFontStyle),
-                Icon(MyFlutterApp.heart_2, size: 15)
+                SizedBox(height: 5),
+
+                Text(
+                  "${this.title != null ? this.title : ""} Classical",
+                  style: itemTitleFontStyle,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text("Boomerage", style: itemBrandFontStyle),
+                // SizedBox(height: 2),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text("\$250.00", style: priceFontStyle),
+                    Icon(MyFlutterApp.heart_2, size: 15)
+                  ],
+                )
               ],
-            )
+            ))
           ],
         ),
       ),

@@ -69,16 +69,18 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({
     this.leadingIcon,
     this.leadingIconFunction,
+    this.title,
     Key? key,
   }) : super(key: key);
   final Icon? leadingIcon;
   final Function? leadingIconFunction;
+  final Widget? title;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       // automaticallyImplyLeading: false,
       // titleSpacing: 0 //* for  deleting unexpected padding of title
-
+      title: this.title,
       shadowColor: Colors.red,
       // title: Text("data"),
       // titleSpacing: 18,
