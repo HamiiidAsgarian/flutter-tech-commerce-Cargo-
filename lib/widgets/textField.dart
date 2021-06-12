@@ -1,11 +1,11 @@
 import 'package:commerce_app/consts.dart';
-import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWithIcon extends StatelessWidget {
-  const TextFieldWithIcon({
-    Key? key,
-  }) : super(key: key);
+  final String? hint;
+  final IconData? icon;
+
+  TextFieldWithIcon({this.hint, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +23,13 @@ class TextFieldWithIcon extends StatelessWidget {
       decoration: new InputDecoration(
           prefixIcon: Padding(
             padding: EdgeInsets.only(left: 15, right: 15),
-            child: Icon(
-              MyFlutterApp.search_5,
-              size: 23,
-              color: appBargrey,
-            ),
+            child: this.icon != null
+                ? Icon(
+                    this.icon,
+                    size: 23,
+                    color: appBargrey,
+                  )
+                : null,
           ),
           fillColor: greySearchbarBackground,
           filled: true,
@@ -57,7 +59,7 @@ class TextFieldWithIcon extends StatelessWidget {
           // enabledBorder: OutlineInputBorder(
           //   borderSide: BorderSide(color: Colors.green, width: 5.0),
           // ),
-          hintText: 'Type a word to search',
+          hintText: this.hint,
           hintStyle: TextStyle(color: Colors.grey, fontSize: 17)),
     );
   }

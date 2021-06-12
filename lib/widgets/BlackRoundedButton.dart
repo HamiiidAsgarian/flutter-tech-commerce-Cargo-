@@ -2,9 +2,10 @@ import 'package:commerce_app/consts.dart';
 import 'package:flutter/material.dart';
 
 class BlackRoundedButton extends StatelessWidget {
-  const BlackRoundedButton({
-    Key? key,
-  }) : super(key: key);
+  final String? title;
+  BlackRoundedButton({
+    this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class BlackRoundedButton extends StatelessWidget {
               // backgroundColor: Colors.pink,
               ),
           child: Text(
-            'Add to cart',
+            this.title!,
             style: priceFontStyle.copyWith(color: Colors.white),
           ),
         ),

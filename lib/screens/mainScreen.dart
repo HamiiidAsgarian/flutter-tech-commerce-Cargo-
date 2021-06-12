@@ -23,10 +23,10 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   var currentpage1 = 0;
   List<Widget> screens = [
-    ProfileScreen(),
     MainScreenContetnts(),
     CartScreen(),
-    FavoriteScreen()
+    FavoriteScreen(),
+    ProfileScreen(),
   ];
 
   @override
