@@ -96,23 +96,27 @@ class Item extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: Hero(
+            Expanded(
+              flex: 2,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: Hero(
                   tag: this.title!,
-                  child: FutureBuilder(
-                    future: loadimage('https://picsum.photos/250?image=9'),
-                    builder: (context, AsyncSnapshot<Widget> snapshot) {
-                      if (snapshot.hasData) {
-                        print("Image is loaded");
-                        return snapshot.data!;
-                      } else {
-                        print("loading Image");
-
-                        return CircularProgressIndicator();
-                      }
-                    },
-                  )),
+                  child: Container(
+                    // height: 90,
+                    // width: 90,
+                    color: Colors.amber,
+                    // decoration: BoxDecoration(
+                    //   image: DecorationImage(
+                    //     image: NetworkImage(
+                    //         "https://i.picsum.photos/id/77/200/300.jpg?grayscale&hmac=0XOpv5k16oN2OIdXA51RRwpKHuMnidcPYoVk6X5iUaI"),
+                    //     //whatever image you can put here
+                    //     fit: BoxFit.cover,
+                    //   ),
+                    // ),
+                  ),
+                ),
+              ),
             ),
             Expanded(
                 child: Column(

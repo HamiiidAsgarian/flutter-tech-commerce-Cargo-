@@ -16,13 +16,15 @@ class _SearchSectionState extends State<SearchSection> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      automaticallyImplyLeading:
+          false, //////////////////////////////////* removing default unwanted back button
       titleSpacing: 0 //* for  deleting unexpected padding of title
       // automaticallyImplyLeading: false,
       ,
       toolbarHeight: 130,
       expandedHeight: 130, //* IMPORTANT: making space for whole Bar
       // pinned: true,
-      floating: true, ////* instance appearance when slid up
+      // floating: true, ////* instance appearance when slid up
       // centerTitle: true,
       // flexibleSpace: FlexibleSpaceBar(
       //   background: Column(children: [

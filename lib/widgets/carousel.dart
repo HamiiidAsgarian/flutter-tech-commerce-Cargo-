@@ -16,9 +16,9 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   // late PageController controller;
-  int currentpage = 0;
+  int currentpage = 1;
   var controller = PageController(
-    initialPage: 0,
+    initialPage: 1,
     keepPage: false,
     viewportFraction: 0.75, ////*fraction
   );
@@ -165,7 +165,9 @@ class _SlideState extends State<Slide> {
                     ////////////////////////////////////* main slide
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
-                      color: widget.index % 2 == 0 ? Colors.blue : Colors.red,
+                      color: widget.index % 2 == 0
+                          ? Colors.blue
+                          : Colors.redAccent,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
