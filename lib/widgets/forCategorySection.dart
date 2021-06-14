@@ -31,7 +31,7 @@ class ForCategorySection extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "View More",
+                        "View More ",
                         style: viewMoreFontStyle,
                       ),
                       Icon(

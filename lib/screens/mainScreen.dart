@@ -4,6 +4,7 @@ import 'package:commerce_app/screens/CartScreen.dart';
 import 'package:commerce_app/screens/favoritesScreen.dart';
 import 'package:commerce_app/screens/profileScreen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
+import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/carousel.dart';
 import 'package:commerce_app/widgets/forCategorySection.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
@@ -29,11 +30,11 @@ class _MainScreenState extends State<MainScreen> {
     ProfileScreen(),
   ];
 
-  @override
-  void initState() {
-    print("Hellow");
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   print("Hellow");
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
