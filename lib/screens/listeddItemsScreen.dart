@@ -1,6 +1,6 @@
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/appbar.dart';
-import 'package:commerce_app/widgets/forCategorySection.dart';
+import 'package:commerce_app/widgets/item.dart';
 import 'package:flutter/material.dart';
 
 import '../consts.dart';

@@ -63,6 +63,8 @@ class MainScreenContetnts extends StatefulWidget {
 class _MainScreenContetntsState extends State<MainScreenContetnts> {
   final int sliderIndex = 1;
 
+  get sectionTitle => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,8 +84,12 @@ class _MainScreenContetntsState extends State<MainScreenContetnts> {
                   height:
                       200, //////////////////////////////* carousel Section height
                   child: Carousel(sliderIndex: sliderIndex, itemIndex: 0)),
-              ForCategorySection(sectionTitle: "For Men"),
-              ForCategorySection(sectionTitle: "For WoMen"),
+              ScrollviewCategory(sectionTitle: "For Men"),
+              // Container(
+              //   height: 500,
+              //   child: ForCategorySection(sectionTitle: "For Men"),
+              // )
+              // ForCategorySection(sectionTitle: "For WoMen"),
 
               // ForCategorySection(),
             ],
