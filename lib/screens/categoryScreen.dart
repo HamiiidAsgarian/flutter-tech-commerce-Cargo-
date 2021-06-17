@@ -1,3 +1,4 @@
+import 'package:commerce_app/screens/listeddItemsScreen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 
@@ -39,15 +40,22 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 return TextButton(
                   onPressed: () {},
                   child: Container(
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom:
-                                BorderSide(width: 0.1, color: Colors.grey))),
-                    child: ListTile(
-                      title: Text("item $index",
-                          style: itemBrandFontStyle.copyWith(fontSize: 15)),
-                    ),
-                  ),
+                      height: 60,
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom:
+                                  BorderSide(width: 0.1, color: Colors.grey))),
+                      child: Center(
+                        child: ListTile(
+                          onTap: () => Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return ListedItemsScreen();
+                          })),
+                          trailing: Icon(Icons.keyboard_arrow_right, size: 30),
+                          title: Text("item $index",
+                              style: itemBrandFontStyle.copyWith(fontSize: 17)),
+                        ),
+                      )),
                 );
               }),
           onRefresh: () async {

@@ -1,6 +1,6 @@
 // import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/providerModel.dart';
-import 'package:commerce_app/screens/CartScreen.dart';
+import 'package:commerce_app/screens/categoryScreen.dart';
 import 'package:commerce_app/screens/favoritesScreen.dart';
 import 'package:commerce_app/screens/profileScreen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
@@ -9,6 +9,7 @@ import 'package:commerce_app/widgets/carousel.dart';
 import 'package:commerce_app/widgets/forCategorySection.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
 import 'package:commerce_app/widgets/searchSection.dart';
+import 'package:commerce_app/widgets/windowsCategorySection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,8 @@ class _MainScreenState extends State<MainScreen> {
   var currentpage1 = 0;
   List<Widget> screens = [
     MainScreenContetnts(),
-    CartScreen(),
+    CategoryScreen(),
+    // CartScreen(),
     FavoriteScreen(),
     ProfileScreen(),
   ];
@@ -85,13 +87,9 @@ class _MainScreenContetntsState extends State<MainScreenContetnts> {
                       200, //////////////////////////////* carousel Section height
                   child: Carousel(sliderIndex: sliderIndex, itemIndex: 0)),
               ScrollviewCategory(sectionTitle: "For Men"),
-              // Container(
-              //   height: 500,
-              //   child: ForCategorySection(sectionTitle: "For Men"),
-              // )
-              // ForCategorySection(sectionTitle: "For WoMen"),
-
-              // ForCategorySection(),
+              WindowsCategorySection(),
+              ScrollviewCategory(sectionTitle: "For Men"),
+              ScrollviewCategory(sectionTitle: "For Men"),
             ],
           ),
         )

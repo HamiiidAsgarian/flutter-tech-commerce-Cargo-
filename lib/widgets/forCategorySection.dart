@@ -14,10 +14,10 @@ class ScrollviewCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-      color: Colors.green,
+      padding: EdgeInsets.only(left: 25, right: 25, top: 10, bottom: 5),
+      color: Colors.white,
       child: Column(children: [
-        SizedBox(height: 10),
+        // SizedBox(height: 10),
         CategoryTitle(sectionTitle: this.sectionTitle),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -46,7 +46,7 @@ class CategoryTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
+      // color: Colors.blue,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

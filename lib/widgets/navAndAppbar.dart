@@ -43,8 +43,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               backgroundColor: Colors.red,
             ),
             BottomNavigationBarItem(
-              icon: Icon(MyFlutterApp.wallet),
-              label: 'Wallet',
+              icon: Icon(Icons.list_alt_outlined),
+              label: 'Categories',
               backgroundColor: Colors.green,
             ),
             BottomNavigationBarItem(
