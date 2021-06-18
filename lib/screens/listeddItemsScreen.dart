@@ -30,12 +30,54 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
             Navigator.pushNamed(context, "/");
           },
         ),
-        body: Container(
-          width: double.infinity,
-          color: Colors.blueAccent,
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 0),
-          child: Center(
+        body: Column(children: [
+          Container(
+            // padding: EdgeInsets.symmetric(horizontal: 25),
+            height: 40,
+            // color: Colors.yellowAccent,
+            child: Row(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center, //todo
+              children: [
+                SizedBox(width: 25),
+                Text("Other brands",
+                    style: itemBrandFontStyle.copyWith(fontSize: 15)),
+                SizedBox(width: 5),
+                Expanded(
+                    child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: ['Aftabe', 'Lagan', 'Addidas', 'Puma', 'Banana']
+                      .map((e) => Padding(
+                            padding: EdgeInsets.all(5),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              // width: 100,
+                              // color: Colors.blue,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                border: Border.all(
+                                    width: 1, color: appBargrey.withOpacity(0)),
+                              ),
+                              height: 30,
+                              child: Center(
+                                child: Text(e,
+                                    style: itemBrandFontStyle.copyWith(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600)),
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                ))
+              ],
+            ),
+          ),
+          Expanded(
             child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
               // gridview.count
               // childAspectRatio: MediaQuery.of(context).size.height / 900,
               // // childAspectRatio: 2,
@@ -43,7 +85,8 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
               // mainAxisSpacing: 10,
               // crossAxisCount: 2,
               child: Wrap(
-                alignment: WrapAlignment.spaceBetween,
+                spacing: 0, runSpacing: 0,
+                // alignment: WrapAlignment.spaceAround,
                 // crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   "Reading",
@@ -65,13 +108,27 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
                   "writing",
                   '1',
                 ]
-                    .map<Widget>((dynamic itemTitle) => Item(
-                          title: itemTitle,
+                    .map<Widget>((dynamic itemTitle) => Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Container(
+                              color: Colors.white,
+                              // width: (MediaQuery.of(context).size.width / 2) - 5,
+                              child: Item(
+                                title: itemTitle,
+                                imageWidth:
+                                    (MediaQuery.of(context).size.width / 2) -
+                                        35,
+                              ),
+                            ),
+                          ),
                         ))
                     .toList(),
               ),
             ),
           ),
-        ));
+        ]));
   }
 }

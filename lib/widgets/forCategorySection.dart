@@ -13,6 +13,8 @@ class ScrollviewCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String>? mainScreenItems = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+
     return Container(
       padding: EdgeInsets.only(left: 25, right: 25, top: 10, bottom: 5),
       color: Colors.white,
@@ -22,13 +24,12 @@ class ScrollviewCategory extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: [
-              Item(title: "${this.sectionTitle}1"),
-              Item(title: "${this.sectionTitle}2"),
-              Item(title: "${this.sectionTitle}3"),
-              Item(title: "${this.sectionTitle}4"),
-            ],
-          ),
+              children: mainScreenItems
+                  .map((e) => Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.only(right: 10),
+                      child: Item(title: e)))
+                  .toList()),
         ),
       ]),
     );

@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 
 class Item extends StatelessWidget {
   final String? title;
+  final double imageWidth;
 
-  const Item({Key? key, this.title}) : super(key: key);
+  const Item({Key? key, this.title, this.imageWidth = 130}) : super(key: key);
 
   Future<Widget> loadimage(url) async {
     var a = Image.network(url);
@@ -24,12 +25,12 @@ class Item extends StatelessWidget {
                 builder: (context) => ItemDetailScreen(title: this.title)));
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5),
+        padding: EdgeInsets.symmetric(horizontal: 0),
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(5)),
           child: Container(
             padding: EdgeInsets.all(5),
-            width: 130,
+            width: this.imageWidth,
             // margin: EdgeInsets.only(right: 20),
             // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             color: Colors
@@ -40,7 +41,7 @@ class Item extends StatelessWidget {
               children: [
                 Container(
                   ////////////////////////////////////////* item image frame
-                  height: 130,
+                  height: this.imageWidth,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(25),
                     child: Hero(

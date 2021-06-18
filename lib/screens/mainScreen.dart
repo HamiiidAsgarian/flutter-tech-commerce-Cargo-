@@ -25,6 +25,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   var currentpage1 = 0;
   List<Widget> screens = [
+    // ListedItemsScreen(),
     MainScreenContetnts(),
     CategoryScreen(),
     // CartScreen(),
@@ -86,7 +87,7 @@ class _MainScreenContetntsState extends State<MainScreenContetnts> {
                   height:
                       200, //////////////////////////////* carousel Section height
                   child: Carousel(sliderIndex: sliderIndex, itemIndex: 0)),
-              ScrollviewCategory(sectionTitle: "For Men"),
+              ScrollviewCategory(sectionTitle: "For Mewwwwwn"),
               WindowsCategorySection(),
               ScrollviewCategory(sectionTitle: "For Men"),
               ScrollviewCategory(sectionTitle: "For Men"),
