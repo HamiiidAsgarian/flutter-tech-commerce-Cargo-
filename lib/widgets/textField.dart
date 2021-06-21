@@ -11,7 +11,7 @@ class TextFieldWithIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: (a) {},
-      style: TextStyle(color: appBargrey, fontSize: 20),
+      style: TextStyle(color: cBackgroundGrey, fontSize: 20),
       textAlign: TextAlign.left,
       // controller: searchCtrl,
       keyboardType: TextInputType.text,

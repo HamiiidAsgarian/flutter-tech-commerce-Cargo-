@@ -39,7 +39,7 @@ class ScreenWidthSizedContainer extends StatelessWidget {
       width: (MediaQuery.of(context).size.width / 2) - 25,
       // color: Colors.amber,               //////////////////////////// * item main frame
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
         child: TextButton(
           onPressed: () =>
               Navigator.push(context, MaterialPageRoute(builder: (context) {

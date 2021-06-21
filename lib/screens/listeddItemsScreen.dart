@@ -16,6 +16,7 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: cBackgroundGrey,
         appBar: MyAppBar(
           title: Text(
             "Items",
@@ -31,53 +32,17 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
           },
         ),
         body: Column(children: [
-          Container(
-            // padding: EdgeInsets.symmetric(horizontal: 25),
-            height: 40,
-            // color: Colors.yellowAccent,
-            child: Row(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center, //todo
-              children: [
-                SizedBox(width: 25),
-                Text("Other brands",
-                    style: itemBrandFontStyle.copyWith(fontSize: 15)),
-                SizedBox(width: 5),
-                Expanded(
-                    child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: ['Aftabe', 'Lagan', 'Addidas', 'Puma', 'Banana']
-                      .map((e) => Padding(
-                            padding: EdgeInsets.all(5),
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              // width: 100,
-                              // color: Colors.blue,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                                border: Border.all(
-                                    width: 1, color: appBargrey.withOpacity(0)),
-                              ),
-                              height: 30,
-                              child: Center(
-                                child: Text(e,
-                                    style: itemBrandFontStyle.copyWith(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w600)),
-                              ),
-                            ),
-                          ))
-                      .toList(),
-                ))
-              ],
-            ),
+          Divider(
+            height: 1,
+            color: cBackgroundGrey,
           ),
+          FilterAndSortSection(),
+          SizedBox(height: 7),
+          OtherBrandsSection(),
+          SizedBox(height: 7),
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 0),
               // gridview.count
               // childAspectRatio: MediaQuery.of(context).size.height / 900,
               // // childAspectRatio: 2,
@@ -108,9 +73,10 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
                   "writing",
                   '1',
                 ]
-                    .map<Widget>((dynamic itemTitle) => Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    .map<Widget>((dynamic itemTitle) => Container(
+                          // color: Colors.amber,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(5),
                             child: Container(
@@ -120,7 +86,7 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
                                 title: itemTitle,
                                 imageWidth:
                                     (MediaQuery.of(context).size.width / 2) -
-                                        35,
+                                        59,
                               ),
                             ),
                           ),
@@ -130,5 +96,105 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
             ),
           ),
         ]));
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+class OtherBrandsSection extends StatelessWidget {
+  const OtherBrandsSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 0), //NOTE section margin
+      // color: Colors.amber,
+      // padding: EdgeInsets.symmetric(horizontal: 25),
+      height: 40,
+      // color: Colors.yellowAccent,
+      child: Row(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center, //todo
+        children: [
+          SizedBox(width: 25),
+          Text("Other brands",
+              style: itemBrandFontStyle.copyWith(fontSize: 15)),
+          SizedBox(width: 7),
+          Expanded(
+              child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: ['Aftabe', 'Lagan', 'Addidas', 'Puma', 'Banana']
+                .map((e) => Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white, //NOTE Other brands
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          border: Border.all(width: 1, color: cBorderGrey),
+                        ),
+                        height: 30,
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 0),
+                            child: Text(e,
+                                style: itemBrandFontStyle.copyWith(
+                                    fontSize: 13, fontWeight: FontWeight.w600)),
+                          ),
+                        ),
+                      ),
+                    ))
+                .toList(),
+          ))
+        ],
+      ),
+    );
+  }
+}
+
+class FilterAndSortSection extends StatelessWidget {
+  const FilterAndSortSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //NOTE Filter and sort Section
+      padding: EdgeInsets.symmetric(vertical: 10),
+      color: Colors.white,
+      child: Row(children: [
+        Expanded(
+          child: TextButton(
+            onPressed: () {},
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Icon(
+                Icons.filter_list,
+                size: 25,
+                color: appBargrey,
+              ),
+              SizedBox(width: 5),
+              Text("Filter", style: itemTitleFontStyle.copyWith(fontSize: 18))
+            ]),
+          ),
+        ),
+        Expanded(
+          child: TextButton(
+            onPressed: () {},
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Icon(
+                Icons.sort,
+                size: 25,
+                color: appBargrey,
+              ),
+              SizedBox(width: 5),
+              Text("Sort", style: itemTitleFontStyle.copyWith(fontSize: 18))
+            ]),
+          ),
+        ),
+      ]),
+    );
   }
 }

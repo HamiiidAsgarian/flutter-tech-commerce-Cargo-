@@ -24,10 +24,12 @@ class Item extends StatelessWidget {
             MaterialPageRoute(
                 builder: (context) => ItemDetailScreen(title: this.title)));
       },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        child: Container(
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(
+              horizontal: 7, vertical: 7), //NOTE Item main margin
           child: Container(
             padding: EdgeInsets.all(5),
             width: this.imageWidth,
@@ -43,7 +45,8 @@ class Item extends StatelessWidget {
                   ////////////////////////////////////////* item image frame
                   height: this.imageWidth,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(5),
+                    //NOTE Image border
                     child: Hero(
                       tag: this.title!,
                       child: Container(

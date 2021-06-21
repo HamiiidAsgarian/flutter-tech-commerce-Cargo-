@@ -83,7 +83,7 @@ class _CarouselState extends State<Carousel> {
       child: Container(
         //////////////////////////////////////////* whole slider bar
         height: 200,
-        color: Colors.white,
+        color: cBackgroundGrey,
         child: Column(children: [
           Expanded(
             child: PageView

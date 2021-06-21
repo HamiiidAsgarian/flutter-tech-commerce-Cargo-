@@ -36,7 +36,8 @@ class _SearchSectionState extends State<SearchSection> {
       //     ]),
       //   ]),
       // ),
-      title: Padding(
+      title: Container(
+        // color: cBackgroundGrey, //NOTE search section bg color
         padding: EdgeInsets.symmetric(horizontal: 25),
         child: Column(children: [
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
