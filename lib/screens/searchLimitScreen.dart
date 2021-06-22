@@ -14,6 +14,7 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
   int sliderMin = 0;
   int slidermax = 500;
   var testText;
+  bool _statusCheckValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +23,17 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.amber,
+        leading: Container(),
         actions: [
           Padding(
               padding: EdgeInsets.only(right: 25),
-              child: IconButton(onPressed: () {}, icon: Icon(Icons.close)))
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.close)))
         ],
-        title: Center(
-          child: Text("SearchLimit"),
-        ),
+        title: Align(alignment: Alignment(0.35, 0), child: Text("SearchLimit")),
       ),
       body: Column(children: [
         Divider(height: 0),
@@ -46,81 +50,112 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
               },
             )),
         Container(
-          height: 50,
+          height: 20,
           //  color: Colors.amber
         ),
         Divider(height: 1, color: cBackgroundGrey),
         ExpansionPanelList(
-          // dividerColor: (Colors.yellow),
-          // expandedHeaderPadding: EdgeInsets.all(20),
-          elevation: 1,
-          expansionCallback: (i, isOpen) {
-            setState(() {
-              _isOpen?[i] = !isOpen;
-            });
-          },
-          children: [
-            ExpansionPanel(
-              canTapOnHeader: true,
-              headerBuilder: (BuildContext context, _isOpen) => Align(
-                  child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25),
-                      child: Text("Price(in \$)",
-                          style: itemBrandFontStyle.copyWith(fontSize: 20))),
-                  alignment: Alignment.centerLeft),
-              body: Column(children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 0),
-                  child: Row(children: [
-                    Expanded(
-                        child: SearchField2(
-                      hint: sliderMin.toString(),
-                      func: (e) {
-                        setState(() {
-                          // ignore: unnecessary_statements
-                          sliderMin < slidermax ? int.parse(e) : null;
-                        });
-                      },
-                    )),
-                    SizedBox(width: 20),
-                    Expanded(
-                        child: SearchField2(
-                      hint: slidermax.toString(),
-                      func: (e) {
-                        setState(() {
-                          //TODO
-                          // ignore: unnecessary_statements
-                          slidermax > sliderMin ? int.parse(e) : null;
-                        });
-                      },
-                    ))
-                  ]),
-                ),
-                SizedBox(height: 20),
-                RangeSlider(
-                  max: 500,
-                  min: 0,
-                  values:
-                      RangeValues(sliderMin.toDouble(), slidermax.toDouble()),
-                  onChanged: (e) {
-                    print(e);
-                    setState(() {
-                      sliderMin = e.start.toInt();
-                      slidermax = e.end.toInt();
-                    });
-                  },
-                )
-              ]),
-              isExpanded: _isOpen![0],
-            ),
-            ExpansionPanel(
-              headerBuilder: (BuildContext context, _isOpen) =>
-                  Text("header data"),
-              body: Text("Body data"),
-              isExpanded: _isOpen![1],
-            ),
-          ],
-        ),
+            // dividerColor: (Colors.yellow),
+            // expandedHeaderPadding: EdgeInsets.all(20),
+            elevation: 1,
+            expansionCallback: (i, isOpen) {
+              setState(() {
+                _isOpen?[i] = !isOpen;
+              });
+            },
+            children: [
+              ExpansionPanel(
+                isExpanded: _isOpen![0],
+                canTapOnHeader: true,
+                headerBuilder: (BuildContext context, _isOpen) => Align(
+                    child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25),
+                        child: Text("Price",
+                            style: itemBrandFontStyle.copyWith(fontSize: 20))),
+                    alignment: Alignment.centerLeft),
+                body: Column(children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+                    child: Row(children: [
+                      Expanded(
+                          child: SearchField2(
+                        hint: sliderMin.toString(),
+                        func: (e) {
+                          setState(() {
+                            // ignore: unnecessary_statements
+                            int.parse(e) < slidermax && int.parse(e) >= 0
+                                ? sliderMin = int.parse(e)
+                                : print("slidermax>SliderMin");
+                          });
+                        },
+                        value: sliderMin,
+                      )),
+                      SizedBox(width: 20),
+                      Expanded(
+                          child: SearchField2(
+                        hint: slidermax.toString(),
+                        func: (e) {
+                          setState(() {
+                            // ignore: unnecessary_statements
+                            int.parse(e) > sliderMin && int.parse(e) <= 500
+                                ? slidermax = int.parse(e)
+                                : print("slidermax<SliderMin");
+                          });
+                        },
+                        value: slidermax,
+                      ))
+                    ]),
+                  ),
+                  SizedBox(height: 20),
+                  RangeSlider(
+                    max: 500,
+                    min: 0,
+                    values:
+                        RangeValues(sliderMin.toDouble(), slidermax.toDouble()),
+                    onChanged: (e) {
+                      print(e);
+                      setState(() {
+                        sliderMin = e.start.toInt();
+                        slidermax = e.end.toInt();
+                      });
+                    },
+                  ),
+                  SizedBox(height: 30) //NOTE gap 1
+                ]),
+              ),
+              ExpansionPanel(
+                  isExpanded: _isOpen![1],
+                  canTapOnHeader: true,
+                  headerBuilder: (BuildContext context, _isOpen) => Align(
+                      child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 25),
+                          child: Text("Status",
+                              style:
+                                  itemBrandFontStyle.copyWith(fontSize: 20))),
+                      alignment: Alignment.centerLeft),
+                  body: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 25),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                                value: _statusCheckValue,
+                                onChanged: (e) {
+                                  setState(() {
+                                    _statusCheckValue = e!;
+                                  });
+                                }),
+                            Text("Available Items",
+                                style:
+                                    itemBrandFontStyle.copyWith(fontSize: 15)),
+                          ],
+                        ),
+                        SizedBox(height: 30) //NOTE gap 2
+                      ],
+                    ),
+                  ))
+            ]),
       ]),
     );
   }
@@ -131,18 +166,27 @@ class SearchField2 extends StatelessWidget {
   final String? hint;
   final Widget? icon;
   final Function? func;
-  SearchField2({this.hint, this.icon, this.func});
+  final int? value;
+  SearchField2({this.hint, this.icon, this.func, this.value});
+  final TextEditingController cntrl = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    value != null
+        ? cntrl.text = value.toString()
+        : print("search input value is null");
+
+    cntrl.selection =
+        TextSelection.fromPosition(TextPosition(offset: cntrl.text.length));
     return Theme(
       data: new ThemeData(
         primaryColor: Colors.redAccent,
         primaryColorDark: Colors.red,
       ),
       child: TextField(
+        controller: cntrl,
         onChanged: (e) => this.func!(e), //NOTE search function
-        style: TextStyle(color: cBackgroundGrey, fontSize: 20),
+        style: TextStyle(color: cTextFieldTextColorGrey, fontSize: 20),
         textAlign: TextAlign.left,
         // controller: searchCtrl,
         keyboardType: TextInputType.text,
@@ -193,7 +237,7 @@ class SearchField2 extends StatelessWidget {
             //   borderSide: BorderSide(color: Colors.green, width: 5.0),
             // ),
             hintText: this.hint,
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 17)),
+            hintStyle: TextStyle(color: cBorderGrey, fontSize: 17)),
       ),
     );
   }

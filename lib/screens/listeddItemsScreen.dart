@@ -1,3 +1,4 @@
+import 'package:commerce_app/screens/searchLimitScreen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/item.dart';
@@ -168,7 +169,11 @@ class FilterAndSortSection extends StatelessWidget {
       child: Row(children: [
         Expanded(
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return SearchLimitScreen();
+              }));
+            },
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Icon(
                 Icons.filter_list,

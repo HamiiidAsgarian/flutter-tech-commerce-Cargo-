@@ -48,3 +48,4 @@ const greyUnselectedCircule = Color.fromRGBO(183, 183, 183, 1);
 
 Color cBackgroundGrey = Color.fromRGBO(241, 242, 244, 1);
 Color cBorderGrey = Color.fromRGBO(229, 229, 229, 1);
+Color cTextFieldTextColorGrey = Color.fromRGBO(130, 130, 130, 1);

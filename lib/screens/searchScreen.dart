@@ -15,6 +15,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
+    double screensize = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: cBackgroundGrey,
       body: Container(
@@ -45,8 +46,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                 child: TextButton(
                                   onPressed: () {},
                                   child: Container(
-                                    width: 100,
-                                    height: 100,
+                                    width: screensize / 3 - 37,
+                                    height: screensize / 3 - 37,
                                     color: Colors.amber,
                                   ),
                                 )),
