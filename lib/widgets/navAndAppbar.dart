@@ -48,8 +48,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               backgroundColor: Colors.green,
             ),
             BottomNavigationBarItem(
-              icon: Icon(MyFlutterApp.heart_empty),
-              label: 'Favourites',
+              icon: Icon(MyFlutterApp.search_5),
+              label: 'Search',
               backgroundColor: Colors.purple,
             ),
             BottomNavigationBarItem(

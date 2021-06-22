@@ -2,6 +2,7 @@
 import 'package:commerce_app/providerModel.dart';
 import 'package:commerce_app/screens/categoryScreen.dart';
 import 'package:commerce_app/screens/favoritesScreen.dart';
+import 'package:commerce_app/screens/searchLimitScreen.dart';
 import 'package:commerce_app/screens/searchScreen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/appbar.dart';
@@ -24,10 +25,12 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   var currentpage1 = 0;
   List<Widget> screens = [
-    SearchScreen(),
+    SearchLimitScreen(),
     // ListedItemsScreen(),
     MainScreenContetnts(),
     CategoryScreen(),
+    SearchScreen(),
+
     // CartScreen(),
     FavoriteScreen(),
     // ProfileScreen(),

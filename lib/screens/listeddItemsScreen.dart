@@ -182,7 +182,9 @@ class FilterAndSortSection extends StatelessWidget {
         ),
         Expanded(
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              sortPopup(context);
+            },
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Icon(
                 Icons.sort,
@@ -195,6 +197,77 @@ class FilterAndSortSection extends StatelessWidget {
           ),
         ),
       ]),
+    );
+  }
+}
+
+//////////////////////////////////////////////////////
+sortPopup(context) {
+  {
+    showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (BuildContext context) {
+          return ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: Container(
+                height: (MediaQuery.of(context).size.height / 2),
+                color: Colors.white,
+                child: Column(children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                    color: Colors.white, //NOTE Title section color
+                    child: ListTile(
+                      title: Center(
+                          child: Text("Sort",
+                              style:
+                                  itemBrandFontStyle.copyWith(fontSize: 25))),
+                      trailing: IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: Icon(Icons.cancel, size: 30)),
+                    ),
+                  ),
+                  Divider(height: 0),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          SortOption(text: "LowestPRice"),
+                          SortOption(text: "LowestPRice"),
+                          SortOption(text: "LowestPRice"),
+                          SortOption(text: "LowestPRice"),
+                          SortOption(text: "LowestPRice"),
+                          SortOption(text: "LowestPRice"),
+                          SortOption(text: "LowestPRice"),
+                          SortOption(text: "LowestPRice"),
+                          SortOption(text: "LowestPRice"),
+                        ],
+                      ),
+                    ),
+                  )
+                ]),
+              ));
+        });
+  }
+}
+
+//////////////////////////////////////////////////
+class SortOption extends StatelessWidget {
+  final String? text;
+  SortOption({this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        print(text);
+      },
+      child: Padding(
+          padding: EdgeInsets.only(right: 50, top: 25),
+          child: Text(this.text!,
+              style: itemBrandFontStyle.copyWith(fontSize: 25))),
     );
   }
 }

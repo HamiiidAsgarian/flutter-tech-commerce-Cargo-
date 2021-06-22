@@ -97,6 +97,8 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 }
 
+/////////////////////////////----------------------------------------------------//////////////////
+
 ////////----------------------------------------------------------------------------------/////////
 class SearchSection extends StatefulWidget {
   const SearchSection({Key? key}) : super(key: key);
