@@ -22,7 +22,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  var currentpage1 = 0;
+  int currentpage1 = 0;
   List<Widget> screens = [
     // SearchLimitScreen(),
     // ListedItemsScreen(),
@@ -69,7 +69,7 @@ class MainScreenContetnts extends StatefulWidget {
 class _MainScreenContetntsState extends State<MainScreenContetnts> {
   final int sliderIndex = 1;
 
-  get sectionTitle => null;
+  // Null get sectionTitle => null;
 
   @override
   Widget build(BuildContext context) {
@@ -81,26 +81,23 @@ class _MainScreenContetntsState extends State<MainScreenContetnts> {
           color: appBargrey,
         ),
       ),
-      body: Container(
-        // color: Colors.amber,
-        child: CustomScrollView(slivers: [
-          // SearchSection(),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                SizedBox(
-                    height:
-                        200, //////////////////////////////* carousel Section height
-                    child: Carousel(sliderIndex: sliderIndex, itemIndex: 0)),
-                const ScrollviewCategory(sectionTitle: "For Mewwwwwn"),
-                const WindowsCategorySection(),
-                const ScrollviewCategory(sectionTitle: "For Men"),
-                const ScrollviewCategory(sectionTitle: "For Men"),
-              ],
-            ),
-          )
-        ]),
-      ),
+      body: CustomScrollView(slivers: [
+        // SearchSection(),
+        SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              SizedBox(
+                  height:
+                      200, //////////////////////////////* carousel Section height
+                  child: Carousel(sliderIndex: sliderIndex, itemIndex: 0)),
+              const ScrollviewCategory(sectionTitle: "For Mewwwwwn"),
+              const WindowsCategorySection(),
+              const ScrollviewCategory(sectionTitle: "For Men"),
+              const ScrollviewCategory(sectionTitle: "For Men"),
+            ],
+          ),
+        )
+      ]),
     );
   }
 }

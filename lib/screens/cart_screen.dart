@@ -27,10 +27,6 @@ class _CartScreenState extends State<CartScreen> {
             ),
             const SizedBox(width: 10),
             Expanded(
-              flex: 1,
-              ////////////////////////////////////////////* middle part of the cartitem
-
-              // color: Colors.amber,
               child: Container(
                 height: 90,
                 child: Column(
@@ -150,7 +146,6 @@ class _CartScreenState extends State<CartScreen> {
       //   ),
       // ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
               decoration: const BoxDecoration(
@@ -165,7 +160,6 @@ class _CartScreenState extends State<CartScreen> {
               // margin: EdgeInsets.only(bottom: 10),
               alignment: Alignment.topLeft,
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("My Cart",

@@ -71,7 +71,7 @@ class _CarouselState extends State<Carousel> {
   // }
 
   @override
-  dispose() {
+  void dispose() {
     controller.dispose();
     super.dispose();
   }
@@ -119,7 +119,7 @@ class _CarouselState extends State<Carousel> {
 
 ////////////////////////////////////////////////////////////////////////*slide class
 class Slide extends StatefulWidget {
-  Slide(
+  const Slide(
       {required this.controller,
       required this.index,
       required this.hasLabel,
@@ -160,7 +160,6 @@ class _SlideState extends State<Slide> {
                 //////////////////////////////////////////////////////// * counter dots
 
                 Align(
-                  alignment: Alignment.center,
                   child: Container(
                     ////////////////////////////////////* main slide
                     decoration: BoxDecoration(
@@ -172,9 +171,7 @@ class _SlideState extends State<Slide> {
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 3,
-                          blurRadius: 7,
-                          offset:
-                              const Offset(0, 0), // changes position of shadow
+                          blurRadius: 7, // changes position of shadow
                         ),
                       ],
                     ),

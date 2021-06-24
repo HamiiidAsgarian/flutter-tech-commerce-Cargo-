@@ -2,10 +2,9 @@ import 'package:commerce_app/consts.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWithIcon extends StatelessWidget {
+  const TextFieldWithIcon({this.hint, this.icon});
   final String? hint;
   final IconData? icon;
-
-  TextFieldWithIcon({this.hint, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +15,9 @@ class TextFieldWithIcon extends StatelessWidget {
       // controller: searchCtrl,
       keyboardType: TextInputType.text,
       cursorColor: appBargrey,
-      cursorWidth: 2,
       cursorRadius: Radius.zero,
       showCursor: true,
-      enableInteractiveSelection: true,
-      decoration: new InputDecoration(
+      decoration: InputDecoration(
           prefixIcon: Padding(
             padding: const EdgeInsets.only(left: 15, right: 15),
             child: icon != null

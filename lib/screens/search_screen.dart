@@ -15,85 +15,81 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
-    double screensize = MediaQuery.of(context).size.width;
+    final double screensize = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: cBackgroundGrey,
-      body: Container(
-        // color: Colors.white, //NOTE search section bg color
-
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const SearchSection(),
-          Padding(
-            padding: const EdgeInsets.only(left: 25, top: 25),
-            child: Text(
-              "Users top searches",
-              style: itemBrandFontStyle.copyWith(fontSize: 25),
-              textAlign: TextAlign.left,
-            ),
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const SearchSection(),
+        Padding(
+          padding: const EdgeInsets.only(left: 25, top: 25),
+          child: Text(
+            "Users top searches",
+            style: itemBrandFontStyle.copyWith(fontSize: 25),
+            textAlign: TextAlign.left,
           ),
-          Expanded(
-            child: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Wrap(
-                    children: ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c']
-                        .map(
-                          (e) => Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
-                                child: TextButton(
-                                  onPressed: () {},
-                                  child: Container(
-                                    width: screensize / 3 - 37,
-                                    height: screensize / 3 - 37,
-                                    color: Colors.amber,
-                                  ),
-                                )),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Wrap(
-                    children: [
-                      'aaasd',
-                      ' asdffb',
-                      'ac',
-                      'ad',
-                      'asdasdb',
-                      'cds',
-                      'aasdadad',
-                      'bdd',
-                      'cadasdad'
-                    ]
-                        .map(
-                          (e) => Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
+        ),
+        Expanded(
+          child: ListView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Wrap(
+                  children: ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c']
+                      .map(
+                        (e) => Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: TextButton(
+                                onPressed: () {},
                                 child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 25, vertical: 10),
-                                    color: Colors.amberAccent,
-                                    child: Text(e)),
-                              ),
+                                  width: screensize / 3 - 37,
+                                  height: screensize / 3 - 37,
+                                  color: Colors.amber,
+                                ),
+                              )),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Wrap(
+                  children: [
+                    'aaasd',
+                    ' asdffb',
+                    'ac',
+                    'ad',
+                    'asdasdb',
+                    'cds',
+                    'aasdadad',
+                    'bdd',
+                    'cadasdad'
+                  ]
+                      .map(
+                        (e) => Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 25, vertical: 10),
+                                  color: Colors.amberAccent,
+                                  child: Text(e)),
                             ),
                           ),
-                        )
-                        .toList(),
-                  ),
-                )
-              ],
-            ),
-          )
-        ]),
-      ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              )
+            ],
+          ),
+        )
+      ]),
     );
   }
 }
@@ -118,7 +114,7 @@ class _SearchSectionState extends State<SearchSection> {
       child: Column(children: [
         const SizedBox(height: 25),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Expanded(
+          const Expanded(
               child: TextFieldWithIcon(
             hint: 'Type something to search',
             icon: MyFlutterApp.search_5,
@@ -136,12 +132,11 @@ class _SearchSectionState extends State<SearchSection> {
         Container(
           height: 60,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CategoryTextButton(
                 isChosen: _chosenOption == "Popular" ? true : false,
                 text: "Popular",
-                function: (var e) {
+                function: (String e) {
                   setState(() {
                     _chosenOption = e;
                   });
@@ -151,7 +146,7 @@ class _SearchSectionState extends State<SearchSection> {
               CategoryTextButton(
                 isChosen: _chosenOption == "Recommended" ? true : false,
                 text: "Recommended",
-                function: (var e) {
+                function: (String e) {
                   setState(() {
                     _chosenOption = e;
                   });
@@ -161,7 +156,7 @@ class _SearchSectionState extends State<SearchSection> {
               CategoryTextButton(
                 isChosen: _chosenOption == "Top Brands" ? true : false,
                 text: "Top Brands",
-                function: (var e) {
+                function: (String e) {
                   setState(() {
                     _chosenOption = e;
                   });

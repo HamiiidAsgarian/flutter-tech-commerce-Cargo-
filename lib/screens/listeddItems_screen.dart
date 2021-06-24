@@ -43,7 +43,7 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
           const SizedBox(height: 7),
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               // gridview.count
               // childAspectRatio: MediaQuery.of(context).size.height / 900,
               // // childAspectRatio: 2,
@@ -51,9 +51,6 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
               // mainAxisSpacing: 10,
               // crossAxisCount: 2,
               child: Wrap(
-                spacing: 0, runSpacing: 0,
-                // alignment: WrapAlignment.spaceAround,
-                // crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   "Reading",
                   "Speaking",
@@ -63,7 +60,8 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
                   '',
                   '',
                   '',
-                  '' "Reading",
+                  '',
+                  "Reading",
                   "Speaking",
                   "listening",
                   "writing",
@@ -109,14 +107,13 @@ class OtherBrandsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 0), //NOTE section margin
+      margin: const EdgeInsets.symmetric(), //NOTE section margin
       // color: Colors.amber,
       // padding: EdgeInsets.symmetric(horizontal: 25),
       height: 40,
       // color: Colors.yellowAccent,
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center, //todo
         children: [
           const SizedBox(width: 25),
           Text("Other brands",
@@ -133,14 +130,13 @@ class OtherBrandsSection extends StatelessWidget {
                           color: Colors.white, //NOTE Other brands
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5)),
-                          border: Border.all(width: 1, color: cBorderGrey),
+                          border: Border.all(color: cBorderGrey),
                         ),
                         height: 30,
                         child: TextButton(
                           onPressed: () {},
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 0),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Text(e,
                                 style: itemBrandFontStyle.copyWith(
                                     fontSize: 13, fontWeight: FontWeight.w600)),
@@ -208,7 +204,7 @@ class FilterAndSortSection extends StatelessWidget {
 }
 
 //////////////////////////////////////////////////////
-sortPopup(BuildContext context) {
+void sortPopup(BuildContext context) {
   {
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
@@ -240,7 +236,7 @@ sortPopup(BuildContext context) {
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
-                        children: [
+                        children: const [
                           SortOption(text: "LowestPRice"),
                           SortOption(text: "LowestPRice"),
                           SortOption(text: "LowestPRice"),
@@ -263,7 +259,7 @@ sortPopup(BuildContext context) {
 //////////////////////////////////////////////////
 class SortOption extends StatelessWidget {
   final String? text;
-  SortOption({this.text});
+  const SortOption({this.text});
 
   @override
   Widget build(BuildContext context) {

@@ -15,12 +15,11 @@ class WindowsCategorySection extends StatelessWidget {
 
       ///*    15px instead of 25px because the children padding adds 10px from the sides,
       child: Wrap(
-        direction: Axis.horizontal,
-        children: [
+        children: const [
           ScreenWidthSizedContainer(color: Colors.yellow),
-          const ScreenWidthSizedContainer(color: Colors.red),
-          const ScreenWidthSizedContainer(color: Colors.purple),
-          const ScreenWidthSizedContainer(color: Colors.blueGrey),
+          ScreenWidthSizedContainer(color: Colors.red),
+          ScreenWidthSizedContainer(color: Colors.purple),
+          ScreenWidthSizedContainer(color: Colors.blueGrey),
         ],
       ),
     );

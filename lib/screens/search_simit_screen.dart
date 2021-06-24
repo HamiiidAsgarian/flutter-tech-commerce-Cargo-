@@ -215,18 +215,17 @@ class SearchField2 extends StatelessWidget {
               borderSide: BorderSide(width: 2, color: Colors.grey),
             ),
             disabledBorder: const OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(4)),
               borderSide: BorderSide(color: Colors.orange),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(4)),
               borderSide: BorderSide(color: cBackgroundGrey),
             ),
-            errorBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(4)),
-                borderSide: BorderSide(color: Colors.black)),
+            // errorBorder: const OutlineInputBorder(
+            //   borderRadius: BorderRadius.all(
+            //     Radius.circular(4),
+            //   ),
+            // ),
             focusedErrorBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(const Radius.circular(4)),
                 borderSide: BorderSide(color: Colors.yellowAccent)),
             contentPadding:
                 const EdgeInsets.only(left: 20), //NOTE Content padding

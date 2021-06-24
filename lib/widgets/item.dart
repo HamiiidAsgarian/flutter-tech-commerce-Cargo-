@@ -9,8 +9,8 @@ class Item extends StatelessWidget {
 
   const Item({Key? key, this.title, this.imageWidth = 130}) : super(key: key);
 
-  Future<Widget> loadimage(url) async {
-    var a = Image.network(url);
+  Future<Widget> loadimage(String url) async {
+    final a = Image.network(url);
     return a;
   }
 
@@ -70,7 +70,7 @@ class Item extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${title != null ? title : ""} Classical",
+                      "${title ?? ""} Classical",
                       style: itemTitleFontStyle,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -79,9 +79,9 @@ class Item extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text("\$250.00", style: priceFontStyle),
-                        const Icon(MyFlutterApp.heart_2, size: 15)
+                      children: const [
+                        Text("\$250.00", style: priceFontStyle),
+                        Icon(MyFlutterApp.heart_2, size: 15)
                       ],
                     ),
                     const SizedBox(

@@ -39,23 +39,25 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         SizedBox(
           width: 40,
           child: IconButton(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            padding: const EdgeInsets.symmetric(),
             icon: GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, "/Cart");
               },
-              child: Stack(children: [
-                const Center(
+              child: Stack(children: const [
+                Center(
                   child: Icon(
                     MyFlutterApp.cart,
                     color: appBargrey,
                     size: 26,
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   right: -1,
                   top: 9,
                   child: CircleAvatar(
+                    radius: 9,
+                    backgroundColor: Colors.white,
                     child: CircleAvatar(
                       radius: 6,
                       backgroundColor: Colors.grey,
@@ -67,8 +69,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    radius: 9,
-                    backgroundColor: Colors.white,
                   ),
                 ),
               ]),
@@ -84,7 +84,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         SizedBox(
           width: 40,
           child: IconButton(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            padding: const EdgeInsets.symmetric(),
             icon: const Icon(
               MyFlutterApp.bell,
               color: appBargrey,

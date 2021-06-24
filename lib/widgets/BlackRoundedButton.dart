@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class BlackRoundedButton extends StatelessWidget {
   final String? title;
-  BlackRoundedButton({
+  const BlackRoundedButton({
     this.title,
   });
 

@@ -41,7 +41,7 @@ class _SearchSectionState extends State<SearchSection> {
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Column(children: [
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Expanded(
+            const Expanded(
                 child: TextFieldWithIcon(
               hint: 'Type something to search',
               icon: MyFlutterApp.search_5,
@@ -59,12 +59,11 @@ class _SearchSectionState extends State<SearchSection> {
           Container(
             height: 60,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CategoryTextButton(
                   isChosen: _chosenOption == "Popular" ? true : false,
                   text: "Popular",
-                  function: (var e) {
+                  function: (String e) {
                     setState(() {
                       _chosenOption = e;
                     });
@@ -74,7 +73,7 @@ class _SearchSectionState extends State<SearchSection> {
                 CategoryTextButton(
                   isChosen: _chosenOption == "Recommended" ? true : false,
                   text: "Recommended",
-                  function: (var e) {
+                  function: (String e) {
                     setState(() {
                       _chosenOption = e;
                     });
@@ -84,7 +83,7 @@ class _SearchSectionState extends State<SearchSection> {
                 CategoryTextButton(
                   isChosen: _chosenOption == "Top Brands" ? true : false,
                   text: "Top Brands",
-                  function: (var e) {
+                  function: (String e) {
                     setState(() {
                       _chosenOption = e;
                     });
@@ -110,7 +109,7 @@ class CategoryTextButton extends StatelessWidget {
   final Function function;
   final bool isChosen;
 
-  CategoryTextButton(
+  const CategoryTextButton(
       {required this.text, required this.function, required this.isChosen});
 
   @override
@@ -118,7 +117,7 @@ class CategoryTextButton extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       decoration: isChosen == true
-          ? const BoxDecoration(border: Border(bottom: BorderSide(width: 1)))
+          ? const BoxDecoration(border: Border(bottom: BorderSide()))
           : BoxDecoration(
               border: Border.all(
                   width: 0.0, color: Colors.blueGrey.withOpacity(0))),

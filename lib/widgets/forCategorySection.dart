@@ -13,7 +13,7 @@ class ScrollviewCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String>? mainScreenItems = [
+    final List<String> mainScreenItems = [
       'a',
       'b',
       'c',
@@ -33,7 +33,7 @@ class ScrollviewCategory extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-              children: mainScreenItems!
+              children: mainScreenItems
                   .map((e) => Container(
                       // color: Colors.white,
                       padding:
@@ -56,35 +56,32 @@ class CategoryTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // color: Colors.blue,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            sectionTitle != null ? sectionTitle! : "",
-            style: forMenFontStyle,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          sectionTitle != null ? sectionTitle! : "",
+          style: forMenFontStyle,
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.pushNamed(context, "/ListedItems");
+          },
+          child: Row(
+            children: const [
+              Text(
+                "View More ",
+                style: viewMoreFontStyle,
+              ),
+              Icon(
+                MyFlutterApp.right_open,
+                size: 13,
+                color: appBargrey,
+              )
+            ],
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, "/ListedItems");
-            },
-            child: Row(
-              children: [
-                const Text(
-                  "View More ",
-                  style: viewMoreFontStyle,
-                ),
-                const Icon(
-                  MyFlutterApp.right_open,
-                  size: 13,
-                  color: appBargrey,
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }

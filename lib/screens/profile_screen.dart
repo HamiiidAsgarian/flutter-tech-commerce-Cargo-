@@ -17,7 +17,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             decoration: const BoxDecoration(
@@ -31,17 +30,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: const EdgeInsets.only(left: 25, bottom: 15, top: 25),
             // margin: EdgeInsets.only(bottom: 10),
             alignment: Alignment.topLeft,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Profile",
-                      style: itemTitleFontStyle.copyWith(
-                          fontSize: 20, fontWeight: FontWeight.w700)),
-                  Text(" ",
-                      style: itemTitleFontStyle.copyWith(
-                          fontSize: 11, fontWeight: FontWeight.w500)),
-                ]),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text("Profile",
+                  style: itemTitleFontStyle.copyWith(
+                      fontSize: 20, fontWeight: FontWeight.w700)),
+              Text(" ",
+                  style: itemTitleFontStyle.copyWith(
+                      fontSize: 11, fontWeight: FontWeight.w500)),
+            ]),
           ),
           Expanded(
             //////////////////////////////////////////////////* listview section
@@ -50,33 +47,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: ListView(
                 children: [
                   const SizedBox(height: 25),
-                  Container(
-                    // height: 50,
-                    // color: Colors.red,
-                    child: CircleAvatar(
-                      radius: 50,
-                      child: Stack(
-                        children: [
-                          Align(
-                            alignment: const Alignment(0.2, -1),
-                            child: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 20,
-                              child: ClipRRect(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(25)),
-                                child: TextButton(
-                                  onPressed: () => print("Camera"),
-                                  child: const CircleAvatar(
-                                      radius: 17,
-                                      child: Icon(Icons.camera_alt_rounded,
-                                          size: 20)),
-                                ),
+                  CircleAvatar(
+                    radius: 50,
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: const Alignment(0.2, -1),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 20,
+                            child: ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(25)),
+                              child: TextButton(
+                                onPressed: () => print("Camera"),
+                                child: const CircleAvatar(
+                                    radius: 17,
+                                    child: Icon(Icons.camera_alt_rounded,
+                                        size: 20)),
                               ),
                             ),
-                          )
-                        ], //////////////////////////////////////////* image section
-                      ),
+                          ),
+                        )
+                      ], //////////////////////////////////////////* image section
                     ),
                   ),
                   ////////////////////////////////////////////////* Name Section
@@ -85,8 +78,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Name', style: priceFontStyle),
+                      children: const [
+                        Text('Name', style: priceFontStyle),
                         TextFieldWithIcon(hint: "Name")
                       ],
                     ),
@@ -96,8 +89,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Age', style: priceFontStyle),
+                      children: const [
+                        Text('Age', style: priceFontStyle),
                         TextFieldWithIcon(hint: "Age")
                       ],
                     ),
@@ -110,8 +103,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Address', style: priceFontStyle),
+                      children: const [
+                        Text('Address', style: priceFontStyle),
                         TextFieldWithIcon(hint: "Adress")
                       ],
                     ),
@@ -131,10 +124,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 //////////////////////////////////////////////////////////////////////////*w1: Gender
 class GenderRadioSection extends StatefulWidget {
   const GenderRadioSection({Key? key}) : super(key: key);
-  final a = 1;
-  int selectedIndex() {
-    return a;
-  }
+  // final int a = 1;
+  // int selectedIndex() {
+  //   return a;
+  // }
 
   @override
   _GenderRadioSectionState createState() => _GenderRadioSectionState();
@@ -145,7 +138,7 @@ class _GenderRadioSectionState extends State<GenderRadioSection> {
 
   @override
   Widget build(BuildContext context) {
-    var column =
+    final Column column =
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const Text('Gender', style: priceFontStyle),
       Row(children: [

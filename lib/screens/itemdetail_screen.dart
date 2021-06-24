@@ -82,59 +82,50 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                   ),
                 )),
             Expanded(
-                flex: 1,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  color: Colors.white,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              color: Colors.white,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text("Classical hoodies",
-                                      style: forMenFontStyle.copyWith(
-                                          color: Colors.black)),
-                                  const SizedBox(width: 5),
-                                  const Icon(
-                                    MyFlutterApp.star_3,
-                                    size: 10,
-                                    color: Colors.yellow,
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text(
-                                    "4.7",
-                                    style:
-                                        priceFontStyle.copyWith(fontSize: 12),
-                                  )
-                                ],
-                              ),
+                            Text("Classical hoodies",
+                                style: forMenFontStyle.copyWith(
+                                    color: Colors.black)),
+                            const SizedBox(width: 5),
+                            const Icon(
+                              MyFlutterApp.star_3,
+                              size: 10,
+                              color: Colors.yellow,
                             ),
-                            Container(
-                              child: Row(
-                                children: [
-                                  const Icon(MyFlutterApp.share_alt),
-                                  const SizedBox(width: 25),
-                                  const Icon(MyFlutterApp.heart_empty),
-                                ],
-                              ),
+                            const SizedBox(width: 5),
+                            Text(
+                              "4.7",
+                              style: priceFontStyle.copyWith(fontSize: 12),
                             )
                           ],
                         ),
-                        const Text("boomstack", style: itemTitleFontStyle)
-                      ]),
-                )),
+                        Row(
+                          children: const [
+                            Icon(MyFlutterApp.share_alt),
+                            SizedBox(width: 25),
+                            Icon(MyFlutterApp.heart_empty),
+                          ],
+                        )
+                      ],
+                    ),
+                    const Text("boomstack", style: itemTitleFontStyle)
+                  ]),
+            )),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Describtin",
@@ -174,9 +165,9 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                                       color: Colors.black)),
                               Row(
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 7),
-                                    child: CircleAvatar(
+                                  Container(
+                                    padding: const EdgeInsets.only(left: 7),
+                                    child: const CircleAvatar(
                                       radius: 12.5,
                                     ),
                                   ),
@@ -191,7 +182,6 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                             ],
                           ),
                           Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text("Price:",

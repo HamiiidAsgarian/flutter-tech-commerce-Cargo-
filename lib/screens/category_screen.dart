@@ -34,34 +34,35 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
       ),
       body: RefreshIndicator(
-          child: ListView.builder(
-              itemCount: 20,
-              itemBuilder: (context, index) {
-                return TextButton(
-                  onPressed: () {},
-                  child: Container(
-                      height: 60,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom:
-                                  BorderSide(width: 0.1, color: Colors.grey))),
-                      child: Center(
-                        child: ListTile(
-                          onTap: () => Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const ListedItemsScreen();
-                          })),
-                          trailing:
-                              const Icon(Icons.keyboard_arrow_right, size: 30),
-                          title: Text("item $index",
-                              style: itemBrandFontStyle.copyWith(fontSize: 17)),
-                        ),
-                      )),
-                );
-              }),
-          onRefresh: () async {
-            print("object");
-          }),
+        onRefresh: () async {
+          print("object");
+        },
+        child: ListView.builder(
+            itemCount: 20,
+            itemBuilder: (context, index) {
+              return TextButton(
+                onPressed: () {},
+                child: Container(
+                    height: 60,
+                    decoration: const BoxDecoration(
+                        border: Border(
+                            bottom:
+                                BorderSide(width: 0.1, color: Colors.grey))),
+                    child: Center(
+                      child: ListTile(
+                        onTap: () => Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const ListedItemsScreen();
+                        })),
+                        trailing:
+                            const Icon(Icons.keyboard_arrow_right, size: 30),
+                        title: Text("item $index",
+                            style: itemBrandFontStyle.copyWith(fontSize: 17)),
+                      ),
+                    )),
+              );
+            }),
+      ),
     );
   }
 }
