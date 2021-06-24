@@ -217,7 +217,7 @@ class _CartScreenState extends State<CartScreen> {
                   ],
                 ),
               ),
-              BlackRoundedButton(
+              const BlackRoundedButton(
                 title: 'Submit',
               )
             ]),

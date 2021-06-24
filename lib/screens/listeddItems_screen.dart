@@ -1,4 +1,4 @@
-import 'package:commerce_app/screens/search_simit_screen.dart';
+import 'package:commerce_app/screens/search_limit_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/item.dart';
@@ -204,6 +204,8 @@ class FilterAndSortSection extends StatelessWidget {
 }
 
 //////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////
 void sortPopup(BuildContext context) {
   {
     showModalBottomSheet(
@@ -211,8 +213,12 @@ void sortPopup(BuildContext context) {
         context: context,
         builder: (BuildContext context) {
           return ClipRRect(
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
               child: Container(
+                //NOTE: popup sort height
                 height: MediaQuery.of(context).size.height / 2,
                 color: Colors.white,
                 child: Column(children: [
@@ -221,10 +227,10 @@ void sortPopup(BuildContext context) {
                         horizontal: 25, vertical: 10),
                     color: Colors.white, //NOTE Title section color
                     child: ListTile(
-                      title: Center(
-                          child: Text("Sort",
-                              style:
-                                  itemBrandFontStyle.copyWith(fontSize: 25))),
+                      // title: Center(
+                      //     child: Text("Sort",
+                      //         style:
+                      //             itemBrandFontStyle.copyWith(fontSize: 25))),
                       trailing: IconButton(
                           onPressed: () {
                             Navigator.of(context).pop();

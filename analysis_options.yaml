@@ -1,13 +1,13 @@
-include: package:lint/analysis_options.yaml
+# include: package:lint/analysis_options.yaml
 
-analyzer:
-  errors:
-    sized_box_for_whitespace: false
-    argument_type_not_assignable: false
-    avoid_print: false
-    avoid_bool_literals_in_conditional_expressions: false
-    constant_identifier_names: false
-    file_names: false
+# analyzer:
+#   errors:
+#     sized_box_for_whitespace: false
+#     argument_type_not_assignable: false
+#     avoid_print: false
+#     avoid_bool_literals_in_conditional_expressions: false
+#     constant_identifier_names: false
+#     file_names: false
 
 
 

@@ -54,7 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Wrap(
                   children: [
                     'aaasd',

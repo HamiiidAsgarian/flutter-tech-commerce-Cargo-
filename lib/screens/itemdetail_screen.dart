@@ -197,7 +197,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      BlackRoundedButton(
+                      const BlackRoundedButton(
                         title: 'Add to basket',
                       )
                     ],
