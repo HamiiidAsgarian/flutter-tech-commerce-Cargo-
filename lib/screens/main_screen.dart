@@ -1,5 +1,5 @@
 // import 'package:commerce_app/style/my_flutter_app_icons.dart';
-import 'package:commerce_app/providerModel.dart';
+import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/screens/Profile_screen2.dart';
 import 'package:commerce_app/screens/category_screen.dart';
 import 'package:commerce_app/screens/search_screen.dart';
@@ -8,7 +8,7 @@ import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/carousel.dart';
 import 'package:commerce_app/widgets/forCategorySection.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
-import 'package:commerce_app/widgets/windowsCategorySection.dart';
+import 'package:commerce_app/widgets/windows_category-section.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,10 +26,10 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> screens = [
     // SearchLimitScreen(),
     // ListedItemsScreen(),
-    MainScreenContetnts(),
-    CategoryScreen(),
-    SearchScreen(),
-    ProfileScreen2(),
+    const MainScreenContetnts(),
+    const CategoryScreen(),
+    const SearchScreen(),
+    const ProfileScreen2(),
 
     // CartScreen(),
     // FavoriteScreen(),
@@ -74,7 +74,7 @@ class _MainScreenContetntsState extends State<MainScreenContetnts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(
+      appBar: const MyAppBar(
         leadingIcon: Icon(
           MyFlutterApp.menu,
           // MdiIcons.walletPlusOutline,
@@ -92,10 +92,10 @@ class _MainScreenContetntsState extends State<MainScreenContetnts> {
                     height:
                         200, //////////////////////////////* carousel Section height
                     child: Carousel(sliderIndex: sliderIndex, itemIndex: 0)),
-                ScrollviewCategory(sectionTitle: "For Mewwwwwn"),
-                WindowsCategorySection(),
-                ScrollviewCategory(sectionTitle: "For Men"),
-                ScrollviewCategory(sectionTitle: "For Men"),
+                const ScrollviewCategory(sectionTitle: "For Mewwwwwn"),
+                const WindowsCategorySection(),
+                const ScrollviewCategory(sectionTitle: "For Men"),
+                const ScrollviewCategory(sectionTitle: "For Men"),
               ],
             ),
           )

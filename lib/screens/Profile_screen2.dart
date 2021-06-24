@@ -23,13 +23,13 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
           (var listItem) => TextButton(
             onPressed: () {},
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Row(
                 children: [
                   myIcon == true
                       ? Icon(listItem.iconData, size: 30, color: appBargrey)
                       : Container(),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Text(listItem.string.toString(),
                       style: itemTitleFontStyle.copyWith(fontSize: 18)),
                 ],
@@ -48,15 +48,15 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
           Container(
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-              child: Icon(Icons.access_alarm, size: 50)),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+              child: const Icon(Icons.access_alarm, size: 50)),
           // SizedBox(height: 20),
-          Padding(
+          const Padding(
               padding: EdgeInsets.symmetric(horizontal: 50),
-              child: MyRoundedButton()),
-          SizedBox(height: 30),
+              child: const MyRoundedButton()),
+          const SizedBox(height: 30),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
                 children: listMaker([
               IcondataString(
@@ -70,9 +70,9 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
           Container(
               color: appBargrey,
               height: 1,
-              margin: EdgeInsets.symmetric(vertical: 20)),
+              margin: const EdgeInsets.symmetric(vertical: 20)),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
                 children: listMaker([
               IcondataString(iconData: Icons.timelapse, string: 'About Us'),

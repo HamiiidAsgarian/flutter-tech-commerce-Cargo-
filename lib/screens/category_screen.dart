@@ -26,7 +26,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(
+          child: const Icon(
             MyFlutterApp.left_open,
             // MdiIcons.walletPlusOutline,
             color: appBargrey,
@@ -41,7 +41,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   onPressed: () {},
                   child: Container(
                       height: 60,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           border: Border(
                               bottom:
                                   BorderSide(width: 0.1, color: Colors.grey))),
@@ -49,9 +49,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         child: ListTile(
                           onTap: () => Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return ListedItemsScreen();
+                            return const ListedItemsScreen();
                           })),
-                          trailing: Icon(Icons.keyboard_arrow_right, size: 30),
+                          trailing:
+                              const Icon(Icons.keyboard_arrow_right, size: 30),
                           title: Text("item $index",
                               style: itemBrandFontStyle.copyWith(fontSize: 17)),
                         ),

@@ -1,6 +1,6 @@
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/searchSection.dart';
-import 'package:commerce_app/widgets/textField.dart';
+import 'package:commerce_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 import '../consts.dart';
@@ -22,9 +22,9 @@ class _SearchScreenState extends State<SearchScreen> {
         // color: Colors.white, //NOTE search section bg color
 
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SearchSection(),
+          const SearchSection(),
           Padding(
-            padding: EdgeInsets.only(left: 25, top: 25),
+            padding: const EdgeInsets.only(left: 25, top: 25),
             child: Text(
               "Users top searches",
               style: itemBrandFontStyle.copyWith(fontSize: 25),
@@ -35,12 +35,12 @@ class _SearchScreenState extends State<SearchScreen> {
             child: ListView(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Wrap(
                     children: ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c']
                         .map(
                           (e) => Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(5),
                                 child: TextButton(
@@ -57,7 +57,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Wrap(
                     children: [
                       'aaasd',
@@ -72,13 +72,13 @@ class _SearchScreenState extends State<SearchScreen> {
                     ]
                         .map(
                           (e) => Padding(
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             child: GestureDetector(
                               onTap: () {},
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(5),
                                 child: Container(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         horizontal: 25, vertical: 10),
                                     color: Colors.amberAccent,
                                     child: Text(e)),
@@ -109,13 +109,14 @@ class SearchSection extends StatefulWidget {
 }
 
 class _SearchSectionState extends State<SearchSection> {
+  String? _chosenOption;
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white, //NOTE search section bg color
-      padding: EdgeInsets.symmetric(horizontal: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Column(children: [
-        SizedBox(height: 25),
+        const SizedBox(height: 25),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Expanded(
               child: TextFieldWithIcon(
@@ -124,7 +125,7 @@ class _SearchSectionState extends State<SearchSection> {
           )),
           // SizedBox(width: 20),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               MyFlutterApp.params,
               color: appBargrey,
             ),
@@ -138,31 +139,31 @@ class _SearchSectionState extends State<SearchSection> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CategoryTextButton(
-                // isChosen: _chosenOption == "Popular" ? true : false,
+                isChosen: _chosenOption == "Popular" ? true : false,
                 text: "Popular",
                 function: (var e) {
                   setState(() {
-                    // _chosenOption = e;
+                    _chosenOption = e;
                   });
                   // print(this._chosenOption);
                 },
               ),
               CategoryTextButton(
-                // isChosen: _chosenOption == "Recommended" ? true : false,
+                isChosen: _chosenOption == "Recommended" ? true : false,
                 text: "Recommended",
                 function: (var e) {
                   setState(() {
-                    // _chosenOption = e;
+                    _chosenOption = e;
                   });
                   // print(this._chosenOption);
                 },
               ),
               CategoryTextButton(
-                // isChosen: _chosenOption == "Top Brands" ? true : false,
+                isChosen: _chosenOption == "Top Brands" ? true : false,
                 text: "Top Brands",
                 function: (var e) {
                   setState(() {
-                    // _chosenOption = e;
+                    _chosenOption = e;
                   });
                   // print(this._chosenOption);
                 },

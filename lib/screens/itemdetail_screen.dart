@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../consts.dart';
 
 class ItemDetailScreen extends StatefulWidget {
-  ItemDetailScreen({this.title});
+  const ItemDetailScreen({this.title});
 
   final String? title;
 
@@ -22,7 +22,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
     return Scaffold(
         // bottomNavigationBar: MyBottomNavigationBar(),
         appBar: MyAppBar(
-          leadingIcon: Icon(
+          leadingIcon: const Icon(
             MyFlutterApp.left_open,
             // MdiIcons.walletPlusOutline,
             color: appBargrey,
@@ -39,7 +39,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                   color: Colors.yellow
                       .withOpacity(0), //////////* little radious color fade
                   child: ClipRRect(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20)),
                     child: Stack(children: [
@@ -57,19 +57,19 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                         ],
                       ),
                       Align(
-                        alignment: Alignment(0, 0.9),
+                        alignment: const Alignment(0, 0.9),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(right: 5),
+                              padding: const EdgeInsets.only(right: 5),
                               child: CircleAvatar(
                                   radius: 7,
                                   backgroundColor:
                                       Colors.white.withOpacity(0.5)),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(right: 5),
+                              padding: const EdgeInsets.only(right: 5),
                               child: CircleAvatar(
                                   radius: 7,
                                   backgroundColor:
@@ -84,7 +84,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
             Expanded(
                 flex: 1,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   color: Colors.white,
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,13 +101,13 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                                   Text("Classical hoodies",
                                       style: forMenFontStyle.copyWith(
                                           color: Colors.black)),
-                                  SizedBox(width: 5),
-                                  Icon(
+                                  const SizedBox(width: 5),
+                                  const Icon(
                                     MyFlutterApp.star_3,
                                     size: 10,
                                     color: Colors.yellow,
                                   ),
-                                  SizedBox(width: 5),
+                                  const SizedBox(width: 5),
                                   Text(
                                     "4.7",
                                     style:
@@ -119,20 +119,20 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                             Container(
                               child: Row(
                                 children: [
-                                  Icon(MyFlutterApp.share_alt),
-                                  SizedBox(width: 25),
-                                  Icon(MyFlutterApp.heart_empty),
+                                  const Icon(MyFlutterApp.share_alt),
+                                  const SizedBox(width: 25),
+                                  const Icon(MyFlutterApp.heart_empty),
                                 ],
                               ),
                             )
                           ],
                         ),
-                        Text("boomstack", style: itemTitleFontStyle)
+                        const Text("boomstack", style: itemTitleFontStyle)
                       ]),
                 )),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,7 +142,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
                             color: Colors.black)),
-                    Expanded(
+                    const Expanded(
                       child: SingleChildScrollView(
                         child: Text(
                           "The definition of a description is a statement that gives details about someone or something. An example of description is a story about the places visited on a family trip. ... Published a description of the journey; gave a vivid description of the game.The definition of a description is a statement that gives details about someone or something. An example of description is a story about the places visited on a family trip. ... Published a description of the journey; gave a vivid description of the game.",
@@ -155,13 +155,13 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Expanded(
                 flex: 2,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
                     children: [
                       Row(
@@ -174,13 +174,13 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                                       color: Colors.black)),
                               Row(
                                 children: [
-                                  Padding(
+                                  const Padding(
                                     padding: EdgeInsets.only(left: 7),
                                     child: CircleAvatar(
                                       radius: 12.5,
                                     ),
                                   ),
-                                  Padding(
+                                  const Padding(
                                     padding: EdgeInsets.only(left: 7),
                                     child: CircleAvatar(
                                       radius: 12.5,
@@ -206,7 +206,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                           )
                         ],
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       BlackRoundedButton(
                         title: 'Add to basket',
                       )

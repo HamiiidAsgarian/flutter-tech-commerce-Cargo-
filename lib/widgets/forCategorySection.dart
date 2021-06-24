@@ -13,21 +13,31 @@ class ScrollviewCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String>? mainScreenItems = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    final List<String>? mainScreenItems = [
+      'a',
+      'b',
+      'c',
+      'd',
+      'e',
+      'f',
+      'g',
+      'h'
+    ];
 
     return Container(
-      padding: EdgeInsets.only(left: 25, right: 25, top: 10, bottom: 5),
+      padding: const EdgeInsets.only(left: 25, right: 25, top: 10, bottom: 5),
       color: cBackgroundGrey,
       child: Column(children: [
         // SizedBox(height: 10),
-        CategoryTitle(sectionTitle: this.sectionTitle),
+        CategoryTitle(sectionTitle: sectionTitle),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-              children: mainScreenItems
+              children: mainScreenItems!
                   .map((e) => Container(
                       // color: Colors.white,
-                      padding: EdgeInsets.only(right: 10, bottom: 10, top: 10),
+                      padding:
+                          const EdgeInsets.only(right: 10, bottom: 10, top: 10),
                       child: Item(title: e)))
                   .toList()),
         ),
@@ -52,7 +62,7 @@ class CategoryTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            this.sectionTitle != null ? this.sectionTitle! : "",
+            sectionTitle != null ? sectionTitle! : "",
             style: forMenFontStyle,
           ),
           TextButton(
@@ -61,11 +71,11 @@ class CategoryTitle extends StatelessWidget {
             },
             child: Row(
               children: [
-                Text(
+                const Text(
                   "View More ",
                   style: viewMoreFontStyle,
                 ),
-                Icon(
+                const Icon(
                   MyFlutterApp.right_open,
                   size: 13,
                   color: appBargrey,

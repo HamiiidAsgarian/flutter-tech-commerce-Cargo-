@@ -1,5 +1,5 @@
 import 'package:commerce_app/widgets/blackroundedbutton.dart';
-import 'package:commerce_app/widgets/textField.dart';
+import 'package:commerce_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 import '../consts.dart';
@@ -20,7 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color:
                   Colors.white, //////////////////////// * MY cart section color
 
@@ -28,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20)),
             ),
-            padding: EdgeInsets.only(left: 25, bottom: 15, top: 25),
+            padding: const EdgeInsets.only(left: 25, bottom: 15, top: 25),
             // margin: EdgeInsets.only(bottom: 10),
             alignment: Alignment.topLeft,
             child: Column(
@@ -46,10 +46,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Expanded(
             //////////////////////////////////////////////////* listview section
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               child: ListView(
                 children: [
-                  SizedBox(height: 25),
+                  const SizedBox(height: 25),
                   Container(
                     // height: 50,
                     // color: Colors.red,
@@ -58,16 +58,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Stack(
                         children: [
                           Align(
-                            alignment: Alignment(0.2, -1),
+                            alignment: const Alignment(0.2, -1),
                             child: CircleAvatar(
                               backgroundColor: Colors.white,
                               radius: 20,
                               child: ClipRRect(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(25)),
+                                    const BorderRadius.all(Radius.circular(25)),
                                 child: TextButton(
                                   onPressed: () => print("Camera"),
-                                  child: CircleAvatar(
+                                  child: const CircleAvatar(
                                       radius: 17,
                                       child: Icon(Icons.camera_alt_rounded,
                                           size: 20)),
@@ -81,37 +81,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   ////////////////////////////////////////////////* Name Section
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 12.5),
+                    padding: const EdgeInsets.symmetric(vertical: 12.5),
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Name', style: priceFontStyle),
+                        const Text('Name', style: priceFontStyle),
                         TextFieldWithIcon(hint: "Name")
                       ],
                     ),
                   ), ////////////////////////////////////////////////* age Section
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 12.5),
+                    padding: const EdgeInsets.symmetric(vertical: 12.5),
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Age', style: priceFontStyle),
+                        const Text('Age', style: priceFontStyle),
                         TextFieldWithIcon(hint: "Age")
                       ],
                     ),
                   ) ////////////////////////////////////////////////* gender Section
                   ,
-                  SizedBox(height: 25),
-                  GenderRadioSection(),
+                  const SizedBox(height: 25),
+                  const GenderRadioSection(),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 12.5),
+                    padding: const EdgeInsets.symmetric(vertical: 12.5),
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Address', style: priceFontStyle),
+                        const Text('Address', style: priceFontStyle),
                         TextFieldWithIcon(hint: "Adress")
                       ],
                     ),
@@ -147,7 +147,7 @@ class _GenderRadioSectionState extends State<GenderRadioSection> {
   Widget build(BuildContext context) {
     var column =
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('Gender', style: priceFontStyle),
+      const Text('Gender', style: priceFontStyle),
       Row(children: [
         Expanded(
           child: ClipRRect(

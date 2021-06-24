@@ -1,5 +1,5 @@
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
-import 'package:commerce_app/widgets/textField.dart';
+import 'package:commerce_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 import '../consts.dart';
@@ -38,7 +38,7 @@ class _SearchSectionState extends State<SearchSection> {
       // ),
       title: Container(
         // color: cBackgroundGrey, //NOTE search section bg color
-        padding: EdgeInsets.symmetric(horizontal: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Column(children: [
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Expanded(
@@ -48,7 +48,7 @@ class _SearchSectionState extends State<SearchSection> {
             )),
             // SizedBox(width: 20),
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 MyFlutterApp.params,
                 color: appBargrey,
               ),
@@ -68,7 +68,7 @@ class _SearchSectionState extends State<SearchSection> {
                     setState(() {
                       _chosenOption = e;
                     });
-                    print(this._chosenOption);
+                    print(_chosenOption);
                   },
                 ),
                 CategoryTextButton(
@@ -78,7 +78,7 @@ class _SearchSectionState extends State<SearchSection> {
                     setState(() {
                       _chosenOption = e;
                     });
-                    print(this._chosenOption);
+                    print(_chosenOption);
                   },
                 ),
                 CategoryTextButton(
@@ -88,7 +88,7 @@ class _SearchSectionState extends State<SearchSection> {
                     setState(() {
                       _chosenOption = e;
                     });
-                    print(this._chosenOption);
+                    print(_chosenOption);
                   },
                 ),
               ],
@@ -107,25 +107,25 @@ class _SearchSectionState extends State<SearchSection> {
 
 class CategoryTextButton extends StatelessWidget {
   final String text;
-  final function;
-  final isChosen;
+  final Function function;
+  final bool isChosen;
 
   CategoryTextButton(
-      {required this.text, required this.function, this.isChosen});
+      {required this.text, required this.function, required this.isChosen});
 
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       decoration: isChosen == true
-          ? BoxDecoration(border: Border(bottom: BorderSide(width: 1)))
+          ? const BoxDecoration(border: Border(bottom: BorderSide(width: 1)))
           : BoxDecoration(
               border: Border.all(
                   width: 0.0, color: Colors.blueGrey.withOpacity(0))),
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: TextButton(
-        onPressed: () => this.function(this.text),
-        child: Text(this.text, style: categoryFontStyle),
+        onPressed: () => function(text),
+        child: Text(text, style: categoryFontStyle),
       ),
     );
   }

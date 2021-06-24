@@ -11,16 +11,16 @@ class WindowsCategorySection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
 
       ///*    15px instead of 25px because the children padding adds 10px from the sides,
       child: Wrap(
         direction: Axis.horizontal,
         children: [
           ScreenWidthSizedContainer(color: Colors.yellow),
-          ScreenWidthSizedContainer(color: Colors.red),
-          ScreenWidthSizedContainer(color: Colors.purple),
-          ScreenWidthSizedContainer(color: Colors.blueGrey),
+          const ScreenWidthSizedContainer(color: Colors.red),
+          const ScreenWidthSizedContainer(color: Colors.purple),
+          const ScreenWidthSizedContainer(color: Colors.blueGrey),
         ],
       ),
     );
@@ -28,29 +28,29 @@ class WindowsCategorySection extends StatelessWidget {
 }
 
 class ScreenWidthSizedContainer extends StatelessWidget {
-  ScreenWidthSizedContainer({this.color});
+  const ScreenWidthSizedContainer({this.color});
   final Color? color;
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       height: (MediaQuery.of(context).size.width / 2) -
           25, //////////* 25px for the 25px of section padding
       width: (MediaQuery.of(context).size.width / 2) - 25,
       // color: Colors.amber,               //////////////////////////// * item main frame
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         child: TextButton(
           onPressed: () =>
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return CategoryScreen();
+            return const CategoryScreen();
           })),
           child: Stack(children: [
             Container(
               color: color,
             ),
             Align(
-              alignment: Alignment(0, -0.7),
+              alignment: const Alignment(0, -0.7),
               child: Text("Fashion accessoars",
                   textAlign: TextAlign.center,
                   style: priceFontStyle.copyWith(

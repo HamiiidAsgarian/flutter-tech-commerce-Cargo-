@@ -9,10 +9,10 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   List<Widget> testItems() {
-    List<Widget> a = [];
+    final List<Widget> a = [];
     for (var i = 0; i < 100; i++) {
       a.add(Container(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
 
         // color: Colors.blue,
         child: Row(
@@ -25,7 +25,7 @@ class _CartScreenState extends State<CartScreen> {
                 height: 90,
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               flex: 1,
               ////////////////////////////////////////////* middle part of the cartitem
@@ -66,7 +66,7 @@ class _CartScreenState extends State<CartScreen> {
                               child: Container(
                                 width: 25,
                                 height: 25,
-                                child: Center(
+                                child: const Center(
                                     child: Icon(Icons.remove,
                                         color: Colors.white, size: 15)),
                               ),
@@ -74,7 +74,7 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
                             "3",
                             style: priceFontStyle.copyWith(fontSize: 15),
@@ -92,7 +92,7 @@ class _CartScreenState extends State<CartScreen> {
                               child: Container(
                                 width: 25,
                                 height: 25,
-                                child: Center(
+                                child: const Center(
                                     child: Icon(Icons.add,
                                         color: Colors.white, size: 15)),
                               ),
@@ -116,7 +116,7 @@ class _CartScreenState extends State<CartScreen> {
                   child: Container(
                     width: 30,
                     height: 30,
-                    child: Center(
+                    child: const Center(
                         child: Icon(
                       Icons.close,
                       color: Colors.white,
@@ -153,7 +153,7 @@ class _CartScreenState extends State<CartScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors
                     .white, //////////////////////// * MY cart section color
 
@@ -161,7 +161,7 @@ class _CartScreenState extends State<CartScreen> {
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
               ),
-              padding: EdgeInsets.only(left: 25, bottom: 15, top: 25),
+              padding: const EdgeInsets.only(left: 25, bottom: 15, top: 25),
               // margin: EdgeInsets.only(bottom: 10),
               alignment: Alignment.topLeft,
               child: Column(
@@ -175,16 +175,16 @@ class _CartScreenState extends State<CartScreen> {
                         style: itemTitleFontStyle.copyWith(
                             fontSize: 11, fontWeight: FontWeight.w500)),
                   ])),
-          Divider(height: 1),
+          const Divider(height: 1),
           Expanded(
             //////////////////////////////////////////////* items
             flex: 13,
             child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: ListView(children: testItems())),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
             color:
                 greySearchbarBackground, //////////////////////////////////////* total price color
             child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
@@ -208,9 +208,9 @@ class _CartScreenState extends State<CartScreen> {
                       style: itemBrandFontStyle.copyWith(fontSize: 13)),
                 ],
               ),
-              Divider(),
+              const Divider(),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

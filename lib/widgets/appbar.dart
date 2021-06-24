@@ -20,7 +20,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       // automaticallyImplyLeading: false,
       // titleSpacing: 0 //* for  deleting unexpected padding of title
-      title: this.title,
+      title: title,
       shadowColor: Colors.red,
       // title: Text("data"),
       // titleSpacing: 18,
@@ -28,10 +28,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: appBarWhite,
       // title: Text('My App'),
       leading: Padding(
-        padding: EdgeInsets.only(left: 25), //* 25 pixle Left margin
+        padding: const EdgeInsets.only(left: 25), //* 25 pixle Left margin
         child: IconButton(
-          padding: EdgeInsets.all(0),
-          icon: this.leadingIcon == null ? Text("") : this.leadingIcon!,
+          padding: const EdgeInsets.all(0),
+          icon: leadingIcon == null ? const Text("") : leadingIcon!,
           onPressed: () => leadingIconFunction!(),
         ),
       ),
@@ -39,20 +39,20 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         SizedBox(
           width: 40,
           child: IconButton(
-            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
             icon: GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, "/Cart");
               },
               child: Stack(children: [
-                Center(
+                const Center(
                   child: Icon(
                     MyFlutterApp.cart,
                     color: appBargrey,
                     size: 26,
                   ),
                 ),
-                Positioned(
+                const Positioned(
                   right: -1,
                   top: 9,
                   child: CircleAvatar(
@@ -78,25 +78,25 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ), //* 24 PX Gap between Icons(same size as the icons with)
         SizedBox(
           width: 40,
           child: IconButton(
-            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-            icon: Icon(
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            icon: const Icon(
               MyFlutterApp.bell,
               color: appBargrey,
             ),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ListedItemsScreen();
+                return const ListedItemsScreen();
               }));
             },
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 25,
         ), //* 25 PX Right Margin
       ],
@@ -104,5 +104,5 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => new Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

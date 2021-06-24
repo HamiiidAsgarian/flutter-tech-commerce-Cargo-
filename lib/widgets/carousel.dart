@@ -47,7 +47,7 @@ class _CarouselState extends State<Carousel> {
     final List<Widget> counterDotsWidgets = [];
     list.asMap().forEach((index, element) {
       counterDotsWidgets.add(Padding(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: CircleAvatar(
           radius: 5,
           backgroundColor: selectedIndex == index
@@ -61,14 +61,14 @@ class _CarouselState extends State<Carousel> {
   }
 
   @override
-  initState() {
-    // if (controller.hasClients) {
-    //   print("yes");
-    //   // controller.jumpToPage(1);
-    // }
+  // initState() {
+  //   // if (controller.hasClients) {
+  //   //   print("yes");
+  //   //   // controller.jumpToPage(1);
+  //   // }
 
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
   @override
   dispose() {
@@ -164,7 +164,7 @@ class _SlideState extends State<Slide> {
                   child: Container(
                     ////////////////////////////////////* main slide
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      borderRadius: const BorderRadius.all(Radius.circular(15)),
                       color: widget.index % 2 == 0
                           ? Colors.blue
                           : Colors.redAccent,
@@ -173,35 +173,36 @@ class _SlideState extends State<Slide> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 3,
                           blurRadius: 7,
-                          offset: Offset(0, 0), // changes position of shadow
+                          offset:
+                              const Offset(0, 0), // changes position of shadow
                         ),
                       ],
                     ),
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     // margin: const EdgeInsets.all(8.0),
                   ),
                 ),
                 //////////////////////////////////////////////////////// * label
-                widget.hasLabel == true
-                    ? Align(
-                        alignment: Alignment(-0.7, 0.6),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Container(
-                            color: Colors.white,
-                            width: 80,
-                            height: 25,
-                            child: Center(
-                              child: Text(
-                                widget
-                                    .label!, ////////////////////////* label text
-                                style: standardSearchFontStyle,
-                              ),
-                            ),
+                if (widget.hasLabel == true)
+                  Align(
+                    alignment: const Alignment(-0.7, 0.6),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        color: Colors.white,
+                        width: 80,
+                        height: 25,
+                        child: Center(
+                          child: Text(
+                            widget.label!, ////////////////////////* label text
+                            style: standardSearchFontStyle,
                           ),
                         ),
-                      )
-                    : SizedBox()
+                      ),
+                    ),
+                  )
+                else
+                  const SizedBox()
               ],
             ),
           ),

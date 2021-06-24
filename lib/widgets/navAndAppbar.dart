@@ -1,4 +1,4 @@
-import 'package:commerce_app/providerModel.dart';
+import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

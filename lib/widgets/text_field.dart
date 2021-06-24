@@ -22,10 +22,10 @@ class TextFieldWithIcon extends StatelessWidget {
       enableInteractiveSelection: true,
       decoration: new InputDecoration(
           prefixIcon: Padding(
-            padding: EdgeInsets.only(left: 15, right: 15),
-            child: this.icon != null
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: icon != null
                 ? Icon(
-                    this.icon,
+                    icon,
                     size: 23,
                     color: appBargrey,
                   )
@@ -34,7 +34,7 @@ class TextFieldWithIcon extends StatelessWidget {
           fillColor: greySearchbarBackground,
           filled: true,
           // border: InputBorder.none,
-          border: OutlineInputBorder(
+          border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(30)),
             //  BorderRadius.only(
             //     topLeft: Radius.circular(15),
@@ -59,8 +59,8 @@ class TextFieldWithIcon extends StatelessWidget {
           // enabledBorder: OutlineInputBorder(
           //   borderSide: BorderSide(color: Colors.green, width: 5.0),
           // ),
-          hintText: this.hint,
-          hintStyle: TextStyle(color: Colors.grey, fontSize: 17)),
+          hintText: hint,
+          hintStyle: const TextStyle(color: Colors.grey, fontSize: 17)),
     );
   }
 }

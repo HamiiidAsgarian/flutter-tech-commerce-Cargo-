@@ -1,4 +1,4 @@
-import 'package:commerce_app/providerModel.dart';
+import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/screens/cart_screen.dart';
 import 'package:commerce_app/screens/category_screen.dart';
 import 'package:commerce_app/screens/favorites_screen.dart';
@@ -10,9 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
@@ -31,9 +29,9 @@ class _MyAppState extends State<MyApp> {
           "/Item": (context) => ItemDetailScreen(),
           "/Cart": (context) => CartScreen(),
           "/Favorite": (context) => FavoriteScreen(),
-          "/Category": (context) => CategoryScreen(),
-          "/Profile": (context) => ProfileScreen(),
-          "/ListedItems": (context) => ListedItemsScreen(),
+          "/Category": (context) => const CategoryScreen(),
+          "/Profile": (context) => const ProfileScreen(),
+          "/ListedItems": (context) => const ListedItemsScreen(),
         },
         initialRoute: "/",
       ),

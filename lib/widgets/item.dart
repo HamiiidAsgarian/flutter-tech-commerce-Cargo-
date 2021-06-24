@@ -18,21 +18,21 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        print(this.title);
+        print(title);
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ItemDetailScreen(title: this.title)));
+                builder: (context) => ItemDetailScreen(title: title)));
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         child: Container(
           color: Colors.white,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
               horizontal: 7, vertical: 7), //NOTE Item main margin
           child: Container(
-            padding: EdgeInsets.all(5),
-            width: this.imageWidth,
+            padding: const EdgeInsets.all(5),
+            width: imageWidth,
             // margin: EdgeInsets.only(right: 20),
             // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             color: Colors
@@ -43,12 +43,12 @@ class Item extends StatelessWidget {
               children: [
                 Container(
                   ////////////////////////////////////////* item image frame
-                  height: this.imageWidth,
+                  height: imageWidth,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     //NOTE Image border
                     child: Hero(
-                      tag: this.title!,
+                      tag: title!,
                       child: Container(
                         color: Colors.amber,
                         // decoration: BoxDecoration(
@@ -63,28 +63,28 @@ class Item extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                     height:
                         5), ////////////////////////////* image and title gap
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${this.title != null ? this.title : ""} Classical",
+                      "${title != null ? title : ""} Classical",
                       style: itemTitleFontStyle,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    Text("Boomerage", style: itemBrandFontStyle),
+                    const Text("Boomerage", style: itemBrandFontStyle),
                     // SizedBox(height: 2),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("\$250.00", style: priceFontStyle),
-                        Icon(MyFlutterApp.heart_2, size: 15)
+                        const Text("\$250.00", style: priceFontStyle),
+                        const Icon(MyFlutterApp.heart_2, size: 15)
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                         height:
                             5) //////////////////////////////////////////* additional gap from buttom
                   ],

@@ -9,10 +9,10 @@ class FavoriteScreen extends StatefulWidget {
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
   List<Widget> testItems() {
-    List<Widget> a = [];
+    final List<Widget> a = [];
     for (var i = 0; i < 20; i++) {
       a.add(Container(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
 
         // color: Colors.blue,
         child: Row(
@@ -25,7 +25,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 height: 90,
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               flex: 1,
               ////////////////////////////////////////////* middle part of the cartitem
@@ -47,7 +47,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         fontSize: 15,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       "150\$",
                       style: priceFontStyle.copyWith(
@@ -121,7 +121,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       child: Container(
                         width: 30,
                         height: 30,
-                        child: Center(
+                        child: const Center(
                             child: Padding(
                           padding: EdgeInsets.only(bottom: 7),
                           child: Icon(
@@ -134,7 +134,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 ClipRRect(
@@ -148,7 +148,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       child: Container(
                         width: 30,
                         height: 30,
-                        child: Center(
+                        child: const Center(
                             child: Icon(
                           Icons.close,
                           color: Colors.white,
@@ -187,7 +187,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors
                     .white, //////////////////////// * MY cart section color
 
@@ -195,7 +195,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
               ),
-              padding: EdgeInsets.only(left: 25, bottom: 15, top: 25),
+              padding: const EdgeInsets.only(left: 25, bottom: 15, top: 25),
               // margin: EdgeInsets.only(bottom: 10),
               alignment: Alignment.topLeft,
               child: Column(
@@ -209,12 +209,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         style: itemTitleFontStyle.copyWith(
                             fontSize: 11, fontWeight: FontWeight.w500)),
                   ])),
-          Divider(height: 1),
+          const Divider(height: 1),
           Expanded(
             //////////////////////////////////////////////* items
             flex: 13,
             child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: ListView(children: testItems())),
           ),
         ],

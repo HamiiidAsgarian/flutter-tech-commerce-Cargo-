@@ -21,7 +21,7 @@ class BlackRoundedButton extends StatelessWidget {
               // backgroundColor: Colors.pink,
               ),
           child: Text(
-            this.title!,
+            title!,
             style: priceFontStyle.copyWith(color: Colors.white),
           ),
         ),
