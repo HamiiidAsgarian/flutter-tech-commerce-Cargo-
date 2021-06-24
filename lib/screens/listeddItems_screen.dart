@@ -1,4 +1,4 @@
-import 'package:commerce_app/screens/searchLimitScreen.dart';
+import 'package:commerce_app/screens/search_simit_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/item.dart';
@@ -84,7 +84,7 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
                               color: Colors.white,
                               // width: (MediaQuery.of(context).size.width / 2) - 5,
                               child: Item(
-                                title: itemTitle,
+                                title: itemTitle.toString(),
                                 imageWidth:
                                     (MediaQuery.of(context).size.width / 2) -
                                         59,
@@ -207,7 +207,7 @@ class FilterAndSortSection extends StatelessWidget {
 }
 
 //////////////////////////////////////////////////////
-sortPopup(context) {
+sortPopup(BuildContext context) {
   {
     showModalBottomSheet(
         backgroundColor: Colors.transparent,

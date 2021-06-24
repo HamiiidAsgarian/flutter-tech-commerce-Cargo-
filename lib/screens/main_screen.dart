@@ -1,8 +1,8 @@
 // import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/providerModel.dart';
-import 'package:commerce_app/screens/ProfileScreen2.dart';
-import 'package:commerce_app/screens/categoryScreen.dart';
-import 'package:commerce_app/screens/searchScreen.dart';
+import 'package:commerce_app/screens/Profile_screen2.dart';
+import 'package:commerce_app/screens/category_screen.dart';
+import 'package:commerce_app/screens/search_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/carousel.dart';

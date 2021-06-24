@@ -17,7 +17,7 @@ class Carousel extends StatefulWidget {
 class _CarouselState extends State<Carousel> {
   // late PageController controller;
   int currentpage = 1;
-  var controller = PageController(
+  PageController controller = PageController(
     initialPage: 1,
     keepPage: false,
     viewportFraction: 0.75, ////*fraction
@@ -30,7 +30,7 @@ class _CarouselState extends State<Carousel> {
   ];
 
   List<Widget> slideBuilder(List list, PageController controller) {
-    List<Widget>? slideWidgets = [];
+    final List<Widget> slideWidgets = [];
     list.asMap().forEach((index, element) {
       slideWidgets.add(Slide(
         controller: controller,
@@ -44,7 +44,7 @@ class _CarouselState extends State<Carousel> {
   }
 
   List<Widget> counterDotsBuilder(List list, int selectedIndex) {
-    List<Widget>? counterDotsWidgets = [];
+    final List<Widget> counterDotsWidgets = [];
     list.asMap().forEach((index, element) {
       counterDotsWidgets.add(Padding(
         padding: EdgeInsets.all(5),

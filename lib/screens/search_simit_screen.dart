@@ -10,10 +10,10 @@ class SearchLimitScreen extends StatefulWidget {
 }
 
 class _SearchLimitScreenState extends State<SearchLimitScreen> {
-  List<bool>? _isOpen = [false, false];
+  final List<bool> _isOpen = [false, false];
   int sliderMin = 0;
   int slidermax = 500;
-  var testText;
+  String? testText;
   bool _statusCheckValue = false;
 
   @override
@@ -26,27 +26,28 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
         leading: Container(),
         actions: [
           Padding(
-              padding: EdgeInsets.only(right: 25),
+              padding: const EdgeInsets.only(right: 25),
               child: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.close)))
+                  icon: const Icon(Icons.close)))
         ],
-        title: Align(alignment: Alignment(0.35, 0), child: Text("SearchLimit")),
+        title: const Align(
+            alignment: Alignment(0.35, 0), child: Text("SearchLimit")),
       ),
       body: Column(children: [
-        Divider(height: 0),
-        SizedBox(height: 20),
+        const Divider(height: 0),
+        const SizedBox(height: 20),
         Container(
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 1),
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 1),
             child: SearchField2(
               hint: "Searching in Fashion category",
-              func: (e) {
+              func: (String e) {
                 setState(() {
                   testText = e;
                 });
-                print(testText);
+                // print(testText);
               },
             )),
         Container(
@@ -60,56 +61,56 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
             elevation: 1,
             expansionCallback: (i, isOpen) {
               setState(() {
-                _isOpen?[i] = !isOpen;
+                _isOpen[i] = !isOpen;
               });
             },
             children: [
               ExpansionPanel(
-                isExpanded: _isOpen![0],
+                isExpanded: _isOpen[0],
                 canTapOnHeader: true,
                 headerBuilder: (BuildContext context, _isOpen) => Align(
-                    child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 25),
-                        child: Text("Price",
-                            style: itemBrandFontStyle.copyWith(fontSize: 20))),
-                    alignment: Alignment.centerLeft),
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Text("Price",
+                          style: itemBrandFontStyle.copyWith(fontSize: 20))),
+                ),
                 body: Column(children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Row(children: [
                       Expanded(
                           child: SearchField2(
                         hint: sliderMin.toString(),
-                        func: (e) {
+                        func: (String e) {
                           setState(() {
                             // ignore: unnecessary_statements
                             int.parse(e) < slidermax && int.parse(e) >= 0
                                 ? sliderMin = int.parse(e)
-                                : print("slidermax>SliderMin");
+                                : Container();
                           });
                         },
                         value: sliderMin,
                       )),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       Expanded(
                           child: SearchField2(
                         hint: slidermax.toString(),
-                        func: (e) {
+                        func: (String e) {
                           setState(() {
                             // ignore: unnecessary_statements
                             int.parse(e) > sliderMin && int.parse(e) <= 500
                                 ? slidermax = int.parse(e)
-                                : print("slidermax<SliderMin");
+                                : Container();
                           });
                         },
                         value: slidermax,
                       ))
                     ]),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   RangeSlider(
                     max: 500,
-                    min: 0,
                     values:
                         RangeValues(sliderMin.toDouble(), slidermax.toDouble()),
                     onChanged: (e) {
@@ -120,21 +121,22 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
                       });
                     },
                   ),
-                  SizedBox(height: 30) //NOTE gap 1
+                  const SizedBox(height: 30) //NOTE gap 1
                 ]),
               ),
               ExpansionPanel(
-                  isExpanded: _isOpen![1],
+                  isExpanded: _isOpen[1],
                   canTapOnHeader: true,
                   headerBuilder: (BuildContext context, _isOpen) => Align(
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 25),
-                          child: Text("Status",
-                              style:
-                                  itemBrandFontStyle.copyWith(fontSize: 20))),
-                      alignment: Alignment.centerLeft),
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            child: Text("Status",
+                                style:
+                                    itemBrandFontStyle.copyWith(fontSize: 20))),
+                      ),
                   body: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Column(
                       children: [
                         Row(
@@ -151,7 +153,7 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
                                     itemBrandFontStyle.copyWith(fontSize: 15)),
                           ],
                         ),
-                        SizedBox(height: 30) //NOTE gap 2
+                        const SizedBox(height: 30) //NOTE gap 2
                       ],
                     ),
                   ))
@@ -168,7 +170,7 @@ class SearchField2 extends StatelessWidget {
   final Function? func;
   final int? value;
   SearchField2({this.hint, this.icon, this.func, this.value});
-  final TextEditingController cntrl = new TextEditingController();
+  final TextEditingController cntrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -179,30 +181,28 @@ class SearchField2 extends StatelessWidget {
     cntrl.selection =
         TextSelection.fromPosition(TextPosition(offset: cntrl.text.length));
     return Theme(
-      data: new ThemeData(
+      data: ThemeData(
         primaryColor: Colors.redAccent,
         primaryColorDark: Colors.red,
       ),
       child: TextField(
         controller: cntrl,
-        onChanged: (e) => this.func!(e), //NOTE search function
+        onChanged: (e) => func!(e), //NOTE search function
         style: TextStyle(color: cTextFieldTextColorGrey, fontSize: 20),
         textAlign: TextAlign.left,
         // controller: searchCtrl,
         keyboardType: TextInputType.text,
         cursorColor: appBargrey,
-        cursorWidth: 2,
         cursorRadius: Radius.zero,
         showCursor: true,
-        enableInteractiveSelection: true,
-        decoration: new InputDecoration(
+        decoration: InputDecoration(
             // prefixIcon: Padding(
             //     padding: EdgeInsets.only(left: 15, right: 15),
             //     child: this.icon),
             fillColor: Colors.white, //NOTE Fill color
             filled: true,
             // border: InputBorder.none,
-            border: OutlineInputBorder(
+            border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(5)),
               //  BorderRadius.only(
               //     topLeft: Radius.circular(15),
@@ -210,24 +210,24 @@ class SearchField2 extends StatelessWidget {
               //         Radius.circular(15)), //////////////////* left radius
               borderSide: BorderSide(width: 2, color: Colors.pink),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
+            focusedBorder: const OutlineInputBorder(
+              // borderRadius: BorderRadius.all(Radius.circular(4)),
               borderSide: BorderSide(width: 2, color: Colors.grey),
             ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide: BorderSide(width: 1, color: Colors.orange),
+            disabledBorder: const OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(4)),
+              borderSide: BorderSide(color: Colors.orange),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide: BorderSide(width: 1, color: cBackgroundGrey),
+              borderSide: BorderSide(color: cBackgroundGrey),
             ),
             errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
-                borderSide: BorderSide(width: 1, color: Colors.black)),
+                borderSide: BorderSide(color: Colors.black)),
             focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
-                borderSide: BorderSide(width: 1, color: Colors.yellowAccent)),
+                borderSide: BorderSide(color: Colors.yellowAccent)),
             contentPadding: EdgeInsets.only(left: 20), //NOTE Content padding
 
             // focusedBorder: OutlineInputBorder(
@@ -236,7 +236,7 @@ class SearchField2 extends StatelessWidget {
             // enabledBorder: OutlineInputBorder(
             //   borderSide: BorderSide(color: Colors.green, width: 5.0),
             // ),
-            hintText: this.hint,
+            hintText: hint,
             hintStyle: TextStyle(color: cBorderGrey, fontSize: 17)),
       ),
     );

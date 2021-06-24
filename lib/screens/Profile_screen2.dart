@@ -9,21 +9,28 @@ class ProfileScreen2 extends StatefulWidget {
   _ProfileScreen2State createState() => _ProfileScreen2State();
 }
 
+class IcondataString {
+  IconData? iconData;
+  String? string;
+
+  IcondataString({this.iconData, this.string});
+}
+
 class _ProfileScreen2State extends State<ProfileScreen2> {
-  listMaker(List list, bool myIcon) {
+  List<Widget> listMaker(List<IcondataString> list, bool myIcon) {
     return list
         .map(
-          (listItem) => TextButton(
+          (var listItem) => TextButton(
             onPressed: () {},
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Row(
                 children: [
                   myIcon == true
-                      ? Icon(listItem[1], size: 30, color: appBargrey)
+                      ? Icon(listItem.iconData, size: 30, color: appBargrey)
                       : Container(),
                   SizedBox(width: 5),
-                  Text(listItem[0],
+                  Text(listItem.string.toString(),
                       style: itemTitleFontStyle.copyWith(fontSize: 18)),
                 ],
               ),
@@ -52,10 +59,12 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
             padding: EdgeInsets.symmetric(horizontal: 25),
             child: Column(
                 children: listMaker([
-              ['Price Changes', Icons.timelapse],
-              ['Favorites', Icons.favorite],
-              ['Recent views', Icons.receipt_long],
-              ['Setting', Icons.settings],
+              IcondataString(
+                  iconData: Icons.timelapse, string: 'Price Changes'),
+              IcondataString(iconData: Icons.favorite, string: 'Favorites'),
+              IcondataString(
+                  iconData: Icons.receipt_long, string: 'Recent views'),
+              IcondataString(iconData: Icons.settings, string: 'Setting'),
             ], true)),
           ),
           Container(
@@ -66,10 +75,12 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
             padding: EdgeInsets.symmetric(horizontal: 25),
             child: Column(
                 children: listMaker([
-              ['About Us', MyFlutterApp.bell_alt],
-              ['Contacts', MyFlutterApp.bell_alt],
-              ['Version', MyFlutterApp.bell_alt],
-              ['Our team', MyFlutterApp.bell_alt],
+              IcondataString(iconData: Icons.timelapse, string: 'About Us'),
+              IcondataString(
+                  iconData: MyFlutterApp.bell_alt, string: 'Contacts'),
+              IcondataString(
+                  iconData: MyFlutterApp.bell_alt, string: 'Version'),
+              IcondataString(iconData: Icons.timelapse, string: 'Our team'),
             ], false)),
           )
         ])));
