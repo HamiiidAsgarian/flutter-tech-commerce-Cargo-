@@ -10,7 +10,7 @@ class WindowsCategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: cBackgroundGrey,
       padding: const EdgeInsets.symmetric(horizontal: 20),
 
       ///*    15px instead of 25px because the children padding adds 10px from the sides,

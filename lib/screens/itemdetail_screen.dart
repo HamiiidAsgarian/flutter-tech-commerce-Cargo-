@@ -31,179 +31,209 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
             Navigator.pushNamed(context, "/");
           },
         ),
-        body: Column(
+        body: SingleChildScrollView(
+          child: Column(
+            children: const [
+              ItemsSlideView(),
+              SizedBox(height: 20),
+              ItemTitle(),
+              ItemDescription(),
+              SizedBox(height: 10),
+              ItemFooter()
+            ],
+          ),
+        ));
+  }
+}
+
+class ItemFooter extends StatelessWidget {
+  const ItemFooter({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Text("Colors:",
+                      style: priceFontStyle.copyWith(color: Colors.black)),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 7),
+                        child: const CircleAvatar(
+                          radius: 12.5,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 7),
+                        child: CircleAvatar(
+                          radius: 12.5,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Price:",
+                      style: priceFontStyle.copyWith(color: Colors.black)),
+                  Text("75.00\$",
+                      style: priceFontStyle.copyWith(
+                          color: Colors.black, fontSize: 25, height: 1)),
+                ],
+              )
+            ],
+          ),
+          const SizedBox(height: 10),
+          const BlackRoundedButton(
+            title: 'Add to basket',
+          ),
+          const SizedBox(height: 25),
+        ],
+      ),
+    );
+  }
+}
+
+class ItemDescription extends StatelessWidget {
+  const ItemDescription({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Describtin",
+              style: itemBrandFontStyle.copyWith(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black)),
+          const Text(
+            "The definition of a description is a statement that gives details about someone or something. An example of description is a story about the places visited on a family trip. ... Published a description of the journey; gave a vivid description of the game.The definition of a description is a statement that gives details about someone or something. An example of description is a story about the places visited on a family trip. ... Published a description of the journey; gave a vivid description of the game.",
+            // overflow: TextOverflow.ellipsis
+            style: itemBrandFontStyle,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ItemTitle extends StatelessWidget {
+  const ItemTitle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // height: 200,
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      color: Colors.white,
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-                flex: 6,
-                child: Container(
-                  color: Colors.yellow
-                      .withOpacity(0), //////////* little radious color fade
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20)),
-                    child: Stack(children: [
-                      PageView(
-                        children: <Widget>[
-                          Container(
-                            color: Colors.pink,
-                          ),
-                          Container(
-                            color: Colors.cyan,
-                          ),
-                          Container(
-                            color: Colors.deepPurple,
-                          ),
-                        ],
-                      ),
-                      Align(
-                        alignment: const Alignment(0, 0.9),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 5),
-                              child: CircleAvatar(
-                                  radius: 7,
-                                  backgroundColor:
-                                      Colors.white.withOpacity(0.5)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 5),
-                              child: CircleAvatar(
-                                  radius: 7,
-                                  backgroundColor:
-                                      Colors.white.withOpacity(0.5)),
-                            ),
-                          ],
-                        ),
-                      )
-                    ]),
-                  ),
-                )),
-            Expanded(
-                child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              color: Colors.white,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Text("Classical hoodies",
-                                style: forMenFontStyle.copyWith(
-                                    color: Colors.black)),
-                            const SizedBox(width: 5),
-                            const Icon(
-                              MyFlutterApp.star_3,
-                              size: 10,
-                              color: Colors.yellow,
-                            ),
-                            const SizedBox(width: 5),
-                            Text(
-                              "4.7",
-                              style: priceFontStyle.copyWith(fontSize: 12),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: const [
-                            Icon(MyFlutterApp.share_alt),
-                            SizedBox(width: 25),
-                            Icon(MyFlutterApp.heart_empty),
-                          ],
-                        )
-                      ],
+                    Text("Classical hoodies",
+                        style: forMenFontStyle.copyWith(color: Colors.black)),
+                    const SizedBox(width: 5),
+                    const Icon(
+                      MyFlutterApp.star_3,
+                      size: 10,
+                      color: Colors.yellow,
                     ),
-                    const Text("boomstack", style: itemTitleFontStyle)
-                  ]),
-            )),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Describtin",
-                        style: itemBrandFontStyle.copyWith(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black)),
-                    const Expanded(
-                      child: SingleChildScrollView(
-                        child: Text(
-                          "The definition of a description is a statement that gives details about someone or something. An example of description is a story about the places visited on a family trip. ... Published a description of the journey; gave a vivid description of the game.The definition of a description is a statement that gives details about someone or something. An example of description is a story about the places visited on a family trip. ... Published a description of the journey; gave a vivid description of the game.",
-                          // overflow: TextOverflow.ellipsis
-                          style: itemBrandFontStyle,
-                        ),
-                      ),
+                    const SizedBox(width: 5),
+                    Text(
+                      "4.7",
+                      style: priceFontStyle.copyWith(fontSize: 12),
                     )
                   ],
                 ),
-              ),
+                Row(
+                  children: const [
+                    Icon(MyFlutterApp.share_alt),
+                    SizedBox(width: 25),
+                    Icon(MyFlutterApp.heart_empty),
+                  ],
+                )
+              ],
             ),
-            const SizedBox(
-              height: 10,
+            const Text("boomstack", style: itemTitleFontStyle)
+          ]),
+    );
+  }
+}
+
+class ItemsSlideView extends StatelessWidget {
+  const ItemsSlideView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.yellow.withOpacity(0), //////////* little radious color fade
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height / 2,
+          child: Stack(children: [
+            PageView(
+              children: <Widget>[
+                Container(
+                  color: Colors.pink,
+                ),
+                Container(
+                  color: Colors.cyan,
+                ),
+                Container(
+                  color: Colors.deepPurple,
+                ),
+              ],
             ),
-            Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            children: [
-                              Text("Colors:",
-                                  style: priceFontStyle.copyWith(
-                                      color: Colors.black)),
-                              Row(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.only(left: 7),
-                                    child: const CircleAvatar(
-                                      radius: 12.5,
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 7),
-                                    child: CircleAvatar(
-                                      radius: 12.5,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Price:",
-                                  style: priceFontStyle.copyWith(
-                                      color: Colors.black)),
-                              Text("75.00\$",
-                                  style: priceFontStyle.copyWith(
-                                      color: Colors.black,
-                                      fontSize: 25,
-                                      height: 1)),
-                            ],
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      const BlackRoundedButton(
-                        title: 'Add to basket',
-                      )
-                    ],
+            Align(
+              alignment: const Alignment(0, 0.9),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5),
+                    child: CircleAvatar(
+                        radius: 7,
+                        backgroundColor: Colors.white.withOpacity(0.5)),
                   ),
-                ))
-          ],
-        ));
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5),
+                    child: CircleAvatar(
+                        radius: 7,
+                        backgroundColor: Colors.white.withOpacity(0.5)),
+                  ),
+                ],
+              ),
+            )
+          ]),
+        ),
+      ),
+    );
   }
 }

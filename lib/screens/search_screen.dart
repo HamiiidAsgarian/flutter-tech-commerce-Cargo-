@@ -131,39 +131,42 @@ class _SearchSectionState extends State<SearchSection> {
         ]),
         Container(
           height: 60,
-          child: Row(
-            children: [
-              CategoryTextButton(
-                isChosen: _chosenOption == "Popular" ? true : false,
-                text: "Popular",
-                function: (String e) {
-                  setState(() {
-                    _chosenOption = e;
-                  });
-                  // print(this._chosenOption);
-                },
-              ),
-              CategoryTextButton(
-                isChosen: _chosenOption == "Recommended" ? true : false,
-                text: "Recommended",
-                function: (String e) {
-                  setState(() {
-                    _chosenOption = e;
-                  });
-                  // print(this._chosenOption);
-                },
-              ),
-              CategoryTextButton(
-                isChosen: _chosenOption == "Top Brands" ? true : false,
-                text: "Top Brands",
-                function: (String e) {
-                  setState(() {
-                    _chosenOption = e;
-                  });
-                  // print(this._chosenOption);
-                },
-              ),
-            ],
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                CategoryTextButton(
+                  isChosen: _chosenOption == "Popular" ? true : false,
+                  text: "Popular",
+                  function: (String e) {
+                    setState(() {
+                      _chosenOption = e;
+                    });
+                    // print(this._chosenOption);
+                  },
+                ),
+                CategoryTextButton(
+                  isChosen: _chosenOption == "Recommended" ? true : false,
+                  text: "Recommended",
+                  function: (String e) {
+                    setState(() {
+                      _chosenOption = e;
+                    });
+                    // print(this._chosenOption);
+                  },
+                ),
+                CategoryTextButton(
+                  isChosen: _chosenOption == "Top Brands" ? true : false,
+                  text: "Top Brands",
+                  function: (String e) {
+                    setState(() {
+                      _chosenOption = e;
+                    });
+                    // print(this._chosenOption);
+                  },
+                ),
+              ],
+            ),
           ),
         )
       ]),

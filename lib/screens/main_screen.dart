@@ -23,17 +23,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentpage1 = 0;
-  List<Widget> screens = [
-    // SearchLimitScreen(),
-    // ListedItemsScreen(),
-    const MainScreenContetnts(),
-    const CategoryScreen(),
-    const SearchScreen(),
-    const ProfileScreen2(),
-
-    // CartScreen(),
-    // FavoriteScreen(),
-    // ProfileScreen(),
+  List<Widget> screens = const [
+    MainScreenContetnts(),
+    CategoryScreen(),
+    SearchScreen(),
+    ProfileScreen2(),
   ];
 
   // @override
@@ -45,9 +39,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ProviderModel>(builder: (context, vals, child) {
-      // var a = ValueNotifier(vals.appBarSelectedIndex);
-
-      // print("aaaaaaaaaaaaaaaaaaaaaaaa ${a.value}");
       return Scaffold(
         extendBodyBehindAppBar:
             true, //////////* for fixing one pixle gap under the appbar
@@ -87,10 +78,10 @@ class _MainScreenContetntsState extends State<MainScreenContetnts> {
           delegate: SliverChildListDelegate(
             [
               SizedBox(
-                  height:
-                      200, //////////////////////////////* carousel Section height
-                  child: Carousel(sliderIndex: sliderIndex, itemIndex: 0)),
-              const ScrollviewCategory(sectionTitle: "For Mewwwwwn"),
+                height: 200,
+                child: Carousel(sliderIndex: sliderIndex, itemIndex: 0),
+              ),
+              const ScrollviewCategory(sectionTitle: "For men"),
               const WindowsCategorySection(),
               const ScrollviewCategory(sectionTitle: "For Men"),
               const ScrollviewCategory(sectionTitle: "For Men"),
