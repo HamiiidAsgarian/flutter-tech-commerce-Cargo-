@@ -1,4 +1,3 @@
-import 'package:commerce_app/screens/listeddItems_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -84,16 +83,22 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         SizedBox(
           width: 40,
           child: IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, "/Favorite");
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) {
+              //       return const ListedItemsScreen();
+              //     },
+              //   ),
+              // );
+            },
             padding: const EdgeInsets.symmetric(),
             icon: const Icon(
               MyFlutterApp.bell,
               color: appBargrey,
             ),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const ListedItemsScreen();
-              }));
-            },
           ),
         ),
         const SizedBox(

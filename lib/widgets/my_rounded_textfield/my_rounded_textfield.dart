@@ -2,7 +2,7 @@ import 'package:commerce_app/consts.dart';
 import 'package:flutter/material.dart';
 
 class MyRoundedTextfield extends StatelessWidget {
-  MyRoundedTextfield({
+  const MyRoundedTextfield({
     Key? key,
     this.cntrl,
     this.func,

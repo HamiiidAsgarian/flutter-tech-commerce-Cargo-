@@ -93,7 +93,7 @@ class IcondataString {
 }
 
 void regiserationPopup(BuildContext context) {
-  TextEditingController textcntrl = TextEditingController();
+  final TextEditingController textcntrl = TextEditingController();
   {
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
@@ -135,14 +135,14 @@ void regiserationPopup(BuildContext context) {
                                 style:
                                     itemBrandFontStyle.copyWith(fontSize: 25)),
                           ),
-                          SizedBox(height: 25),
+                          const SizedBox(height: 25),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 25),
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
                             child: MyRoundedTextfield(
                                 cntrl: textcntrl, func: (e) {}, hint: "hint"),
                           ),
-                          SizedBox(height: 25),
-                          Padding(
+                          const SizedBox(height: 25),
+                          const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 25),
                               child: MyRoundedButton()),
                         ],

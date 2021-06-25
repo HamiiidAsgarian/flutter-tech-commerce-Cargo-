@@ -18,7 +18,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         child: Row(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(5),
               child: Container(
                 color: Colors.grey,
                 width: 90,
@@ -41,6 +41,16 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       softWrap: false,
                       style: itemBrandFontStyle.copyWith(
                         fontSize: 15,
+                      ),
+                    ),
+                    Text(
+                      "Bifor the yooth",
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      softWrap: false,
+                      style: itemBrandFontStyle.copyWith(
+                        fontSize: 11,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -190,15 +200,25 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
               ),
-              padding: const EdgeInsets.only(left: 25, bottom: 15, top: 25),
+              padding: const EdgeInsets.only(
+                  left: 25, bottom: 15, top: 25, right: 25),
               // margin: EdgeInsets.only(bottom: 10),
               alignment: Alignment.topLeft,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("My Favorites",
-                        style: itemTitleFontStyle.copyWith(
-                            fontSize: 20, fontWeight: FontWeight.w700)),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("My Favorites",
+                              style: itemTitleFontStyle.copyWith(
+                                  fontSize: 20, fontWeight: FontWeight.w700)),
+                          IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              })
+                        ]),
                     Text("you have 2 itrms in your Favorites",
                         style: itemTitleFontStyle.copyWith(
                             fontSize: 11, fontWeight: FontWeight.w500)),

@@ -18,7 +18,7 @@ class _CartScreenState extends State<CartScreen> {
         child: Row(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(5),
               child: Container(
                 color: Colors.grey,
                 width: 90,
@@ -156,15 +156,25 @@ class _CartScreenState extends State<CartScreen> {
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
               ),
-              padding: const EdgeInsets.only(left: 25, bottom: 15, top: 25),
+              padding: const EdgeInsets.only(
+                  left: 25, bottom: 15, top: 25, right: 25),
               // margin: EdgeInsets.only(bottom: 10),
               alignment: Alignment.topLeft,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("My Cart",
-                        style: itemTitleFontStyle.copyWith(
-                            fontSize: 20, fontWeight: FontWeight.w700)),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "My Cart",
+                            style: itemTitleFontStyle.copyWith(
+                                fontSize: 20, fontWeight: FontWeight.w700),
+                          ),
+                          IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () => Navigator.pop(context))
+                        ]),
                     Text("you have 2 itrms in your cart",
                         style: itemTitleFontStyle.copyWith(
                             fontSize: 11, fontWeight: FontWeight.w500)),
