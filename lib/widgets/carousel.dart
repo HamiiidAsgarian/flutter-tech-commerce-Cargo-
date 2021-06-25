@@ -4,7 +4,7 @@ import '../consts.dart';
 
 ////////////////////////////////////////////////////////////////////
 class Carousel extends StatefulWidget {
-  const Carousel({Key? key, required this.sliderIndex, required this.itemIndex})
+  const Carousel({Key? key, this.sliderIndex = 1, this.itemIndex = 1})
       : super(key: key);
 
   final int sliderIndex;
@@ -78,40 +78,42 @@ class _CarouselState extends State<Carousel> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-      child: Container(
-        //////////////////////////////////////////* whole slider bar
-        height: 200,
-        color: cBackgroundGrey,
-        child: Column(children: [
-          Expanded(
-            child: PageView
-                // .builder
-                (
-              onPageChanged: (value) {
-                print(value);
-                setState(() {
-                  currentpage = value;
-                });
-              },
-              controller: controller,
-              children: slideBuilder(carouselItems, controller),
-              // itemBuilder: (context, index) => builder(index)),
+    return SizedBox(
+      height: 200,
+      child: Center(
+        child: Container(
+          //////////////////////////////////////////* whole slider bar
+          height: 200,
+          color: cBackgroundGrey,
+          child: Column(children: [
+            Expanded(
+              child: PageView
+                  // .builder
+                  (
+                onPageChanged: (value) {
+                  print(value);
+                  setState(() {
+                    currentpage = value;
+                  });
+                },
+                controller: controller,
+                children: slideBuilder(carouselItems, controller),
+                // itemBuilder: (context, index) => builder(index)),
+              ),
             ),
-          ),
-          Container(
-            width: 80,
-            height: 25,
-            // color: Colors.pink,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: counterDotsBuilder(carouselItems, currentpage),
-            ),
-          )
-        ]),
+            Container(
+              width: 80,
+              height: 25,
+              // color: Colors.pink,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: counterDotsBuilder(carouselItems, currentpage),
+              ),
+            )
+          ]),
+        ),
       ),
-    ));
+    );
   }
 
   // slideBuilder(int index, bool hasLabel, String labelText) {}

@@ -4,26 +4,13 @@ import 'package:commerce_app/widgets/item.dart';
 import 'package:flutter/material.dart';
 
 class ScrollviewCategory extends StatelessWidget {
-  const ScrollviewCategory({
-    Key? key,
-    required this.sectionTitle,
-  }) : super(key: key);
+  ScrollviewCategory({this.sectionTitle, this.itemsList});
 
   final String? sectionTitle;
+  final List<String>? itemsList;
 
   @override
   Widget build(BuildContext context) {
-    final List<String> mainScreenItems = [
-      'a',
-      'b',
-      'c',
-      'd',
-      'e',
-      'f',
-      'g',
-      'h'
-    ];
-
     return Container(
       padding: const EdgeInsets.only(left: 25, right: 25, top: 10, bottom: 5),
       color: cBackgroundGrey,
@@ -33,7 +20,7 @@ class ScrollviewCategory extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-              children: mainScreenItems
+              children: itemsList!
                   .map((e) => Container(
                       // color: Colors.white,
                       padding:

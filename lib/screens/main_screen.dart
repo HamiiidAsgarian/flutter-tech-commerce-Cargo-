@@ -8,7 +8,6 @@ import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/carousel.dart';
 import 'package:commerce_app/widgets/forCategorySection.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
-import 'package:commerce_app/widgets/windows_category-section.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,12 +29,6 @@ class _MainScreenState extends State<MainScreen> {
     ProfileScreen2(),
   ];
 
-  // @override
-  // void initState() {
-  //   print("Hellow");
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ProviderModel>(builder: (context, vals, child) {
@@ -50,15 +43,16 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-class MainScreenContetnts extends StatefulWidget {
+////////////////////////////////////////////////////////////////////////////////////* Home Screen
+class MainScreenContetnts extends StatelessWidget {
   const MainScreenContetnts({Key? key}) : super(key: key);
 
-  @override
-  _MainScreenContetntsState createState() => _MainScreenContetntsState();
-}
+//   @override
+//   _MainScreenContetntsState createState() => _MainScreenContetntsState();
+// }
 
-class _MainScreenContetntsState extends State<MainScreenContetnts> {
-  final int sliderIndex = 1;
+// class _MainScreenContetntsState extends State<MainScreenContetnts> {
+  // final int sliderIndex = 1;
 
   // Null get sectionTitle => null;
 
@@ -77,14 +71,17 @@ class _MainScreenContetntsState extends State<MainScreenContetnts> {
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              SizedBox(
-                height: 200,
-                child: Carousel(sliderIndex: sliderIndex, itemIndex: 0),
-              ),
-              const ScrollviewCategory(sectionTitle: "For men"),
-              const WindowsCategorySection(),
-              const ScrollviewCategory(sectionTitle: "For Men"),
-              const ScrollviewCategory(sectionTitle: "For Men"),
+              Carousel(),
+              ScrollviewCategory(
+                  sectionTitle: "For men1",
+                  itemsList: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']),
+              // WindowsCategorySection(),
+              ScrollviewCategory(
+                  sectionTitle: "For men1",
+                  itemsList: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']),
+              ScrollviewCategory(
+                  sectionTitle: "For men1",
+                  itemsList: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']),
             ],
           ),
         )
