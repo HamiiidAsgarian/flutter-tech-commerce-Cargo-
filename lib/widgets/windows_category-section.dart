@@ -11,10 +11,12 @@ class WindowsCategorySection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: cBackgroundGrey,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
 
       ///*    15px instead of 25px because the children padding adds 10px from the sides,
       child: Wrap(
+        runSpacing: 0,
+        spacing: 0,
         children: const [
           ScreenWidthSizedContainer(color: Colors.yellow),
           ScreenWidthSizedContainer(color: Colors.red),
@@ -31,31 +33,36 @@ class ScreenWidthSizedContainer extends StatelessWidget {
   final Color? color;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(5),
-      height: (MediaQuery.of(context).size.width / 2) -
-          25, //////////* 25px for the 25px of section padding
-      width: (MediaQuery.of(context).size.width / 2) - 25,
-      // color: Colors.amber,               //////////////////////////// * item main frame
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(5)),
-        child: TextButton(
-          onPressed: () =>
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const CategoryScreen();
-          })),
-          child: Stack(children: [
-            Container(
-              color: color,
-            ),
-            Align(
-              alignment: const Alignment(0, -0.7),
-              child: Text("Fashion accessoars",
-                  textAlign: TextAlign.center,
-                  style: priceFontStyle.copyWith(
-                      fontSize: 17, color: Colors.white)),
-            )
-          ]),
+    return Padding(
+      padding: EdgeInsets.all(5),
+      child: Container(
+        height: (MediaQuery.of(context).size.width / 2) -
+            15, //////////* 25px for the 25px of section padding
+        width: (MediaQuery.of(context).size.width / 2) - 20,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: RawMaterialButton(
+            splashColor: cBackgroundGrey.withOpacity(0.5),
+            fillColor: color,
+            onPressed: () =>
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const CategoryScreen();
+            })),
+            child: Stack(children: [
+              Align(
+                alignment: const Alignment(0, -0.7),
+                child: FittedBox(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text("Fashion ",
+                        textAlign: TextAlign.center,
+                        style: priceFontStyle.copyWith(
+                            fontSize: 17, color: Colors.white)),
+                  ),
+                ),
+              )
+            ]),
+          ),
         ),
       ),
     );

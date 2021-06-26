@@ -2,6 +2,7 @@ import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/carousel.dart';
 import 'package:commerce_app/widgets/forCategorySection.dart';
+import 'package:commerce_app/widgets/windows_category-section.dart';
 import 'package:flutter/material.dart';
 
 import '../consts.dart';
@@ -27,6 +28,7 @@ class HomeScreen extends StatelessWidget {
     //       HorizontalItemsList(sectionTitle: "For men1", itemsList: testL),
     // );
     return Scaffold(
+        backgroundColor: cBackgroundGrey,
         appBar: const MyAppBar(
           leadingIcon: Icon(
             MyFlutterApp.menu,
@@ -34,17 +36,25 @@ class HomeScreen extends StatelessWidget {
             color: appBargrey,
           ),
         ),
-        body: Column(
-          children: [
-            Carousel(),
-            HorizontalItemsList(
-              sectionTitle: "1",
-              itemsList: fakeList5,
-            ),
-            // Expanded(
-            //   child: ItemsColumnMaker(itemRows: fakeList1),
-            // ),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 10),
+              Carousel(),
+              HorizontalItemsList(
+                sectionTitle: "1",
+                itemsList: fakeList5,
+              ),
+              WindowsCategorySection(),
+              HorizontalItemsList(
+                sectionTitle: "1",
+                itemsList: fakeList5,
+              ),
+              // Expanded(
+              //   child: ItemsColumnMaker(itemRows: fakeList1),
+              // ),
+            ],
+          ),
         ));
   }
 }

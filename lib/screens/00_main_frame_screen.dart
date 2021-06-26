@@ -8,6 +8,9 @@ import 'package:commerce_app/widgets/navAndAppbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '02_category_screen.dart';
+import '04_Profile_screen2.dart';
+
 // import '../consts.dart';
 
 class MainScreen extends StatefulWidget {
@@ -19,19 +22,26 @@ class _MainScreenState extends State<MainScreen> {
   int currentpage1 = 0;
   List<Widget> screens = [
     HomeScreen(),
-    // CategoryScreen(),
+    CategoryScreen(),
     SearchScreen(),
-    // ProfileScreen2(),
+    ProfileScreen2(),
   ];
-
   @override
   Widget build(BuildContext context) {
+    // pageController1.jumpTo(1);
     return Consumer<ProviderModel>(builder: (context, vals, child) {
+      print(vals.appBarSelectedIndex);
+
       return Scaffold(
         extendBodyBehindAppBar:
             true, //////////* for fixing one pixle gap under the appbar
         bottomNavigationBar: MyBottomNavigationBar(),
-        body: SafeArea(child: screens[vals.appBarSelectedIndex]),
+        // screens[vals.appBarSelectedIndex
+        body: SafeArea(
+            child: PageView(
+                physics: NeverScrollableScrollPhysics(),
+                children: screens,
+                controller: vals.pgc)),
         // screens[Provider.of<ProviderModel>(context).appBarSelectedIndex]
       );
     });

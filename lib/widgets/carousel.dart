@@ -81,7 +81,7 @@ class _CarouselState extends State<Carousel> {
     return Container(
       height: 200,
       //////////////////////////////////////////* whole slider bar
-      color: Colors.amber, //NOTE: debuging color
+      // color: Colors.amber, //NOTE: debuging color
       // color: cBackgroundGrey,
       child: Column(children: [
         Expanded(
@@ -155,10 +155,10 @@ class _SlideState extends State<Slide> {
             width: 400,
             child: Stack(
               children: [
-                //////////////////////////////////////////////////////// * counter dots
-
                 Align(
                   child: Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     ////////////////////////////////////* main slide
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(15)),
@@ -173,8 +173,6 @@ class _SlideState extends State<Slide> {
                         ),
                       ],
                     ),
-                    margin: const EdgeInsets.all(10),
-                    // margin: const EdgeInsets.all(8.0),
                   ),
                 ),
                 //////////////////////////////////////////////////////// * label

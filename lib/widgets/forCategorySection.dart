@@ -12,11 +12,13 @@ class HorizontalItemsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 25, right: 25, top: 10, bottom: 5),
+      padding: const EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
       color: cBackgroundGrey,
       child: Column(children: [
         // SizedBox(height: 10),
-        CategoryTitle(sectionTitle: sectionTitle),
+        Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: CategoryTitle(sectionTitle: sectionTitle)),
         Container(
           // height: 270,
           child: RowListedItems(itemsList: itemsList),
@@ -49,9 +51,9 @@ class RowListedItems extends StatelessWidget {
       child: Row(
           children: itemsList!
               .map((e) => Container(
-                  // color: Colors.white,
-                  padding:
-                      const EdgeInsets.only(right: 10, bottom: 10, top: 10),
+                  margin: EdgeInsets.all(0),
+                  // color: Colors.red,
+                  // padding: const EdgeInsets.only(right: 0, bottom: 0, top: 0),
                   child: Item(title: e)))
               .toList()),
     );

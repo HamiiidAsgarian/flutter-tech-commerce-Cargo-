@@ -22,10 +22,12 @@ class _SearchScreenState extends State<SearchScreen> {
         const SearchSection(),
         Padding(
           padding: const EdgeInsets.only(left: 25, top: 25),
-          child: Text(
-            "Users top searches",
-            style: itemBrandFontStyle.copyWith(fontSize: 25),
-            textAlign: TextAlign.left,
+          child: FittedBox(
+            child: Text(
+              "Users top searches",
+              style: itemBrandFontStyle.copyWith(fontSize: 20),
+              textAlign: TextAlign.left,
+            ),
           ),
         ),
         Expanded(
@@ -36,25 +38,34 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: Wrap(
                   children: ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c']
                       .map(
-                        (e) => Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(5),
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Container(
-                                  width: screensize / 3 - 20,
-                                  height: screensize / 3 - 20,
-                                  color: Colors.amber,
-                                ),
-                              )),
+                        (e) => ClipRRect(
+                          borderRadius: BorderRadius.circular(0),
+                          child: Container(
+                            width: (screensize / 3) - 17,
+                            height: (screensize / 3) - 17,
+                            // color: Colors.blue,
+                            padding: const EdgeInsets.all(5),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: RawMaterialButton(
+                                  fillColor: Colors.amber,
+                                  splashColor: Colors.grey.withOpacity(0.5),
+                                  onPressed: () {
+                                    print("pressed");
+                                  },
+                                  child: Container(
+                                      // color: Colors.amber,
+                                      ),
+                                )),
+                          ),
                         ),
                       )
                       .toList(),
                 ),
               ),
+              SizedBox(height: 10),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Wrap(
                   children: [
                     'aaasd',
