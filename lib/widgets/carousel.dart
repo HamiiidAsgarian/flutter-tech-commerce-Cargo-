@@ -39,7 +39,7 @@ class _CarouselState extends State<Carousel> {
         label: element["labelText"],
       ));
     });
-    print(slideWidgets);
+    // print(slideWidgets);
     return slideWidgets;
   }
 
@@ -56,7 +56,7 @@ class _CarouselState extends State<Carousel> {
         ),
       ));
     });
-    print(counterDotsWidgets);
+    // print(counterDotsWidgets);
     return counterDotsWidgets;
   }
 
@@ -78,41 +78,37 @@ class _CarouselState extends State<Carousel> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 200,
-      child: Center(
-        child: Container(
-          //////////////////////////////////////////* whole slider bar
-          height: 200,
-          color: cBackgroundGrey,
-          child: Column(children: [
-            Expanded(
-              child: PageView
-                  // .builder
-                  (
-                onPageChanged: (value) {
-                  print(value);
-                  setState(() {
-                    currentpage = value;
-                  });
-                },
-                controller: controller,
-                children: slideBuilder(carouselItems, controller),
-                // itemBuilder: (context, index) => builder(index)),
-              ),
-            ),
-            Container(
-              width: 80,
-              height: 25,
-              // color: Colors.pink,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: counterDotsBuilder(carouselItems, currentpage),
-              ),
-            )
-          ]),
+      //////////////////////////////////////////* whole slider bar
+      color: Colors.amber, //NOTE: debuging color
+      // color: cBackgroundGrey,
+      child: Column(children: [
+        Expanded(
+          child: PageView
+              // .builder
+              (
+            onPageChanged: (value) {
+              // print(value);
+              setState(() {
+                currentpage = value;
+              });
+            },
+            controller: controller,
+            children: slideBuilder(carouselItems, controller),
+            // itemBuilder: (context, index) => builder(index)),
+          ),
         ),
-      ),
+        Container(
+          width: 80,
+          height: 25,
+          // color: Colors.pink, //NOTE: counterDots Debug color
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: counterDotsBuilder(carouselItems, currentpage),
+          ),
+        )
+      ]),
     );
   }
 

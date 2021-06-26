@@ -3,8 +3,8 @@ import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/item.dart';
 import 'package:flutter/material.dart';
 
-class ScrollviewCategory extends StatelessWidget {
-  ScrollviewCategory({this.sectionTitle, this.itemsList});
+class HorizontalItemsList extends StatelessWidget {
+  HorizontalItemsList({this.sectionTitle, this.itemsList});
 
   final String? sectionTitle;
   final List<String>? itemsList;
@@ -17,22 +17,59 @@ class ScrollviewCategory extends StatelessWidget {
       child: Column(children: [
         // SizedBox(height: 10),
         CategoryTitle(sectionTitle: sectionTitle),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-              children: itemsList!
-                  .map((e) => Container(
-                      // color: Colors.white,
-                      padding:
-                          const EdgeInsets.only(right: 10, bottom: 10, top: 10),
-                      child: Item(title: e)))
-                  .toList()),
+        Container(
+          // height: 270,
+          child: RowListedItems(itemsList: itemsList),
         ),
+        // SingleChildScrollView(
+        //   scrollDirection: Axis.horizontal,
+        //   child: Row(
+        //       children: itemsList!
+        //           .map((e) => Container(
+        //               // color: Colors.white,
+        //               padding:
+        //                   const EdgeInsets.only(right: 10, bottom: 10, top: 10),
+        //               child: Item(title: e)))
+        //           .toList()),
+        // ),
       ]),
     );
   }
 }
 
+//////*********************************************************/*///////////////////////////////////////////////////////
+class RowListedItems extends StatelessWidget {
+  final List<String>? itemsList;
+  RowListedItems({Key? key, this.itemsList}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+          children: itemsList!
+              .map((e) => Container(
+                  // color: Colors.white,
+                  padding:
+                      const EdgeInsets.only(right: 10, bottom: 10, top: 10),
+                  child: Item(title: e)))
+              .toList()),
+    );
+
+    // ListView.builder(
+    //     // cacheExtent: 500,
+    //     // addAutomaticKeepAlives: false,
+    //     shrinkWrap: true,
+    //     scrollDirection: Axis.horizontal,
+    //     itemCount: itemsList!.length,
+    //     itemBuilder: (context, index) => Container(
+    //         // color: Colors.white,
+    //         // padding: const EdgeInsets.only(right: 0, bottom: 10, top: 10),
+    //         child: Item(title: itemsList![index])));
+  }
+}
+
+//////*********************************************************/*///////////////////////////////////////////////////////
 class CategoryTitle extends StatelessWidget {
   const CategoryTitle({
     Key? key,
@@ -72,5 +109,3 @@ class CategoryTitle extends StatelessWidget {
     );
   }
 }
-
-// ////////////////////////////////////////////////////////////* items

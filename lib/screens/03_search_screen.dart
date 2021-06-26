@@ -43,8 +43,8 @@ class _SearchScreenState extends State<SearchScreen> {
                               child: TextButton(
                                 onPressed: () {},
                                 child: Container(
-                                  width: screensize / 3 - 37,
-                                  height: screensize / 3 - 37,
+                                  width: screensize / 3 - 20,
+                                  height: screensize / 3 - 20,
                                   color: Colors.amber,
                                 ),
                               )),

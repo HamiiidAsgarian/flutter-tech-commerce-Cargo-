@@ -1,5 +1,5 @@
 import 'package:commerce_app/consts.dart';
-import 'package:commerce_app/screens/category_screen.dart';
+import 'package:commerce_app/screens/02_category_screen.dart';
 import 'package:flutter/material.dart';
 
 class WindowsCategorySection extends StatelessWidget {
