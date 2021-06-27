@@ -7,21 +7,24 @@ class MyRoundedTextfield extends StatelessWidget {
     this.cntrl,
     this.func,
     this.hint,
+    this.textInputType,
   }) : super(key: key);
 
   final TextEditingController? cntrl;
   final Function? func;
   final String? hint;
+  final TextInputType? textInputType;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: textInputType ?? null,
       controller: cntrl,
       onChanged: (e) => func!(e), //NOTE search function
       style: TextStyle(color: cTextFieldTextColorGrey, fontSize: 20),
       textAlign: TextAlign.left,
       // controller: searchCtrl,
-      keyboardType: TextInputType.text,
+      // keyboardType: TextInputType.text,
       cursorColor: appBargrey,
       cursorRadius: Radius.zero,
       showCursor: true,

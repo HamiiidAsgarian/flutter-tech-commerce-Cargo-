@@ -14,6 +14,27 @@ class ListedItemsScreen extends StatefulWidget {
 }
 
 class _ListedItemsScreenState extends State<ListedItemsScreen> {
+  List<String> itemsList = [
+    "Reading",
+    "Speaking",
+    "listening",
+    "writing",
+    '1',
+    '',
+    '',
+    '',
+    '',
+    "Reading",
+    "Speaking",
+    "listening",
+    "writing",
+    '1',
+    "Reading",
+    "Speaking",
+    "listening",
+    "writing",
+    '1',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,60 +62,50 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
           const SizedBox(height: 7),
           const OtherBrandsSection(),
           const SizedBox(height: 7),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              // gridview.count
-              // childAspectRatio: MediaQuery.of(context).size.height / 900,
-              // // childAspectRatio: 2,
-              // crossAxisSpacing: 10,
-              // mainAxisSpacing: 10,
-              // crossAxisCount: 2,
-              child: Wrap(
-                children: [
-                  "Reading",
-                  "Speaking",
-                  "listening",
-                  "writing",
-                  '1',
-                  '',
-                  '',
-                  '',
-                  '',
-                  "Reading",
-                  "Speaking",
-                  "listening",
-                  "writing",
-                  '1',
-                  "Reading",
-                  "Speaking",
-                  "listening",
-                  "writing",
-                  '1',
-                ]
-                    .map<Widget>((dynamic itemTitle) => Container(
-                          // color: Colors.amber,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Container(
-                              color: Colors.white,
-                              // width: (MediaQuery.of(context).size.width / 2) - 5,
-                              child: Item(
-                                title: itemTitle.toString(),
-                                imageWidth:
-                                    (MediaQuery.of(context).size.width / 2) -
-                                        59,
-                              ),
-                            ),
-                          ),
-                        ))
-                    .toList(),
-              ),
-            ),
-          ),
+          BrandItemsList(itemsList: itemsList)
         ]));
+  }
+}
+
+class BrandItemsList extends StatelessWidget {
+  const BrandItemsList({Key? key, required this.itemsList}) : super(key: key);
+  final List<String> itemsList;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        // gridview.count
+        // childAspectRatio: MediaQuery.of(context).size.height / 900,
+        // // childAspectRatio: 2,
+        // crossAxisSpacing: 10,
+        // mainAxisSpacing: 10,
+        // crossAxisCount: 2,
+        child: Wrap(
+          children: itemsList
+              .map<Widget>((dynamic itemTitle) => Container(
+                    // color: Colors.amber,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: Container(
+                        color: Colors.white,
+                        // width:
+                        //     (MediaQuery.of(context).size.width / 2) - 5,
+                        child: Item(
+                          title: itemTitle.toString(),
+                          imageWidth:
+                              (MediaQuery.of(context).size.width / 2) - 34,
+                        ),
+                      ),
+                    ),
+                  ))
+              .toList(),
+        ),
+      ),
+    );
   }
 }
 
@@ -127,19 +138,26 @@ class OtherBrandsSection extends StatelessWidget {
                       padding: const EdgeInsets.all(5),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white, //NOTE Other brands
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5)),
                           border: Border.all(color: cBorderGrey),
                         ),
                         height: 30,
-                        child: TextButton(
-                          onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Text(e,
-                                style: itemBrandFontStyle.copyWith(
-                                    fontSize: 13, fontWeight: FontWeight.w600)),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: RawMaterialButton(
+                            fillColor: Colors.white,
+                            splashColor: cBackgroundGrey.withOpacity(0.5),
+                            onPressed: () {},
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: FittedBox(
+                                child: Text(e,
+                                    style: itemBrandFontStyle.copyWith(
+                                        fontWeight: FontWeight.w600)),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -161,7 +179,7 @@ class FilterAndSortSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //NOTE Filter and sort Section
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       color: Colors.white,
       child: Row(children: [
         Expanded(
@@ -224,7 +242,7 @@ void sortPopup(BuildContext context) {
                 child: Column(children: [
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 25, vertical: 10),
+                        horizontal: 10, vertical: 10),
                     color: Colors.white, //NOTE Title section color
                     child: ListTile(
                       // title: Center(

@@ -8,9 +8,14 @@ import 'package:commerce_app/screens/00_main_frame_screen.dart';
 import 'package:commerce_app/screens/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+void main() => {
+      SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(statusBarColor: Colors.pink)),
+      runApp(MyApp())
+    };
 
 class MyApp extends StatefulWidget {
   @override

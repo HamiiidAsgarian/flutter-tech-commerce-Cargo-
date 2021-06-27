@@ -12,7 +12,7 @@ class HorizontalItemsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
+      // padding: const EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
       color: cBackgroundGrey,
       child: Column(children: [
         // SizedBox(height: 10),
@@ -49,9 +49,10 @@ class RowListedItems extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: itemsList!
               .map((e) => Container(
-                  margin: EdgeInsets.all(0),
+                  margin: EdgeInsets.symmetric(horizontal: 5),
                   // color: Colors.red,
                   // padding: const EdgeInsets.only(right: 0, bottom: 0, top: 0),
                   child: Item(title: e)))
@@ -89,7 +90,7 @@ class CategoryTitle extends StatelessWidget {
           sectionTitle != null ? sectionTitle! : "",
           style: forMenFontStyle,
         ),
-        TextButton(
+        RawMaterialButton(
           onPressed: () {
             Navigator.pushNamed(context, "/ListedItems");
           },

@@ -20,10 +20,11 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.black,
         leading: Container(),
         actions: [
           Padding(
@@ -42,6 +43,7 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
         Container(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 1),
             child: SearchField2(
+              textInputType: TextInputType.text,
               hint: "Searching in Fashion category",
               func: (String e) {
                 setState(() {
@@ -81,6 +83,7 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
                     child: Row(children: [
                       Expanded(
                           child: SearchField2(
+                        textInputType: TextInputType.number,
                         hint: sliderMin.toString(),
                         func: (String e) {
                           setState(() {
@@ -95,6 +98,7 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
                       const SizedBox(width: 20),
                       Expanded(
                           child: SearchField2(
+                        textInputType: TextInputType.number,
                         hint: slidermax.toString(),
                         func: (String e) {
                           setState(() {
@@ -169,7 +173,9 @@ class SearchField2 extends StatelessWidget {
   final Widget? icon;
   final Function? func;
   final int? value;
-  SearchField2({this.hint, this.icon, this.func, this.value});
+  final TextInputType? textInputType;
+  SearchField2(
+      {this.hint, this.icon, this.func, this.value, this.textInputType});
   final TextEditingController cntrl = TextEditingController();
 
   @override
@@ -180,13 +186,8 @@ class SearchField2 extends StatelessWidget {
 
     cntrl.selection =
         TextSelection.fromPosition(TextPosition(offset: cntrl.text.length));
-    return Theme(
-      data: ThemeData(
-        primaryColor: Colors.redAccent,
-        primaryColorDark: Colors.red,
-      ),
-      child: MyRoundedTextfield(cntrl: cntrl, func: func, hint: hint),
-    );
+    return MyRoundedTextfield(
+        cntrl: cntrl, func: func, hint: hint, textInputType: textInputType);
   }
 }
 

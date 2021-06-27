@@ -17,31 +17,45 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int currentpage1 = 0;
+  int currentpage = 0;
   List<Widget> screens = [
     HomeScreen(),
     CategoryScreen(),
     SearchScreen(),
     ProfileScreen2(),
   ];
+  PageController pageController = PageController(initialPage: 0);
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // pageController1.jumpTo(1);
+    if (pageController.hasClients) pageController.jumpToPage(currentpage);
     // return Consumer<ProviderModel>(builder: (context, vals, child) {
 
     return Scaffold(
-      extendBodyBehindAppBar:
-          true, //////////* for fixing one pixle gap under the appbar
+      extendBodyBehindAppBar: true,
       bottomNavigationBar: MyBottomNavigationBar(
-        newvalue: currentpage1,
+        newvalue: currentpage,
         function: (int e) {
           print(e);
           setState(() {
-            currentpage1 = e;
+            currentpage = e;
           });
         },
       ),
-      body: screens[currentpage1],
+      body: PageView(
+          onPageChanged: (e) {
+            setState(() {
+              currentpage = e;
+            });
+          },
+          children: screens,
+          controller: pageController),
     );
     // });
   }

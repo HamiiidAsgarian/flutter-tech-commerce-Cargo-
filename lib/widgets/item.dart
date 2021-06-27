@@ -16,18 +16,20 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        print(title);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ItemDetailScreen(title: title)));
-      },
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(5)),
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(Radius.circular(5)),
+      child: RawMaterialButton(
+        fillColor: Colors.white,
+        splashColor: cBackgroundGrey.withOpacity(1),
+        onPressed: () {
+          print(title);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ItemDetailScreen(title: title)));
+        },
         child: Container(
-          color: Colors.white,
+          // color: Colors.white,
           padding: const EdgeInsets.symmetric(
               horizontal: 7, vertical: 7), //NOTE Item main margin
           child: Container(
@@ -47,19 +49,16 @@ class Item extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     //NOTE Image border
-                    child: Hero(
-                      tag: title!,
-                      child: Container(
-                        color: Colors.amber,
-                        // decoration: BoxDecoration(
-                        //   image: DecorationImage(
-                        //     image: NetworkImage(
-                        //         "https://i.picsum.photos/id/77/200/300.jpg?grayscale&hmac=0XOpv5k16oN2OIdXA51RRwpKHuMnidcPYoVk6X5iUaI"),
-                        //     //whatever image you can put here
-                        //     fit: BoxFit.cover,
-                        //   ),
-                        // ),
-                      ),
+                    child: Container(
+                      color: Colors.amber,
+                      // decoration: BoxDecoration(
+                      //   image: DecorationImage(
+                      //     image: NetworkImage(
+                      //         "https://i.picsum.photos/id/77/200/300.jpg?grayscale&hmac=0XOpv5k16oN2OIdXA51RRwpKHuMnidcPYoVk6X5iUaI"),
+                      //     //whatever image you can put here
+                      //     fit: BoxFit.cover,
+                      //   ),
+                      // ),
                     ),
                   ),
                 ),

@@ -36,24 +36,31 @@ class HomeScreen extends StatelessWidget {
             color: appBargrey,
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 10),
-              Carousel(),
-              HorizontalItemsList(
-                sectionTitle: "1",
-                itemsList: fakeList5,
-              ),
-              WindowsCategorySection(),
-              HorizontalItemsList(
-                sectionTitle: "1",
-                itemsList: fakeList5,
-              ),
-              // Expanded(
-              //   child: ItemsColumnMaker(itemRows: fakeList1),
-              // ),
-            ],
+        body: RefreshIndicator(
+          onRefresh: () async {
+            print("object");
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 10),
+                Carousel(),
+                HorizontalItemsList(
+                  sectionTitle: "<",
+                  itemsList: fakeList5,
+                ),
+                SizedBox(height: 10),
+
+                WindowsCategorySection(),
+                HorizontalItemsList(
+                  sectionTitle: "1",
+                  itemsList: fakeList5,
+                ),
+                // Expanded(
+                //   child: ItemsColumnMaker(itemRows: fakeList1),
+                // ),
+              ],
+            ),
           ),
         ));
   }
