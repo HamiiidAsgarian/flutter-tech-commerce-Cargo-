@@ -6,10 +6,6 @@ class ProviderModel extends ChangeNotifier {
     initialPage: 0,
   );
 
-  void onp(int index) {
-    pgc.jumpToPage(appBarSelectedIndex);
-  }
-
   void onItemTapped(int index) {
     appBarSelectedIndex = index;
     print("Provider Nav index: $appBarSelectedIndex");

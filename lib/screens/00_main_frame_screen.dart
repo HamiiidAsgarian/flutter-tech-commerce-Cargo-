@@ -1,12 +1,10 @@
 // import 'package:commerce_app/style/my_flutter_app_icons.dart';
-import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/screens/01_home_screen.dart';
 // import 'package:commerce_app/screens/Profile_screen2.dart';
 // import 'package:commerce_app/screens/category_screen.dart';
 import 'package:commerce_app/screens/03_search_screen.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '02_category_screen.dart';
 import '04_Profile_screen2.dart';
@@ -29,21 +27,22 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     // pageController1.jumpTo(1);
-    return Consumer<ProviderModel>(builder: (context, vals, child) {
-      print(vals.appBarSelectedIndex);
+    // return Consumer<ProviderModel>(builder: (context, vals, child) {
 
-      return Scaffold(
-        extendBodyBehindAppBar:
-            true, //////////* for fixing one pixle gap under the appbar
-        bottomNavigationBar: MyBottomNavigationBar(),
-        // screens[vals.appBarSelectedIndex
-        body: SafeArea(
-            child: PageView(
-                physics: NeverScrollableScrollPhysics(),
-                children: screens,
-                controller: vals.pgc)),
-        // screens[Provider.of<ProviderModel>(context).appBarSelectedIndex]
-      );
-    });
+    return Scaffold(
+      extendBodyBehindAppBar:
+          true, //////////* for fixing one pixle gap under the appbar
+      bottomNavigationBar: MyBottomNavigationBar(
+        newvalue: currentpage1,
+        function: (int e) {
+          print(e);
+          setState(() {
+            currentpage1 = e;
+          });
+        },
+      ),
+      body: screens[currentpage1],
+    );
+    // });
   }
 }
