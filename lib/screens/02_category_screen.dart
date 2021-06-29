@@ -52,7 +52,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       child: ListTile(
                         onTap: () => Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return const ListedItemsScreen();
+                          return ListedItemsScreen(
+                            title: "itemss",
+                          );
                         })),
                         trailing:
                             const Icon(Icons.keyboard_arrow_right, size: 30),

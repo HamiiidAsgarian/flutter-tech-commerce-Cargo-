@@ -6,15 +6,17 @@ import 'package:flutter/material.dart';
 
 import '../consts.dart';
 
-class ListedItemsScreen extends StatefulWidget {
-  const ListedItemsScreen({Key? key}) : super(key: key);
+class ListedItemsScreen extends StatelessWidget {
+  ListedItemsScreen({Key? key, this.title}) : super(key: key);
 
-  @override
-  _ListedItemsScreenState createState() => _ListedItemsScreenState();
-}
+  final String? title;
 
-class _ListedItemsScreenState extends State<ListedItemsScreen> {
-  List<String> itemsList = [
+//   @override
+//   _ListedItemsScreenState createState() => _ListedItemsScreenState();
+// }
+
+// class _ListedItemsScreenState extends State<ListedItemsScreen> {
+  final List<String> itemsList = [
     "Reading",
     "Speaking",
     "listening",
@@ -41,7 +43,7 @@ class _ListedItemsScreenState extends State<ListedItemsScreen> {
         backgroundColor: cBackgroundGrey,
         appBar: MyAppBar(
           title: Text(
-            "Items",
+            this.title ?? "",
             style: itemBrandFontStyle.copyWith(fontSize: 20),
           ),
           leadingIcon: const Icon(
@@ -118,7 +120,7 @@ class OtherBrandsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(), //NOTE section margin
+      // margin: const EdgeInsets.symmetric(), //NOTE section margin
       // color: Colors.amber,
       // padding: EdgeInsets.symmetric(horizontal: 25),
       height: 40,
@@ -133,11 +135,15 @@ class OtherBrandsSection extends StatelessWidget {
           Expanded(
               child: ListView(
             scrollDirection: Axis.horizontal,
-            children: ['Aftabe', 'Lagan', 'Addidas', 'Puma', 'Banana']
+            children: ['Aftabe', 'ven', 'Adorabamma', 'Puma', 'S']
                 .map((e) => Padding(
-                      padding: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 2.5, vertical: 5),
                       child: Container(
+                        //   width: 5,
+
                         decoration: BoxDecoration(
+                          // color: Colors.red,
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5)),
                           border: Border.all(color: cBorderGrey),
@@ -147,16 +153,19 @@ class OtherBrandsSection extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                           child: RawMaterialButton(
                             fillColor: Colors.white,
-                            splashColor: cBackgroundGrey.withOpacity(0.5),
-                            onPressed: () {},
+                            constraints: BoxConstraints(minWidth: 50),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ListedItemsScreen(title: e)));
+                            },
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: FittedBox(
-                                child: Text(e,
-                                    style: itemBrandFontStyle.copyWith(
-                                        fontWeight: FontWeight.w600)),
-                              ),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(e,
+                                  style: itemBrandFontStyle.copyWith(
+                                      fontWeight: FontWeight.w600)),
                             ),
                           ),
                         ),
@@ -223,7 +232,6 @@ class FilterAndSortSection extends StatelessWidget {
 
 //////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////
 void sortPopup(BuildContext context) {
   {
     showModalBottomSheet(
@@ -261,15 +269,15 @@ void sortPopup(BuildContext context) {
                     child: SingleChildScrollView(
                       child: Column(
                         children: const [
-                          SortOption(text: "LowestPRice"),
-                          SortOption(text: "LowestPRice"),
-                          SortOption(text: "LowestPRice"),
-                          SortOption(text: "LowestPRice"),
-                          SortOption(text: "LowestPRice"),
-                          SortOption(text: "LowestPRice"),
-                          SortOption(text: "LowestPRice"),
-                          SortOption(text: "LowestPRice"),
-                          SortOption(text: "LowestPRice"),
+                          SortOption(text: "Lowest pricr"),
+                          SortOption(text: "Lowest value"),
+                          SortOption(text: "Highest price"),
+                          SortOption(text: "Highest value"),
+                          SortOption(text: "option"),
+                          SortOption(text: "option"),
+                          SortOption(text: "option"),
+                          SortOption(text: "option"),
+                          SortOption(text: "option"),
                         ],
                       ),
                     ),

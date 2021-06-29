@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
           "/Favorite": (context) => FavoriteScreen(),
           "/Category": (context) => const CategoryScreen(),
           "/Profile": (context) => const ProfileScreen(),
-          "/ListedItems": (context) => const ListedItemsScreen(),
+          "/ListedItems": (context) => ListedItemsScreen(title: "Items"),
         },
         initialRoute: "/",
       ),

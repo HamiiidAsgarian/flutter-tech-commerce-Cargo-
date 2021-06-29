@@ -46,7 +46,9 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: 10),
                 Carousel(),
                 HorizontalItemsList(
-                  sectionTitle: "<",
+                  ListItemsMargin: EdgeInsets.only(right: 10),
+                  ListFramePadding: EdgeInsets.symmetric(horizontal: 15),
+                  sectionTitle: "For men",
                   itemsList: fakeList5,
                 ),
                 SizedBox(height: 10),

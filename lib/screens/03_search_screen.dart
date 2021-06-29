@@ -19,6 +19,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       backgroundColor: cBackgroundGrey,
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        SizedBox(height: 15),
         const SearchSection(),
         Padding(
           padding: const EdgeInsets.only(left: 25, top: 25),
@@ -131,17 +132,17 @@ class _SearchSectionState extends State<SearchSection> {
             icon: MyFlutterApp.search_5,
           )),
           // SizedBox(width: 20),
-          IconButton(
-            icon: const Icon(
-              MyFlutterApp.params,
-              color: appBargrey,
-            ),
-            onPressed: () {},
-            // splashColor: Colors.red,
-          )
+          // IconButton(
+          //   icon: const Icon(
+          //     MyFlutterApp.params,
+          //     color: appBargrey,
+          //   ),
+          //   onPressed: () {},
+          //   // splashColor: Colors.red,
+          // )
         ]),
         Container(
-          height: 60,
+          height: 50,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
