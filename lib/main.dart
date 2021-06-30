@@ -22,12 +22,15 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
+GlobalKey<NavigatorState> key00 = new GlobalKey();
+
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (BuildContext context) => ProviderModel(),
       child: MaterialApp(
+        // navigatorKey: key00,
         debugShowCheckedModeBanner: false,
         routes: {
           "/": (context) => MainScreen(),
