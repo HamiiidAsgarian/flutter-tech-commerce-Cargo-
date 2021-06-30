@@ -1,6 +1,6 @@
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/blackroundedbutton.dart';
-import 'package:commerce_app/widgets/appbar.dart';
+// import 'package:commerce_app/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
 import '../consts.dart';
@@ -21,28 +21,28 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
 
     return Scaffold(
         // bottomNavigationBar: MyBottomNavigationBar(),
-        appBar: MyAppBar(
-          leadingIcon: const Icon(
-            MyFlutterApp.left_open,
-            // MdiIcons.walletPlusOutline,
-            color: appBargrey,
-          ),
-          leadingIconFunction: () {
-            Navigator.pushNamed(context, "/");
-          },
-        ),
+        // appBar: MyAppBar(
+        //   leadingIcon: const Icon(
+        //     MyFlutterApp.left_open,
+        //     // MdiIcons.walletPlusOutline,
+        //     color: appBargrey,
+        //   ),
+        //   leadingIconFunction: () {
+        //     Navigator.pushNamed(context, "/");
+        //   },
+        // ),
         body: SingleChildScrollView(
-          child: Column(
-            children: const [
-              ItemsSlideView(),
-              SizedBox(height: 20),
-              ItemTitle(),
-              ItemDescription(),
-              SizedBox(height: 10),
-              ItemFooter()
-            ],
-          ),
-        ));
+      child: Column(
+        children: const [
+          ItemsSlideView(),
+          SizedBox(height: 20),
+          ItemTitle(),
+          ItemDescription(),
+          SizedBox(height: 10),
+          ItemFooter()
+        ],
+      ),
+    ));
   }
 }
 

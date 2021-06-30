@@ -251,33 +251,36 @@ void sortPopup(BuildContext context) {
                   Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
-                    color: Colors.white, //NOTE Title section color
+                    color: Colors.black, //NOTE Title section color
                     child: ListTile(
-                      // title: Center(
-                      //     child: Text("Sort",
-                      //         style:
-                      //             itemBrandFontStyle.copyWith(fontSize: 25))),
+                      // tileColor: Colors.amber,
+                      title: Align(
+                        alignment: Alignment(0.3, 0),
+                        child: Text("Sort",
+                            style: itemBrandFontStyle.copyWith(
+                                fontSize: 25, color: Colors.white)),
+                      ),
                       trailing: IconButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          icon: const Icon(Icons.cancel, size: 30)),
+                          icon: const Icon(Icons.cancel,
+                              size: 30, color: Colors.white)),
                     ),
                   ),
                   const Divider(height: 0),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
-                        children: const [
-                          SortOption(text: "Lowest pricr"),
-                          SortOption(text: "Lowest value"),
-                          SortOption(text: "Highest price"),
-                          SortOption(text: "Highest value"),
-                          SortOption(text: "option"),
-                          SortOption(text: "option"),
-                          SortOption(text: "option"),
-                          SortOption(text: "option"),
-                          SortOption(text: "option"),
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 10),
+                          PopupItem(text: "highest Value"),
+                          PopupItem(text: "Lowestt Value"),
+                          PopupItem(text: "Lowestt Value"),
+                          PopupItem(text: "Lowestt Value"),
+                          PopupItem(text: "Lowestt Value"),
                         ],
                       ),
                     ),
@@ -288,20 +291,27 @@ void sortPopup(BuildContext context) {
   }
 }
 
-//////////////////////////////////////////////////
-class SortOption extends StatelessWidget {
+class PopupItem extends StatelessWidget {
   final String? text;
-  const SortOption({this.text});
+  const PopupItem({Key? key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print(text);
+    return RawMaterialButton(
+      onPressed: () {
+        print("object");
       },
-      child: Padding(
-          padding: const EdgeInsets.only(right: 50, top: 25),
-          child: Text(text!, style: itemBrandFontStyle.copyWith(fontSize: 25))),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 15),
+        width: double.infinity,
+        // height: 50,
+        // color: Colors.amber,
+        child: Center(
+            child: Text(this.text ?? 'no text',
+                style: itemBrandFontStyle.copyWith(fontSize: 25))),
+      ),
     );
   }
 }
+
+//////////////////////////////////////////////////
