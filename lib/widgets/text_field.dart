@@ -9,21 +9,26 @@ class TextFieldWithIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onChanged: (a) {},
-      style: TextStyle(color: cBackgroundGrey, fontSize: 20),
-      textAlign: TextAlign.left,
-      // controller: searchCtrl,
-      keyboardType: TextInputType.text,
-      cursorColor: appBargrey,
-      cursorRadius: Radius.zero,
-      showCursor: true,
-      decoration: InputDecoration(
+        onChanged: (a) {},
+        style: TextStyle(color: Colors.grey, fontSize: 20),
+        textAlign: TextAlign.left,
+        // controller: searchCtrl,
+        keyboardType: TextInputType.text,
+        cursorColor: appBargrey,
+        cursorRadius: Radius.zero,
+        showCursor: true,
+        decoration: InputDecoration(
+          hintText: hint,
+          hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
+
+          // isDense: true,
+          contentPadding: EdgeInsets.symmetric(vertical: 5),
           prefixIcon: Padding(
             padding: const EdgeInsets.only(left: 15, right: 15),
             child: icon != null
                 ? Icon(
                     icon,
-                    size: 23,
+                    size: 20,
                     color: appBargrey,
                   )
                 : null,
@@ -38,6 +43,7 @@ class TextFieldWithIcon extends StatelessWidget {
             //     bottomLeft:
             //         Radius.circular(15)), //////////////////* left radius
             borderSide: BorderSide(
+              // color: Colors.red,
               width: 0,
               style: BorderStyle.none,
             ),
@@ -46,7 +52,6 @@ class TextFieldWithIcon extends StatelessWidget {
           // enabledBorder: InputBorder.none,
           // errorBorder: InputBorder.none,
           // disabledBorder: InputBorder.none,
-
           // contentPadding:
           //     EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
 
@@ -56,9 +61,7 @@ class TextFieldWithIcon extends StatelessWidget {
           // enabledBorder: OutlineInputBorder(
           //   borderSide: BorderSide(color: Colors.green, width: 5.0),
           // ),
-          hintText: hint,
-          hintStyle: const TextStyle(color: Colors.grey, fontSize: 17)),
-    );
+        ));
   }
 }
 /////////////////////////////////////////////

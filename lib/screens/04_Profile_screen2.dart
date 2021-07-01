@@ -41,47 +41,59 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-            child: Column(children: [
-          Container(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-              child: const Icon(Icons.access_alarm, size: 50)),
-          // SizedBox(height: 20),
-          const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50),
-              child: MyRoundedButton()),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
+    return Navigator(onGenerateRoute: (RouteSettings settings) {
+      return MaterialPageRoute(builder: (context) {
+        return Scaffold(
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
             child: Column(
-                children: listMaker(list: [
-              IcondataString(
-                  iconData: Icons.timelapse, string: 'Price Changes'),
-              IcondataString(iconData: Icons.favorite, string: 'Favorites'),
-              IcondataString(
-                  iconData: Icons.receipt_long, string: 'Recent views'),
-              IcondataString(iconData: Icons.settings, string: 'Setting'),
-            ])),
+              children: [
+                Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 20),
+                    child: const Icon(Icons.access_alarm, size: 50)),
+                // SizedBox(height: 20),
+                const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    child: MyRoundedButton()),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Column(
+                      children: listMaker(list: [
+                    IcondataString(
+                        iconData: Icons.timelapse, string: 'Price Changes'),
+                    IcondataString(
+                        iconData: Icons.favorite, string: 'Favorites'),
+                    IcondataString(
+                        iconData: Icons.receipt_long, string: 'Recent views'),
+                    IcondataString(iconData: Icons.settings, string: 'Setting'),
+                  ])),
+                ),
+                Container(
+                    color: appBargrey,
+                    height: 1,
+                    margin: const EdgeInsets.symmetric(vertical: 20)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Column(
+                      children: listMaker(list: [
+                    IcondataString(
+                        iconData: Icons.timelapse, string: 'About Us'),
+                    IcondataString(
+                        iconData: MyFlutterApp.bell_alt, string: 'Contacts'),
+                    IcondataString(
+                        iconData: MyFlutterApp.bell_alt, string: 'Version'),
+                    IcondataString(
+                        iconData: Icons.timelapse, string: 'Our team'),
+                  ], myIcon: false)),
+                )
+              ],
+            ),
           ),
-          Container(
-              color: appBargrey,
-              height: 1,
-              margin: const EdgeInsets.symmetric(vertical: 20)),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
-                children: listMaker(list: [
-              IcondataString(iconData: Icons.timelapse, string: 'About Us'),
-              IcondataString(
-                  iconData: MyFlutterApp.bell_alt, string: 'Contacts'),
-              IcondataString(
-                  iconData: MyFlutterApp.bell_alt, string: 'Version'),
-              IcondataString(iconData: Icons.timelapse, string: 'Our team'),
-            ], myIcon: false)),
-          )
-        ])));
+        );
+      });
+    });
   }
 }
 
