@@ -21,28 +21,26 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
 
     return Scaffold(
         // bottomNavigationBar: MyBottomNavigationBar(),
-        // appBar: MyAppBar(
-        //   leadingIcon: const Icon(
-        //     MyFlutterApp.left_open,
-        //     // MdiIcons.walletPlusOutline,
-        //     color: appBargrey,
-        //   ),
-        //   leadingIconFunction: () {
-        //     Navigator.pushNamed(context, "/");
-        //   },
-        // ),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+              color: Colors.black,
+              icon: Icon(Icons.arrow_back_ios_outlined),
+              onPressed: () => Navigator.pop(context)),
+        ),
         body: SingleChildScrollView(
-      child: Column(
-        children: const [
-          ItemsSlideView(),
-          SizedBox(height: 20),
-          ItemTitle(),
-          ItemDescription(),
-          SizedBox(height: 10),
-          ItemFooter()
-        ],
-      ),
-    ));
+          child: Column(
+            children: const [
+              ItemsSlideView(),
+              SizedBox(height: 20),
+              ItemTitle(),
+              ItemDescription(),
+              SizedBox(height: 10),
+              ItemFooter()
+            ],
+          ),
+        ));
   }
 }
 

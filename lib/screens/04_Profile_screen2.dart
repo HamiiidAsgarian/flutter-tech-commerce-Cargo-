@@ -12,33 +12,6 @@ class ProfileScreen2 extends StatefulWidget {
 }
 
 class _ProfileScreen2State extends State<ProfileScreen2> {
-  List<Widget> listMaker(
-      {required List<IcondataString> list, bool myIcon = true}) {
-    return list
-        .map(
-          (IcondataString listItem) => TextButton(
-            onPressed: () {
-              regiserationPopup(context);
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Row(
-                children: [
-                  if (myIcon == true)
-                    Icon(listItem.iconData, size: 30, color: appBargrey)
-                  else
-                    Container(),
-                  const SizedBox(width: 5),
-                  Text(listItem.string.toString(),
-                      style: itemTitleFontStyle.copyWith(fontSize: 18)),
-                ],
-              ),
-            ),
-          ),
-        )
-        .toList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Navigator(onGenerateRoute: (RouteSettings settings) {
@@ -49,9 +22,10 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
             child: Column(
               children: [
                 Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 25, vertical: 20),
-                    child: const Icon(Icons.access_alarm, size: 50)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                  // child: const Icon(Icons.access_alarm, size: 50),
+                ),
                 // SizedBox(height: 20),
                 const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50),
@@ -62,12 +36,15 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
                   child: Column(
                       children: listMaker(list: [
                     IcondataString(
-                        iconData: Icons.timelapse, string: 'Price Changes'),
+                        iconData: Icons.money, string: 'Price Changes'),
                     IcondataString(
-                        iconData: Icons.favorite, string: 'Favorites'),
+                        iconData: Icons.favorite_border_outlined,
+                        string: 'Favorites'),
                     IcondataString(
-                        iconData: Icons.receipt_long, string: 'Recent views'),
-                    IcondataString(iconData: Icons.settings, string: 'Setting'),
+                        iconData: Icons.recent_actors, string: 'Recent views'),
+                    IcondataString(
+                        iconData: Icons.settings_applications_rounded,
+                        string: 'Setting'),
                   ])),
                 ),
                 Container(
@@ -78,15 +55,11 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
                       children: listMaker(list: [
-                    IcondataString(
-                        iconData: Icons.timelapse, string: 'About Us'),
-                    IcondataString(
-                        iconData: MyFlutterApp.bell_alt, string: 'Contacts'),
-                    IcondataString(
-                        iconData: MyFlutterApp.bell_alt, string: 'Version'),
-                    IcondataString(
-                        iconData: Icons.timelapse, string: 'Our team'),
-                  ], myIcon: false)),
+                    IcondataString(string: 'About Us'),
+                    IcondataString(string: 'Contacts'),
+                    IcondataString(string: 'Version'),
+                    IcondataString(string: 'Our team'),
+                  ], myIcon: false, context: context)),
                 )
               ],
             ),
@@ -134,10 +107,10 @@ void regiserationPopup(BuildContext context) {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          icon: const Icon(Icons.cancel, size: 30)),
+                          icon: const Icon(Icons.cancel, size: 25)),
                     ),
                   ),
-                  const Divider(height: 0),
+                  // const Divider(height: 0),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
@@ -165,4 +138,34 @@ void regiserationPopup(BuildContext context) {
               ));
         });
   }
+}
+
+List<Widget> listMaker(
+    {required List<IcondataString> list, bool myIcon = true, context}) {
+  return list
+      .map(
+        (IcondataString listItem) => TextButton(
+          onPressed: () {
+            regiserationPopup(context);
+          },
+          child: Container(
+            margin: EdgeInsets.all(5),
+            color: Colors.blue[50]!.withOpacity(0.3),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Row(
+              children: [
+                if (myIcon == true)
+                  Icon(listItem.iconData, size: 20, color: Colors.black87)
+                else
+                  Container(),
+                const SizedBox(width: 5),
+                Text(listItem.string.toString(),
+                    style: itemTitleFontStyle.copyWith(
+                        fontSize: 16, color: Colors.black87)),
+              ],
+            ),
+          ),
+        ),
+      )
+      .toList();
 }

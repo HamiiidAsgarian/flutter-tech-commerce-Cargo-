@@ -149,7 +149,7 @@ class SearchSection extends StatefulWidget {
 }
 
 class _SearchSectionState extends State<SearchSection> {
-  String? _chosenOption;
+  String? _chosenOption = "Popular";
   @override
   Widget build(BuildContext context) {
     return Container(
