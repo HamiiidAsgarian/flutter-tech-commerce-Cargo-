@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 class HorizontalItemsList extends StatelessWidget {
   HorizontalItemsList(
-      {this.sectionTitle,
+      {this.productsMap,
+      this.sectionTitle,
       this.itemsList,
       this.ListFramePadding = const EdgeInsets.all(0),
       this.ListItemsMargin = const EdgeInsets.all(0)});
@@ -13,6 +14,7 @@ class HorizontalItemsList extends StatelessWidget {
   final List<String>? itemsList;
   final EdgeInsets ListFramePadding;
   final EdgeInsets ListItemsMargin;
+  final List<Map>? productsMap;
 
   @override
   Widget build(BuildContext context) {

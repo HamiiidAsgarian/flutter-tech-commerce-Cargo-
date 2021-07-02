@@ -1,5 +1,4 @@
 import 'package:commerce_app/consts.dart';
-import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/my_rounded_button/my_rounded_button.dart';
 import 'package:commerce_app/widgets/my_rounded_textfield/my_rounded_textfield.dart';
 import 'package:flutter/material.dart';

@@ -2,12 +2,12 @@
 import 'package:commerce_app/screens/01_home_screen.dart';
 // import 'package:commerce_app/screens/Profile_screen2.dart';
 // import 'package:commerce_app/screens/category_screen.dart';
-import 'package:commerce_app/screens/03_search_screen.dart';
+// import 'package:commerce_app/screens/03_search_screen.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
 import 'package:flutter/material.dart';
 
-import '02_category_screen.dart';
-import '04_Profile_screen2.dart';
+// import '02_category_screen.dart';
+// import '04_Profile_screen2.dart';
 
 // import '../consts.dart';
 
@@ -20,9 +20,9 @@ class _MainScreenState extends State<MainScreen> {
   int currentpage = 0;
   List<Widget> screens = [
     HomeScreen(),
-    CategoryScreen(),
-    SearchScreen(),
-    ProfileScreen2(),
+    // CategoryScreen(),
+    // SearchScreen(),
+    // ProfileScreen2(),
   ];
   // PageController pageController = PageController(initialPage: 0);
 

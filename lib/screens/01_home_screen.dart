@@ -44,10 +44,11 @@ class HomeScreen extends StatelessWidget {
 
                   WindowsCategorySection(),
                   HorizontalItemsList(
-                    sectionTitle: "1",
+                    ListItemsMargin: EdgeInsets.only(right: 10),
+                    ListFramePadding: EdgeInsets.symmetric(horizontal: 15),
+                    sectionTitle: "For women",
                     itemsList: fakeList5,
-                  ),
-                  // Expanded(
+                  ), // Expanded(
                   //   child: ItemsColumnMaker(itemRows: fakeList1),
                   // ),
                 ],

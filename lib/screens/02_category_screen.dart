@@ -1,5 +1,5 @@
 import 'package:commerce_app/screens/listeddItems_screen.dart';
-import 'package:commerce_app/style/my_flutter_app_icons.dart';
+// import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 
 import '../consts.dart';
@@ -18,6 +18,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       return MaterialPageRoute(builder: (context) {
         return Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             title: Text(
               "Category",
               style: itemBrandFontStyle.copyWith(fontSize: 20),
@@ -25,16 +26,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
             elevation: 0,
             backgroundColor:
                 Colors.white, ////////////////////////* appbar color
-            leading: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: const Icon(
-                MyFlutterApp.left_open,
-                // MdiIcons.walletPlusOutline,
-                color: appBargrey,
-              ),
-            ),
+            // leading: GestureDetector(
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //   },
+            //   child: const Icon(
+            //     MyFlutterApp.left_open,
+            //     // MdiIcons.walletPlusOutline,
+            //     color: appBargrey,
+            //   ),
+            // ),
           ),
           body: RefreshIndicator(
             onRefresh: () async {
