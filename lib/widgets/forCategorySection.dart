@@ -1,20 +1,22 @@
 import 'package:commerce_app/consts.dart';
+import 'package:commerce_app/http_classed.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/item.dart';
 import 'package:flutter/material.dart';
 
 class HorizontalItemsList extends StatelessWidget {
   HorizontalItemsList(
-      {this.productsMap,
+      {
+      // this.productsMap,
       this.sectionTitle,
-      this.itemsList,
+      required this.itemsList,
       this.ListFramePadding = const EdgeInsets.all(0),
       this.ListItemsMargin = const EdgeInsets.all(0)});
   final String? sectionTitle;
-  final List<String>? itemsList;
+  final List<Watches> itemsList;
   final EdgeInsets ListFramePadding;
   final EdgeInsets ListItemsMargin;
-  final List<Map>? productsMap;
+  // final Future<List<Watches>>? productsMap;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,8 @@ class HorizontalItemsList extends StatelessWidget {
         // SizedBox(height: 10),
         CategoryTitle(sectionTitle: sectionTitle),
         Container(
+          alignment: Alignment(-1, 0),
+          // color: Colors.black,
           // height: 270,
           child: RowListedItems(itemsList: itemsList, margin: ListItemsMargin),
         ),
@@ -49,7 +53,7 @@ class RowListedItems extends StatelessWidget {
   RowListedItems(
       {Key? key, this.itemsList, this.margin = const EdgeInsets.all(0)})
       : super(key: key);
-  final List<String>? itemsList;
+  final List<Watches>? itemsList;
   final EdgeInsets margin;
 
   @override
@@ -58,12 +62,19 @@ class RowListedItems extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: itemsList!
               .map((e) => Container(
                   margin: margin,
                   // color: Colors.red,
                   // padding: const EdgeInsets.only(right: 0, bottom: 0, top: 0),
-                  child: Item(title: e)))
+                  child: Item(
+                    title: e.title,
+                    price: e.price,
+                    company: e.company,
+                    id: e.id,
+                    imgTumbnailUrl: e.thumbnail,
+                  )))
               .toList()),
     );
 

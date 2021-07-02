@@ -4,10 +4,26 @@ import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 
 class Item extends StatelessWidget {
+  final int? id;
+  final String? imgTumbnailUrl;
+  final String? imgUrl;
+
   final String? title;
+  final String? company;
+  final int? price;
+
   final double imageWidth;
 
-  const Item({Key? key, this.title, this.imageWidth = 130}) : super(key: key);
+  const Item(
+      {Key? key,
+      this.title,
+      this.imageWidth = 130,
+      this.id,
+      this.imgTumbnailUrl,
+      this.company,
+      this.price,
+      this.imgUrl})
+      : super(key: key);
 
   Future<Widget> loadimage(String url) async {
     final a = Image.network(url);
@@ -50,7 +66,8 @@ class Item extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     //NOTE Image border
                     child: Container(
-                      color: Colors.amber,
+                      // color: Colors.amber,
+                      child: Image.network(imgTumbnailUrl!),
                       // decoration: BoxDecoration(
                       //   image: DecorationImage(
                       //     image: NetworkImage(
@@ -69,11 +86,11 @@ class Item extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${title ?? ""} Classical",
+                      "${title ?? ""} ",
                       style: itemTitleFontStyle,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const Text("Boomerage", style: itemBrandFontStyle),
+                    Text(company ?? "", style: itemBrandFontStyle),
                     // SizedBox(height: 2),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
