@@ -1,5 +1,6 @@
 // import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/screens/01_home_screen.dart';
+import 'package:commerce_app/screens/99_test_screen.dart';
 // import 'package:commerce_app/screens/Profile_screen2.dart';
 // import 'package:commerce_app/screens/category_screen.dart';
 // import 'package:commerce_app/screens/03_search_screen.dart';
@@ -19,7 +20,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentpage = 0;
   List<Widget> screens = [
-    HomeScreen(),
+    TestScreen(),
+    // HomeScreen(),
     // CategoryScreen(),
     // SearchScreen(),
     // ProfileScreen2(),

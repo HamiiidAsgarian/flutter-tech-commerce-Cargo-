@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
     if (response.statusCode == 200) {
       Iterable l = json.decode(response.body);
       List<Watches> posts =
-          List<Watches>.from(l.map((model) => Watches.fromJson(model)));
+          List<Watches>.from(l.map((e) => Watches.fromJson(e)));
       // var a = Watches.fromJson(jsonDecode(response.body)); //NOTE if respose is map
 
       print(json.decode(response.body));

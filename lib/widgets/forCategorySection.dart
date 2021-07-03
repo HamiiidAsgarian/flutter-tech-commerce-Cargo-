@@ -7,11 +7,10 @@ import 'package:flutter/material.dart';
 class HorizontalItemsList extends StatelessWidget {
   HorizontalItemsList(
       {
-      // this.productsMap,
       this.sectionTitle,
       required this.itemsList,
       this.ListFramePadding = const EdgeInsets.all(0),
-      this.ListItemsMargin = const EdgeInsets.all(0)});
+      this.ListItemsMargin = const EdgeInsets.all(0),});
   final String? sectionTitle;
   final List<Watches> itemsList;
   final EdgeInsets ListFramePadding;
