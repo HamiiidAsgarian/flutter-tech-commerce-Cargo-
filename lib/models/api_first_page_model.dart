@@ -1,31 +1,17 @@
 // To parse this JSON data, do
 //
-//     final firstPage = firstPageFromJson(jsonString);
+//     final apiFirstPageModel = apiFirstPageModelFromJson(jsonString);
 
 import 'dart:convert';
 
-FirstPage firstPageFromJson(String str) => FirstPage.fromJson(json.decode(str));
+ApiFirstPageModel apiFirstPageModelFromJson(String str) =>
+    ApiFirstPageModel.fromJson(json.decode(str));
 
-String firstPageToJson(FirstPage data) => json.encode(data.toJson());
+String apiFirstPageModelToJson(ApiFirstPageModel data) =>
+    json.encode(data.toJson());
 
-class FirstPage {
-  FirstPage({
-    required this.firstpage,
-  });
-
-  Firstpage firstpage;
-
-  factory FirstPage.fromJson(Map<String, dynamic> json) => FirstPage(
-        firstpage: Firstpage.fromJson(json["firstpage"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "firstpage": firstpage.toJson(),
-      };
-}
-
-class Firstpage {
-  Firstpage({
+class ApiFirstPageModel {
+  ApiFirstPageModel({
     required this.carousels,
     required this.scrollableItems,
     required this.windows,
@@ -35,7 +21,8 @@ class Firstpage {
   ScrollableItems scrollableItems;
   Windows windows;
 
-  factory Firstpage.fromJson(Map<String, dynamic> json) => Firstpage(
+  factory ApiFirstPageModel.fromJson(Map<String, dynamic> json) =>
+      ApiFirstPageModel(
         carousels: Carousels.fromJson(json["Carousels"]),
         scrollableItems: ScrollableItems.fromJson(json["scrollableItems"]),
         windows: Windows.fromJson(json["windows"]),
