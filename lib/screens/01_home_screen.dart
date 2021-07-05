@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:commerce_app/http_classed.dart';
+// import 'package:commerce_app/http_classed.dart';
+import 'package:commerce_app/models/api_first_page_model.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/carousel.dart';
@@ -10,17 +11,29 @@ import 'package:flutter/material.dart';
 import '../consts.dart';
 import 'package:http/http.dart' as http;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  static const List<String> data = ['men', '2', '3', '4', 'men', '2', '3', '4'];
-  final List<String> fakeList5 = List.generate(5, (index) => "number $index");
-
-  final String url = "http://localhost:3000/Watches";
-
   @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _future = firstPageDataGet();
+    });
+  }
+
+  var _future;
+  List<String> fakeList5 = List.generate(5, (index) => "number $index");
+  List carouselsList = [];
+  List scrolablesList = [];
+  List windowsList = [];
+
   Widget build(BuildContext context) {
-    getWatches(url);
     return Navigator(onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute(builder: (context) {
         return Scaffold(
@@ -39,33 +52,66 @@ class HomeScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 10),
-                  Carousel(),
                   FutureBuilder(
-                      future: getWatches(url),
-                      builder: (context,
-                          AsyncSnapshot<List<Watches>> asyncSnapshot) {
-                        if (asyncSnapshot.hasData) {
-                          return HorizontalItemsList(
-                              sectionTitle: "For men",
-                              ListItemsMargin: EdgeInsets.only(right: 10),
-                              ListFramePadding:
-                                  EdgeInsets.symmetric(horizontal: 15),
-                              itemsList: asyncSnapshot.data!);
+                      future: _future,
+                      builder:
+                          (context, AsyncSnapshot<ApiFirstPageModel> snapshot) {
+                        List<Widget> carouselsList2 = [];
+                        if (snapshot.hasData) {
+                          print("-------");
+                          snapshot.data!.carousels.toJson().forEach(
+                            (key, value) {
+                              carouselsList2.add(CarouselSection());
+                              // carouselsList.add(CarouselSection());
+                              ;
+                            },
+                          );
+                          snapshot.data!.scrollableItems.toJson().forEach(
+                            (String key, value) {
+                              // List<Watch>  q = Watch.fromJson(value);
+                              carouselsList2.add(HorizontalItemsList(
+                                  ListItemsMargin: EdgeInsets.only(right: 10),
+                                  ListFramePadding:
+                                      EdgeInsets.symmetric(horizontal: 15),
+                                  sectionTitle: key,
+                                  itemsList:
+                                      snapshot.data!.scrollableItems.watches
+                                  // snapshot.data!.scrollableItems.watches
+                                  ));
+                              // carouselsList.add(CarouselSection());
+                              ;
+                            },
+                          );
+
+                          return Container(
+                              child: Column(children: carouselsList2));
                         } else
                           return CircularProgressIndicator();
                       }),
+                  CarouselSection(),
                   SizedBox(height: 10),
-
+                  HorizontalItemsList(
+                      sectionTitle: "For men",
+                      ListItemsMargin: EdgeInsets.only(right: 10),
+                      ListFramePadding: EdgeInsets.symmetric(horizontal: 15),
+                      itemsList: [
+                        Watch(
+                            id: 1,
+                            title: "title",
+                            company: "company",
+                            price: 200,
+                            imageUrl: "imageUrl",
+                            thumbnail: "thumbnail"),
+                        Watch(
+                            id: 1,
+                            title: "title",
+                            company: "company",
+                            price: 200,
+                            imageUrl: "imageUrl",
+                            thumbnail: "thumbnail")
+                      ]),
+                  SizedBox(height: 10),
                   WindowsCategorySection(),
-                  // HorizontalItemsList(
-                  //   ListItemsMargin: EdgeInsets.only(right: 10),
-                  //   ListFramePadding: EdgeInsets.symmetric(horizontal: 15),
-                  //   sectionTitle: "For women",
-                  //   itemsList: fakeList5,
-                  // ), // Expanded(
-                  //   child: ItemsColumnMaker(itemRows: fakeList1),
-                  // ),
                 ],
               ),
             ),
@@ -75,44 +121,19 @@ class HomeScreen extends StatelessWidget {
     });
   }
 
-//* get watches
-  Future<List<Watches>> getWatches(String url) async {
-    final response =
-        await http.get(Uri.parse(url), headers: {"accept": "application/json"});
-    // final statusCode = response.statusCode;
-    // final headers = response.headers;
-    // final contentType = headers['content-type'];
-    // final jsonBody = response.body;
-    // print(jsonBody[1]);
-    if (response.statusCode == 200) {
-      Iterable l = json.decode(response.body);
-      List<Watches> posts =
-          List<Watches>.from(l.map((e) => Watches.fromJson(e)));
-      // var a = Watches.fromJson(jsonDecode(response.body)); //NOTE if respose is map
+  Future<ApiFirstPageModel> firstPageDataGet() async {
+    var response = await http.get(Uri.parse("http://localhost:3000/firstpage"));
 
-      print(json.decode(response.body));
-      print("-------");
-      print(posts[0].title);
+    var responseBody = response.body;
+    var parsedJson = jsonDecode(responseBody);
+    ApiFirstPageModel ModeledData = ApiFirstPageModel.fromJson(parsedJson);
 
-      return posts; // [0] is for situatio that respose is a list
-    } else
-      throw Exception('failed to load Watches');
+    return ModeledData;
   }
 }
 
-// class ItemsColumnMaker extends StatelessWidget {
-//   final List<String>? itemRows;
-//   const ItemsColumnMaker({Key? key, this.itemRows}) : super(key: key);
+// give(Future a) async {
+//   var z = a;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//         // cacheExtent: 500,
-//         scrollDirection: Axis.vertical,
-//         itemCount: itemRows!.length,
-//         itemBuilder: (context, index) => HorizontalItemsList(
-//               sectionTitle: itemRows![index],
-//               itemsList: List.generate(20, (index) => index.toString()),
-//             ));
-//   }
+//   return a;
 // }

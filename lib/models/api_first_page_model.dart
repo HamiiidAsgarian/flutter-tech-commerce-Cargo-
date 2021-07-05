@@ -112,16 +112,16 @@ class Watch {
   });
 
   int id;
-  Title title;
-  Company company;
+  String title;
+  String company;
   int price;
   String imageUrl;
   String thumbnail;
 
   factory Watch.fromJson(Map<String, dynamic> json) => Watch(
         id: json["id"],
-        title: (titleValues.map[json["title"]])!,
-        company: (companyValues.map[json["company"]])!,
+        title: ([json["title"]].toString()), //NOTE change from enum to string
+        company: ([json["company"]].toString()),
         price: json["price"],
         imageUrl: json["imageUrl"],
         thumbnail: json["thumbnail"],
@@ -129,22 +129,22 @@ class Watch {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "title": titleValues.reverse[title],
-        "company": companyValues.reverse[company],
+        "title": title,
+        "company": company,
         "price": price,
         "imageUrl": imageUrl,
         "thumbnail": thumbnail,
       };
 }
 
-enum Company { SHEVORLET, ORLET }
+// enum Company { SHEVORLET, ORLET }
 
-final companyValues =
-    EnumValues({"orlet": Company.ORLET, "Shevorlet": Company.SHEVORLET});
+// final companyValues =
+//     EnumValues({"orlet": Company.ORLET, "Shevorlet": Company.SHEVORLET});
 
-enum Title { MARTIN, SGTIR }
+// enum Title { MARTIN, SGTIR }
 
-final titleValues = EnumValues({"martin": Title.MARTIN, "sgtir": Title.SGTIR});
+// final titleValues = EnumValues({"martin": Title.MARTIN, "sgtir": Title.SGTIR});
 
 class Windows {
   Windows({
@@ -191,17 +191,17 @@ class SecondWindowsClass {
       };
 }
 
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
+// class EnumValues<T> {
+//   Map<String, T> map;
+//   late Map<T, String> reverseMap;
 
-  EnumValues(this.map);
+//   EnumValues(this.map);
 
-  Map<T, String> get reverse {
-    // ignore: unnecessary_null_comparison
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
-    return reverseMap;
-  }
-}
+//   Map<T, String> get reverse {
+//     // ignore: unnecessary_null_comparison
+//     if (reverseMap == null) {
+//       reverseMap = map.map((k, v) => new MapEntry(v, k));
+//     }
+//     return reverseMap;
+//   }
+// }

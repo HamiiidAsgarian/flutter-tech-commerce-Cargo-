@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:math';
 
-// import 'package:commerce_app/widgets/forCategorySection.dart';
 import 'package:commerce_app/models/api_first_page_model.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import

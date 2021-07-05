@@ -1,4 +1,5 @@
 import 'package:commerce_app/consts.dart';
+import 'package:commerce_app/models/api_first_page_model.dart';
 import 'package:commerce_app/screens/itemdetail_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,8 @@ class Item extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => ItemDetailScreen(title: title)));
+                  builder: (context) => ItemDetailScreen(
+                      title: "title"))); //TODO change title type
         },
         child: Container(
           // color: Colors.white,
@@ -90,7 +92,9 @@ class Item extends StatelessWidget {
                       style: itemTitleFontStyle,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    Text(company ?? "", style: itemBrandFontStyle),
+                    Text(company.toString(),
+                        style:
+                            itemBrandFontStyle), // NOTE changed from company ?? ""
                     // SizedBox(height: 2),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

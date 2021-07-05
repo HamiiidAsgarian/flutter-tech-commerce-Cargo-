@@ -1,4 +1,4 @@
-import 'package:commerce_app/screens/99_test_screen.dart';
+import 'package:commerce_app/screens/01_home_screen.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +10,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentpage = 0;
   List<Widget> screens = [
-    TestScreen(),
-    // HomeScreen(),
+    // TestScreen(),
+    HomeScreen(),
     // CategoryScreen(),
     // SearchScreen(),
     // ProfileScreen2(),

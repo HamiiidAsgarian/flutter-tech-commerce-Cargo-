@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import '../consts.dart';
 
 ////////////////////////////////////////////////////////////////////
-class Carousel extends StatefulWidget {
-  const Carousel({Key? key, this.sliderIndex = 1, this.itemIndex = 1})
+class CarouselSection extends StatefulWidget {
+  const CarouselSection({Key? key, this.sliderIndex = 1, this.itemIndex = 1})
       : super(key: key);
 
   final int sliderIndex;
   final int itemIndex;
 
   @override
-  _CarouselState createState() => _CarouselState();
+  _CarouselSectionState createState() => _CarouselSectionState();
 }
 
-class _CarouselState extends State<Carousel> {
+class _CarouselSectionState extends State<CarouselSection> {
   // late PageController controller;
   int currentpage = 1;
   PageController controller = PageController(
