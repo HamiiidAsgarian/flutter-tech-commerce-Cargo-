@@ -4,11 +4,13 @@ import '../consts.dart';
 
 ////////////////////////////////////////////////////////////////////
 class CarouselSection extends StatefulWidget {
-  const CarouselSection({Key? key, this.sliderIndex = 1, this.itemIndex = 1})
+  const CarouselSection(
+      {Key? key, required this.items, this.sliderIndex = 1, this.itemIndex = 1})
       : super(key: key);
 
   final int sliderIndex;
   final int itemIndex;
+  final List<dynamic> items;
 
   @override
   _CarouselSectionState createState() => _CarouselSectionState();
@@ -23,11 +25,12 @@ class _CarouselSectionState extends State<CarouselSection> {
     viewportFraction: 0.75, ////*fraction
   );
 
-  List carouselItems = [
-    {"hasLabel": true, "labelText": "New 1"},
-    {"hasLabel": false},
-    {"hasLabel": true, "labelText": "New 3"}
-  ];
+  // List carouselItems = widget.items;
+  //  [
+  //   {"hasLabel": true, "labelText": "New 1"},
+  //   {"hasLabel": false},
+  //   {"hasLabel": true, "labelText": "New 3"}
+  // ];
 
   List<Widget> slideBuilder(List list, PageController controller) {
     final List<Widget> slideWidgets = [];
@@ -35,8 +38,9 @@ class _CarouselSectionState extends State<CarouselSection> {
       slideWidgets.add(Slide(
         controller: controller,
         index: index,
-        hasLabel: element["hasLabel"],
-        label: element["labelText"],
+        // hasLabel: element["hasLabel"],
+        label: element["label"],
+        imageUrl: element["imageURL"],
       ));
     });
     // print(slideWidgets);
@@ -95,17 +99,17 @@ class _CarouselSectionState extends State<CarouselSection> {
               });
             },
             controller: controller,
-            children: slideBuilder(carouselItems, controller),
+            children: slideBuilder(widget.items, controller),
             // itemBuilder: (context, index) => builder(index)),
           ),
         ),
         Container(
-          width: 80,
+          // width: 80,
           height: 25,
           // color: Colors.pink, //NOTE: counterDots Debug color
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: counterDotsBuilder(carouselItems, currentpage),
+            children: counterDotsBuilder(widget.items, currentpage),
           ),
         )
       ]),
@@ -120,13 +124,16 @@ class Slide extends StatefulWidget {
   const Slide(
       {required this.controller,
       required this.index,
-      required this.hasLabel,
-      this.label});
+      // required this.hasLabel,
+      this.label,
+      this.imageUrl});
 
   final PageController controller;
   final int index;
-  final bool hasLabel;
+  // final bool hasLabel;
   final String? label;
+  final String? imageUrl;
+
   @override
   _SlideState createState() => _SlideState();
 }
@@ -157,14 +164,21 @@ class _SlideState extends State<Slide> {
               children: [
                 Align(
                   child: Container(
+                    height: Curves.easeOut.transform(value) * 200,
+                    width: 400,
+
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image.network(widget.imageUrl ?? "",
+                            fit: BoxFit.fill)),
                     margin:
                         const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     ////////////////////////////////////* main slide
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(15)),
-                      color: widget.index % 2 == 0
-                          ? Colors.blue
-                          : Colors.redAccent,
+                      // color: widget.index % 2 == 0
+                      //     ? Colors.blue
+                      //     : Colors.redAccent,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
@@ -176,7 +190,7 @@ class _SlideState extends State<Slide> {
                   ),
                 ),
                 //////////////////////////////////////////////////////// * label
-                if (widget.hasLabel == true)
+                if ((widget.label != "") && (widget.label != null))
                   Align(
                     alignment: const Alignment(-0.7, 0.6),
                     child: ClipRRect(

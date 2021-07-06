@@ -19,15 +19,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var _carouselData;
+  var _windowsData;
   @override
   void initState() {
     super.initState();
     setState(() {
-      _future = firstPageDataGet();
+      _carouselData = getDataFromApi(url: "http://localhost:3000/Carousels");
+      _carouselData = getDataFromApi(url: "http://localhost:3000/Carousels");
     });
   }
 
-  var _future;
   List<String> fakeList5 = List.generate(5, (index) => "number $index");
   List carouselsList = [];
   List scrolablesList = [];
@@ -53,63 +55,26 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   FutureBuilder(
-                      future: _future,
-                      builder:
-                          (context, AsyncSnapshot<ApiFirstPageModel> snapshot) {
-                        List<Widget> carouselsList2 = [];
+                      future: _carouselData,
+                      builder: (context,
+                          AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                        print("Carousel is Built");
                         if (snapshot.hasData) {
-                          print("-------");
-                          snapshot.data!.carousels.toJson().forEach(
-                            (key, value) {
-                              carouselsList2.add(CarouselSection());
-                              // carouselsList.add(CarouselSection());
-                              ;
-                            },
-                          );
-                          snapshot.data!.scrollableItems.toJson().forEach(
-                            (String key, value) {
-                              // List<Watch>  q = Watch.fromJson(value);
-                              carouselsList2.add(HorizontalItemsList(
-                                  ListItemsMargin: EdgeInsets.only(right: 10),
-                                  ListFramePadding:
-                                      EdgeInsets.symmetric(horizontal: 15),
-                                  sectionTitle: key,
-                                  itemsList:
-                                      snapshot.data!.scrollableItems.watches
-                                  // snapshot.data!.scrollableItems.watches
-                                  ));
-                              // carouselsList.add(CarouselSection());
-                              ;
-                            },
-                          );
-
                           return Container(
-                              child: Column(children: carouselsList2));
-                        } else
-                          return CircularProgressIndicator();
+                            child: CarouselSection(
+                                items: snapshot.data!['FirstCarousel']),
+                          );
+                        }
+                        return CircularProgressIndicator();
                       }),
-                  CarouselSection(),
+
                   SizedBox(height: 10),
-                  HorizontalItemsList(
-                      sectionTitle: "For men",
-                      ListItemsMargin: EdgeInsets.only(right: 10),
-                      ListFramePadding: EdgeInsets.symmetric(horizontal: 15),
-                      itemsList: [
-                        Watch(
-                            id: 1,
-                            title: "title",
-                            company: "company",
-                            price: 200,
-                            imageUrl: "imageUrl",
-                            thumbnail: "thumbnail"),
-                        Watch(
-                            id: 1,
-                            title: "title",
-                            company: "company",
-                            price: 200,
-                            imageUrl: "imageUrl",
-                            thumbnail: "thumbnail")
-                      ]),
+                  // HorizontalItemsList(
+                  //     sectionTitle: "For men",
+                  //     ListItemsMargin: EdgeInsets.only(right: 10),
+                  //     ListFramePadding: EdgeInsets.symmetric(horizontal: 15),
+                  //     itemsList: [
+                  //     ]),
                   SizedBox(height: 10),
                   WindowsCategorySection(),
                 ],
@@ -121,16 +86,30 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<ApiFirstPageModel> firstPageDataGet() async {
+  Future<Map<String, dynamic>> firstPageDataGet() async {
     var response = await http.get(Uri.parse("http://localhost:3000/firstpage"));
 
     var responseBody = response.body;
-    var parsedJson = jsonDecode(responseBody);
-    ApiFirstPageModel ModeledData = ApiFirstPageModel.fromJson(parsedJson);
+    Map<String, dynamic> parsedJson = jsonDecode(responseBody);
 
-    return ModeledData;
+    // ApiFirstPageModel ModeledData = ApiFirstPageModel.fromJson(parsedJson);
+
+    return parsedJson;
   }
 }
+
+Future<Map<String, dynamic>> getDataFromApi({String url = ""}) async {
+  var response = await http.get(Uri.parse(url));
+
+  var responseBody = response.body;
+  Map<String, dynamic> parsedJson = jsonDecode(responseBody);
+
+  // ApiFirstPageModel ModeledData = ApiFirstPageModel.fromJson(parsedJson);
+
+  return parsedJson;
+}
+
+
 
 // give(Future a) async {
 //   var z = a;

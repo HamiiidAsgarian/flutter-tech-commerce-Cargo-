@@ -1,5 +1,5 @@
 import 'package:commerce_app/consts.dart';
-import 'package:commerce_app/models/api_first_page_model.dart';
+// import 'package:commerce_app/models/api_first_page_model.dart';
 import 'package:commerce_app/screens/itemdetail_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class Item extends StatelessWidget {
         fillColor: Colors.white,
         splashColor: cBackgroundGrey.withOpacity(1),
         onPressed: () {
-          print(title);
+          // print(title);
           Navigator.push(
               context,
               MaterialPageRoute(
