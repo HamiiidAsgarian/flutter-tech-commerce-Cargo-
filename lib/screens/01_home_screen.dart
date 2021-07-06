@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 // import 'package:commerce_app/http_classed.dart';
-import 'package:commerce_app/models/api_first_page_model.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/carousel.dart';
@@ -21,19 +20,23 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   var _carouselData;
   var _windowsData;
+  var _ScrolableOne;
+
   @override
   void initState() {
     super.initState();
     setState(() {
       _carouselData = getDataFromApi(url: "http://localhost:3000/Carousels");
-      _carouselData = getDataFromApi(url: "http://localhost:3000/Carousels");
+      _windowsData = getDataFromApi(url: "http://localhost:3000/Windows");
+      _ScrolableOne =
+          getDataFromApi(url: "http://localhost:3000/scrollableItems");
     });
   }
 
   List<String> fakeList5 = List.generate(5, (index) => "number $index");
-  List carouselsList = [];
-  List scrolablesList = [];
-  List windowsList = [];
+  // List carouselsList = [];
+  // List scrolablesList = [];
+  // List windowsList = [];
 
   Widget build(BuildContext context) {
     return Navigator(onGenerateRoute: (RouteSettings settings) {
@@ -49,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: RefreshIndicator(
             onRefresh: () async {
-              print("object");
+              setState(() {});
             },
             child: SingleChildScrollView(
               child: Column(
@@ -58,11 +61,43 @@ class _HomeScreenState extends State<HomeScreen> {
                       future: _carouselData,
                       builder: (context,
                           AsyncSnapshot<Map<String, dynamic>> snapshot) {
-                        print("Carousel is Built");
+                        print("carousel is Built");
+
                         if (snapshot.hasData) {
                           return Container(
                             child: CarouselSection(
                                 items: snapshot.data!['FirstCarousel']),
+                          );
+                        }
+                        return CircularProgressIndicator();
+                      }),
+                  FutureBuilder(
+                      future: _ScrolableOne,
+                      builder: (context,
+                          AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                        print("scroll is Built");
+                        if (snapshot.hasData) {
+                          return Container(
+                            child: HorizontalItemsList(
+                                sectionTitle: "Watches",
+                                ListItemsMargin: EdgeInsets.only(right: 10),
+                                ListFramePadding:
+                                    EdgeInsets.symmetric(horizontal: 15),
+                                itemsList: snapshot.data!['Watches']),
+                          );
+                        }
+                        return CircularProgressIndicator();
+                      }),
+
+                  FutureBuilder(
+                      future: _windowsData,
+                      builder: (context,
+                          AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                        print("windows is Built");
+                        if (snapshot.hasData) {
+                          return Container(
+                            child: WindowsCategorySection(
+                                items: snapshot.data!['FirstWindow']),
                           );
                         }
                         return CircularProgressIndicator();
@@ -76,7 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   //     itemsList: [
                   //     ]),
                   SizedBox(height: 10),
-                  WindowsCategorySection(),
                 ],
               ),
             ),
@@ -86,8 +120,8 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<Map<String, dynamic>> firstPageDataGet() async {
-    var response = await http.get(Uri.parse("http://localhost:3000/firstpage"));
+  Future<Map<String, dynamic>> getDataFromApi({String url = ""}) async {
+    var response = await http.get(Uri.parse(url));
 
     var responseBody = response.body;
     Map<String, dynamic> parsedJson = jsonDecode(responseBody);
@@ -97,22 +131,3 @@ class _HomeScreenState extends State<HomeScreen> {
     return parsedJson;
   }
 }
-
-Future<Map<String, dynamic>> getDataFromApi({String url = ""}) async {
-  var response = await http.get(Uri.parse(url));
-
-  var responseBody = response.body;
-  Map<String, dynamic> parsedJson = jsonDecode(responseBody);
-
-  // ApiFirstPageModel ModeledData = ApiFirstPageModel.fromJson(parsedJson);
-
-  return parsedJson;
-}
-
-
-
-// give(Future a) async {
-//   var z = a;
-
-//   return a;
-// }
