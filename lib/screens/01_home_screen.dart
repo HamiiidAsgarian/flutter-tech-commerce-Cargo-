@@ -88,7 +88,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         }
                         return CircularProgressIndicator();
                       }),
-
                   FutureBuilder(
                       future: _windowsData,
                       builder: (context,
@@ -102,14 +101,28 @@ class _HomeScreenState extends State<HomeScreen> {
                         }
                         return CircularProgressIndicator();
                       }),
-
                   SizedBox(height: 10),
-                  // HorizontalItemsList(
-                  //     sectionTitle: "For men",
-                  //     ListItemsMargin: EdgeInsets.only(right: 10),
-                  //     ListFramePadding: EdgeInsets.symmetric(horizontal: 15),
-                  //     itemsList: [
-                  //     ]),
+                  FutureBuilder(
+                      future: _ScrolableOne,
+                      builder: (context,
+                          AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                        List<Widget> a = [];
+                        print("scroll is Built");
+                        if (snapshot.hasData) {
+                          snapshot.data!.forEach((key, value) {
+                            a.add(Container(
+                              child: HorizontalItemsList(
+                                  sectionTitle: key,
+                                  ListItemsMargin: EdgeInsets.only(right: 10),
+                                  ListFramePadding:
+                                      EdgeInsets.symmetric(horizontal: 15),
+                                  itemsList: value),
+                            ));
+                          });
+                          return Container(child: Column(children: a));
+                        }
+                        return CircularProgressIndicator();
+                      }),
                   SizedBox(height: 10),
                 ],
               ),
