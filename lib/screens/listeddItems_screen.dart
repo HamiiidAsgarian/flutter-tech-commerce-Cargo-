@@ -100,6 +100,7 @@ class BrandItemsList extends StatelessWidget {
                           title: itemTitle.toString(),
                           imageWidth:
                               (MediaQuery.of(context).size.width / 2) - 34,
+                          data: {}, //NOTE to fix
                         ),
                       ),
                     ),

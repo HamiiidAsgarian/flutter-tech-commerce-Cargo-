@@ -15,6 +15,8 @@ class Item extends StatelessWidget {
 
   final double imageWidth;
 
+  final Map data;
+
   const Item(
       {Key? key,
       this.title,
@@ -23,7 +25,8 @@ class Item extends StatelessWidget {
       this.imgTumbnailUrl,
       this.company,
       this.price,
-      this.imgUrl})
+      this.imgUrl,
+      required this.data})
       : super(key: key);
 
   Future<Widget> loadimage(String url) async {
@@ -44,7 +47,9 @@ class Item extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => ItemDetailScreen(
-                      title: "title"))); //TODO change title type
+                        title: " h ",
+                        data: data,
+                      )));
         },
         child: Container(
           // color: Colors.white,

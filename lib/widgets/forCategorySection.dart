@@ -1,4 +1,6 @@
 import 'package:commerce_app/consts.dart';
+import 'package:commerce_app/screens/itemdetail_screen.dart';
+import 'package:commerce_app/screens/listeddItems_screen.dart';
 // import 'package:commerce_app/http_classed.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/item.dart';
@@ -69,12 +71,12 @@ class RowListedItems extends StatelessWidget {
                 // color: Colors.red,
                 // padding: const EdgeInsets.only(right: 0, bottom: 0, top: 0),
                 child: Item(
-                  title: e['title'],
-                  price: e['price'],
-                  company: e['company'],
-                  id: e['id'],
-                  imgTumbnailUrl: e["thumbnail"],
-                ));
+                    title: e['title'],
+                    price: e['price'],
+                    company: e['company'],
+                    id: e['id'],
+                    imgTumbnailUrl: e["thumbnail"],
+                    data: e));
           }).toList()),
     );
 
@@ -111,7 +113,9 @@ class CategoryTitle extends StatelessWidget {
         ),
         RawMaterialButton(
           onPressed: () {
-            Navigator.pushNamed(context, "/ListedItems");
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ListedItemsScreen()));
+            // //.pushNamed(context, "/ListedItems");
           },
           child: Row(
             children: const [

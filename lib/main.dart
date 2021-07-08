@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         routes: {
           "/": (context) => MainScreen(),
-          "/Item": (context) => const ItemDetailScreen(),
+          "/Item": (context) => ItemDetailScreen(),
           "/Cart": (context) => CartScreen(),
           "/Favorite": (context) => FavoriteScreen(),
           "/Category": (context) => const CategoryScreen(),

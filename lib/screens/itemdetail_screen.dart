@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import '../consts.dart';
 
 class ItemDetailScreen extends StatefulWidget {
-  const ItemDetailScreen({this.title});
-
   final String? title;
+  final Map? data;
+  ItemDetailScreen({this.title, this.data});
 
   @override
   _ItemDetailScreenState createState() => _ItemDetailScreenState();
@@ -31,13 +31,19 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
         ),
         body: SingleChildScrollView(
           child: Column(
-            children: const [
-              ItemsSlideView(),
+            children: [
+              ItemsSlideView(images: (widget.data?['imageUrl'])),
               SizedBox(height: 20),
-              ItemTitle(),
-              ItemDescription(),
+              ItemTitle(
+                  title: (widget.data?['title']) ?? "NO TITLE",
+                  score: widget.data?['rate'],
+                  company: widget.data?['company']),
+              ItemDescription(
+                  description: (widget.data?['description']) ?? "NO TITLE"),
               SizedBox(height: 10),
-              ItemFooter()
+              ItemFooter(
+                price: widget.data?['price'],
+              )
             ],
           ),
         ));
@@ -45,9 +51,9 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
 }
 
 class ItemFooter extends StatelessWidget {
-  const ItemFooter({
-    Key? key,
-  }) : super(key: key);
+  const ItemFooter({this.price});
+
+  final double? price;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +68,7 @@ class ItemFooter extends StatelessWidget {
                 children: [
                   Text("Colors:",
                       style: priceFontStyle.copyWith(color: Colors.black)),
+                  SizedBox(height: 10),
                   Row(
                     children: [
                       Container(
@@ -83,16 +90,17 @@ class ItemFooter extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Price:",
-                      style: priceFontStyle.copyWith(color: Colors.black)),
-                  Text("75.00\$",
+                  Text("$price\$",
                       style: priceFontStyle.copyWith(
                           color: Colors.black, fontSize: 25, height: 1)),
+                  // Text("75.00\$",
+                  //     style: priceFontStyle.copyWith(
+                  //         color: Colors.black, fontSize: 25, height: 1)),
                 ],
               )
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           const BlackRoundedButton(
             title: 'Add to basket',
           ),
@@ -104,9 +112,9 @@ class ItemFooter extends StatelessWidget {
 }
 
 class ItemDescription extends StatelessWidget {
-  const ItemDescription({
-    Key? key,
-  }) : super(key: key);
+  const ItemDescription({this.description});
+
+  final String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -120,8 +128,8 @@ class ItemDescription extends StatelessWidget {
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
                   color: Colors.black)),
-          const Text(
-            "The definition of a description is a statement that gives details about someone or something. An example of description is a story about the places visited on a family trip. ... Published a description of the journey; gave a vivid description of the game.The definition of a description is a statement that gives details about someone or something. An example of description is a story about the places visited on a family trip. ... Published a description of the journey; gave a vivid description of the game.",
+          Text(
+            description ?? "NO DESCRIPTION",
             // overflow: TextOverflow.ellipsis
             style: itemBrandFontStyle,
           ),
@@ -132,16 +140,18 @@ class ItemDescription extends StatelessWidget {
 }
 
 class ItemTitle extends StatelessWidget {
-  const ItemTitle({
-    Key? key,
-  }) : super(key: key);
+  final String? title;
+  final String? company;
+  final double? score;
+
+  const ItemTitle({this.title, tite, this.company, this.score});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       // height: 200,
       padding: const EdgeInsets.symmetric(horizontal: 25),
-      color: Colors.white,
+      // color: Colors.white,
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -149,23 +159,31 @@ class ItemTitle extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Text("Classical hoodies",
-                        style: forMenFontStyle.copyWith(color: Colors.black)),
-                    const SizedBox(width: 5),
-                    const Icon(
-                      MyFlutterApp.star_3,
-                      size: 10,
-                      color: Colors.yellow,
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      "4.7",
-                      style: priceFontStyle.copyWith(fontSize: 12),
-                    )
-                  ],
+                Expanded(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(title ?? "",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                                forMenFontStyle.copyWith(color: Colors.black)),
+                      ),
+                      const SizedBox(width: 5),
+                      const Icon(
+                        MyFlutterApp.star_3,
+                        size: 10,
+                        color: Colors.yellow,
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        score.toString(),
+                        style: priceFontStyle.copyWith(fontSize: 12),
+                      )
+                    ],
+                  ),
                 ),
+                SizedBox(width: 20),
                 Row(
                   children: const [
                     Icon(MyFlutterApp.share_alt),
@@ -175,21 +193,55 @@ class ItemTitle extends StatelessWidget {
                 )
               ],
             ),
-            const Text("boomstack", style: itemTitleFontStyle)
+            Text(company ?? "NA", style: itemTitleFontStyle)
           ]),
     );
   }
 }
 
-class ItemsSlideView extends StatelessWidget {
-  const ItemsSlideView({
-    Key? key,
-  }) : super(key: key);
+class ItemsSlideView extends StatefulWidget {
+  const ItemsSlideView({this.images});
+
+  final List<dynamic>? images;
+
+  @override
+  _ItemsSlideViewState createState() => _ItemsSlideViewState();
+}
+
+class _ItemsSlideViewState extends State<ItemsSlideView> {
+  int imageIndex = 0;
+  dotMaker(List<dynamic> images) {
+    List<Widget> dots = [];
+
+    for (var i = 0; i < images.length; i++) {
+      dots.add(
+        Padding(
+          padding: const EdgeInsets.only(right: 5),
+          child: CircleAvatar(
+              radius: 7,
+              backgroundColor: i == imageIndex
+                  ? Colors.black.withOpacity(0.5)
+                  : Colors.grey.withOpacity(0.5)),
+        ),
+      );
+    }
+
+    return dots;
+  }
+
+  //
+  List<Widget> imagesBuilder(List images) {
+    List<Widget> imagesList = [];
+    for (var item in images) {
+      imagesList.add(Image.network(item));
+    }
+    return imagesList;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.yellow.withOpacity(0), //////////* little radious color fade
+      color: Colors.white, //NOTE page view background color
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
@@ -197,37 +249,34 @@ class ItemsSlideView extends StatelessWidget {
           height: MediaQuery.of(context).size.height / 2,
           child: Stack(children: [
             PageView(
-              children: <Widget>[
-                Container(
-                  color: Colors.pink,
-                ),
-                Container(
-                  color: Colors.cyan,
-                ),
-                Container(
-                  color: Colors.deepPurple,
-                ),
-              ],
+              onPageChanged: (index) {
+                setState(() {
+                  imageIndex = index;
+                });
+              },
+              children: imagesBuilder(widget.images ?? []),
             ),
             Align(
               alignment: const Alignment(0, 0.9),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5),
-                    child: CircleAvatar(
-                        radius: 7,
-                        backgroundColor: Colors.white.withOpacity(0.5)),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: dotMaker(widget.images ?? [])
+
+                  //  [
+                  //   Padding(
+                  //     padding: const EdgeInsets.only(right: 5),
+                  //     child: CircleAvatar(
+                  //         radius: 7,
+                  //         backgroundColor: Colors.white.withOpacity(0.5)),
+                  //   ),
+                  //   Padding(
+                  //     padding: const EdgeInsets.only(right: 5),
+                  //     child: CircleAvatar(
+                  //         radius: 7,
+                  //         backgroundColor: Colors.white.withOpacity(0.5)),
+                  //   ),
+                  // ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5),
-                    child: CircleAvatar(
-                        radius: 7,
-                        backgroundColor: Colors.white.withOpacity(0.5)),
-                  ),
-                ],
-              ),
             )
           ]),
         ),
