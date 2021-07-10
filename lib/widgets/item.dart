@@ -29,10 +29,10 @@ class Item extends StatelessWidget {
       required this.data})
       : super(key: key);
 
-  Future<Widget> loadimage(String url) async {
-    final a = Image.network(url);
-    return a;
-  }
+  // Future<Widget> loadimage(String url) async {
+  //   final a = Image.network(url);
+  //   return a;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,10 @@ class Item extends StatelessWidget {
                     //NOTE Image border
                     child: Container(
                       // color: Colors.amber,
-                      child: Image.network(imgTumbnailUrl!),
+                      child: (imgTumbnailUrl == "" || imgTumbnailUrl == null)
+                          ? Center(child: CircularProgressIndicator())
+                          : (Image.network(imgTumbnailUrl!)),
+                      // (Image.network(imgTumbnailUrl)) ?? Container(),
                       // decoration: BoxDecoration(
                       //   image: DecorationImage(
                       //     image: NetworkImage(

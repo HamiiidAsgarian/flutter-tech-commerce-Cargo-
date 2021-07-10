@@ -6,19 +6,44 @@ import 'package:flutter/material.dart';
 
 import '../consts.dart';
 
-class ListedItemsScreen extends StatelessWidget {
-  ListedItemsScreen({this.title, this.itemsList});
+class ListedItemsWithFilterScreen extends StatelessWidget {
+  ListedItemsWithFilterScreen({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
-  final List<dynamic>? itemsList;
+//   @override
+//   _ListedItemsWithFilterScreenState createState() => _ListedItemsWithFilterScreenState();
+// }
+
+// class _ListedItemsWithFilterScreenState extends State<ListedItemsWithFilterScreen> {
+  final List<String> itemsList = [
+    "Reading",
+    "Speaking",
+    "listening",
+    "writing",
+    '1',
+    '',
+    '',
+    '',
+    '',
+    "Reading",
+    "Speaking",
+    "listening",
+    "writing",
+    '1',
+    "Reading",
+    "Speaking",
+    "listening",
+    "writing",
+    '1',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: cBackgroundGrey,
         appBar: MyAppBar(
           title: Text(
-            title!,
+            this.title ?? "",
             style: itemBrandFontStyle.copyWith(fontSize: 20),
           ),
           leadingIcon: const Icon(
@@ -35,18 +60,18 @@ class ListedItemsScreen extends StatelessWidget {
             height: 1,
             color: cBackgroundGrey,
           ),
-          // const FilterAndSortSection(),
-          // const SizedBox(height: 7),
-          // const OtherBrandsSection(),
+          const FilterAndSortSection(),
           const SizedBox(height: 7),
-          BrandItemsList(itemsList: itemsList!)
+          const OtherBrandsSection(),
+          const SizedBox(height: 7),
+          BrandItemsList(itemsList: itemsList)
         ]));
   }
 }
 
 class BrandItemsList extends StatelessWidget {
   const BrandItemsList({Key? key, required this.itemsList}) : super(key: key);
-  final List<dynamic> itemsList;
+  final List<String> itemsList;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +86,7 @@ class BrandItemsList extends StatelessWidget {
         // crossAxisCount: 2,
         child: Wrap(
           children: itemsList
-              .map<Widget>((data) => Container(
+              .map<Widget>((dynamic itemTitle) => Container(
                     // color: Colors.amber,
                     padding:
                         const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
@@ -72,15 +97,16 @@ class BrandItemsList extends StatelessWidget {
                         // width:
                         //     (MediaQuery.of(context).size.width / 2) - 5,
                         child: Item(
-                          id: data['id'],
-                          title: data['title'],
-                          company: data['company'],
-                          price: data['price'],
-                          imgTumbnailUrl: data['thumbnail'],
-                          imgUrl: "data['imageUrl']",
+                          id: 0,
+                          title: "itemTitle.toString()",
+                          company: "aaaa",
+                          price: 22000,
+                          imgTumbnailUrl: "",
+                          imgUrl: "",
+
                           imageWidth:
                               (MediaQuery.of(context).size.width / 2) - 34,
-                          data: data,
+                          data: {}, //NOTE to fix
                         ),
                       ),
                     ),
@@ -140,7 +166,8 @@ class OtherBrandsSection extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          ListedItemsScreen(title: e)));
+                                          ListedItemsWithFilterScreen(
+                                              title: e)));
                             },
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10),

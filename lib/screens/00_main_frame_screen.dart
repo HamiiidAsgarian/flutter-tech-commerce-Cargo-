@@ -1,4 +1,7 @@
 import 'package:commerce_app/screens/01_home_screen.dart';
+import 'package:commerce_app/screens/02_category_screen.dart';
+import 'package:commerce_app/screens/03_search_screen.dart';
+import 'package:commerce_app/screens/04_Profile_screen2.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +15,9 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> screens = [
     // TestScreen(),
     HomeScreen(),
-    // CategoryScreen(),
-    // SearchScreen(),
-    // ProfileScreen2(),
+    CategoryScreen(),
+    SearchScreen(),
+    ProfileScreen2(),
   ];
   // PageController pageController = PageController(initialPage: 0);
 
@@ -28,13 +31,11 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     // if (pageController.hasClients) pageController.jumpToPage(currentpage);//NOTE:if it was pageView
     // return Consumer<ProviderModel>(builder: (context, vals, child) {
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       bottomNavigationBar: MyBottomNavigationBar(
         newvalue: currentpage,
         function: (int e) {
-          print(e);
           setState(() {
             currentpage = e;
           });

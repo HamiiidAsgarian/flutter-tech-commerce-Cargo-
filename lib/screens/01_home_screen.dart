@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 // import 'package:commerce_app/http_classed.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
@@ -61,15 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       future: _carouselData,
                       builder: (context,
                           AsyncSnapshot<Map<String, dynamic>> snapshot) {
-                        print("carousel is Built");
-
                         if (snapshot.hasData) {
                           return Container(
                             child: CarouselSection(
                                 items: snapshot.data!['FirstCarousel']),
                           );
                         }
-                        return CircularProgressIndicator();
+                        return Center(child: CircularProgressIndicator());
                       }),
                   FutureBuilder(
                       future: _ScrolableOne,
@@ -107,7 +106,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context,
                           AsyncSnapshot<Map<String, dynamic>> snapshot) {
                         List<Widget> a = [];
-                        print("scroll is Built");
                         if (snapshot.hasData) {
                           snapshot.data!.forEach((key, value) {
                             a.add(Container(
@@ -144,3 +142,5 @@ class _HomeScreenState extends State<HomeScreen> {
     return parsedJson;
   }
 }
+
+// sum of two numbers

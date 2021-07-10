@@ -1,5 +1,4 @@
 import 'package:commerce_app/screens/listeddItems_screen.dart';
-// import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 
 import '../consts.dart';

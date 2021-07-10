@@ -1,5 +1,4 @@
 import 'package:commerce_app/consts.dart';
-import 'package:commerce_app/screens/itemdetail_screen.dart';
 import 'package:commerce_app/screens/listeddItems_screen.dart';
 // import 'package:commerce_app/http_classed.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
@@ -26,7 +25,7 @@ class HorizontalItemsList extends StatelessWidget {
       color: cBackgroundGrey,
       child: Column(children: [
         // SizedBox(height: 10),
-        CategoryTitle(sectionTitle: sectionTitle),
+        CategoryTitle(sectionTitle: sectionTitle, data: itemsList),
         Container(
           alignment: Alignment(-1, 0),
           // color: Colors.black,
@@ -95,12 +94,10 @@ class RowListedItems extends StatelessWidget {
 
 //////*********************************************************/*///////////////////////////////////////////////////////
 class CategoryTitle extends StatelessWidget {
-  const CategoryTitle({
-    Key? key,
-    required this.sectionTitle,
-  }) : super(key: key);
+  const CategoryTitle({required this.sectionTitle, this.data});
 
   final String? sectionTitle;
+  final List? data;
 
   @override
   Widget build(BuildContext context) {
@@ -108,13 +105,16 @@ class CategoryTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          sectionTitle != null ? sectionTitle! : "",
+          sectionTitle != null ? sectionTitle! : "NA",
           style: forMenFontStyle,
         ),
         RawMaterialButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ListedItemsScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ListedItemsScreen(
+                        title: sectionTitle, itemsList: data)));
             // //.pushNamed(context, "/ListedItems");
           },
           child: Row(
