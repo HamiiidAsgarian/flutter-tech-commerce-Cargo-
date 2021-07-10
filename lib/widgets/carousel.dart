@@ -1,8 +1,10 @@
+import 'package:commerce_app/provider_model.dart';
+import 'package:commerce_app/screens/listeddItems_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../consts.dart';
 
-////////////////////////////////////////////////////////////////////
 class CarouselSection extends StatefulWidget {
   const CarouselSection(
       {Key? key, required this.items, this.sliderIndex = 1, this.itemIndex = 1})
@@ -25,22 +27,20 @@ class _CarouselSectionState extends State<CarouselSection> {
     viewportFraction: 0.75, ////*fraction
   );
 
-  // List carouselItems = widget.items;
-  //  [
-  //   {"hasLabel": true, "labelText": "New 1"},
-  //   {"hasLabel": false},
-  //   {"hasLabel": true, "labelText": "New 3"}
-  // ];
-
-  List<Widget> slideBuilder(List list, PageController controller) {
+  List<Widget> slideBuilder(
+      List list, PageController controller, Map referenceData) {
+    //NOTE slide builder
     final List<Widget> slideWidgets = [];
     list.asMap().forEach((index, element) {
+      print(referenceData[index]);
       slideWidgets.add(Slide(
         controller: controller,
         index: index,
         // hasLabel: element["hasLabel"],
         label: element["label"],
         imageUrl: element["imageURL"],
+        data: referenceData[element["ctegory"]],
+        title: element["ctegory"],
       ));
     });
     // print(slideWidgets);
@@ -65,16 +65,6 @@ class _CarouselSectionState extends State<CarouselSection> {
   }
 
   @override
-  // initState() {
-  //   // if (controller.hasClients) {
-  //   //   print("yes");
-  //   //   // controller.jumpToPage(1);
-  //   // }
-
-  //   super.initState();
-  // }
-
-  @override
   void dispose() {
     controller.dispose();
     super.dispose();
@@ -82,41 +72,48 @@ class _CarouselSectionState extends State<CarouselSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      //////////////////////////////////////////* whole slider bar
-      // color: Colors.amber, //NOTE: debuging color
-      // color: cBackgroundGrey,
-      child: Column(children: [
-        Expanded(
-          child: PageView
-              // .builder
-              (
-            onPageChanged: (value) {
-              // print(value);
-              setState(() {
-                currentpage = value;
-              });
-            },
-            controller: controller,
-            children: slideBuilder(widget.items, controller),
-            // itemBuilder: (context, index) => builder(index)),
-          ),
-        ),
-        Container(
-          // width: 80,
-          height: 25,
-          // color: Colors.pink, //NOTE: counterDots Debug color
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: counterDotsBuilder(widget.items, currentpage),
-          ),
-        )
-      ]),
-    );
+    return Consumer<ProviderModel>(builder: (context, vals, child) {
+      return Container(
+          height: 200,
+          //////////////////////////////////////////* whole slider bar
+          // color: cBackgroundGrey,
+          child: Column(children: [
+            FutureBuilder(
+                future: vals.getDataFromApi(
+                    url: 'http://localhost:3000/scrollableItems'),
+                builder:
+                    (context, AsyncSnapshot<Map<dynamic, dynamic>> snapshot) {
+                  if (snapshot.hasData) {
+                    print(snapshot.data);
+                    return Expanded(
+                      child: PageView
+                          // .builder
+                          (
+                        onPageChanged: (value) {
+                          // print(value);
+                          setState(() {
+                            currentpage = value;
+                          });
+                        },
+                        controller: controller,
+                        children: slideBuilder(widget.items, controller,
+                            snapshot.data!), //NOTE pages future building
+                        // itemBuilder: (context, index) => builder(index)),
+                      ),
+                    );
+                  }
+                  return CircularProgressIndicator();
+                }),
+            Container(
+                // width: 80,
+                height: 25,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: counterDotsBuilder(widget.items, currentpage),
+                )),
+          ]));
+    });
   }
-
-  // slideBuilder(int index, bool hasLabel, String labelText) {}
 }
 
 ////////////////////////////////////////////////////////////////////////*slide class
@@ -126,7 +123,9 @@ class Slide extends StatefulWidget {
       required this.index,
       // required this.hasLabel,
       this.label,
-      this.imageUrl});
+      this.imageUrl,
+      this.data,
+      this.title});
 
   final PageController controller;
   final int index;
@@ -134,6 +133,8 @@ class Slide extends StatefulWidget {
   final String? label;
   final String? imageUrl;
 
+  final List? data;
+  final String? title;
   @override
   _SlideState createState() => _SlideState();
 }
@@ -155,62 +156,75 @@ class _SlideState extends State<Slide> {
         }
 
         return Center(
-          child: Container(
-            ////////////////////////////////////////////////* slide's main frame
-            // color: Colors.amber,
-            height: Curves.easeOut.transform(value) * 200,
-            width: 400,
-            child: Stack(
-              children: [
-                Align(
-                  child: Container(
-                    height: Curves.easeOut.transform(value) * 200,
-                    width: 400,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListedItemsScreen(
+                          title: widget.title,
+                          itemsList:
+                              widget.data))); //NOTE sending to new items page
+            },
+            child: Container(
+              ////////////////////////////////////////////////* slide's main frame
+              // color: Colors.amber,
+              height: Curves.easeOut.transform(value) * 200,
+              width: 400,
+              child: Stack(
+                children: [
+                  Align(
+                    child: Container(
+                      height: Curves.easeOut.transform(value) * 200,
+                      width: 400,
 
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Image.network(widget.imageUrl ?? "",
-                            fit: BoxFit.fill)),
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                    ////////////////////////////////////* main slide
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(15)),
-                      // color: widget.index % 2 == 0
-                      //     ? Colors.blue
-                      //     : Colors.redAccent,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 3,
-                          blurRadius: 7, // changes position of shadow
-                        ),
-                      ],
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image.network(widget.imageUrl ?? "",
+                              fit: BoxFit.fill)),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 10),
+                      ////////////////////////////////////* main slide
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(15)),
+                        // color: widget.index % 2 == 0
+                        //     ? Colors.blue
+                        //     : Colors.redAccent,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 3,
+                            blurRadius: 7, // changes position of shadow
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                //////////////////////////////////////////////////////// * label
-                if ((widget.label != "") && (widget.label != null))
-                  Align(
-                    alignment: const Alignment(-0.7, 0.6),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        color: Colors.white,
-                        width: 80,
-                        height: 25,
-                        child: Center(
-                          child: Text(
-                            widget.label!, ////////////////////////* label text
-                            style: standardSearchFontStyle,
+                  //////////////////////////////////////////////////////// * label
+                  if ((widget.label != "") && (widget.label != null))
+                    Align(
+                      alignment: const Alignment(-0.7, 0.6),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Container(
+                          color: Colors.white,
+                          width: 80,
+                          height: 25,
+                          child: Center(
+                            child: Text(
+                              widget
+                                  .label!, ////////////////////////* label text
+                              style: standardSearchFontStyle,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  )
-                else
-                  const SizedBox()
-              ],
+                    )
+                  else
+                    const SizedBox()
+                ],
+              ),
             ),
           ),
         );
