@@ -32,7 +32,7 @@ class _CarouselSectionState extends State<CarouselSection> {
     //NOTE slide builder
     final List<Widget> slideWidgets = [];
     list.asMap().forEach((index, element) {
-      print(referenceData[index]);
+      // print(referenceData[index]);
       slideWidgets.add(Slide(
         controller: controller,
         index: index,
@@ -84,7 +84,7 @@ class _CarouselSectionState extends State<CarouselSection> {
                 builder:
                     (context, AsyncSnapshot<Map<dynamic, dynamic>> snapshot) {
                   if (snapshot.hasData) {
-                    print(snapshot.data);
+                    // print(snapshot.data);
                     return Expanded(
                       child: PageView
                           // .builder

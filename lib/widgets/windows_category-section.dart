@@ -1,6 +1,10 @@
 import 'package:commerce_app/consts.dart';
+import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/screens/02_category_screen.dart';
+import 'package:commerce_app/screens/listeddItems_screen.dart';
+import 'package:commerce_app/widgets/item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class WindowsCategorySection extends StatelessWidget {
   final List items;
@@ -9,40 +13,51 @@ class WindowsCategorySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    windowsListMaker(List items) {
+    windowsListMaker(List items, Map data) {
       List<Widget> windows = [];
-      items.forEach((element) {
+      for (var i = 0; i < items.length; i++) {
         windows.add(ScreenWidthSizedContainer(
-            imageUrl: element["imageURL"], title: element["label"]));
-      });
+          imageUrl: items[i]["imageURL"],
+          title: items[i]["label"],
+          data: data[items[i]['ctegory']],
+          referenceTitle: items[i]['ctegory'],
+        ));
+      }
       return windows;
     }
 
-    return Container(
-      color: cBackgroundGrey,
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+    return Consumer<ProviderModel>(builder: (context, vals, child) {
+      return Container(
+        color: cBackgroundGrey,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
 
-      ///*    15px instead of 25px because the children padding adds 10px from the sides,
-      child: Wrap(
-        runSpacing: 0,
-        spacing: 0,
-        children: windowsListMaker(items),
-
-        // const [
-        //   ScreenWidthSizedContainer(color: Colors.yellow),
-        //   ScreenWidthSizedContainer(color: Colors.red),
-        //   ScreenWidthSizedContainer(color: Colors.purple),
-        //   ScreenWidthSizedContainer(color: Colors.blueGrey),
-        // ],
-      ),
-    );
+        ///*    15px instead of 25px because the children padding adds 10px from the sides,
+        child: FutureBuilder(
+            future: vals.getDataFromApi(
+                url: 'http://localhost:3000/scrollableItems'),
+            builder: (context, AsyncSnapshot<Map<dynamic, dynamic>> snapshot) {
+              if (snapshot.hasData) {
+                // print(snapshot.data);
+                return Wrap(
+                  runSpacing: 0,
+                  spacing: 0,
+                  children: windowsListMaker(items, snapshot.data!),
+                );
+              }
+              return CircularProgressIndicator();
+            }),
+      );
+    });
   }
 }
 
 class ScreenWidthSizedContainer extends StatelessWidget {
-  const ScreenWidthSizedContainer({this.imageUrl, this.title});
+  const ScreenWidthSizedContainer(
+      {this.imageUrl, this.title, this.data, this.referenceTitle});
   final String? title;
   final String? imageUrl;
+  final List? data;
+  final String? referenceTitle;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -58,7 +73,8 @@ class ScreenWidthSizedContainer extends StatelessWidget {
             // fillColor: color,
             onPressed: () =>
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const CategoryScreen();
+              return ListedItemsScreen(
+                  title: this.referenceTitle, itemsList: data);
             })),
             child: Stack(children: [
               Container(child: Image.network(imageUrl ?? "", fit: BoxFit.fill)),

@@ -1,102 +1,117 @@
+import 'package:commerce_app/provider_model.dart';
+import 'package:commerce_app/screens/02_category_screen2.dart';
 import 'package:commerce_app/screens/listeddItems_screen.dart';
+import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../consts.dart';
 
 class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({Key? key}) : super(key: key);
+  const CategoryScreen({this.hasBack = false});
+  final bool hasBack;
 
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  var _secondPageData;
+  @override
+  void initState() {
+    super.initState();
+
+    _secondPageData = Provider.of<ProviderModel>(context,
+            listen:
+                false) //NOTE maybe better to delete this and pass it to provider totally
+        .getDataFromApi(url: "http://localhost:3000/secondPage");
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Navigator(onGenerateRoute: (RouteSettings settings) {
-      return MaterialPageRoute(builder: (context) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              "Category",
-              style: itemBrandFontStyle.copyWith(fontSize: 20),
+    return Consumer<ProviderModel>(builder: (context, vals, child) {
+      return Navigator(onGenerateRoute: (RouteSettings settings) {
+        return MaterialPageRoute(builder: (context) {
+          return Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text(
+                "Category",
+                style: itemBrandFontStyle.copyWith(fontSize: 20),
+              ),
+              elevation: 0,
+              backgroundColor:
+                  Colors.white, ////////////////////////* appbar color
+              leading: widget.hasBack == true
+                  ? IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        MyFlutterApp.left_open,
+                        // MdiIcons.walletPlusOutline,
+                        color: appBargrey,
+                      ),
+                    )
+                  : SizedBox(),
             ),
-            elevation: 0,
-            backgroundColor:
-                Colors.white, ////////////////////////* appbar color
-            // leading: GestureDetector(
-            //   onTap: () {
-            //     Navigator.pop(context);
-            //   },
-            //   child: const Icon(
-            //     MyFlutterApp.left_open,
-            //     // MdiIcons.walletPlusOutline,
-            //     color: appBargrey,
-            //   ),
-            // ),
-          ),
-          body: RefreshIndicator(
-            onRefresh: () async {
-              print("object");
-            },
-            child: ListView.builder(
-                itemCount: 20,
-                itemBuilder: (context, index) {
-                  return TextButton(
-                    onPressed: () {},
-                    child: Container(
-                        height: 60,
-                        decoration: const BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                                    width: 0.1, color: Colors.grey))),
-                        child: Center(
-                          child: ListTile(
-                            onTap: () => Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return ListedItemsScreen(
-                                title: "itemss",
-                              );
-                            })),
-                            trailing: const Icon(Icons.keyboard_arrow_right,
-                                size: 30),
-                            title: Text("item $index",
-                                style:
-                                    itemBrandFontStyle.copyWith(fontSize: 17)),
-                          ),
-                        )),
-                  );
-                }),
-          ),
-        );
+            body: RefreshIndicator(
+              onRefresh: () async {
+                print("object");
+              },
+              child: FutureBuilder(
+                  future: _secondPageData,
+                  builder: (context, AsyncSnapshot<Map> snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            // print(snapshot.data!.values.elementAt(index));
+                            return Container(
+                                height: 60,
+                                decoration: const BoxDecoration(
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            width: 0.1, color: Colors.grey))),
+                                child: Center(
+                                  child: ListTile(
+                                    onTap: () {
+                                      CategoryScreenTwo result;
+                                      var type = snapshot.data!.values
+                                          .elementAt(index)
+                                          .runtimeType;
+                                      type == List
+                                          ? result = CategoryScreenTwo(
+                                              hasBack: false,
+                                              data: snapshot.data!.values
+                                                  .elementAt(index))
+                                          : result = CategoryScreenTwo(
+                                              hasBack: true,
+                                              data: snapshot.data!.values
+                                                  .elementAt(index));
+
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return result;
+                                      }));
+                                    },
+                                    trailing: const Icon(
+                                        Icons.keyboard_arrow_right,
+                                        size: 30),
+                                    title: Text(
+                                        snapshot.data!.keys.elementAt(index),
+                                        style: itemBrandFontStyle.copyWith(
+                                            fontSize: 17)),
+                                  ),
+                                ));
+                          });
+                    }
+                    return CircularProgressIndicator();
+                  }),
+            ),
+          );
+        });
       });
     });
   }
-
-  // Navigator _getNavigator(BuildContext context, Widget newPage) {
-  //   return new Navigator(
-  //     onGenerateRoute: (RouteSettings settings) {
-  //       return new MaterialPageRoute(builder: (context) {
-  //         return new Center(
-  //           child: new Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             children: <Widget>[
-  //               new Text(settings.name!),
-  //               new ElevatedButton(
-  //                 onPressed: () => Navigator.push(context,
-  //                     MaterialPageRoute(builder: (context) => newPage)),
-  //                 child: new Text('Next'),
-  //               ),
-  //               new ElevatedButton(
-  //                 onPressed: () => Navigator.pop(context),
-  //                 child: new Text('Back'),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       });
-  //     },
-  //   );
-  // }
 }

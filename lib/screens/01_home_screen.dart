@@ -70,6 +70,15 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    TextButton(
+                      child: Text("data"),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return HomeScreen();
+                        }));
+                      },
+                    ),
                     FutureBuilder(
                         future: _firstPageData,
                         builder: (context,
