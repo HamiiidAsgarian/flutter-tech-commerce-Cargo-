@@ -76,19 +76,21 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 child: Center(
                                   child: ListTile(
                                     onTap: () {
-                                      CategoryScreenTwo result;
+                                      var result;
                                       var type = snapshot.data!.values
                                           .elementAt(index)
                                           .runtimeType;
                                       type == List
                                           ? result = CategoryScreenTwo(
-                                              hasBack: false,
+                                              hasBack: true,
                                               data: snapshot.data!.values
                                                   .elementAt(index))
                                           : result = CategoryScreenTwo(
                                               hasBack: true,
                                               data: snapshot.data!.values
                                                   .elementAt(index));
+                                      // print(
+                                      //     "1: ${snapshot.data!.values.elementAt(index)}");
 
                                       Navigator.push(context,
                                           MaterialPageRoute(builder: (context) {
@@ -113,5 +115,21 @@ class _CategoryScreenState extends State<CategoryScreen> {
         });
       });
     });
+  }
+}
+
+////////////////
+class TestPage extends StatelessWidget {
+  TestPage({this.color});
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: color!,
+      child: Center(
+          child: TextButton(
+              onPressed: () => Navigator.pop(context), child: Text("a"))),
+    );
   }
 }

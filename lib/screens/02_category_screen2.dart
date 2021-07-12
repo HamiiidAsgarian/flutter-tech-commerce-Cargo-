@@ -29,73 +29,87 @@ class _CategoryScreenTwoState extends State<CategoryScreenTwo> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderModel>(builder: (context, vals, child) {
-      return Navigator(onGenerateRoute: (RouteSettings settings) {
-        return MaterialPageRoute(builder: (context) {
-          return Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              title: Text(
-                "Category",
-                style: itemBrandFontStyle.copyWith(fontSize: 20),
-              ),
-              elevation: 0,
-              backgroundColor:
-                  Colors.white, ////////////////////////* appbar color
-              leading: widget.hasBack == true
-                  ? IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        MyFlutterApp.left_open,
-                        // MdiIcons.walletPlusOutline,
-                        color: appBargrey,
-                      ),
-                    )
-                  : SizedBox(),
+    return Consumer<ProviderModel>(
+      builder: (context, vals, child) {
+        // return Navigator(
+        //   onGenerateRoute: (RouteSettings settings) {
+        //     return MaterialPageRoute(
+        //       builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              "Category",
+              style: itemBrandFontStyle.copyWith(fontSize: 20),
             ),
-            body: RefreshIndicator(
-                onRefresh: () async {
-                  print("object");
-                },
-                child: ListView.builder(
-                    itemCount: widget.data.length,
-                    itemBuilder: (context, index) {
-                      // print(snapshot.data!.values.elementAt(index));
-                      return Container(
-                          height: 60,
-                          decoration: const BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(
-                                      width: 0.1, color: Colors.grey))),
-                          child: Center(
-                            child: ListTile(
-                              onTap: () {
-                                CategoryScreenTwo result;
-                                var type = widget.data.values
-                                    .elementAt(index)
-                                    .runtimeType;
-                                type == List
-                                    ? result = CategoryScreenTwo(hasBack: false)
-                                    : result = CategoryScreenTwo(hasBack: true);
+            elevation: 0,
+            backgroundColor:
+                Colors.white, ////////////////////////* appbar color
+            leading: widget.hasBack == true
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      MyFlutterApp.left_open,
+                      // MdiIcons.walletPlusOutline,
+                      color: appBargrey,
+                    ),
+                  )
+                : SizedBox(),
+          ),
+          body: RefreshIndicator(
+              onRefresh: () async {
+                // print("object");
+              },
+              child: ListView.builder(
+                  itemCount: widget.data?.length,
+                  itemBuilder: (context, index) {
+                    // print(
+                    //     "2: ${widget.data!.keys.elementAt(index)}:${widget.data!.values.elementAt(index)}");
+                    return Container(
+                        height: 60,
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                    width: 0.1, color: Colors.grey))),
+                        child: Center(
+                          child: ListTile(
+                            onTap: () {
+                              var result;
+                              var type = widget.data?.values
+                                  .elementAt(index)
+                                  .runtimeType;
+                              type == List
+                                  ? result = ListedItemsScreen(
+                                      title: widget.data!.keys.elementAt(index),
+                                      itemsList: (widget.data!.values
+                                          .elementAt(index)),
+                                    )
+                                  : result = CategoryScreenTwo(
+                                      hasBack: true,
+                                      data:
+                                          widget.data!.values.elementAt(index));
 
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return result;
-                                }));
-                              },
-                              trailing: const Icon(Icons.keyboard_arrow_right,
-                                  size: 30),
-                              title: Text(widget.data.keys.elementAt(index),
-                                  style: itemBrandFontStyle.copyWith(
-                                      fontSize: 17)),
-                            ),
-                          ));
-                    })),
-          );
-        });
-      });
-    });
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return result;
+                              }));
+                            },
+                            trailing: const Icon(Icons.keyboard_arrow_right,
+                                size: 30),
+                            title: Text(widget.data!.keys.elementAt(index),
+                                style:
+                                    itemBrandFontStyle.copyWith(fontSize: 17)),
+                          ),
+                        ));
+                  })),
+        );
+        //       },
+        //     );
+        //   },
+        // );
+      },
+    );
   }
 }
