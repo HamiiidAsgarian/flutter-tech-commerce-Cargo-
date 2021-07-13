@@ -6,12 +6,14 @@ import 'package:provider/provider.dart';
 import '../consts.dart';
 
 class CarouselSection extends StatefulWidget {
-  const CarouselSection(
-      {Key? key, required this.items, this.sliderIndex = 1, this.itemIndex = 1})
-      : super(key: key);
+  const CarouselSection({
+    Key? key,
+    required this.items,
+    //  this.sliderIndex = 1, this.itemIndex = 1
+  }) : super(key: key);
 
-  final int sliderIndex;
-  final int itemIndex;
+  // final int sliderIndex;
+  // final int itemIndex;
   final List<dynamic> items;
 
   @override
@@ -21,46 +23,47 @@ class CarouselSection extends StatefulWidget {
 class _CarouselSectionState extends State<CarouselSection> {
   // late PageController controller;
   int currentpage = 1;
-  PageController controller = PageController(
-    initialPage: 1,
-    keepPage: false,
-    viewportFraction: 0.75, ////*fraction
-  );
+  PageController controller =
+      PageController(initialPage: 1, keepPage: false, viewportFraction: 0.85);
 
+  //NOTE carousel builder function
   List<Widget> slideBuilder(
-      List list, PageController controller, Map referenceData) {
-    //NOTE slide builder
-    final List<Widget> slideWidgets = [];
+      List list, PageController controller, Map referenceData)
+  //? referenceData is the data gotten to route into  Product page
+  {
+    final List<Widget> carouselsList = [];
     list.asMap().forEach((index, element) {
-      // print(referenceData[index]);
-      slideWidgets.add(Slide(
+      print(referenceData[element["ctegory"]]);
+      carouselsList.add(Slide(
         controller: controller,
         index: index,
         // hasLabel: element["hasLabel"],
-        label: element["label"],
+        label: element["label"], //if null, no label is created
         imageUrl: element["imageURL"],
         data: referenceData[element["ctegory"]],
         title: element["ctegory"],
       ));
     });
-    // print(slideWidgets);
-    return slideWidgets;
+    return carouselsList;
   }
 
+  //NOTE status dots builder function
   List<Widget> counterDotsBuilder(List list, int selectedIndex) {
     final List<Widget> counterDotsWidgets = [];
     list.asMap().forEach((index, element) {
       counterDotsWidgets.add(Padding(
         padding: const EdgeInsets.all(5),
         child: CircleAvatar(
-          radius: 5,
-          backgroundColor: selectedIndex == index
-              ? greySelectedCircule
-              : greyUnselectedCircule, ////////////////////* circules color
+          backgroundColor: Colors.white,
+          radius: 6,
+          child: CircleAvatar(
+              radius: 5,
+              backgroundColor: selectedIndex == index
+                  ? Colors.black.withOpacity(0.5)
+                  : Colors.grey.withOpacity(0.5)),
         ),
       ));
     });
-    // print(counterDotsWidgets);
     return counterDotsWidgets;
   }
 
@@ -73,45 +76,39 @@ class _CarouselSectionState extends State<CarouselSection> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ProviderModel>(builder: (context, vals, child) {
-      return Container(
-          height: 200,
-          //////////////////////////////////////////* whole slider bar
-          // color: cBackgroundGrey,
-          child: Column(children: [
-            FutureBuilder(
-                future: vals.getDataFromApi(
-                    url: 'http://localhost:3000/scrollableItems'),
-                builder:
-                    (context, AsyncSnapshot<Map<dynamic, dynamic>> snapshot) {
-                  if (snapshot.hasData) {
-                    // print(snapshot.data);
-                    return Expanded(
-                      child: PageView
-                          // .builder
-                          (
+      return AspectRatio(
+        //REVIEW main frame aspect ratio
+        aspectRatio: 1.5 / 1,
+        child: Container(
+            // height: 200,
+            // color: Colors.pink,
+            child: Column(children: [
+          FutureBuilder(
+              future: vals.getDataFromApi(
+                  url:
+                      'http://localhost:3000/scrollableItems'), //NOTE internal data recieve for generating selected items products page
+              builder:
+                  (context, AsyncSnapshot<Map<dynamic, dynamic>> snapshot) {
+                if (snapshot.hasData) {
+                  return Expanded(
+                    child: PageView(
                         onPageChanged: (value) {
-                          // print(value);
                           setState(() {
                             currentpage = value;
                           });
                         },
                         controller: controller,
-                        children: slideBuilder(widget.items, controller,
-                            snapshot.data!), //NOTE pages future building
-                        // itemBuilder: (context, index) => builder(index)),
-                      ),
-                    );
-                  }
-                  return CircularProgressIndicator();
-                }),
-            Container(
-                // width: 80,
-                height: 25,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: counterDotsBuilder(widget.items, currentpage),
-                )),
-          ]));
+                        children: slideBuilder(
+                            widget.items, controller, snapshot.data!)),
+                  );
+                }
+                return CircularProgressIndicator();
+              }),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: counterDotsBuilder(widget.items, currentpage))
+        ])),
+      );
     });
   }
 }
@@ -145,86 +142,65 @@ class _SlideState extends State<Slide> {
     return AnimatedBuilder(
       animation: widget.controller,
       builder: (context, child) {
-        double value = 1.0;
+        double _value = 1.0;
         if (widget.controller.position.haveDimensions) {
           // print(controller.position.viewportDimension);
-          value = widget.controller.page! - widget.index;
-          value = (1 - (value.abs() * .5)).clamp(0.0, 1.0);
+          _value = widget.controller.page! - widget.index;
+          _value = (1 - (_value.abs() * .5)).clamp(0.0, 1.0);
         } else {
-          value = widget.controller.initialPage.toDouble() - widget.index;
-          value = (1 - (value.abs() * .5)).clamp(0.0, 1.0);
+          _value = widget.controller.initialPage.toDouble() - widget.index;
+          _value = (1 - (_value.abs() * .5)).clamp(0.0, 1.0);
         }
-
+        // print(context.size);
         return Center(
           child: GestureDetector(
             onTap: () {
+              //NOTE sending to new items page
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => ListedItemsScreen(
-                          title: widget.title,
-                          itemsList:
-                              widget.data))); //NOTE sending to new items page
+                          title: widget.title, itemsList: widget.data)));
             },
-            child: Container(
-              ////////////////////////////////////////////////* slide's main frame
-              // color: Colors.amber,
-              height: Curves.easeOut.transform(value) * 200,
-              width: 400,
-              child: Stack(
-                children: [
-                  Align(
-                    child: Container(
-                      height: Curves.easeOut.transform(value) * 200,
-                      width: 400,
-
+            ////////////////////////////////////////////////* slide's main frame
+            child: Stack(
+              children: [
+                Padding(
+                  //NOTE gap between pages
+                  padding: EdgeInsets.symmetric(horizontal: 2.5),
+                  child: Align(
+                    //NOTE slides animating aspect ratio
+                    child: AspectRatio(
+                      aspectRatio: 1.7 / Curves.easeOut.transform(_value),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: Image.network(widget.imageUrl ?? "",
                               fit: BoxFit.fill)),
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 10),
-                      ////////////////////////////////////* main slide
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(15)),
-                        // color: widget.index % 2 == 0
-                        //     ? Colors.blue
-                        //     : Colors.redAccent,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 3,
-                            blurRadius: 7, // changes position of shadow
-                          ),
-                        ],
-                      ),
                     ),
                   ),
-                  //////////////////////////////////////////////////////// * label
-                  if ((widget.label != "") && (widget.label != null))
-                    Align(
-                      alignment: const Alignment(-0.7, 0.6),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Container(
-                          color: Colors.white,
-                          width: 80,
-                          height: 25,
-                          child: Center(
-                            child: Text(
-                              widget
-                                  .label!, ////////////////////////* label text
-                              style: standardSearchFontStyle,
-                            ),
+                ),
+                //////////////////////////////////////////////////////// * label
+                if ((widget.label != "") && (widget.label != null))
+                  Align(
+                    alignment: const Alignment(-0.7, 0.6),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        color: Colors.white,
+                        width: 80,
+                        height: 25,
+                        child: Center(
+                          child: Text(
+                            widget.label!, ////////////////////////* label text
+                            style: standardSearchFontStyle,
                           ),
                         ),
                       ),
-                    )
-                  else
-                    const SizedBox()
-                ],
-              ),
+                    ),
+                  )
+                else
+                  const SizedBox()
+              ],
             ),
           ),
         );

@@ -1,8 +1,8 @@
 import 'package:commerce_app/consts.dart';
 import 'package:commerce_app/provider_model.dart';
-import 'package:commerce_app/screens/02_category_screen.dart';
+// import 'package:commerce_app/screens/02_category_screen.dart';
 import 'package:commerce_app/screens/listeddItems_screen.dart';
-import 'package:commerce_app/widgets/item.dart';
+// import 'package:commerce_app/widgets/item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

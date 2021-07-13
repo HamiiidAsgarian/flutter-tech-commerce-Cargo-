@@ -16,6 +16,7 @@ class CategoryScreenTwo extends StatefulWidget {
 }
 
 class _CategoryScreenTwoState extends State<CategoryScreenTwo> {
+  // ignore: unused_field
   var _secondPageData;
   @override
   void initState() {

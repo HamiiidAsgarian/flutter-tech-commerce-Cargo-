@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 const appBarWhite = Color.fromRGBO(255, 255, 255, 1);
 const appBargrey = Color.fromRGBO(117, 117, 117, 1);
+
 const greySearchbarBackground = Color.fromRGBO(246, 246, 246, 1);
 const categoryFontStyle = TextStyle(
     // fontSize: isChosen ? 15 : 14,
@@ -46,6 +47,7 @@ const greyUnselectedCircule = Color.fromRGBO(183, 183, 183, 1);
 
 //* category ==> itemBrandFontStyle.copyWith(fontSize: 20),
 
-Color cBackgroundGrey = const Color.fromRGBO(241, 242, 244, 1);
-Color cBorderGrey = const Color.fromRGBO(229, 229, 229, 1);
-Color cTextFieldTextColorGrey = const Color.fromRGBO(130, 130, 130, 1);
+const cBackgroundGrey = Color.fromRGBO(241, 242, 244, 1);
+const cBorderGrey = Color.fromRGBO(229, 229, 229, 1);
+const cTextFieldTextColorGrey = Color.fromRGBO(130, 130, 130, 1);
+const cIconGrey = Color.fromRGBO(117, 117, 117, 1);
