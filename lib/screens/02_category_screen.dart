@@ -79,7 +79,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       var type = snapshot.data!.values
                                           .elementAt(index)
                                           .runtimeType;
-                                      type == List
+                                      (type == List && type != [])
                                           ? result = CategoryScreenTwo(
                                               hasBack: true,
                                               data: snapshot.data!.values
@@ -90,11 +90,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                                   .elementAt(index));
                                       // print(
                                       //     "1: ${snapshot.data!.values.elementAt(index)}");
-
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return result;
-                                      }));
+                                      if (result != [] && result != {}) {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return result;
+                                        }));
+                                      }
                                     },
                                     trailing: const Icon(
                                         Icons.keyboard_arrow_right,
