@@ -1,5 +1,5 @@
 import 'package:commerce_app/screens/01_home_screen.dart';
-import 'package:commerce_app/screens/02_category_screen.dart';
+import 'package:commerce_app/screens/02_category_Frame.dart';
 import 'package:commerce_app/screens/03_search_screen.dart';
 import 'package:commerce_app/screens/04_Profile_screen2.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
@@ -14,8 +14,8 @@ class _MainScreenState extends State<MainScreen> {
   int currentpage = 0;
   List<Widget> screens = [
     // TestScreen(),
+    CategoryFramePage(),
     HomeScreen(),
-    CategoryScreen(),
     SearchScreen(),
     ProfileScreen2(),
   ];

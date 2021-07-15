@@ -1,6 +1,6 @@
 import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/screens/cart_screen.dart';
-import 'package:commerce_app/screens/02_category_screen.dart';
+import 'package:commerce_app/screens/02_category_Frame.dart';
 import 'package:commerce_app/screens/favorites_screen.dart';
 import 'package:commerce_app/screens/itemdetail_screen.dart';
 import 'package:commerce_app/screens/listeddItemsWithFilter_screen.dart';
@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
           "/Item": (context) => ItemDetailScreen(),
           "/Cart": (context) => CartScreen(),
           "/Favorite": (context) => FavoriteScreen(),
-          "/Category": (context) => const CategoryScreen(),
+          "/Category": (context) => const CategoryFramePage(),
           "/Profile": (context) => const ProfileScreen(),
           "/ListedItems": (context) =>
               ListedItemsWithFilterScreen(title: "Items"),

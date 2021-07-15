@@ -33,7 +33,7 @@ class _CarouselSectionState extends State<CarouselSection> {
   {
     final List<Widget> carouselsList = [];
     list.asMap().forEach((index, element) {
-      print(referenceData[element["ctegory"]]);
+      // print(referenceData[element["ctegory"]]);
       carouselsList.add(Slide(
         controller: controller,
         index: index,
@@ -76,38 +76,41 @@ class _CarouselSectionState extends State<CarouselSection> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ProviderModel>(builder: (context, vals, child) {
-      return AspectRatio(
-        //REVIEW main frame aspect ratio
-        aspectRatio: 1.5 / 1,
-        child: Container(
-            // height: 200,
-            // color: Colors.pink,
-            child: Column(children: [
-          FutureBuilder(
-              future: vals.getDataFromApi(
-                  url:
-                      'http://localhost:3000/scrollableItems'), //NOTE internal data recieve for generating selected items products page
-              builder:
-                  (context, AsyncSnapshot<Map<dynamic, dynamic>> snapshot) {
-                if (snapshot.hasData) {
-                  return Expanded(
-                    child: PageView(
-                        onPageChanged: (value) {
-                          setState(() {
-                            currentpage = value;
-                          });
-                        },
-                        controller: controller,
-                        children: slideBuilder(
-                            widget.items, controller, snapshot.data!)),
-                  );
-                }
-                return CircularProgressIndicator();
-              }),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: counterDotsBuilder(widget.items, currentpage))
-        ])),
+      return ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: 700), //REVIEW
+        child: AspectRatio(
+          //REVIEW main frame aspect ratio
+          aspectRatio: 1.5 / 1,
+          child: Container(
+              // height: 200,
+              // color: Colors.pink,
+              child: Column(children: [
+            FutureBuilder(
+                future: vals.getDataFromApi(
+                    url:
+                        'http://localhost:3000/scrollableItems'), //NOTE internal data recieve for generating selected items products page
+                builder:
+                    (context, AsyncSnapshot<Map<dynamic, dynamic>> snapshot) {
+                  if (snapshot.hasData) {
+                    return Expanded(
+                      child: PageView(
+                          onPageChanged: (value) {
+                            setState(() {
+                              currentpage = value;
+                            });
+                          },
+                          controller: controller,
+                          children: slideBuilder(
+                              widget.items, controller, snapshot.data!)),
+                    );
+                  }
+                  return CircularProgressIndicator();
+                }),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: counterDotsBuilder(widget.items, currentpage))
+          ])),
+        ),
       );
     });
   }

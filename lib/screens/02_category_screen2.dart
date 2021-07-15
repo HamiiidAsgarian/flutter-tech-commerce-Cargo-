@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/screens/listeddItems_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
@@ -6,26 +8,20 @@ import 'package:provider/provider.dart';
 
 import '../consts.dart';
 
-class CategoryScreenTwo extends StatefulWidget {
-  const CategoryScreenTwo({this.hasBack = false, this.data});
+class CategoryScreen extends StatefulWidget {
+  const CategoryScreen({this.hasBack = false, this.data});
   final bool hasBack;
   final data;
 
   @override
-  _CategoryScreenTwoState createState() => _CategoryScreenTwoState();
+  _CategoryScreenState createState() => _CategoryScreenState();
 }
 
-class _CategoryScreenTwoState extends State<CategoryScreenTwo> {
+class _CategoryScreenState extends State<CategoryScreen> {
   // ignore: unused_field
-  var _secondPageData;
   @override
   void initState() {
     super.initState();
-
-    _secondPageData = Provider.of<ProviderModel>(context,
-            listen:
-                false) //NOTE maybe better to delete this and pass it to provider totally
-        .getDataFromApi(url: "http://localhost:3000/secondPage");
   }
 
   @override
@@ -78,16 +74,22 @@ class _CategoryScreenTwoState extends State<CategoryScreenTwo> {
                           child: ListTile(
                             onTap: () {
                               var result;
-                              var type = widget.data?.values
+                              Type type = widget.data.values
                                   .elementAt(index)
                                   .runtimeType;
+
+                              var data1 = widget.data.values
+                                  .elementAt(index)
+                                  .runtimeType;
+                              // print('---> ${data1==List}');
+
                               type == List
                                   ? result = ListedItemsScreen(
                                       title: widget.data!.keys.elementAt(index),
                                       itemsList: (widget.data!.values
                                           .elementAt(index)),
                                     )
-                                  : result = CategoryScreenTwo(
+                                  : result = CategoryScreen(
                                       hasBack: true,
                                       data:
                                           widget.data!.values.elementAt(index));
