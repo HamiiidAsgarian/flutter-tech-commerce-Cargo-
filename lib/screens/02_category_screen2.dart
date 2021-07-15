@@ -32,7 +32,7 @@ class _CategoryScreenState extends State<CategoryScreen>
     //   return MaterialPageRoute(builder: (context) {
     return Consumer<ProviderModel>(
       builder: (context, vals, child) {
-        print("key == ${widget.key}");
+        // print("key == ${widget.key}");
         // print(widget.data);
         // return Navigator(onGenerateRoute: (RouteSettings settings) {
         //   return MaterialPageRoute(builder: (context) {
@@ -95,22 +95,21 @@ class _CategoryScreenState extends State<CategoryScreen>
                                           .elementAt(index)),
                                     )
                                   : result = CategoryScreen(
-                                      key: ValueKey(
-                                          widget.data!.keys.elementAt(index)),
+                                      // key: ValueKey(
+                                      //     widget.data!.keys.elementAt(index)),
                                       title: widget.data!.keys.elementAt(index),
                                       hasBack: true,
                                       data:
                                           widget.data!.values.elementAt(index));
 
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) {
-                                        return result;
-                                      },
-                                      settings: RouteSettings(
-                                          name: widget.data!.keys
-                                              .elementAt(index))));
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return result;
+                                },
+                                // settings: RouteSettings(
+                                //     name: widget.data!.keys
+                                //         .elementAt(index))
+                              ));
                             },
                             trailing: iconBuilder(
                                         widget.data.values.elementAt(index)) ==
