@@ -1,7 +1,10 @@
 import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/screens/02_category_screen2.dart';
+import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../consts.dart';
 
 class CategoryFramePage extends StatefulWidget {
   const CategoryFramePage({this.hasBack = false});
@@ -37,7 +40,10 @@ class _CategoryFramePageState extends State<CategoryFramePage> {
                   future: _secondPageData,
                   builder: (context, AsyncSnapshot<Map> snapshot) {
                     if (snapshot.hasData) {
-                      return CategoryScreen(data: snapshot.data);
+                      return CategoryScreen(
+                        data: snapshot.data,
+                        title: "1category",
+                      );
                     }
                     return CircularProgressIndicator();
                   }),

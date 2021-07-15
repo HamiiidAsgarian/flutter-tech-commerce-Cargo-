@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../consts.dart';
 
 class ListedItemsScreen extends StatelessWidget {
-  ListedItemsScreen({this.title, this.itemsList});
+  ListedItemsScreen({this.title, this.itemsList, Key? key}) : super(key: key);
 
   final String? title;
 
@@ -27,7 +27,7 @@ class ListedItemsScreen extends StatelessWidget {
             color: appBargrey,
           ),
           leadingIconFunction: () {
-            Navigator.pushNamed(context, "/");
+            Navigator.pop(context);
           },
         ),
         body: Column(children: [
