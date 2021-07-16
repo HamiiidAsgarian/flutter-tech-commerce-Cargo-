@@ -6,44 +6,39 @@ import 'package:flutter/material.dart';
 
 import '../consts.dart';
 
-class ListedItemsWithFilterScreen extends StatelessWidget {
-  ListedItemsWithFilterScreen({Key? key, this.title}) : super(key: key);
+class ListedItemsWithFilterScreen extends StatefulWidget {
+  ListedItemsWithFilterScreen(
+      {Key? key, this.title, this.itemsList, this.otherBrands})
+      : super(key: key);
 
   final String? title;
 
-//   @override
-//   _ListedItemsWithFilterScreenState createState() => _ListedItemsWithFilterScreenState();
-// }
+  final List<dynamic>? itemsList;
+  final Map? otherBrands;
 
-// class _ListedItemsWithFilterScreenState extends State<ListedItemsWithFilterScreen> {
-  final List<String> itemsList = [
-    "Reading",
-    "Speaking",
-    "listening",
-    "writing",
-    '1',
-    '',
-    '',
-    '',
-    '',
-    "Reading",
-    "Speaking",
-    "listening",
-    "writing",
-    '1',
-    "Reading",
-    "Speaking",
-    "listening",
-    "writing",
-    '1',
-  ];
+  @override
+  _ListedItemsWithFilterScreenState createState() =>
+      _ListedItemsWithFilterScreenState();
+}
+
+class _ListedItemsWithFilterScreenState
+    extends State<ListedItemsWithFilterScreen> {
+  var data;
+  @override
+  void initState() {
+    super.initState();
+    data = widget.itemsList;
+  }
+
   @override
   Widget build(BuildContext context) {
+    widget.otherBrands!.forEach((key, value) {});
+    print(widget.otherBrands);
     return Scaffold(
         backgroundColor: cBackgroundGrey,
         appBar: MyAppBar(
           title: Text(
-            this.title ?? "",
+            this.widget.title ?? "",
             style: itemBrandFontStyle.copyWith(fontSize: 20),
           ),
           leadingIcon: const Icon(
@@ -55,38 +50,41 @@ class ListedItemsWithFilterScreen extends StatelessWidget {
             Navigator.pushNamed(context, "/");
           },
         ),
-        body: Column(children: [
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Divider(
             height: 1,
             color: cBackgroundGrey,
           ),
           const FilterAndSortSection(),
           const SizedBox(height: 7),
-          const OtherBrandsSection(),
+          OtherBrandsSection(
+            data: widget.otherBrands,
+            function: (e) {
+              setState(() {
+                data = e;
+              });
+            },
+          ),
           const SizedBox(height: 7),
-          BrandItemsList(itemsList: itemsList)
+          BrandItemsList(itemsList: data)
         ]));
   }
 }
 
 class BrandItemsList extends StatelessWidget {
   const BrandItemsList({Key? key, required this.itemsList}) : super(key: key);
-  final List<String> itemsList;
+  final List<dynamic> itemsList;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        // gridview.count
-        // childAspectRatio: MediaQuery.of(context).size.height / 900,
-        // // childAspectRatio: 2,
-        // crossAxisSpacing: 10,
-        // mainAxisSpacing: 10,
-        // crossAxisCount: 2,
+        padding: EdgeInsets.symmetric(
+            horizontal:
+                10), //NOTE for the positioning beginning and ending of items
         child: Wrap(
           children: itemsList
-              .map<Widget>((dynamic itemTitle) => Container(
+              .map<Widget>((data) => Container(
                     // color: Colors.amber,
                     padding:
                         const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
@@ -97,16 +95,15 @@ class BrandItemsList extends StatelessWidget {
                         // width:
                         //     (MediaQuery.of(context).size.width / 2) - 5,
                         child: Item(
-                          id: 0,
-                          title: "itemTitle.toString()",
-                          company: "aaaa",
-                          price: 22000,
-                          imgTumbnailUrl: "",
-                          imgUrl: "",
-
+                          id: data['id'],
+                          title: data['title'],
+                          company: data['company'],
+                          price: data['price'],
+                          imgTumbnailUrl: data['thumbnail'],
+                          imgUrl: "data['imageUrl']",
                           imageWidth:
                               (MediaQuery.of(context).size.width / 2) - 34,
-                          data: {}, //NOTE to fix
+                          data: data,
                         ),
                       ),
                     ),
@@ -120,12 +117,56 @@ class BrandItemsList extends StatelessWidget {
 
 //////////////////////////////////////////////////////////////////////////////////
 class OtherBrandsSection extends StatelessWidget {
-  const OtherBrandsSection({
-    Key? key,
-  }) : super(key: key);
+  const OtherBrandsSection({this.data, required this.function});
+
+  final Map? data;
+  final Function function;
 
   @override
   Widget build(BuildContext context) {
+    // List OtherBrandsTitles = [];
+    // List OtherBrandsvalue = [];
+    List<Widget> test = [];
+
+    data!.forEach((key, value) {
+      print("key:$key  == value:$value");
+      test.add(Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
+        child: Container(
+          //   width: 5,
+
+          decoration: BoxDecoration(
+            // color: Colors.red,
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
+            border: Border.all(color: cBorderGrey),
+          ),
+          height: 30,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child: RawMaterialButton(
+              fillColor: Colors.white,
+              constraints: BoxConstraints(minWidth: 50),
+              onPressed: () => function(value)
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) =>
+              //             ListedItemsWithFilterScreen(title: e)));
+              ,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Text(key,
+                    style: itemBrandFontStyle.copyWith(
+                        fontWeight: FontWeight.w600)),
+              ),
+            ),
+          ),
+        ),
+      ));
+      // OtherBrandsTitles.add(key);
+      // OtherBrandsvalue.add(value);
+    });
+
     return Container(
       // margin: const EdgeInsets.symmetric(), //NOTE section margin
       // color: Colors.amber,
@@ -140,47 +181,7 @@ class OtherBrandsSection extends StatelessWidget {
               style: itemBrandFontStyle.copyWith(fontSize: 15)),
           const SizedBox(width: 7),
           Expanded(
-              child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: ['Aftabe', 'ven', 'Adorabamma', 'Puma', 'S']
-                .map((e) => Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 2.5, vertical: 5),
-                      child: Container(
-                        //   width: 5,
-
-                        decoration: BoxDecoration(
-                          // color: Colors.red,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(5)),
-                          border: Border.all(color: cBorderGrey),
-                        ),
-                        height: 30,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: RawMaterialButton(
-                            fillColor: Colors.white,
-                            constraints: BoxConstraints(minWidth: 50),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          ListedItemsWithFilterScreen(
-                                              title: e)));
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(e,
-                                  style: itemBrandFontStyle.copyWith(
-                                      fontWeight: FontWeight.w600)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ))
-                .toList(),
-          ))
+              child: ListView(scrollDirection: Axis.horizontal, children: test))
         ],
       ),
     );

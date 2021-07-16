@@ -1,4 +1,5 @@
 import 'package:commerce_app/provider_model.dart';
+import 'package:commerce_app/screens/listeddItemsWithFilter_screen.dart';
 import 'package:commerce_app/screens/listeddItems_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +78,7 @@ class _CategoryScreenState extends State<CategoryScreen>
                         child: Center(
                           child: ListTile(
                             onTap: () {
+                              // print(widget.data.values);
                               var result;
                               Type type = widget.data.values
                                   .elementAt(index)
@@ -87,7 +89,8 @@ class _CategoryScreenState extends State<CategoryScreen>
                               // print('---> ${data1.runtimeType}');
 
                               type == List
-                                  ? result = ListedItemsScreen(
+                                  ? result = ListedItemsWithFilterScreen(
+                                      otherBrands: widget.data,
                                       // key: ValueKey(
                                       //     widget.data!.keys.elementAt(index)),
                                       title: widget.data!.keys.elementAt(index),

@@ -520,9 +520,21 @@
           }
         ],
         "Nikon": [
-          "Na",
-          "Nb",
-          "Nc"
+          {
+            "id": 3,
+            "title": "Nikon watch 7898",
+            "company": "Shevorlet",
+            "price": 2599,
+            "imageUrl": [
+              "https://i.ibb.co/25vWDzY/watch-36.jpg",
+              "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+              "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+            ],
+            "thumbnail": "https://i.ibb.co/kM45RL6/watch-36.jpg",
+            "rate": 4.8,
+            "colors": [],
+            "description": "0.99m(1.6ft) Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+          }
         ]
       },
       "Modern": [

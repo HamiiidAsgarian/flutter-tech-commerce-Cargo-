@@ -42,7 +42,7 @@ class _CategoryFramePageState extends State<CategoryFramePage> {
                     if (snapshot.hasData) {
                       return CategoryScreen(
                         data: snapshot.data,
-                        title: "1category",
+                        title: "Category",
                       );
                     }
                     return CircularProgressIndicator();
