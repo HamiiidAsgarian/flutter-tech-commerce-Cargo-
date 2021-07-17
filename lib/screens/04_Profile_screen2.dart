@@ -26,9 +26,14 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
                   // child: const Icon(Icons.access_alarm, size: 50),
                 ),
                 // SizedBox(height: 20),
-                const Padding(
+                Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50),
-                    child: MyRoundedButton()),
+                    child: MyRoundedButton(
+                      title: "Profile screen",
+                      function: () {
+                        print("Profile screen");
+                      },
+                    )),
                 const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -76,7 +81,7 @@ class IcondataString {
   IcondataString({this.iconData, this.string});
 }
 
-void regiserationPopup(BuildContext context) {
+void regiserationPopup(BuildContext context, Function function) {
   final TextEditingController textcntrl = TextEditingController();
   {
     showModalBottomSheet(
@@ -126,9 +131,10 @@ void regiserationPopup(BuildContext context) {
                                 cntrl: textcntrl, func: (e) {}, hint: "hint"),
                           ),
                           const SizedBox(height: 25),
-                          const Padding(
+                          Padding(
                               padding: EdgeInsets.symmetric(horizontal: 25),
-                              child: MyRoundedButton()),
+                              child: MyRoundedButton(
+                                  title: "Search Limit", function: function)),
                         ],
                       ),
                     ),
@@ -140,12 +146,15 @@ void regiserationPopup(BuildContext context) {
 }
 
 List<Widget> listMaker(
-    {required List<IcondataString> list, bool myIcon = true, context}) {
+    {required List<IcondataString> list,
+    bool myIcon = true,
+    context,
+    Function? function}) {
   return list
       .map(
         (IcondataString listItem) => TextButton(
           onPressed: () {
-            regiserationPopup(context);
+            regiserationPopup(context, function!);
           },
           child: Container(
             margin: EdgeInsets.all(5),

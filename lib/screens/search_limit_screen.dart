@@ -1,10 +1,13 @@
+import 'package:commerce_app/widgets/my_rounded_button/my_rounded_button.dart';
 import 'package:commerce_app/widgets/my_rounded_textfield/my_rounded_textfield.dart';
 import 'package:flutter/material.dart';
 
 import '../consts.dart';
 
 class SearchLimitScreen extends StatefulWidget {
-  const SearchLimitScreen({Key? key}) : super(key: key);
+  const SearchLimitScreen({this.data, required this.function});
+  final List? data;
+  final Function function;
 
   @override
   _SearchLimitScreenState createState() => _SearchLimitScreenState();
@@ -14,7 +17,7 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
   final List<bool> _isOpen = [false, false];
   int sliderMin = 0;
   int slidermax = 500;
-  String? testText;
+  String? searchedText;
   bool _statusCheckValue = false;
 
   @override
@@ -42,15 +45,22 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
         const SizedBox(height: 20),
         Container(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 1),
-            child: SearchField2(
-              textInputType: TextInputType.text,
-              hint: "Searching in Fashion category",
+            child: MyRoundedTextfield(
               func: (String e) {
                 setState(() {
-                  testText = e;
+                  searchedText = e;
                 });
                 // print(testText);
               },
+              //  ,
+              // // textInputType: TextInputType.text,
+              // hint: "Searching in Fashion category",
+              // func: (String e) {
+              //   setState(() {
+              //     searchedText = e;
+              //   });
+              // print(testText);
+              // },
             )),
         Container(
           height: 20,
@@ -118,7 +128,7 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
                     values:
                         RangeValues(sliderMin.toDouble(), slidermax.toDouble()),
                     onChanged: (e) {
-                      print(e);
+                      // print(e);
                       setState(() {
                         sliderMin = e.start.toInt();
                         slidermax = e.end.toInt();
@@ -162,6 +172,14 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
                     ),
                   ))
             ]),
+        MyRoundedButton(
+            title: "Register",
+            function: () {
+              widget.function(
+                [sliderMin, slidermax, _statusCheckValue, searchedText],
+              );
+              Navigator.pop(context);
+            }) //NOTE 00 - seach filter func
       ]),
     );
   }

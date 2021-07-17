@@ -17,7 +17,7 @@ class Item extends StatelessWidget {
 
   final Map data;
 
-  const Item(
+  Item(
       {Key? key,
       this.title,
       this.imageWidth = 130,
@@ -53,7 +53,7 @@ class Item extends StatelessWidget {
         },
         child: Container(
           // color: Colors.white,
-          padding: const EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
               horizontal: 7, vertical: 7), //NOTE Item main margin
           child: Container(
             padding: const EdgeInsets.all(5),
@@ -107,8 +107,8 @@ class Item extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Text("\$250.00", style: priceFontStyle),
+                      children: [
+                        Text(" $price", style: priceFontStyle),
                         Icon(MyFlutterApp.heart_2, size: 15)
                       ],
                     ),

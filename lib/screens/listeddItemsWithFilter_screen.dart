@@ -23,17 +23,16 @@ class ListedItemsWithFilterScreen extends StatefulWidget {
 
 class _ListedItemsWithFilterScreenState
     extends State<ListedItemsWithFilterScreen> {
-  var data;
+  late List data;
   @override
   void initState() {
     super.initState();
-    data = widget.itemsList;
+    data = widget.itemsList ?? [];
   }
 
   @override
   Widget build(BuildContext context) {
-    widget.otherBrands!.forEach((key, value) {});
-    print(widget.otherBrands);
+    // print(widget.otherBrands);
     return Scaffold(
         backgroundColor: cBackgroundGrey,
         appBar: MyAppBar(
@@ -47,7 +46,7 @@ class _ListedItemsWithFilterScreenState
             color: appBargrey,
           ),
           leadingIconFunction: () {
-            Navigator.pushNamed(context, "/");
+            Navigator.pop(context);
           },
         ),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -55,7 +54,22 @@ class _ListedItemsWithFilterScreenState
             height: 1,
             color: cBackgroundGrey,
           ),
-          const FilterAndSortSection(),
+          FilterAndSortSection(
+            data: data,
+            function: (List e) {
+              List test = [];
+              data.forEach((z) {
+                if (z["price"] > e[0] && z["price"] < e[1]) {
+                  test.add(z);
+                }
+                setState(() {
+                  data = test;
+                });
+              });
+              //NOTE 1
+              print(e);
+            },
+          ), //NOTE HERE
           const SizedBox(height: 7),
           OtherBrandsSection(
             data: widget.otherBrands,
@@ -129,7 +143,7 @@ class OtherBrandsSection extends StatelessWidget {
     List<Widget> test = [];
 
     data!.forEach((key, value) {
-      print("key:$key  == value:$value");
+      // print("key:$key  == value:$value");
       test.add(Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
         child: Container(
@@ -189,12 +203,12 @@ class OtherBrandsSection extends StatelessWidget {
 }
 
 class FilterAndSortSection extends StatelessWidget {
-  const FilterAndSortSection({
-    Key? key,
-  }) : super(key: key);
-
+  FilterAndSortSection({this.data, required this.function});
+  final List? data;
+  final Function function;
   @override
   Widget build(BuildContext context) {
+    // print("0 filter => $data");
     return Container(
       //NOTE Filter and sort Section
       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -204,7 +218,9 @@ class FilterAndSortSection extends StatelessWidget {
           child: TextButton(
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const SearchLimitScreen();
+                return SearchLimitScreen(
+                    data: data,
+                    function: function); //NOTE 00 - search limit func
               }));
             },
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [

@@ -176,7 +176,9 @@ class FilterAndSortSection extends StatelessWidget {
           child: TextButton(
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const SearchLimitScreen();
+                return SearchLimitScreen(function: () {
+                  print("from FilterAndSortSection/listed items");
+                });
               }));
             },
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
