@@ -30,9 +30,22 @@ class _ListedItemsWithFilterScreenState
     data = widget.itemsList ?? [];
   }
 
+  // List<Map<String, dynamic>> filters = [
+  //   {"rest": 1111},
+  //   {"rest": 1111},
+  // ];
+  // var max = null;
+  // var min = null;
+  // var status = null;
+  void deleteValueByName(String name, Filter fil) {
+    // print(name);
+  }
+
+  Filter myFilter = new Filter();
   @override
   Widget build(BuildContext context) {
-    // print(widget.otherBrands);
+    print(
+        "0- ${myFilter.statusFilter} , ${myFilter.maximumFilter} , ${myFilter.minimumFilter} ");
     return Scaffold(
         backgroundColor: cBackgroundGrey,
         appBar: MyAppBar(
@@ -57,30 +70,84 @@ class _ListedItemsWithFilterScreenState
           FilterAndSortSection(
             data: data,
             function: (List e) {
-              List test = [];
-              data.forEach((z) {
-                if (z["price"] > e[0] && z["price"] < e[1]) {
-                  test.add(z);
-                }
-                setState(() {
-                  data = test;
-                });
-              });
-              //NOTE 1
-              print(e);
-            },
-          ), //NOTE HERE
-          const SizedBox(height: 7),
-          OtherBrandsSection(
-            data: widget.otherBrands,
-            function: (e) {
+              // print("${e[0]},${e[1]},${e[2]}");
               setState(() {
-                data = e;
+                myFilter.minimumFilter = e[0];
+                myFilter.maximumFilter = e[1];
+                myFilter.statusFilter = e[2];
               });
+              // });
+              //NOTE 1
+              // print(e);
             },
           ),
           const SizedBox(height: 7),
-          BrandItemsList(itemsList: data)
+          OtherBrandsSection(
+              currentTitle: widget.title,
+              data: widget.otherBrands,
+              function: () {
+                // print('a');
+              }
+              // (e) {
+              //   setState(() {
+              //     // data = e;
+              //     // filter.data = e;
+              //   });
+              // },
+              ),
+          const SizedBox(height: 7),
+          SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            scrollDirection: Axis.horizontal,
+            child: Row(
+                children: myFilter.Activefilters()
+                    .map((e) => Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: MaterialButton(
+                              color: Colors.red,
+                              minWidth: 5,
+                              // constraints: ,
+                              // elevation: 0,
+                              // fillColor: Colors.amber,
+                              onPressed: () {
+                                setState(() {
+                                  switch (e.keys.first) {
+                                    case ("Brand"):
+                                      myFilter.brandFilter = null;
+                                      break;
+                                    case ("Max"):
+                                      myFilter.maximumFilter = null;
+                                      break;
+                                    case ("Min"):
+                                      myFilter..minimumFilter = null;
+                                      break;
+                                    case ("Present"):
+                                      myFilter.statusFilter = null;
+                                      break;
+                                    case ("SortType"):
+                                      myFilter.sortTypeFilter = null;
+                                      break;
+                                  }
+                                });
+                              },
+                              // padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(children: [
+                                Text(
+                                    "${e.keys.first} : ${e.values.first}", //NOTE herez
+                                    style: itemTitleFontStyle.copyWith(
+                                        fontSize: 14, color: Colors.white)),
+                                Icon(Icons.close,
+                                    size: 15, color: Colors.white),
+                              ]),
+                            ),
+                          ),
+                        ))
+                    .toList()),
+          ),
+          const SizedBox(height: 7),
+          BrandItemsList(itemsList: myFilter.filteredList(data))
         ]));
   }
 }
@@ -131,10 +198,12 @@ class BrandItemsList extends StatelessWidget {
 
 //////////////////////////////////////////////////////////////////////////////////
 class OtherBrandsSection extends StatelessWidget {
-  const OtherBrandsSection({this.data, required this.function});
+  const OtherBrandsSection(
+      {this.data, required this.function, this.currentTitle});
 
   final Map? data;
   final Function function;
+  final String? currentTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -142,41 +211,53 @@ class OtherBrandsSection extends StatelessWidget {
     // List OtherBrandsvalue = [];
     List<Widget> test = [];
 
+    //NOTE making otherBrands
     data!.forEach((key, value) {
       // print("key:$key  == value:$value");
-      test.add(Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
-        child: Container(
-          //   width: 5,
+      if (value.runtimeType == List && key != currentTitle)
+        test.add(Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
+          child: Container(
+            //   width: 5,
 
-          decoration: BoxDecoration(
-            // color: Colors.red,
-            borderRadius: const BorderRadius.all(Radius.circular(5)),
-            border: Border.all(color: cBorderGrey),
-          ),
-          height: 30,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: RawMaterialButton(
-              fillColor: Colors.white,
-              constraints: BoxConstraints(minWidth: 50),
-              onPressed: () => function(value)
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) =>
-              //             ListedItemsWithFilterScreen(title: e)));
-              ,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text(key,
-                    style: itemBrandFontStyle.copyWith(
-                        fontWeight: FontWeight.w600)),
+            decoration: BoxDecoration(
+              // color: Colors.red,
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
+              border: Border.all(color: cBorderGrey),
+            ),
+            height: 30,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: RawMaterialButton(
+                fillColor: Colors.white,
+                constraints: BoxConstraints(minWidth: 50),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ListedItemsWithFilterScreen(
+                              itemsList: value,
+                              title: key,
+                              otherBrands: data)));
+                  // function(value);
+                }
+
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) =>
+                //             ListedItemsWithFilterScreen(title: e)));
+                ,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(key,
+                      style: itemBrandFontStyle.copyWith(
+                          fontWeight: FontWeight.w600)),
+                ),
               ),
             ),
           ),
-        ),
-      ));
+        ));
       // OtherBrandsTitles.add(key);
       // OtherBrandsvalue.add(value);
     });
@@ -276,7 +357,7 @@ void sortPopup(BuildContext context) {
                   Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
-                    color: Colors.black, //NOTE Title section color
+                    color: Colors.black,
                     child: ListTile(
                       // tileColor: Colors.amber,
                       title: Align(
@@ -340,3 +421,96 @@ class PopupItem extends StatelessWidget {
 }
 
 //////////////////////////////////////////////////
+//NOTE filter class
+class Filter {
+  // List<dynamic> _data = [];
+  String? brandFilter;
+  int? minimumFilter;
+  int? maximumFilter;
+  bool? statusFilter;
+  String? sortTypeFilter;
+
+  Filter(
+      {this.brandFilter,
+      this.maximumFilter,
+      this.minimumFilter,
+      this.statusFilter,
+      this.sortTypeFilter});
+
+  // List<Map> get dataGet => _data;
+  // void set dataSet(List<Map> newData) {
+  //   _data = newData;
+  // }
+
+  List<Map<String, dynamic>> Activefilters() {
+    var filters = [
+      {"Brand": brandFilter, 'calssParameterName': 'brandFilter'},
+      {"Max": maximumFilter, 'calssParameterName': 'maximumFilter'},
+      {"Min": minimumFilter, 'calssParameterName': 'minimumFilter'},
+      {"Present": statusFilter, 'calssParameterName': 'statusFilter'},
+      {"SortType": sortTypeFilter, 'calssParameterName': 'sortTypeFilter'}
+    ];
+    List<Map<String, dynamic>> result = [];
+    filters.forEach((element) {
+      if ((element.values.first != null) && (element.values.first != false))
+        result.add(element);
+    });
+    // print(result);
+    return result;
+  }
+
+  filteredList(List data) {
+    List result = data;
+    print("input $result");
+    print("1- $statusFilter , $maximumFilter , $minimumFilter ");
+    if (statusFilter == true) {
+      var status = [];
+      for (Map item in result) {
+        if (item['status'] == 'open') {
+          print("${item['id']} == open");
+
+          // print(item['price']);
+          // print("------------------");
+          status.add(item);
+          result = status;
+        } else
+          result.remove(item);
+      }
+    }
+    ;
+
+    if (minimumFilter != null) {
+      var min = [];
+      for (Map item in result) {
+        if (item['id'] > minimumFilter) {
+          print("${item['price']} >= $minimumFilter");
+
+          // print(item['price']);
+          // print("------------------");
+          min.add(item);
+          result = min;
+        } else
+          result.remove(item);
+      }
+    }
+    ;
+    if (maximumFilter != null) {
+      var max = [];
+      for (Map item in result) {
+        if (item['price'] < maximumFilter) {
+          print("${item['id']} <= $maximumFilter");
+
+          // print(item['price']);
+          // print("------------------");
+          max.add(item);
+          result = max;
+        } else
+          result.remove(item);
+      }
+    }
+    ;
+    print("output $result");
+
+    return result;
+  }
+}
