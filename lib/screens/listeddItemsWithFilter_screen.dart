@@ -30,22 +30,14 @@ class _ListedItemsWithFilterScreenState
     data = widget.itemsList ?? [];
   }
 
-  // List<Map<String, dynamic>> filters = [
-  //   {"rest": 1111},
-  //   {"rest": 1111},
-  // ];
-  // var max = null;
-  // var min = null;
-  // var status = null;
-  void deleteValueByName(String name, Filter fil) {
-    // print(name);
-  }
-
   Filter myFilter = new Filter();
   @override
   Widget build(BuildContext context) {
+    data = widget.itemsList ?? [];
+
     print(
         "0- ${myFilter.statusFilter} , ${myFilter.maximumFilter} , ${myFilter.minimumFilter} ");
+    print(data);
     return Scaffold(
         backgroundColor: cBackgroundGrey,
         appBar: MyAppBar(
@@ -68,6 +60,10 @@ class _ListedItemsWithFilterScreenState
             color: cBackgroundGrey,
           ),
           FilterAndSortSection(
+            sliderMin: myFilter.minimumFilter ?? 10,
+            sliderMax: myFilter.maximumFilter ?? 400,
+            statusCheck: myFilter.statusFilter ?? false,
+            //NOTE filter
             data: data,
             function: (List e) {
               // print("${e[0]},${e[1]},${e[2]}");
@@ -85,16 +81,7 @@ class _ListedItemsWithFilterScreenState
           OtherBrandsSection(
               currentTitle: widget.title,
               data: widget.otherBrands,
-              function: () {
-                // print('a');
-              }
-              // (e) {
-              //   setState(() {
-              //     // data = e;
-              //     // filter.data = e;
-              //   });
-              // },
-              ),
+              function: () {}),
           const SizedBox(height: 7),
           SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 20),
@@ -284,9 +271,19 @@ class OtherBrandsSection extends StatelessWidget {
 }
 
 class FilterAndSortSection extends StatelessWidget {
-  FilterAndSortSection({this.data, required this.function});
+  FilterAndSortSection(
+      {this.data,
+      required this.function,
+      this.sliderMin,
+      this.sliderMax,
+      this.statusCheck});
   final List? data;
   final Function function;
+
+  final int? sliderMin;
+  final int? sliderMax;
+  final bool? statusCheck;
+
   @override
   Widget build(BuildContext context) {
     // print("0 filter => $data");
@@ -300,6 +297,9 @@ class FilterAndSortSection extends StatelessWidget {
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return SearchLimitScreen(
+                    sliderMin: sliderMin!,
+                    slidermax: sliderMax!,
+                    statusCheckValue: statusCheck!,
                     data: data,
                     function: function); //NOTE 00 - search limit func
               }));
@@ -476,7 +476,8 @@ class Filter {
         } else
           result.remove(item);
       }
-    }
+    } else
+      this.statusFilter = null;
     ;
 
     if (minimumFilter != null) {

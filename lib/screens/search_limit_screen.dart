@@ -5,9 +5,18 @@ import 'package:flutter/material.dart';
 import '../consts.dart';
 
 class SearchLimitScreen extends StatefulWidget {
-  const SearchLimitScreen({this.data, required this.function});
+  SearchLimitScreen(
+      {this.data,
+      required this.function,
+      this.sliderMin = 0,
+      this.slidermax = 500,
+      this.statusCheckValue = false});
   final List? data;
   final Function function;
+
+  final int sliderMin;
+  final int slidermax;
+  final bool statusCheckValue;
 
   @override
   _SearchLimitScreenState createState() => _SearchLimitScreenState();
@@ -15,10 +24,20 @@ class SearchLimitScreen extends StatefulWidget {
 
 class _SearchLimitScreenState extends State<SearchLimitScreen> {
   final List<bool> _isOpen = [false, false];
-  int sliderMin = 0;
-  int slidermax = 500;
+  static const double sliderStartingRange = 0;
+  static const double sliderEndingRange = 500;
+
   String? searchedText;
-  bool _statusCheckValue = false;
+  late int _sliderMin;
+  late int _slidermax = widget.slidermax;
+  late bool _statusCheckValue = widget.statusCheckValue;
+  @override
+  void initState() {
+    super.initState();
+    _sliderMin = widget.sliderMin;
+    _slidermax = widget.slidermax;
+    _statusCheckValue = widget.statusCheckValue;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,44 +113,45 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
                       Expanded(
                           child: SearchField2(
                         textInputType: TextInputType.number,
-                        hint: sliderMin.toString(),
+                        hint: _sliderMin.toString(),
                         func: (String e) {
                           setState(() {
                             // ignore: unnecessary_statements
-                            int.parse(e) < slidermax && int.parse(e) >= 0
-                                ? sliderMin = int.parse(e)
+                            int.parse(e) < _slidermax && int.parse(e) >= 0
+                                ? _sliderMin = int.parse(e)
                                 : Container();
                           });
                         },
-                        value: sliderMin,
+                        value: _sliderMin,
                       )),
                       const SizedBox(width: 20),
                       Expanded(
                           child: SearchField2(
                         textInputType: TextInputType.number,
-                        hint: slidermax.toString(),
+                        hint: _slidermax.toString(),
                         func: (String e) {
                           setState(() {
                             // ignore: unnecessary_statements
-                            int.parse(e) > sliderMin && int.parse(e) <= 500
-                                ? slidermax = int.parse(e)
+                            int.parse(e) > _sliderMin && int.parse(e) <= 500
+                                ? _slidermax = int.parse(e)
                                 : Container();
                           });
                         },
-                        value: slidermax,
+                        value: _slidermax,
                       ))
                     ]),
                   ),
                   const SizedBox(height: 20),
                   RangeSlider(
-                    max: 500,
-                    values:
-                        RangeValues(sliderMin.toDouble(), slidermax.toDouble()),
+                    min: sliderStartingRange,
+                    max: sliderEndingRange,
+                    values: RangeValues(
+                        _sliderMin.toDouble(), _slidermax.toDouble()),
                     onChanged: (e) {
                       // print(e);
                       setState(() {
-                        sliderMin = e.start.toInt();
-                        slidermax = e.end.toInt();
+                        _sliderMin = e.start.toInt();
+                        _slidermax = e.end.toInt();
                       });
                     },
                   ),
@@ -176,7 +196,12 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
             title: "Register",
             function: () {
               widget.function(
-                [sliderMin, slidermax, _statusCheckValue, searchedText],
+                [
+                  _sliderMin == sliderStartingRange ? null : _sliderMin,
+                  _slidermax == sliderEndingRange ? null : _slidermax,
+                  _statusCheckValue == false ? null : _statusCheckValue,
+                  searchedText
+                ],
               );
               Navigator.pop(context);
             }) //NOTE 00 - seach filter func
