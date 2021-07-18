@@ -33,8 +33,7 @@ class _ListedItemsWithFilterScreenState
   Filter myFilter = new Filter();
   @override
   Widget build(BuildContext context) {
-    data = widget.itemsList ?? [];
-
+    print(widget.itemsList);
     print(
         "0- ${myFilter.statusFilter} , ${myFilter.maximumFilter} , ${myFilter.minimumFilter} ");
     print(data);
@@ -66,8 +65,13 @@ class _ListedItemsWithFilterScreenState
             //NOTE filter
             data: data,
             function: (List e) {
-              // print("${e[0]},${e[1]},${e[2]}");
+              List res = [];
+              var a = data.forEach((element) {
+                if (element["price"] > e[0] && element['price'] < e[1])
+                  res.add(element);
+              });
               setState(() {
+                // data = res;
                 myFilter.minimumFilter = e[0];
                 myFilter.maximumFilter = e[1];
                 myFilter.statusFilter = e[2];
@@ -134,7 +138,9 @@ class _ListedItemsWithFilterScreenState
                     .toList()),
           ),
           const SizedBox(height: 7),
-          BrandItemsList(itemsList: myFilter.filteredList(data))
+          BrandItemsList(itemsList: data)
+
+          // BrandItemsList(itemsList: myFilter.filteredList(data))
         ]));
   }
 }
@@ -490,8 +496,7 @@ class Filter {
           // print("------------------");
           min.add(item);
           result = min;
-        } else
-          result.remove(item);
+        }
       }
     }
     ;
@@ -505,8 +510,8 @@ class Filter {
           // print("------------------");
           max.add(item);
           result = max;
-        } else
-          result.remove(item);
+        }
+        result.remove(item);
       }
     }
     ;
