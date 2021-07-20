@@ -23,21 +23,76 @@ class ListedItemsWithFilterScreen extends StatefulWidget {
 
 class _ListedItemsWithFilterScreenState
     extends State<ListedItemsWithFilterScreen> {
+  late Filter myFilter = new Filter(filterdata: data);
+
   late List data;
+
   @override
   void initState() {
     super.initState();
-    data = widget.itemsList ?? [];
+    setState(() {
+      data = widget.itemsList ?? [];
+    });
   }
 
-  Filter myFilter = new Filter();
-  List filterData = [];
+  //  = new Filter(filterdata: widget.itemsList);
+  // List filterData = [];
+  // myFilter.filterdata = data;
   @override
   Widget build(BuildContext context) {
-    filterData = myFilter.filteredList(data);
-    print(widget.itemsList);
-    print(
-        "0- ${myFilter.statusFilter} , ${myFilter.maximumFilter} , ${myFilter.minimumFilter} ");
+    filteredList(data) {
+      List data2 = data;
+      List result;
+
+      if (myFilter.Activefilters().length != 0) {
+        result = data2
+            .where((element) =>
+                (element > myFilter.minimumFilter) &&
+                (element < myFilter.maximumFilter))
+            .toList();
+        // print("0- input ${result.length}");
+        // // print("1- $statusFilter , $maximumFilter , $minimumFilter ");
+        // if (myFilter.Activefilters().length != 0) {
+        //   if (myFilter.statusFilter == true) {
+        //     for (Map item in data2) {
+        //       if (item['status'] != 'open') {
+        //         data2.remove(item);
+        //       }
+        //     }
+        //   }
+        //   if (myFilter.minimumFilter != null) {
+        //     for (Map item in data2) {
+        //       if (item['price'] < myFilter.minimumFilter) {
+        //         // print("${item['price']} >= $minimumFilter");
+
+        //         // print(item['price']);
+        //         // print("------------------");
+        //         data2.remove(item);
+        //       }
+        //     }
+        //   }
+
+        //   if (myFilter.maximumFilter != null) {
+        //     for (Map item in data2) {
+        //       if (item['price'] > myFilter.maximumFilter) {
+        //         // print("${item['id']} <= $maximumFilter");
+
+        //         // print(item['price']);
+        //         // print("------------------");
+        //         data2.remove(item);
+        //       }
+        //     }
+        //   }
+        //   print("3-output ${result.length}");
+
+        //   return data2;
+        // } else
+        //   return myFilter.filterdata;
+        return result;
+      } else
+        return data2;
+    }
+
     print(data);
     return Scaffold(
         backgroundColor: cBackgroundGrey,
@@ -61,19 +116,18 @@ class _ListedItemsWithFilterScreenState
             color: cBackgroundGrey,
           ),
           FilterAndSortSection(
-            sliderMin: myFilter.minimumFilter ?? 10,
-            sliderMax: myFilter.maximumFilter ?? 400,
+            sliderMin: myFilter.minimumFilter ?? 0,
+            sliderMax: myFilter.maximumFilter ?? 500,
             statusCheck: myFilter.statusFilter ?? false,
             //NOTE filter
             data: data,
             function: (List e) {
               setState(() {
-                // data = res;
                 myFilter.minimumFilter = e[0];
                 myFilter.maximumFilter = e[1];
                 myFilter.statusFilter = e[2];
 
-                filterData = myFilter.filteredList(data);
+                // filterData = myFilter.filteredList(data);
               });
               // });
               //NOTE 1
@@ -137,7 +191,7 @@ class _ListedItemsWithFilterScreenState
                     .toList()),
           ),
           const SizedBox(height: 7),
-          BrandItemsList(itemsList: filterData)
+          BrandItemsList(itemsList: filteredList(data))
 
           // BrandItemsList(itemsList: myFilter.filteredList(data))
         ]));
@@ -426,9 +480,11 @@ class PopupItem extends StatelessWidget {
 }
 
 //////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
 //NOTE filter class
 class Filter {
-  // List<dynamic> _data = [];
+  List<dynamic>? filterdata;
   String? brandFilter;
   int? minimumFilter;
   int? maximumFilter;
@@ -436,86 +492,27 @@ class Filter {
   String? sortTypeFilter;
 
   Filter(
-      {this.brandFilter,
+      {this.filterdata,
+      this.brandFilter,
       this.maximumFilter,
       this.minimumFilter,
       this.statusFilter,
       this.sortTypeFilter});
 
-  // List<Map> get dataGet => _data;
-  // void set dataSet(List<Map> newData) {
-  //   _data = newData;
-  // }
-
   List<Map<String, dynamic>> Activefilters() {
-    var filters = [
-      {"Brand": brandFilter, 'calssParameterName': 'brandFilter'},
-      {"Max": maximumFilter, 'calssParameterName': 'maximumFilter'},
-      {"Min": minimumFilter, 'calssParameterName': 'minimumFilter'},
-      {"Present": statusFilter, 'calssParameterName': 'statusFilter'},
-      {"SortType": sortTypeFilter, 'calssParameterName': 'sortTypeFilter'}
+    var _filters = [
+      {"Brand": brandFilter},
+      {"Max": maximumFilter},
+      {"Min": minimumFilter},
+      {"Present": statusFilter},
+      {"SortType": sortTypeFilter}
     ];
     List<Map<String, dynamic>> result = [];
-    filters.forEach((element) {
+    _filters.forEach((element) {
       if ((element.values.first != null) && (element.values.first != false))
         result.add(element);
     });
-    // print(result);
-    return result;
-  }
-
-  filteredList(List data) {
-    List result = data;
-    print("0- input $result");
-    print("1- $statusFilter , $maximumFilter , $minimumFilter ");
-    if (statusFilter == true) {
-      var status = [];
-      for (Map item in result) {
-        if (item['status'] == 'open') {
-          // print("${item['id']} == open");
-
-          // print(item['price']);
-          // print("------------------");
-          status.add(item);
-          result = status;
-        } else
-          result.remove(item);
-      }
-    } else
-      this.statusFilter = null;
-    ;
-
-    if (minimumFilter != null) {
-      var min = [];
-      for (Map item in result) {
-        if (item['id'] > minimumFilter) {
-          // print("${item['price']} >= $minimumFilter");
-
-          // print(item['price']);
-          // print("------------------");
-          min.add(item);
-          result = min;
-        }
-      }
-    }
-    ;
-    if (maximumFilter != null) {
-      var max = [];
-      for (Map item in result) {
-        if (item['price'] < maximumFilter) {
-          // print("${item['id']} <= $maximumFilter");
-
-          // print(item['price']);
-          // print("------------------");
-          max.add(item);
-          result = max;
-        } else
-          result.remove(item);
-      }
-    }
-    ;
-    print("3-output $result");
-
     return result;
   }
 }
+//////////////////////////////////////////////////////////////////////////////

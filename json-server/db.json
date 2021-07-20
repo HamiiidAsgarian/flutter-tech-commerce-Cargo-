@@ -468,7 +468,7 @@
       "Classic": {
         "Sico": [
           {
-            "id": 3,
+            "id": 1,
             "title": "Apple watch 7898",
             "company": "Shevorlet",
             "price": 1000,
@@ -484,7 +484,7 @@
             "description": "0.99m(1.6ft) Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
           },
           {
-            "id": 4,
+            "id": 2,
             "title": " watch 7898",
             "company": "Shevorlet",
             "price": 301,
@@ -503,7 +503,7 @@
             "description": "Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
           },
           {
-            "id": 6,
+            "id": 3,
             "title": "Aora T7825",
             "company": "Shevorlet",
             "price": 90,
