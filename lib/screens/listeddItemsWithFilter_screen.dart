@@ -31,8 +31,10 @@ class _ListedItemsWithFilterScreenState
   }
 
   Filter myFilter = new Filter();
+  List filterData = [];
   @override
   Widget build(BuildContext context) {
+    filterData = myFilter.filteredList(data);
     print(widget.itemsList);
     print(
         "0- ${myFilter.statusFilter} , ${myFilter.maximumFilter} , ${myFilter.minimumFilter} ");
@@ -65,16 +67,13 @@ class _ListedItemsWithFilterScreenState
             //NOTE filter
             data: data,
             function: (List e) {
-              List res = [];
-              var a = data.forEach((element) {
-                if (element["price"] > e[0] && element['price'] < e[1])
-                  res.add(element);
-              });
               setState(() {
                 // data = res;
                 myFilter.minimumFilter = e[0];
                 myFilter.maximumFilter = e[1];
                 myFilter.statusFilter = e[2];
+
+                filterData = myFilter.filteredList(data);
               });
               // });
               //NOTE 1
@@ -138,7 +137,7 @@ class _ListedItemsWithFilterScreenState
                     .toList()),
           ),
           const SizedBox(height: 7),
-          BrandItemsList(itemsList: data)
+          BrandItemsList(itemsList: filterData)
 
           // BrandItemsList(itemsList: myFilter.filteredList(data))
         ]));
@@ -467,13 +466,13 @@ class Filter {
 
   filteredList(List data) {
     List result = data;
-    print("input $result");
+    print("0- input $result");
     print("1- $statusFilter , $maximumFilter , $minimumFilter ");
     if (statusFilter == true) {
       var status = [];
       for (Map item in result) {
         if (item['status'] == 'open') {
-          print("${item['id']} == open");
+          // print("${item['id']} == open");
 
           // print(item['price']);
           // print("------------------");
@@ -490,7 +489,7 @@ class Filter {
       var min = [];
       for (Map item in result) {
         if (item['id'] > minimumFilter) {
-          print("${item['price']} >= $minimumFilter");
+          // print("${item['price']} >= $minimumFilter");
 
           // print(item['price']);
           // print("------------------");
@@ -504,18 +503,18 @@ class Filter {
       var max = [];
       for (Map item in result) {
         if (item['price'] < maximumFilter) {
-          print("${item['id']} <= $maximumFilter");
+          // print("${item['id']} <= $maximumFilter");
 
           // print(item['price']);
           // print("------------------");
           max.add(item);
           result = max;
-        }
-        result.remove(item);
+        } else
+          result.remove(item);
       }
     }
     ;
-    print("output $result");
+    print("3-output $result");
 
     return result;
   }
