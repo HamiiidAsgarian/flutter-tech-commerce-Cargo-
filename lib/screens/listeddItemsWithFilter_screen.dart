@@ -26,73 +26,21 @@ class _ListedItemsWithFilterScreenState
   late Filter myFilter = new Filter(filterdata: data);
 
   late List data;
+  late List filterData;
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      data = widget.itemsList ?? [];
-    });
+    // filterData = widget.itemsList ?? [];
+    data = widget.itemsList ?? [];
   }
 
   //  = new Filter(filterdata: widget.itemsList);
   // List filterData = [];
   // myFilter.filterdata = data;
+
   @override
   Widget build(BuildContext context) {
-    filteredList(data) {
-      List data2 = data;
-      List result;
-
-      if (myFilter.Activefilters().length != 0) {
-        result = data2
-            .where((element) =>
-                (element > myFilter.minimumFilter) &&
-                (element < myFilter.maximumFilter))
-            .toList();
-        // print("0- input ${result.length}");
-        // // print("1- $statusFilter , $maximumFilter , $minimumFilter ");
-        // if (myFilter.Activefilters().length != 0) {
-        //   if (myFilter.statusFilter == true) {
-        //     for (Map item in data2) {
-        //       if (item['status'] != 'open') {
-        //         data2.remove(item);
-        //       }
-        //     }
-        //   }
-        //   if (myFilter.minimumFilter != null) {
-        //     for (Map item in data2) {
-        //       if (item['price'] < myFilter.minimumFilter) {
-        //         // print("${item['price']} >= $minimumFilter");
-
-        //         // print(item['price']);
-        //         // print("------------------");
-        //         data2.remove(item);
-        //       }
-        //     }
-        //   }
-
-        //   if (myFilter.maximumFilter != null) {
-        //     for (Map item in data2) {
-        //       if (item['price'] > myFilter.maximumFilter) {
-        //         // print("${item['id']} <= $maximumFilter");
-
-        //         // print(item['price']);
-        //         // print("------------------");
-        //         data2.remove(item);
-        //       }
-        //     }
-        //   }
-        //   print("3-output ${result.length}");
-
-        //   return data2;
-        // } else
-        //   return myFilter.filterdata;
-        return result;
-      } else
-        return data2;
-    }
-
     print(data);
     return Scaffold(
         backgroundColor: cBackgroundGrey,
@@ -130,7 +78,6 @@ class _ListedItemsWithFilterScreenState
                 // filterData = myFilter.filteredList(data);
               });
               // });
-              //NOTE 1
               // print(e);
             },
           ),
@@ -178,8 +125,7 @@ class _ListedItemsWithFilterScreenState
                               },
                               // padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Row(children: [
-                                Text(
-                                    "${e.keys.first} : ${e.values.first}", //NOTE herez
+                                Text("${e.keys.first} : ${e.values.first}",
                                     style: itemTitleFontStyle.copyWith(
                                         fontSize: 14, color: Colors.white)),
                                 Icon(Icons.close,
@@ -191,7 +137,8 @@ class _ListedItemsWithFilterScreenState
                     .toList()),
           ),
           const SizedBox(height: 7),
-          BrandItemsList(itemsList: filteredList(data))
+          BrandItemsList(
+              itemsList: myFilter.filterHandler(data)) // NOTE making items
 
           // BrandItemsList(itemsList: myFilter.filteredList(data))
         ]));
@@ -360,7 +307,7 @@ class FilterAndSortSection extends StatelessWidget {
                     slidermax: sliderMax!,
                     statusCheckValue: statusCheck!,
                     data: data,
-                    function: function); //NOTE 00 - search limit func
+                    function: function);
               }));
             },
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -513,6 +460,21 @@ class Filter {
         result.add(element);
     });
     return result;
+  }
+
+  filterHandler(List data) {
+    List a = data;
+    if (minimumFilter != null) {
+      a = a.where((element) => element['price'] > minimumFilter).toList();
+    }
+    if (maximumFilter != null) {
+      a = a.where((element) => element['price'] < maximumFilter).toList();
+    }
+    if (statusFilter == true) {
+      a = a.where((element) => element['status'] == "open").toList();
+    }
+
+    return a;
   }
 }
 //////////////////////////////////////////////////////////////////////////////
