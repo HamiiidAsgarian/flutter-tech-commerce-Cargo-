@@ -63,6 +63,7 @@ class _ListedItemsWithFilterScreenState
             color: cBackgroundGrey,
           ),
           FilterAndSortSection(
+            filterText: myFilter.brandFilter ?? "",
             sliderMin: myFilter.minimumFilter ?? 0,
             sliderMax: myFilter.maximumFilter ?? 500,
             statusCheck: myFilter.statusFilter ?? false,
@@ -73,6 +74,7 @@ class _ListedItemsWithFilterScreenState
                 myFilter.minimumFilter = e[0];
                 myFilter.maximumFilter = e[1];
                 myFilter.statusFilter = e[2];
+                myFilter.brandFilter = e[3];
 
                 // filterData = myFilter.filteredList(data);
               });
@@ -83,6 +85,12 @@ class _ListedItemsWithFilterScreenState
               setState(() {
                 myFilter.sortTypeFilter = sortType;
               });
+            },
+            textFunction: (text) {
+              setState(() {
+                myFilter.brandFilter = text;
+              });
+              print(myFilter.brandFilter);
             },
           ),
           const SizedBox(height: 7),
@@ -286,14 +294,18 @@ class FilterAndSortSection extends StatelessWidget {
       this.sliderMin,
       this.sliderMax,
       this.statusCheck,
-      required this.sortFunction});
+      required this.sortFunction,
+      required this.textFunction,
+      this.filterText});
   final List? data;
   final Function function;
   final Function sortFunction;
+  final Function textFunction;
 
   final int? sliderMin;
   final int? sliderMax;
   final bool? statusCheck;
+  final String? filterText;
 
   @override
   Widget build(BuildContext context) {
@@ -307,6 +319,7 @@ class FilterAndSortSection extends StatelessWidget {
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return SearchLimitScreen(
+                    filterText: filterText!,
                     sliderMin: sliderMin!,
                     slidermax: sliderMax!,
                     statusCheckValue: statusCheck!,
@@ -465,8 +478,9 @@ class Filter {
     ];
     List<Map<String, dynamic>> result = [];
     _filters.forEach((element) {
-      if ((element.values.first != null) && (element.values.first != false))
-        result.add(element);
+      if ((element.values.first != null) &&
+          (element.values.first != false) &&
+          (element.values.first != "")) result.add(element);
     });
     return result;
   }
@@ -482,6 +496,10 @@ class Filter {
     if (statusFilter == true) {
       a = a.where((element) => element['status'] == "open").toList();
     }
+    if (brandFilter != null && brandFilter != "") {
+      a = a.where((element) => element['title'].contains(brandFilter)).toList();
+    }
+
     if (sortTypeFilter != null) {
       switch (sortTypeFilter) {
         case ("Highest Value"):

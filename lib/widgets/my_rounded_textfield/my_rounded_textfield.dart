@@ -7,6 +7,7 @@ class MyRoundedTextfield extends StatelessWidget {
     this.cntrl,
     this.func,
     this.hint,
+    this.value = '',
     this.textInputType,
   }) : super(key: key);
 
@@ -14,9 +15,13 @@ class MyRoundedTextfield extends StatelessWidget {
   final Function? func;
   final String? hint;
   final TextInputType? textInputType;
+  final String value;
 
   @override
   Widget build(BuildContext context) {
+    // if (value != null) {
+    //   cntrl?.text = "value.toString()";
+    // }
     return TextField(
       keyboardType: textInputType ?? null,
       controller: cntrl,
@@ -51,7 +56,7 @@ class MyRoundedTextfield extends StatelessWidget {
             borderSide: BorderSide(color: Colors.orange),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: cBackgroundGrey),
+            borderSide: BorderSide(color: Colors.grey),
           ),
           // errorBorder: const OutlineInputBorder(
           //   borderRadius: BorderRadius.all(

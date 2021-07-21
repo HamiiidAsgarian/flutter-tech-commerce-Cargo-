@@ -5,18 +5,21 @@ import 'package:flutter/material.dart';
 import '../consts.dart';
 
 class SearchLimitScreen extends StatefulWidget {
-  SearchLimitScreen(
-      {this.data,
-      required this.function,
-      this.sliderMin = 0,
-      this.slidermax = 500,
-      this.statusCheckValue = false});
+  SearchLimitScreen({
+    this.data,
+    required this.function,
+    this.sliderMin = 0,
+    this.slidermax = 500,
+    this.statusCheckValue = false,
+    this.filterText = '',
+  });
   final List? data;
   final Function function;
 
   final int sliderMin;
   final int slidermax;
   final bool statusCheckValue;
+  final String filterText;
 
   @override
   _SearchLimitScreenState createState() => _SearchLimitScreenState();
@@ -31,16 +34,26 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
   late int _sliderMin;
   late int _slidermax = widget.slidermax;
   late bool _statusCheckValue = widget.statusCheckValue;
+  late String _filterText;
+
   @override
   void initState() {
     super.initState();
     _sliderMin = widget.sliderMin;
     _slidermax = widget.slidermax;
     _statusCheckValue = widget.statusCheckValue;
+    _sliderMin = widget.sliderMin;
+    _filterText = widget.filterText;
   }
+
+  TextEditingController filterTextCNTRLR = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    filterTextCNTRLR.text = _filterText;
+    filterTextCNTRLR.selection = TextSelection.fromPosition(
+        TextPosition(offset: filterTextCNTRLR.text.length));
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -57,34 +70,43 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
                   },
                   icon: const Icon(Icons.close)))
         ],
-        title: const Align(child: Text("SearchLimit")),
+        title: const Align(child: Text("Search Limit")),
       ),
-      body: Column(children: [
+      body: ListView(children: [
         const Divider(height: 0),
-        const SizedBox(height: 20),
+        // const SizedBox(height: 20),
         Container(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 1),
+            color: Colors.white,
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, bottom: 20, top: 20),
             child: MyRoundedTextfield(
-              func: (String e) {
-                setState(() {
-                  searchedText = e;
-                });
+
+                //       cntrl.selection =
+                // TextSelection.fromPosition(TextPosition(offset: cntrl.text.length));
+                cntrl: filterTextCNTRLR,
+                value: _filterText,
+                hint: "Search Product",
+                func: (e) {
+                  setState(() {
+                    _filterText = e;
+                  });
+                }
+
+                // (String e) {
+                //   setState(() {
+                //     searchedText = e;
+                //   });
+                // },
+                //  ,
+                // // textInputType: TextInputType.text,
+                // hint: "Searching in Fashion category",
+                // func: (String e) {
+                //   setState(() {
+                //     searchedText = e;
+                //   });
                 // print(testText);
-              },
-              //  ,
-              // // textInputType: TextInputType.text,
-              // hint: "Searching in Fashion category",
-              // func: (String e) {
-              //   setState(() {
-              //     searchedText = e;
-              //   });
-              // print(testText);
-              // },
-            )),
-        Container(
-          height: 20,
-          //  color: Colors.amber
-        ),
+                // },
+                )),
         Divider(height: 1, color: cBackgroundGrey),
         ExpansionPanelList(
             // dividerColor: (Colors.yellow),
@@ -202,7 +224,7 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
                     _sliderMin == sliderStartingRange ? null : _sliderMin,
                     _slidermax == sliderEndingRange ? null : _slidermax,
                     _statusCheckValue == false ? null : _statusCheckValue,
-                    searchedText
+                    _filterText == "" ? null : _filterText
                   ],
                 );
                 Navigator.pop(context);
