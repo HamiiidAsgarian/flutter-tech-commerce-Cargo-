@@ -41,7 +41,6 @@ class _ListedItemsWithFilterScreenState
 
   @override
   Widget build(BuildContext context) {
-    print(data);
     return Scaffold(
         backgroundColor: cBackgroundGrey,
         appBar: MyAppBar(
@@ -79,6 +78,11 @@ class _ListedItemsWithFilterScreenState
               });
               // });
               // print(e);
+            },
+            sortFunction: (String sortType) {
+              setState(() {
+                myFilter.sortTypeFilter = sortType;
+              });
             },
           ),
           const SizedBox(height: 7),
@@ -206,7 +210,6 @@ class OtherBrandsSection extends StatelessWidget {
 
     //NOTE making otherBrands
     data!.forEach((key, value) {
-      // print("key:$key  == value:$value");
       if (value.runtimeType == List && key != currentTitle)
         test.add(Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
@@ -282,9 +285,11 @@ class FilterAndSortSection extends StatelessWidget {
       required this.function,
       this.sliderMin,
       this.sliderMax,
-      this.statusCheck});
+      this.statusCheck,
+      required this.sortFunction});
   final List? data;
   final Function function;
+  final Function sortFunction;
 
   final int? sliderMin;
   final int? sliderMax;
@@ -292,7 +297,6 @@ class FilterAndSortSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print("0 filter => $data");
     return Container(
       //NOTE Filter and sort Section
       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -324,7 +328,7 @@ class FilterAndSortSection extends StatelessWidget {
         Expanded(
           child: TextButton(
             onPressed: () {
-              sortPopup(context);
+              sortPopup(context, sortFunction);
             },
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               const Icon(
@@ -344,7 +348,7 @@ class FilterAndSortSection extends StatelessWidget {
 
 //////////////////////////////////////////////////////
 
-void sortPopup(BuildContext context) {
+void sortPopup(BuildContext context, Function function) {
   {
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
@@ -364,37 +368,42 @@ void sortPopup(BuildContext context) {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
                     color: Colors.black,
-                    child: ListTile(
-                      // tileColor: Colors.amber,
-                      title: Align(
-                        alignment: Alignment(0.3, 0),
-                        child: Text("Sort",
-                            style: itemBrandFontStyle.copyWith(
-                                fontSize: 25, color: Colors.white)),
-                      ),
-                      trailing: IconButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          icon: const Icon(Icons.cancel,
-                              size: 30, color: Colors.white)),
+                    child: Stack(
+                      children: [
+                        // tileColor: Colors.amber,
+                        Align(
+                          alignment: Alignment(0, 0),
+                          child: Text("Sort",
+                              style: itemBrandFontStyle.copyWith(
+                                  fontSize: 25, color: Colors.white)),
+                        ),
+                        Align(
+                          alignment: Alignment(1, 1),
+                          child: IconButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              icon: const Icon(Icons.cancel,
+                                  size: 30, color: Colors.white)),
+                        )
+                      ],
                     ),
                   ),
                   const Divider(height: 0),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 10),
-                          PopupItem(text: "highest Value"),
-                          PopupItem(text: "Lowestt Value"),
-                          PopupItem(text: "Lowestt Value"),
-                          PopupItem(text: "Lowestt Value"),
-                          PopupItem(text: "Lowestt Value"),
-                        ],
-                      ),
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            "Highest Value",
+                            "Lowest Value",
+                            "Highest Rate",
+                            "Lowest Rate"
+                          ]
+                              .map(
+                                  (e) => PopupItem(text: e, function: function))
+                              .toList()),
                     ),
                   )
                 ]),
@@ -404,15 +413,15 @@ void sortPopup(BuildContext context) {
 }
 
 class PopupItem extends StatelessWidget {
+  const PopupItem({Key? key, this.text, this.function}) : super(key: key);
+
+  final Function? function;
   final String? text;
-  const PopupItem({Key? key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
-      onPressed: () {
-        print("object");
-      },
+      onPressed: () => function!(text),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 15),
         width: double.infinity,
@@ -420,7 +429,7 @@ class PopupItem extends StatelessWidget {
         // color: Colors.amber,
         child: Center(
             child: Text(this.text ?? 'no text',
-                style: itemBrandFontStyle.copyWith(fontSize: 25))),
+                style: itemBrandFontStyle.copyWith(fontSize: 20))),
       ),
     );
   }
@@ -473,8 +482,37 @@ class Filter {
     if (statusFilter == true) {
       a = a.where((element) => element['status'] == "open").toList();
     }
+    if (sortTypeFilter != null) {
+      switch (sortTypeFilter) {
+        case ("Highest Value"):
+          {
+            a.sort((dynamic b, dynamic a) => a['price'].compareTo(b['price']));
+            break;
+          }
+
+        case ('Lowest Value'):
+          {
+            a.sort((dynamic a, dynamic b) => a['price'].compareTo(b['price']));
+            break;
+          }
+        case ('Highest Rate'):
+          {
+            a.sort((dynamic b, dynamic a) => a['rate'].compareTo(b['rate']));
+            break;
+          }
+        case ('Lowest Rate'):
+          {
+            a.sort((dynamic a, dynamic b) => a['rate'].compareTo(b['rate']));
+            break;
+          }
+      }
+    }
 
     return a;
   }
 }
 //////////////////////////////////////////////////////////////////////////////
+// "Highest Value",
+// "Lowest Value",
+// "Highest Rate",
+// "Lowest Rate"

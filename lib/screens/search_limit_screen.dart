@@ -192,19 +192,22 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
                     ),
                   ))
             ]),
-        MyRoundedButton(
-            title: "Register",
-            function: () {
-              widget.function(
-                [
-                  _sliderMin == sliderStartingRange ? null : _sliderMin,
-                  _slidermax == sliderEndingRange ? null : _slidermax,
-                  _statusCheckValue == false ? null : _statusCheckValue,
-                  searchedText
-                ],
-              );
-              Navigator.pop(context);
-            }) //NOTE 00 - seach filter func
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+          child: MyRoundedButton(
+              title: "Register",
+              function: () {
+                widget.function(
+                  [
+                    _sliderMin == sliderStartingRange ? null : _sliderMin,
+                    _slidermax == sliderEndingRange ? null : _slidermax,
+                    _statusCheckValue == false ? null : _statusCheckValue,
+                    searchedText
+                  ],
+                );
+                Navigator.pop(context);
+              }),
+        ) //NOTE 00 - seach filter func
       ]),
     );
   }

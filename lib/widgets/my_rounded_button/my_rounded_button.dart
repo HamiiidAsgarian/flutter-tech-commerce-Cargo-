@@ -12,7 +12,7 @@ class MyRoundedButton extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(5),
       child: Container(
-        color: Colors.orangeAccent[700],
+        color: Colors.blueAccent,
         height: 45,
         child: TextButton(
           onPressed: () => function!(),

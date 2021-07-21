@@ -42,7 +42,7 @@ class _CategoryFramePageState extends State<CategoryFramePage> {
                         title: "Category",
                       );
                     }
-                    return CircularProgressIndicator();
+                    return Center(child: CircularProgressIndicator());
                   }),
             ),
           );
