@@ -8,18 +8,18 @@ class SearchLimitScreen extends StatefulWidget {
   SearchLimitScreen({
     this.data,
     required this.function,
-    this.sliderMin = 0,
-    this.slidermax = 500,
-    this.statusCheckValue = false,
-    this.filterText = '',
+    this.sliderMin,
+    this.slidermax,
+    this.statusCheckValue,
+    this.filterText,
   });
   final List? data;
   final Function function;
 
-  final int sliderMin;
-  final int slidermax;
-  final bool statusCheckValue;
-  final String filterText;
+  final int? sliderMin;
+  final int? slidermax;
+  final bool? statusCheckValue;
+  final String? filterText;
 
   @override
   _SearchLimitScreenState createState() => _SearchLimitScreenState();
@@ -32,18 +32,18 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
 
   String? searchedText;
   late int _sliderMin;
-  late int _slidermax = widget.slidermax;
-  late bool _statusCheckValue = widget.statusCheckValue;
+  late int _slidermax = widget.slidermax!;
+  late bool _statusCheckValue = widget.statusCheckValue!;
   late String _filterText;
 
   @override
   void initState() {
     super.initState();
-    _sliderMin = widget.sliderMin;
-    _slidermax = widget.slidermax;
-    _statusCheckValue = widget.statusCheckValue;
-    _sliderMin = widget.sliderMin;
-    _filterText = widget.filterText;
+    _sliderMin = widget.sliderMin!;
+    _slidermax = widget.slidermax!;
+    _statusCheckValue = widget.statusCheckValue!;
+    _sliderMin = widget.sliderMin!;
+    _filterText = widget.filterText!;
   }
 
   TextEditingController filterTextCNTRLR = new TextEditingController();
