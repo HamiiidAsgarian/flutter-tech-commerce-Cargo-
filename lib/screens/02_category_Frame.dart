@@ -1,5 +1,5 @@
 import 'package:commerce_app/provider_model.dart';
-import 'package:commerce_app/screens/02_category_screen2.dart';
+import 'package:commerce_app/screens/02_category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +31,7 @@ class _CategoryFramePageState extends State<CategoryFramePage> {
           return Scaffold(
             body: RefreshIndicator(
               onRefresh: () async {
-                print("object");
+                setState(() {});
               },
               child: FutureBuilder(
                   future: _secondPageData,

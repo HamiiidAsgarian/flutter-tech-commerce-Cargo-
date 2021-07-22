@@ -8,13 +8,15 @@ import '../consts.dart';
 
 class ListedItemsWithFilterScreen extends StatefulWidget {
   ListedItemsWithFilterScreen(
-      {Key? key, this.title, this.itemsList, this.otherBrands})
+      {Key? key,
+      this.title = "",
+      required this.itemsList,
+      required this.otherBrands})
       : super(key: key);
 
-  final String? title;
-
-  final List<dynamic>? itemsList;
-  final Map? otherBrands;
+  final String title;
+  final List<dynamic> itemsList;
+  final Map<String, dynamic> otherBrands;
 
   @override
   _ListedItemsWithFilterScreenState createState() =>
@@ -23,21 +25,16 @@ class ListedItemsWithFilterScreen extends StatefulWidget {
 
 class _ListedItemsWithFilterScreenState
     extends State<ListedItemsWithFilterScreen> {
-  late Filter myFilter = new Filter(filterdata: data);
-
   late List data;
-  late List filterData;
+  late Filter myFilter = new Filter();
 
   @override
   void initState() {
-    super.initState();
-    // filterData = widget.itemsList ?? [];
-    data = widget.itemsList ?? [];
+    super
+        .initState(); //REVIEW  should i use direct data to data inside filter class?
+    data = widget.itemsList;
+    myFilter.filterdata = data;
   }
-
-  //  = new Filter(filterdata: widget.itemsList);
-  // List filterData = [];
-  // myFilter.filterdata = data;
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +42,11 @@ class _ListedItemsWithFilterScreenState
         backgroundColor: cBackgroundGrey,
         appBar: MyAppBar(
           title: Text(
-            this.widget.title ?? "",
+            this.widget.title,
             style: itemBrandFontStyle.copyWith(fontSize: 20),
           ),
           leadingIcon: const Icon(
             MyFlutterApp.left_open,
-            // MdiIcons.walletPlusOutline,
             color: appBargrey,
           ),
           leadingIconFunction: () {
@@ -63,42 +59,34 @@ class _ListedItemsWithFilterScreenState
             color: cBackgroundGrey,
           ),
           FilterAndSortSection(
+            //NOTE sending the previus written search text to the filter screen and the rest of information too
             filterText: myFilter.brandFilter ?? "",
             sliderMin: myFilter.minimumFilter ?? 0,
             sliderMax: myFilter.maximumFilter ?? 500,
             statusCheck: myFilter.statusFilter ?? false,
-            //NOTE filter
             data: data,
+            //NOTE recieving a list of selected filters from the widget [min,max,isAvailable?,written text to search]
             function: (List e) {
               setState(() {
                 myFilter.minimumFilter = e[0];
                 myFilter.maximumFilter = e[1];
                 myFilter.statusFilter = e[2];
                 myFilter.brandFilter = e[3];
-
-                // filterData = myFilter.filteredList(data);
               });
-              // });
-              // print(e);
             },
+            //NOTE recieving a selected sorting type
             sortFunction: (String sortType) {
               setState(() {
                 myFilter.sortTypeFilter = sortType;
               });
             },
-            textFunction: (text) {
-              setState(() {
-                myFilter.brandFilter = text;
-              });
-              print(myFilter.brandFilter);
-            },
           ),
           const SizedBox(height: 7),
+          //NOTE making a scroll list of sibling items
           OtherBrandsSection(
-              currentTitle: widget.title,
-              data: widget.otherBrands,
-              function: () {}),
+              currentTitle: widget.title, data: widget.otherBrands),
           const SizedBox(height: 7),
+          //NOTE making a scroll list of Chosen/Active filters
           SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 20),
             scrollDirection: Axis.horizontal,
@@ -111,9 +99,15 @@ class _ListedItemsWithFilterScreenState
                             child: MaterialButton(
                               color: Colors.red,
                               minWidth: 5,
-                              // constraints: ,
-                              // elevation: 0,
-                              // fillColor: Colors.amber,
+                              child: Row(
+                                  //NOTE making the visualized filters witch with taping on the Filter its value turns to null to deActivate the filter
+                                  children: [
+                                    Text("${e.keys.first} : ${e.values.first}",
+                                        style: itemTitleFontStyle.copyWith(
+                                            fontSize: 14, color: Colors.white)),
+                                    Icon(Icons.close,
+                                        size: 15, color: Colors.white),
+                                  ]),
                               onPressed: () {
                                 setState(() {
                                   switch (e.keys.first) {
@@ -135,39 +129,28 @@ class _ListedItemsWithFilterScreenState
                                   }
                                 });
                               },
-                              // padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: Row(children: [
-                                Text("${e.keys.first} : ${e.values.first}",
-                                    style: itemTitleFontStyle.copyWith(
-                                        fontSize: 14, color: Colors.white)),
-                                Icon(Icons.close,
-                                    size: 15, color: Colors.white),
-                              ]),
                             ),
                           ),
                         ))
                     .toList()),
           ),
           const SizedBox(height: 7),
-          BrandItemsList(
-              itemsList: myFilter.filterHandler(data)) // NOTE making items
-
-          // BrandItemsList(itemsList: myFilter.filteredList(data))
+          //NOTE making Listed items with filter(if is on)
+          BrandItemsList(itemsList: myFilter.filterHandler())
         ]));
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////////*BrandItemsList
 class BrandItemsList extends StatelessWidget {
-  const BrandItemsList({Key? key, required this.itemsList}) : super(key: key);
+  const BrandItemsList({required this.itemsList});
   final List<dynamic> itemsList;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(
-            horizontal:
-                10), //NOTE for the positioning beginning and ending of items
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: Wrap(
           children: itemsList
               .map<Widget>((data) => Container(
@@ -178,8 +161,6 @@ class BrandItemsList extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                       child: Container(
                         color: Colors.white,
-                        // width:
-                        //     (MediaQuery.of(context).size.width / 2) - 5,
                         child: Item(
                           id: data['id'],
                           title: data['title'],
@@ -201,31 +182,25 @@ class BrandItemsList extends StatelessWidget {
   }
 }
 
-//////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////*
 class OtherBrandsSection extends StatelessWidget {
-  const OtherBrandsSection(
-      {this.data, required this.function, this.currentTitle});
+  const OtherBrandsSection({required this.data, this.currentTitle});
 
-  final Map? data;
-  final Function function;
+  final Map<String, dynamic> data;
   final String? currentTitle;
 
   @override
   Widget build(BuildContext context) {
-    // List OtherBrandsTitles = [];
-    // List OtherBrandsvalue = [];
     List<Widget> test = [];
 
     //NOTE making otherBrands
-    data!.forEach((key, value) {
+    data.forEach((key, value) {
+      //NOTE from all data if it is a list(does not have sub category/reached to the end) and is not current category, add to the other brands scroll
       if (value.runtimeType == List && key != currentTitle)
         test.add(Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
           child: Container(
-            //   width: 5,
-
             decoration: BoxDecoration(
-              // color: Colors.red,
               borderRadius: const BorderRadius.all(Radius.circular(5)),
               border: Border.all(color: cBorderGrey),
             ),
@@ -243,15 +218,7 @@ class OtherBrandsSection extends StatelessWidget {
                               itemsList: value,
                               title: key,
                               otherBrands: data)));
-                  // function(value);
-                }
-
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) =>
-                //             ListedItemsWithFilterScreen(title: e)));
-                ,
+                },
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Text(key,
@@ -262,18 +229,11 @@ class OtherBrandsSection extends StatelessWidget {
             ),
           ),
         ));
-      // OtherBrandsTitles.add(key);
-      // OtherBrandsvalue.add(value);
     });
 
     return Container(
-      // margin: const EdgeInsets.symmetric(), //NOTE section margin
-      // color: Colors.amber,
-      // padding: EdgeInsets.symmetric(horizontal: 25),
       height: 40,
-      // color: Colors.yellowAccent,
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(width: 25),
           Text("Other brands",
@@ -287,6 +247,7 @@ class OtherBrandsSection extends StatelessWidget {
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////*
 class FilterAndSortSection extends StatelessWidget {
   FilterAndSortSection(
       {this.data,
@@ -295,17 +256,79 @@ class FilterAndSortSection extends StatelessWidget {
       this.sliderMax,
       this.statusCheck,
       required this.sortFunction,
-      required this.textFunction,
       this.filterText});
   final List? data;
   final Function function;
   final Function sortFunction;
-  final Function textFunction;
 
   final int? sliderMin;
   final int? sliderMax;
   final bool? statusCheck;
   final String? filterText;
+
+  void sortPopup(BuildContext context, Function function) {
+    {
+      showModalBottomSheet(
+          backgroundColor: Colors.transparent,
+          context: context,
+          builder: (BuildContext context) {
+            return ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+                child: Container(
+                  //NOTE: popup height
+                  height: MediaQuery.of(context).size.height / 2,
+                  color: Colors.white,
+                  child: Column(children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      color: Colors.black,
+                      child: Stack(
+                        children: [
+                          // tileColor: Colors.amber,
+                          Align(
+                            alignment: Alignment(0, 0),
+                            child: Text("Sort",
+                                style: itemBrandFontStyle.copyWith(
+                                    fontSize: 25, color: Colors.white)),
+                          ),
+                          Align(
+                            alignment: Alignment(1, 1),
+                            child: IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                icon: const Icon(Icons.cancel,
+                                    size: 30, color: Colors.white)),
+                          )
+                        ],
+                      ),
+                    ),
+                    const Divider(height: 0),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              "Highest Value",
+                              "Lowest Value",
+                              "Highest Rate",
+                              "Lowest Rate"
+                            ]
+                                .map((e) =>
+                                    PopupItem(text: e, function: function))
+                                .toList()),
+                      ),
+                    )
+                  ]),
+                ));
+          });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -359,74 +382,10 @@ class FilterAndSortSection extends StatelessWidget {
   }
 }
 
-//////////////////////////////////////////////////////
-
-void sortPopup(BuildContext context, Function function) {
-  {
-    showModalBottomSheet(
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (BuildContext context) {
-          return ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              child: Container(
-                //NOTE: popup sort height
-                height: MediaQuery.of(context).size.height / 2,
-                color: Colors.white,
-                child: Column(children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                    color: Colors.black,
-                    child: Stack(
-                      children: [
-                        // tileColor: Colors.amber,
-                        Align(
-                          alignment: Alignment(0, 0),
-                          child: Text("Sort",
-                              style: itemBrandFontStyle.copyWith(
-                                  fontSize: 25, color: Colors.white)),
-                        ),
-                        Align(
-                          alignment: Alignment(1, 1),
-                          child: IconButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              icon: const Icon(Icons.cancel,
-                                  size: 30, color: Colors.white)),
-                        )
-                      ],
-                    ),
-                  ),
-                  const Divider(height: 0),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            "Highest Value",
-                            "Lowest Value",
-                            "Highest Rate",
-                            "Lowest Rate"
-                          ]
-                              .map(
-                                  (e) => PopupItem(text: e, function: function))
-                              .toList()),
-                    ),
-                  )
-                ]),
-              ));
-        });
-  }
-}
+////////////////////////////////////////////////////////////////////////////////*
 
 class PopupItem extends StatelessWidget {
-  const PopupItem({Key? key, this.text, this.function}) : super(key: key);
+  const PopupItem({this.text, required this.function});
 
   final Function? function;
   final String? text;
@@ -438,8 +397,6 @@ class PopupItem extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 15),
         width: double.infinity,
-        // height: 50,
-        // color: Colors.amber,
         child: Center(
             child: Text(this.text ?? 'no text',
                 style: itemBrandFontStyle.copyWith(fontSize: 20))),
@@ -448,25 +405,23 @@ class PopupItem extends StatelessWidget {
   }
 }
 
-//////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////*
 //NOTE filter class
 class Filter {
-  List<dynamic>? filterdata;
-  String? brandFilter;
-  int? minimumFilter;
-  int? maximumFilter;
-  bool? statusFilter;
-  String? sortTypeFilter;
-
   Filter(
-      {this.filterdata,
+      {this.filterdata = const [],
       this.brandFilter,
       this.maximumFilter,
       this.minimumFilter,
       this.statusFilter,
       this.sortTypeFilter});
+
+  List<dynamic> filterdata;
+  String? brandFilter;
+  int? minimumFilter;
+  int? maximumFilter;
+  bool? statusFilter;
+  String? sortTypeFilter;
 
   List<Map<String, dynamic>> Activefilters() {
     var _filters = [
@@ -485,8 +440,9 @@ class Filter {
     return result;
   }
 
-  filterHandler(List data) {
-    List a = data;
+  // filterHandler(List data) {
+  filterHandler() {
+    List a = filterdata;
     if (minimumFilter != null) {
       a = a.where((element) => element['price'] > minimumFilter).toList();
     }
@@ -529,8 +485,3 @@ class Filter {
     return a;
   }
 }
-//////////////////////////////////////////////////////////////////////////////
-// "Highest Value",
-// "Lowest Value",
-// "Highest Rate",
-// "Lowest Rate"
