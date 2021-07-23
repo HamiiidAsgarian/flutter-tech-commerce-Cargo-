@@ -28,4 +28,14 @@ class ProviderModel extends ChangeNotifier {
 
     return parsedJson;
   }
+
+  Future<List> getDataFromApiToList({String url = ""}) async {
+    var response2 = await http.get(Uri.parse(url));
+
+    var responseBody1 = response2.body;
+    var parsedJson1 = jsonDecode(responseBody1);
+    // ApiFirstPageModel ModeledData = ApiFirstPageModel.fromJson(parsedJson);
+
+    return parsedJson1;
+  }
 }

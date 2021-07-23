@@ -8,15 +8,12 @@ import '../consts.dart';
 
 class ListedItemsWithFilterScreen extends StatefulWidget {
   ListedItemsWithFilterScreen(
-      {Key? key,
-      this.title = "",
-      required this.itemsList,
-      required this.otherBrands})
+      {Key? key, this.title = "", required this.itemsList, this.otherBrands})
       : super(key: key);
 
   final String title;
   final List<dynamic> itemsList;
-  final Map<String, dynamic> otherBrands;
+  final Map<String, dynamic>? otherBrands;
 
   @override
   _ListedItemsWithFilterScreenState createState() =>
@@ -83,8 +80,10 @@ class _ListedItemsWithFilterScreenState
           ),
           const SizedBox(height: 7),
           //NOTE making a scroll list of sibling items
-          OtherBrandsSection(
-              currentTitle: widget.title, data: widget.otherBrands),
+          widget.otherBrands != null
+              ? OtherBrandsSection(
+                  currentTitle: widget.title, data: widget.otherBrands!)
+              : const SizedBox(),
           const SizedBox(height: 7),
           //NOTE making a scroll list of Chosen/Active filters
           SingleChildScrollView(

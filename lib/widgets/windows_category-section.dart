@@ -35,7 +35,7 @@ class WindowsCategorySection extends StatelessWidget {
         child: FutureBuilder(
             future: vals.getDataFromApi(
                 url: 'http://localhost:3000/scrollableItems'),
-            builder: (context, AsyncSnapshot<Map<dynamic, dynamic>> snapshot) {
+            builder: (context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.hasData) {
                 // print(snapshot.data);
                 return Wrap(

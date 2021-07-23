@@ -1,6 +1,6 @@
 import 'package:commerce_app/screens/01_home_screen.dart';
 import 'package:commerce_app/screens/02_category_Frame.dart';
-import 'package:commerce_app/screens/03_search_screen.dart';
+import 'package:commerce_app/screens/03_search_screen_frame.dart';
 import 'package:commerce_app/screens/04_Profile_screen.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
     // TestScreen(),
     HomeScreen(),
     CategoryFramePage(),
-    SearchScreen(),
+    SearchFramePage(),
     ProfileScreen2(),
   ];
   // PageController pageController = PageController(initialPage: 0);

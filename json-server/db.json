@@ -1,4 +1,213 @@
 {
+  "Watches": [
+    {
+      "id": 3,
+      "title": "www Apple watch 7898",
+      "company": "Shevorlet",
+      "price": 2599,
+      "imageUrl": [
+        "https://i.ibb.co/25vWDzY/watch-36.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/kM45RL6/watch-36.jpg",
+      "rate": 4.8,
+      "colors": [],
+      "description": "0.99m(1.6ft) Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    },
+    {
+      "id": 4,
+      "title": " watch 7898",
+      "company": "Shevorlet",
+      "price": 900,
+      "imageUrl": [
+        "https://i.ibb.co/nQ3SwGF/watch-37.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/p4Wp17S/watch-37.jpg",
+      "rate": 4.8,
+      "colors": [
+        "red",
+        "green"
+      ],
+      "description": "Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    },
+    {
+      "id": 6,
+      "title": "Aora T7825",
+      "company": "Shevorlet",
+      "price": 700,
+      "imageUrl": [
+        "https://i.ibb.co/g7dD56D/watch-38.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/JdqzfCz/watch-38.jpg",
+      "rate": 4.8,
+      "colors": [
+        "red",
+        "blure"
+      ],
+      "description": "DAC Cable Passive Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    },
+    {
+      "id": 1,
+      "title": "galaexy renowelorn 7880 new, replaced jack and tires",
+      "company": "Shevorlet",
+      "price": 22000,
+      "imageUrl": [
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/1dHtfvH/watch-34.jpg",
+      "rate": 4.8,
+      "colors": [
+        "blure"
+      ],
+      "description": "0999(1.6ft) 10G SFP to SFP Cable Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    },
+    {
+      "id": 7,
+      "title": "Fixed sico",
+      "company": "orlet",
+      "price": 3800,
+      "imageUrl": [
+        "https://i.ibb.co/Pc8bSr7/watch-39.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/2vBLbFD/watch-39.jpg",
+      "rate": 4.8,
+      "colors": [
+        "red"
+      ],
+      "description": "01 Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    },
+    {
+      "id": 8,
+      "title": "Alberta Goldern ",
+      "company": "Shevorlet",
+      "price": 4200,
+      "imageUrl": [
+        "https://i.ibb.co/pbHf05W/watch-40.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/ydz6f7h/watch-40.jpg",
+      "rate": 4.8,
+      "colors": [
+        "green",
+        "blure"
+      ],
+      "description": "2m(1.6ft) Compatible his SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    },
+    {
+      "id": 9,
+      "title": "Renovation",
+      "company": "Shevorlet",
+      "price": 6335,
+      "imageUrl": [
+        "https://i.ibb.co/pRLR2rj/watch-41.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/P969xzG/watch-41.jpg",
+      "rate": 4.8,
+      "colors": [
+        "red",
+        "blure"
+      ],
+      "description": "03m(1.6ft) 10G SFP to SFP Cable, Twinax DAC Cable Passive Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    },
+    {
+      "id": 2,
+      "title": "leopard ti",
+      "company": "orlet",
+      "price": 12000,
+      "imageUrl": [
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/DgHc1ms/watch-35.jpg",
+      "rate": 4.8,
+      "colors": [
+        "red",
+        "green"
+      ],
+      "description": "084m(1.6ft) Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    }
+  ],
+  "Laptops": [
+    {
+      "id": 3,
+      "title": "Apple watch 7898",
+      "company": "Shevorlet",
+      "price": 2599,
+      "imageUrl": [
+        "https://i.ibb.co/25vWDzY/watch-36.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/kM45RL6/watch-36.jpg",
+      "rate": 4.8,
+      "colors": [],
+      "description": "0.99m(1.6ft) Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    }
+  ],
+  "Phones": [
+    {
+      "id": 3,
+      "title": "Apple watch 7898",
+      "company": "Shevorlet",
+      "price": 2599,
+      "imageUrl": [
+        "https://i.ibb.co/25vWDzY/watch-36.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/kM45RL6/watch-36.jpg",
+      "rate": 4.8,
+      "colors": [],
+      "description": "0.99m(1.6ft) Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    }
+  ],
+  "Tablets": [
+    {
+      "id": 3,
+      "title": "Apple watch 7898",
+      "company": "Shevorlet",
+      "price": 2599,
+      "imageUrl": [
+        "https://i.ibb.co/25vWDzY/watch-36.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/kM45RL6/watch-36.jpg",
+      "rate": 4.8,
+      "colors": [],
+      "description": "0.99m(1.6ft) Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    }
+  ],
+  "Keyboards": [
+    {
+      "id": 3,
+      "title": "Apple watch 7898",
+      "company": "Shevorlet",
+      "price": 2599,
+      "imageUrl": [
+        "https://i.ibb.co/25vWDzY/watch-36.jpg",
+        "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+        "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+      ],
+      "thumbnail": "https://i.ibb.co/kM45RL6/watch-36.jpg",
+      "rate": 4.8,
+      "colors": [],
+      "description": "0.99m(1.6ft) Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+    }
+  ],
   "firstPage": {
     "Carousels": {
       "FirstCarousel": [
@@ -580,20 +789,52 @@
         ]
       },
       "Modern": [
-        "Na",
-        "Nb",
-        "Nc"
+        {
+          "id": 6,
+          "title": "Modern T7825",
+          "company": "Shevorlet",
+          "price": 400,
+          "imageUrl": [
+            "https://i.ibb.co/g7dD56D/watch-38.jpg",
+            "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+            "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+          ],
+          "thumbnail": "https://i.ibb.co/JdqzfCz/watch-38.jpg",
+          "rate": 4.8,
+          "colors": [
+            "red",
+            "blure"
+          ],
+          "status": "open",
+          "description": "DAC Cable Passive Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+        }
       ],
       "AppleWatche": [
-        "Aa",
-        "Ab",
-        "Ac"
+        {
+          "id": 6,
+          "title": "Apple watch T7825",
+          "company": "Shevorlet",
+          "price": 400,
+          "imageUrl": [
+            "https://i.ibb.co/g7dD56D/watch-38.jpg",
+            "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+            "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+          ],
+          "thumbnail": "https://i.ibb.co/JdqzfCz/watch-38.jpg",
+          "rate": 4.8,
+          "colors": [
+            "red",
+            "blure"
+          ],
+          "status": "open",
+          "description": "DAC Cable Passive Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+        }
       ]
     },
     "Phones": [
       {
         "id": 3,
-        "title": "Apple watch 7898",
+        "title": "ph Apple watch 7898",
         "company": "Shevorlet",
         "price": 100,
         "imageUrl": [
@@ -609,7 +850,7 @@
       },
       {
         "id": 4,
-        "title": " watch 7898",
+        "title": "phwatch 7898",
         "company": "Shevorlet",
         "price": 500,
         "imageUrl": [
@@ -628,7 +869,7 @@
       },
       {
         "id": 6,
-        "title": "Aora T7825",
+        "title": "phAora T7825",
         "company": "Shevorlet",
         "price": 300,
         "imageUrl": [
@@ -647,15 +888,170 @@
       }
     ],
     "Laptops": [
-      "La",
-      "Lb",
-      "Lc"
+      {
+        "id": 6,
+        "title": "Laptop T7825",
+        "company": "Shevorlet",
+        "price": 300,
+        "imageUrl": [
+          "https://i.ibb.co/g7dD56D/watch-38.jpg",
+          "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+          "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+        ],
+        "thumbnail": "https://i.ibb.co/JdqzfCz/watch-38.jpg",
+        "rate": 4.8,
+        "colors": [
+          "red",
+          "blure"
+        ],
+        "status": "open",
+        "description": "DAC Cable Passive Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+      }
     ],
     "NA": [
-      "Na",
-      "Nb",
-      "Nc"
+      {
+        "id": 6,
+        "title": "NA T7825",
+        "company": "Shevorlet",
+        "price": 300,
+        "imageUrl": [
+          "https://i.ibb.co/g7dD56D/watch-38.jpg",
+          "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+          "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+        ],
+        "thumbnail": "https://i.ibb.co/JdqzfCz/watch-38.jpg",
+        "rate": 4.8,
+        "colors": [
+          "red",
+          "blure"
+        ],
+        "status": "open",
+        "description": "DAC Cable Passive Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+      }
     ]
   },
-  "thirdPage": {}
+  "thirdPage": {
+    "popular": {
+      "items": [
+        {
+          "id": 1,
+          "title": " popular item s T7825",
+          "company": "Shevorlet",
+          "price": 300,
+          "imageUrl": [
+            "https://i.ibb.co/g7dD56D/watch-38.jpg",
+            "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+            "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+          ],
+          "thumbnail": "https://i.ibb.co/JdqzfCz/watch-38.jpg",
+          "rate": 4.8,
+          "colors": [
+            "red",
+            "blure"
+          ],
+          "status": "open",
+          "description": "DAC Cable Passive Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+        },
+        {
+          "id": 6,
+          "title": " popular items T7825",
+          "company": "Shevorlet",
+          "price": 300,
+          "imageUrl": [
+            "https://i.ibb.co/g7dD56D/watch-38.jpg",
+            "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+            "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+          ],
+          "thumbnail": "https://i.ibb.co/JdqzfCz/watch-38.jpg",
+          "rate": 4.8,
+          "colors": [
+            "red",
+            "blure"
+          ],
+          "status": "open",
+          "description": "DAC Cable Passive Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+        }
+      ],
+      "categories": [
+        "Keyboards",
+        "Tablets",
+        "Phones",
+        "Laptops",
+        "Watches"
+      ]
+    },
+    "recommended": {
+      "items": [
+        {
+          "id": 1,
+          "title": "recommended item s T7825",
+          "company": "Shevorlet",
+          "price": 300,
+          "imageUrl": [
+            "https://i.ibb.co/g7dD56D/watch-38.jpg",
+            "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+            "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+          ],
+          "thumbnail": "https://i.ibb.co/JdqzfCz/watch-38.jpg",
+          "rate": 4.8,
+          "colors": [
+            "red",
+            "blure"
+          ],
+          "status": "open",
+          "description": "DAC Cable Passive Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+        },
+        {
+          "id": 6,
+          "title": "items T7825",
+          "company": "Shevorlet",
+          "price": 300,
+          "imageUrl": [
+            "https://i.ibb.co/g7dD56D/watch-38.jpg",
+            "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+            "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+          ],
+          "thumbnail": "https://i.ibb.co/JdqzfCz/watch-38.jpg",
+          "rate": 4.8,
+          "colors": [
+            "red",
+            "blure"
+          ],
+          "status": "open",
+          "description": "DAC Cable Passive Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+        }
+      ],
+      "categories": [
+        "Keyboards",
+        "Tablets"
+      ]
+    },
+    "top brands": {
+      "items": [
+        {
+          "id": 1,
+          "title": "top item s T7825",
+          "company": "Shevorlet",
+          "price": 300,
+          "imageUrl": [
+            "https://i.ibb.co/g7dD56D/watch-38.jpg",
+            "https://i.ibb.co/bRMw6Yq/watch-35.jpg",
+            "https://i.ibb.co/qWb3Myb/watch-34.jpg"
+          ],
+          "thumbnail": "https://i.ibb.co/JdqzfCz/watch-38.jpg",
+          "rate": 4.8,
+          "colors": [
+            "red",
+            "blure"
+          ],
+          "status": "open",
+          "description": "DAC Cable Passive Direct Attach Copper Compatible with Cisco SFP-H10GB-CU0.5M, Ubiquiti, Netgear, Mikrotik, D-Link, Supermicro and more. This SFP DAC Cable is equal to 2*10G sfp+ optical modules plus an optical fiber patch cord, helping save your budget in short reach environment and improve the stability and durability without interface exposed and repeated plug and removal.     "
+        }
+      ],
+      "categories": [
+        "Keyboards",
+        "Watches"
+      ]
+    }
+  }
 }
