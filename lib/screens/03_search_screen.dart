@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:commerce_app/screens/itemdetail_screen.dart';
 import 'package:commerce_app/screens/listeddItemsWithFilter_screen.dart';
-import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/searchSection.dart';
 import 'package:commerce_app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
@@ -32,51 +31,52 @@ class _SearchScreenState extends State<SearchScreen> {
 
   String selectedOption = 'Popular';
   String _searchedText = "";
-  getAllProductsData() async {
-    if (_searchedText != "") {
-      var allProductitems = await _allProducts;
-
-      allProductitems.forEach((element) {
-        if (element['title'].contains(_searchedText)) {
-          print(_searchedText);
-          print(element['title']);
-        }
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    getAllProductsData();
     // print("axa".contains('xx'));
     return Navigator(onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute(builder: (context) {
         return Scaffold(
           backgroundColor: cBackgroundGrey,
           body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(height: 25, color: Colors.white),
+            FutureBuilder(
+                future: _allProducts,
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return Container(
+                        padding: EdgeInsets.symmetric(horizontal: 25),
+                        child: AutoCompleteCustomInput(
+                          hint: "Type product name to seach",
+                          icon: Icons.search,
+                          function: (e) {
+                            setState(() {
+                              _searchedText = e;
+                              print(".....$_searchedText");
+                            });
+                          },
+                          listItems: snapshot.data,
+                        ),
+                        color: Colors.white);
+                  }
+
+                  return CircularProgressIndicator();
+                }),
+            Container(height: 10, color: Colors.white),
             SearchSection(
-                function: (e) {
-                  setState(() {
-                    _searchedText = e;
-                  });
-                },
+                // function: (e) {
+                //   setState(() {
+                //     _searchedText = e;
+                //   });
+                // },
                 chosenOption: selectedOption,
                 optionsFunctions: (e) {
                   setState(() {
                     selectedOption = e ?? "";
                   });
                 }),
-            Container(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: AutoCompleteCustomInput(
-                    hint: "Type product name to seach",
-                    icon: Icons.search,
-                    function: (e) {
-                      setState(() {
-                        _searchedText = e;
-                      });
-                    }),
-                color: Colors.white),
+            Container(height: 10, color: Colors.white),
             SizedBox(height: 15),
             SearchItemsSection(
                 categoryData: widget.data[selectedOption.toLowerCase()]
@@ -197,67 +197,72 @@ class SearchItemsSection extends StatelessWidget {
 
 ////////----------------------------------------------------------------------------------/////////
 class SearchSection extends StatelessWidget {
-  SearchSection(
-      {this.chosenOption, this.optionsFunctions, required this.function});
+  SearchSection({this.chosenOption, this.optionsFunctions});
 
   final String? chosenOption;
   final Function? optionsFunctions;
-  final Function function;
+  // final Function function;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       color: Colors.white, //NOTE search section bg color
       padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: Column(children: [
-        const SizedBox(height: 25),
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Expanded(
-              child: TextFieldWithIcon(
-            function: function,
-            hint: 'Type something to search',
-            icon: MyFlutterApp.search_5,
-          )),
-        ]),
-        Container(
-          height: 50,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-                children: ['Popular', 'Recommended', 'Top Brands']
-                    .map((e) => CategoryTextButton(
-                        isChosen: chosenOption == e ? true : false,
-                        text: e,
-                        function: optionsFunctions!))
-                    .toList()
+      child:
+          //  Column(children: [
+          //   const SizedBox(height: 25),
+          // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          //   Expanded(
+          //       child: TextFieldWithIcon(
+          //     function: function,
+          //     hint: 'Type something to search',
+          //     icon: MyFlutterApp.search_5,
+          //   )),
+          // ]),
+          //   Container(
+          // width: double.infinity,
+          // height: 50,
+          // child:
+          SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: ['Popular', 'Recommended', 'Top Brands']
+                .map((e) => CategoryTextButton(
+                    isChosen: chosenOption == e ? true : false,
+                    text: e,
+                    function: optionsFunctions!))
+                .toList()
 
-                //  [
+            //  [
 
-                //   CategoryTextButton(
-                //     isChosen: _chosenOption == "Recommended" ? true : false,
-                //     text: "Recommended",
-                //     function: (String e) {
-                //       setState(() {
-                //         _chosenOption = e;
-                //       });
-                //       // print(this._chosenOption);
-                //     },
-                //   ),
-                //   CategoryTextButton(
-                //     isChosen: _chosenOption == "Top Brands" ? true : false,
-                //     text: "Top Brands",
-                //     function: (String e) {
-                //       setState(() {
-                //         _chosenOption = e;
-                //       });
-                //       // print(this._chosenOption);
-                //     },
-                //   ),
-                // ],
-                ),
-          ),
-        )
-      ]),
+            //   CategoryTextButton(
+            //     isChosen: _chosenOption == "Recommended" ? true : false,
+            //     text: "Recommended",
+            //     function: (String e) {
+            //       setState(() {
+            //         _chosenOption = e;
+            //       });
+            //       // print(this._chosenOption);
+            //     },
+            //   ),
+            //   CategoryTextButton(
+            //     isChosen: _chosenOption == "Top Brands" ? true : false,
+            //     text: "Top Brands",
+            //     function: (String e) {
+            //       setState(() {
+            //         _chosenOption = e;
+            //       });
+            //       // print(this._chosenOption);
+            //     },
+            //   ),
+            // ],
+            ),
+      ),
+      // )
+      // ]),
     );
   }
 }
