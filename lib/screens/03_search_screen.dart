@@ -33,31 +33,32 @@ class _SearchScreenState extends State<SearchScreen> {
   String selectedOption = 'Popular';
   String _searchedText = "";
   getAllProductsData() async {
-    List<dynamic> a = await _allProducts;
-    return a;
+    if (_searchedText != "") {
+      var allProductitems = await _allProducts;
+
+      allProductitems.forEach((element) {
+        if (element['title'].contains(_searchedText)) {
+          print(_searchedText);
+          print(element['title']);
+        }
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     getAllProductsData();
+    // print("axa".contains('xx'));
     return Navigator(onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute(builder: (context) {
         return Scaffold(
           backgroundColor: cBackgroundGrey,
           body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SearchSection(
-                function: (e) async {
+                function: (e) {
                   setState(() {
                     _searchedText = e;
                   });
-                  if (_searchedText != "") {
-                    print("object");
-                    // List items = await getAllProductsData();
-                    // items.forEach((element) {
-                    //   (element['title'].toString().contains(_searchedText));
-                    //   print(element['title']);
-                    // });
-                  }
                 },
                 chosenOption: selectedOption,
                 optionsFunctions: (e) {
@@ -65,6 +66,17 @@ class _SearchScreenState extends State<SearchScreen> {
                     selectedOption = e ?? "";
                   });
                 }),
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: AutoCompleteCustomInput(
+                    hint: "Type product name to seach",
+                    icon: Icons.search,
+                    function: (e) {
+                      setState(() {
+                        _searchedText = e;
+                      });
+                    }),
+                color: Colors.white),
             SizedBox(height: 15),
             SearchItemsSection(
                 categoryData: widget.data[selectedOption.toLowerCase()]

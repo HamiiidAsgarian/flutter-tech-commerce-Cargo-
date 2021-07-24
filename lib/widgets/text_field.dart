@@ -11,7 +11,7 @@ class TextFieldWithIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
         onChanged: (e) => function(e),
-        style: TextStyle(color: Colors.grey, fontSize: 20),
+        style: TextStyle(color: Color.fromRGBO(0, 0, 0, 1), fontSize: 20),
         textAlign: TextAlign.left,
         // controller: searchCtrl,
         keyboardType: TextInputType.text,
@@ -109,53 +109,88 @@ class TextFieldWithIcon extends StatelessWidget {
 // }
 ///////////////////////////////////////////////////////////
 
-// class AutoCompleteCustomInput extends StatelessWidget {
-//    AutoCompleteCustomInput({this.hint, this.icon});
-//   final String? hint;
-//   final IconData? icon;
+class AutoCompleteCustomInput extends StatelessWidget {
+  AutoCompleteCustomInput({this.hint, this.icon, required this.function});
+  final String? hint;
+  final IconData? icon;
+  final Function function;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Theme(
-//       data: ThemeData(
-//         inputDecorationTheme: InputDecorationTheme(
-//             hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
+  @override
+  Widget build(BuildContext context) {
+    return Autocomplete(
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        if (textEditingValue.text == '') {
+          return const Iterable<String>.empty();
+        }
+        return ['a'].where((String option) {
+          return option
+              .toLowerCase()
+              .contains(textEditingValue.text.toLowerCase());
+        });
+      },
+      onSelected: (String selection) {
+        debugPrint('You just selected $selection');
+      },
+      fieldViewBuilder: (context, controller, focusNode, onEditingComplete) {
+        return TextField(
+            controller: controller,
+            focusNode: focusNode,
+            onEditingComplete: onEditingComplete,
+            onChanged: (e) => function(e),
+            style: TextStyle(color: Color.fromRGBO(0, 0, 0, 1), fontSize: 20),
+            textAlign: TextAlign.left,
+            // controller: searchCtrl,
+            keyboardType: TextInputType.text,
+            cursorColor: appBargrey,
+            cursorRadius: Radius.zero,
+            showCursor: true,
+            decoration: InputDecoration(
+              hintText: hint,
+              hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
 
-//             // isDense: true,
-//             contentPadding: EdgeInsets.symmetric(vertical: 5),
-//             fillColor: greySearchbarBackground,
-//             filled: true,
-//             // border: InputBorder.none,
-//             border: const OutlineInputBorder(
-//               borderRadius: BorderRadius.all(Radius.circular(30)),
-//               //  BorderRadius.only(
-//               //     topLeft: Radius.circular(15),
-//               //     bottomLeft:
-//               //         Radius.circular(15)), //////////////////* left radius
-//               borderSide: BorderSide(
-//                 // color: Colors.red,
-//                 width: 0,
-//                 style: BorderStyle.none,
-//               ),
-//             )),
-//         // textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.red)
-//       ),
-//       child: Autocomplete(
-//         optionsBuilder: (TextEditingValue textEditingValue) {
-//           if (textEditingValue.text == '') {
-//             return const Iterable<String>.empty();
-//           }
-//           return ['a'].where((String option) {
-//             return option
-//                 .toLowerCase()
-//                 .contains(textEditingValue.text.toLowerCase());
-//           });
-//         },
-//         onSelected: (String selection) {
-//           debugPrint('You just selected $selection');
-//         },
-//       ),
-//     );
-//   }
-// }
+              // isDense: true,
+              contentPadding: EdgeInsets.symmetric(vertical: 5),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: icon != null
+                    ? Icon(
+                        icon,
+                        size: 20,
+                        color: appBargrey,
+                      )
+                    : null,
+              ),
+              fillColor: greySearchbarBackground,
+              filled: true,
+              // border: InputBorder.none,
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                //  BorderRadius.only(
+                //     topLeft: Radius.circular(15),
+                //     bottomLeft:
+                //         Radius.circular(15)), //////////////////* left radius
+                borderSide: BorderSide(
+                  // color: Colors.red,
+                  width: 0,
+                  style: BorderStyle.none,
+                ),
+              ),
+              // focusedBorder: InputBorder.none,
+              // enabledBorder: InputBorder.none,
+              // errorBorder: InputBorder.none,
+              // disabledBorder: InputBorder.none,
+              // contentPadding:
+              //     EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+
+              // focusedBorder: OutlineInputBorder(
+              //   borderSide: BorderSide(color: Colors.red, width: 1.0),
+              // ),
+              // enabledBorder: OutlineInputBorder(
+              //   borderSide: BorderSide(color: Colors.green, width: 5.0),
+              // ),
+            ));
+      },
+    );
+  }
+}
 /////////////////////////////////////////////
