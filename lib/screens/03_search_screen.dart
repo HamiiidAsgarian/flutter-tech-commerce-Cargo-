@@ -21,16 +21,44 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  late Future<List<dynamic>> _allProducts;
+
+  @override
+  void initState() {
+    super.initState();
+    _allProducts = Provider.of<ProviderModel>(context, listen: false)
+        .getDataFromApiToList(url: "http://localhost:3000/allProducts");
+  }
+
   String selectedOption = 'Popular';
+  String _searchedText = "";
+  getAllProductsData() async {
+    List<dynamic> a = await _allProducts;
+    return a;
+  }
 
   @override
   Widget build(BuildContext context) {
+    getAllProductsData();
     return Navigator(onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute(builder: (context) {
         return Scaffold(
           backgroundColor: cBackgroundGrey,
           body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SearchSection(
+                function: (e) async {
+                  setState(() {
+                    _searchedText = e;
+                  });
+                  if (_searchedText != "") {
+                    print("object");
+                    // List items = await getAllProductsData();
+                    // items.forEach((element) {
+                    //   (element['title'].toString().contains(_searchedText));
+                    //   print(element['title']);
+                    // });
+                  }
+                },
                 chosenOption: selectedOption,
                 optionsFunctions: (e) {
                   setState(() {
@@ -157,10 +185,13 @@ class SearchItemsSection extends StatelessWidget {
 
 ////////----------------------------------------------------------------------------------/////////
 class SearchSection extends StatelessWidget {
-  SearchSection({this.chosenOption, this.optionsFunctions});
+  SearchSection(
+      {this.chosenOption, this.optionsFunctions, required this.function});
 
   final String? chosenOption;
   final Function? optionsFunctions;
+  final Function function;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -169,8 +200,9 @@ class SearchSection extends StatelessWidget {
       child: Column(children: [
         const SizedBox(height: 25),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          const Expanded(
+          Expanded(
               child: TextFieldWithIcon(
+            function: function,
             hint: 'Type something to search',
             icon: MyFlutterApp.search_5,
           )),

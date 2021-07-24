@@ -2,14 +2,15 @@ import 'package:commerce_app/consts.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWithIcon extends StatelessWidget {
-  const TextFieldWithIcon({this.hint, this.icon});
+  TextFieldWithIcon({this.hint, this.icon, required this.function});
+  final Function function;
   final String? hint;
   final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-        onChanged: (a) {},
+        onChanged: (e) => function(e),
         style: TextStyle(color: Colors.grey, fontSize: 20),
         textAlign: TextAlign.left,
         // controller: searchCtrl,
@@ -106,3 +107,55 @@ class TextFieldWithIcon extends StatelessWidget {
 //     );
 //   }
 // }
+///////////////////////////////////////////////////////////
+
+// class AutoCompleteCustomInput extends StatelessWidget {
+//    AutoCompleteCustomInput({this.hint, this.icon});
+//   final String? hint;
+//   final IconData? icon;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Theme(
+//       data: ThemeData(
+//         inputDecorationTheme: InputDecorationTheme(
+//             hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
+
+//             // isDense: true,
+//             contentPadding: EdgeInsets.symmetric(vertical: 5),
+//             fillColor: greySearchbarBackground,
+//             filled: true,
+//             // border: InputBorder.none,
+//             border: const OutlineInputBorder(
+//               borderRadius: BorderRadius.all(Radius.circular(30)),
+//               //  BorderRadius.only(
+//               //     topLeft: Radius.circular(15),
+//               //     bottomLeft:
+//               //         Radius.circular(15)), //////////////////* left radius
+//               borderSide: BorderSide(
+//                 // color: Colors.red,
+//                 width: 0,
+//                 style: BorderStyle.none,
+//               ),
+//             )),
+//         // textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.red)
+//       ),
+//       child: Autocomplete(
+//         optionsBuilder: (TextEditingValue textEditingValue) {
+//           if (textEditingValue.text == '') {
+//             return const Iterable<String>.empty();
+//           }
+//           return ['a'].where((String option) {
+//             return option
+//                 .toLowerCase()
+//                 .contains(textEditingValue.text.toLowerCase());
+//           });
+//         },
+//         onSelected: (String selection) {
+//           debugPrint('You just selected $selection');
+//         },
+//       ),
+//     );
+//   }
+// }
+/////////////////////////////////////////////

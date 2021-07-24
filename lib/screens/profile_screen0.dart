@@ -79,9 +79,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text('Name', style: priceFontStyle),
-                        TextFieldWithIcon(hint: "Name")
+                        TextFieldWithIcon(
+                            hint: "Name",
+                            function: () {
+                              print("object");
+                            })
                       ],
                     ),
                   ), ////////////////////////////////////////////////* age Section
@@ -90,9 +94,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text('Age', style: priceFontStyle),
-                        TextFieldWithIcon(hint: "Age")
+                        TextFieldWithIcon(hint: "Age", function: () {})
                       ],
                     ),
                   ) ////////////////////////////////////////////////* gender Section
@@ -104,9 +108,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text('Address', style: priceFontStyle),
-                        TextFieldWithIcon(hint: "Adress")
+                        TextFieldWithIcon(hint: "Adress", function: () {})
                       ],
                     ),
                   ),

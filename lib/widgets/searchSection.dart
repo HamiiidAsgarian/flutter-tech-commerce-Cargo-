@@ -41,8 +41,9 @@ class _SearchSectionState extends State<SearchSection> {
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Column(children: [
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            const Expanded(
+            Expanded(
                 child: TextFieldWithIcon(
+              function: () {},
               hint: 'Type something to search',
               icon: MyFlutterApp.search_5,
             )),
