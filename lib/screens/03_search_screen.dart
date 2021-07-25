@@ -104,6 +104,39 @@ class SearchItemsSection extends StatelessWidget {
     Colors.lightBlue,
     Colors.brown
   ];
+
+  categoryMaker(context, categoryData) {
+    List<Widget> result = [];
+    for (var item in categoryData) {
+      result.add(Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: MaterialButton(
+            elevation: 0,
+            minWidth: 20,
+            color: myColors[Random().nextInt(myColors.length)],
+            onPressed: () async {
+              //REVIEW makes loading the new page a bit slower
+              List<dynamic> allProducts =
+                  await Provider.of<ProviderModel>(context, listen: false)
+                      .getDataFromApiToList(url: "http://localhost:3000/$e");
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListedItemsWithFilterScreen(
+                          itemsList: allProducts, title: item)));
+            },
+            child: Text(item,
+                style: itemTitleFontStyle.copyWith(
+                    fontSize: 12, color: Colors.white)),
+          ),
+        ),
+      ));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final double screensize = MediaQuery.of(context).size.width;
@@ -151,40 +184,78 @@ class SearchItemsSection extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Wrap(
                 children: categoryData
-                    .map(
-                      (e) => Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 5),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: MaterialButton(
-                            elevation: 0,
-                            minWidth: 20,
-                            color: myColors[Random().nextInt(myColors.length)],
-                            onPressed: () async {
-                              //REVIEW makes loading the new page a bit slower
-                              List<dynamic> allProducts =
-                                  await Provider.of<ProviderModel>(context,
-                                          listen: false)
-                                      .getDataFromApiToList(
-                                          url: "http://localhost:3000/$e");
+                    .asMap()
+                    .map((i, e) => MapEntry(
+                          i,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: MaterialButton(
+                                elevation: 0,
+                                minWidth: 20,
+                                color: myColors[i % myColors.length],
+                                onPressed: () async {
+                                  //REVIEW makes loading the new page a bit slower
+                                  List<dynamic> allProducts =
+                                      await Provider.of<ProviderModel>(context,
+                                              listen: false)
+                                          .getDataFromApiToList(
+                                              url: "http://localhost:3000/$e");
 
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          ListedItemsWithFilterScreen(
-                                              itemsList: allProducts,
-                                              title: e)));
-                            },
-                            child: Text(e,
-                                style: itemTitleFontStyle.copyWith(
-                                    fontSize: 12, color: Colors.white)),
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ListedItemsWithFilterScreen(
+                                                  itemsList: allProducts,
+                                                  title: e)));
+                                },
+                                child: Text(e,
+                                    style: itemTitleFontStyle.copyWith(
+                                        fontSize: 12, color: Colors.white)),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    )
+                        ))
+                    .values
                     .toList(),
+                // .map(
+                //   (e) =>
+                // Padding(
+                //     padding: const EdgeInsets.symmetric(
+                //         horizontal: 5, vertical: 5),
+                //     child: ClipRRect(
+                //       borderRadius: BorderRadius.circular(5),
+                //       child: MaterialButton(
+                //         elevation: 0,
+                //         minWidth: 20,
+                //         color: myColors[Random().nextInt(myColors.length)],
+                //         onPressed: () async {
+                //           //REVIEW makes loading the new page a bit slower
+                //           List<dynamic> allProducts =
+                //               await Provider.of<ProviderModel>(context,
+                //                       listen: false)
+                //                   .getDataFromApiToList(
+                //                       url: "http://localhost:3000/$e");
+
+                //           Navigator.push(
+                //               context,
+                //               MaterialPageRoute(
+                //                   builder: (context) =>
+                //                       ListedItemsWithFilterScreen(
+                //                           itemsList: allProducts,
+                //                           title: e)));
+                //         },
+                //         child: Text(e,
+                //             style: itemTitleFontStyle.copyWith(
+                //                 fontSize: 12, color: Colors.white)),
+                //       ),
+                //     ),
+                //   ),
+                // )
+                // .toList(),
               ),
             )
           ],

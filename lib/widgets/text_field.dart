@@ -121,84 +121,95 @@ class AutoCompleteCustomInput extends StatelessWidget {
   static TextEditingController txtCNTRLR = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Autocomplete(optionsBuilder: (TextEditingValue textEditingValue) {
-      if (textEditingValue.text == '') {
-        return const Iterable<String>.empty();
-      }
-      listItems.forEach((element) {
-        a.add(element['title']);
-      });
-      return a.where((String option) {
-        return option
-            .toLowerCase()
-            .contains(textEditingValue.text.toLowerCase());
-      });
-    }, onSelected: (String e) {
-      Map selectedItem = {};
-      listItems.forEach((element) {
-        if (element['title'] == e) {
-          selectedItem = element;
+    return Autocomplete(
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        if (textEditingValue.text == '') {
+          return const Iterable<String>.empty();
         }
-      });
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ItemDetailScreen(
-                  title: "XXXXX",
-                  data:
-                      selectedItem))); //REVIEW xxx can be deleted from the class
-    },
-        // onSelected: (String a) => print(a.runtimeType),
-        fieldViewBuilder: (context, txtCNTRLR, focusNode, onEditingComplete) {
-      // txtCNTRLR.text = "";
+        listItems.forEach((element) {
+          a.add(element['title']);
+        });
+        return a.where((String option) {
+          return option
+              .toLowerCase()
+              .contains(textEditingValue.text.toLowerCase());
+        });
+      },
+      onSelected: (String e) {
+        Map selectedItem = {};
+        listItems.forEach((element) {
+          if (element['title'] == e) {
+            selectedItem = element;
+          }
+        });
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ItemDetailScreen(
+                    title: "XXXXX",
+                    data:
+                        selectedItem))); //REVIEW xxx can be deleted from the class
+      },
 
-      return TextField(
-          controller: txtCNTRLR,
-          focusNode: focusNode,
-          onEditingComplete: onEditingComplete,
-          onChanged: (e) => function(e),
-          style: TextStyle(color: Colors.grey, fontSize: 20),
-          textAlign: TextAlign.left,
-          // controller: searchCtrl,
-          keyboardType: TextInputType.text,
-          cursorColor: appBargrey,
-          cursorRadius: Radius.zero,
-          showCursor: true,
-          decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
+      fieldViewBuilder: (context, txtCNTRLR, focusNode, onEditingComplete) {
+        // txtCNTRLR.text = "";
 
-            // isDense: true,
-            contentPadding: EdgeInsets.symmetric(vertical: 5),
-            prefixIcon: Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: icon != null
-                  ? Icon(
-                      icon,
-                      size: 20,
-                      color: appBargrey,
-                    )
-                  : null,
-            ),
-            fillColor: greySearchbarBackground,
-            filled: true,
-            // border: InputBorder.none,
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              //  BorderRadius.only(
-              //     topLeft: Radius.circular(15),
-              //     bottomLeft:
-              //         Radius.circular(15)), //////////////////* left radius
-              borderSide: BorderSide(
-                // color: Colors.red,
-                width: 0,
-                style: BorderStyle.none,
+        return TextField(
+            controller: txtCNTRLR,
+            focusNode: focusNode,
+            onEditingComplete: onEditingComplete,
+            onChanged: (e) => function(e),
+            style: TextStyle(color: Colors.grey, fontSize: 20),
+            textAlign: TextAlign.left,
+            // controller: searchCtrl,
+            keyboardType: TextInputType.text,
+            cursorColor: appBargrey,
+            cursorRadius: Radius.zero,
+            showCursor: true,
+            decoration: InputDecoration(
+              hintText: hint,
+              hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
+
+              // isDense: true,
+              contentPadding: EdgeInsets.symmetric(vertical: 5),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: icon != null
+                    ? Icon(
+                        icon,
+                        size: 20,
+                        color: appBargrey,
+                      )
+                    : null,
               ),
-            ),
-          ));
-    }
-        // ,optionsViewBuilder: (),
-        );
+              fillColor: greySearchbarBackground,
+              filled: true,
+              // border: InputBorder.none,
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                //  BorderRadius.only(
+                //     topLeft: Radius.circular(15),
+                //     bottomLeft:
+                //         Radius.circular(15)), //////////////////* left radius
+                borderSide: BorderSide(
+                  // color: Colors.red,
+                  width: 0,
+                  style: BorderStyle.none,
+                ),
+              ),
+            ));
+      },
+      // optionsViewBuilder: (context, onSelected, options) {
+      //   // print(options.toString());
+
+      //   return Material(
+      //     child: ListView(
+      //       children: [Text("data")],
+      //     ),
+      //   );
+      //   // return ListTile(title: option['title'].toString());
+      // },
+    );
   }
 }
 /////////////////////////////////////////////
