@@ -3,52 +3,62 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ProviderModel extends ChangeNotifier {
-  List<Map> cartItems = [];
-  // List<Map> cleanCartItems = [];
+  List<Map<String, dynamic>> cartItems = [];
+  double totalPriceNumber = 0;
+  double totalPriceFee = 0;
+
+  totalPrice() {
+    double price = 0;
+    cartItems.forEach((element) {
+      price = price + element['price'] * element['count'];
+    });
+    notifyListeners();
+    totalPriceNumber = price;
+    totalPriceFee = totalPriceNumber * 0.05;
+    return price;
+  }
 
   addToCartList(Map item) {
-    print(item['count']);
-    var number = item['count'] != null ? item['count'] : 1;
+    var foundedItem;
 
-    print(item['count']);
-
-    cartItems.forEach((element) {
-      if (element['title'] == item['title']) {
-        // number++;
-        cartItems = [
-          ...cartItems,
-          {...item, "count": number}
-        ];
+    for (Map<String, dynamic> e in cartItems) {
+      if (e['title'] == item['title']) {
+        foundedItem = e;
       }
-    });
-
-    // cleanCartItems
-    //     .removeWhere((element) => (element['title'] == item['title']));
-
-    // cleanCartItems = [
-    //   ...cleanCartItems,
-    //   {...item, "count": number}
-    // ];
-
+    }
+    if (foundedItem == null) {
+      cartItems.add({...item, "count": 1});
+    } else {
+      cartItems.removeWhere((e) => e['title'] == item['title']);
+      cartItems.add({...item, "count": foundedItem['count'] + 1});
+    }
+    totalPrice();
     notifyListeners();
   }
 
   discartItem(itemD) {
-    if (itemD['count'] <= 1) {
-      cartItems.removeWhere((element) => (element['title'] == itemD['title']));
-    }
-
-    // cartItems.removeWhere((element) => (element['title'] == itemD['title']));
-
-    cartItems.forEach((element) {
-      if (element['title'] == itemD['title']) {
-        element['count'] = itemD['count'] - 1;
-      }
-    });
-
-    // }
+    cartItems.removeWhere((element) => (element['title'] == itemD['title']));
+    totalPrice();
     notifyListeners();
-    // }
+  }
+
+  countChange(item, String plusOrMines) {
+    if (item['count'] > 1 && plusOrMines == '-') {
+      for (var i = 0; i < cartItems.length; i++) {
+        if (cartItems[i]['title'] == item['title']) {
+          cartItems[i]['count'] = cartItems[i]['count'] - 1;
+        }
+      }
+    }
+    if (item['count'] < 100 && plusOrMines == '+') {
+      for (var i = 0; i < cartItems.length; i++) {
+        if (cartItems[i]['title'] == item['title']) {
+          cartItems[i]['count'] = cartItems[i]['count'] + 1;
+        }
+      }
+    }
+    totalPrice();
+    notifyListeners();
   }
 
   Future<Map<String, dynamic>> getDataFromApi({String url = ""}) async {

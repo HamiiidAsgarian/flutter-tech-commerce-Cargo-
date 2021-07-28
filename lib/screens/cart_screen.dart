@@ -10,7 +10,8 @@ class CartScreen extends StatelessWidget {
 // }
 
 // class _CartScreenState extends State<CartScreen> {
-  List<Widget> testItems(List itemsList, Function discartFunction) {
+  List<Widget> testItems(
+      List itemsList, Function discartFunction, Function countChange) {
     var b = [];
     final List<Widget> a = [];
     for (var i = 0; i < itemsList.length; i++) {
@@ -63,7 +64,7 @@ class CartScreen extends StatelessWidget {
                               color: Colors.black87,
                               child: InkWell(
                                 onTap: () {
-                                  print("-");
+                                  countChange(itemsList[i], '-');
                                 },
                                 child: Container(
                                   width: 25,
@@ -89,7 +90,7 @@ class CartScreen extends StatelessWidget {
                               color: Colors.black87,
                               child: InkWell(
                                 onTap: () {
-                                  print("+");
+                                  countChange(itemsList[i], '+');
                                 },
                                 child: Container(
                                   width: 25,
@@ -167,7 +168,8 @@ class CartScreen extends StatelessWidget {
                                 icon: const Icon(Icons.close),
                                 onPressed: () => Navigator.pop(context))
                           ]),
-                      Text("you have 2 itrms in your cart",
+                      Text(
+                          "you have ${val.cartItems.length} itrms in your cart",
                           style: itemTitleFontStyle.copyWith(
                               fontSize: 11, fontWeight: FontWeight.w500)),
                     ])),
@@ -180,6 +182,8 @@ class CartScreen extends StatelessWidget {
                   child: ListView(
                       children: testItems(val.cartItems, (e) {
                     val.discartItem(e);
+                  }, (element, operation) {
+                    val.countChange(element, operation);
                   }))),
             ),
             Container(
@@ -194,7 +198,7 @@ class CartScreen extends StatelessWidget {
                     Text("Subtotal",
                         style: itemBrandFontStyle.copyWith(
                             fontSize: 14, color: Colors.black)),
-                    Text("25\$",
+                    Text("${val.totalPriceNumber.toString()} \$",
                         style: itemBrandFontStyle.copyWith(
                             fontSize: 14, color: Colors.black)),
                   ],
@@ -204,7 +208,7 @@ class CartScreen extends StatelessWidget {
                   children: [
                     Text("Shopping fee",
                         style: itemBrandFontStyle.copyWith(fontSize: 13)),
-                    Text("118\$",
+                    Text("${(val.totalPriceFee).toStringAsFixed(2)} \$",
                         style: itemBrandFontStyle.copyWith(fontSize: 13)),
                   ],
                 ),
@@ -217,7 +221,7 @@ class CartScreen extends StatelessWidget {
                       Text("Total",
                           style: itemBrandFontStyle.copyWith(
                               fontSize: 25, color: Colors.black)),
-                      Text("138\$",
+                      Text("${val.totalPriceNumber - val.totalPriceFee} \$",
                           style: itemBrandFontStyle.copyWith(
                               fontSize: 18, color: Colors.black)),
                     ],
