@@ -114,7 +114,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  const BlackRoundedButton(title: 'Confirm')
+                  BlackRoundedButton(
+                      title: 'Confirm',
+                      function: () {
+                        print("confirm");
+                      })
                 ],
               ),
             ),

@@ -2,11 +2,13 @@ import 'package:commerce_app/consts.dart';
 import 'package:flutter/material.dart';
 
 class BlackRoundedButton extends StatelessWidget {
-  final String? title;
   const BlackRoundedButton({
     this.title,
+    required this.function,
   });
 
+  final String? title;
+  final Function function;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -16,7 +18,7 @@ class BlackRoundedButton extends StatelessWidget {
         width: double.infinity,
         height: 40,
         child: TextButton(
-          onPressed: () {},
+          onPressed: () => function(),
           style: TextButton.styleFrom(
               // backgroundColor: Colors.pink,
               ),

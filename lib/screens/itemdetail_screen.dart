@@ -1,7 +1,9 @@
+import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/blackroundedbutton.dart';
 // import 'package:commerce_app/widgets/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../consts.dart';
 
@@ -43,6 +45,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
               SizedBox(height: 10),
               ItemFooter(
                 price: widget.data?['price'],
+                data: widget.data!,
               )
             ],
           ),
@@ -51,63 +54,72 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
 }
 
 class ItemFooter extends StatelessWidget {
-  const ItemFooter({this.price});
+  const ItemFooter({this.price, required this.data});
 
   final double? price;
+  final Map data;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Text("Colors:",
-                      style: priceFontStyle.copyWith(color: Colors.black)),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(left: 7),
-                        child: const CircleAvatar(
-                          radius: 12.5,
+    return Consumer<ProviderModel>(builder: (context, vals, child) {
+////
+
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text("Colors:",
+                        style: priceFontStyle.copyWith(color: Colors.black)),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(left: 7),
+                          child: const CircleAvatar(
+                            radius: 12.5,
+                          ),
                         ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 7),
-                        child: CircleAvatar(
-                          radius: 12.5,
+                        const Padding(
+                          padding: EdgeInsets.only(left: 7),
+                          child: CircleAvatar(
+                            radius: 12.5,
+                          ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("$price\$",
-                      style: priceFontStyle.copyWith(
-                          color: Colors.black, fontSize: 25, height: 1)),
-                  // Text("75.00\$",
-                  //     style: priceFontStyle.copyWith(
-                  //         color: Colors.black, fontSize: 25, height: 1)),
-                ],
-              )
-            ],
-          ),
-          const SizedBox(height: 20),
-          const BlackRoundedButton(
-            title: 'Add to basket',
-          ),
-          const SizedBox(height: 25),
-        ],
-      ),
-    );
+                      ],
+                    )
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("$price\$",
+                        style: priceFontStyle.copyWith(
+                            color: Colors.black, fontSize: 25, height: 1)),
+                    // Text("75.00\$",
+                    //     style: priceFontStyle.copyWith(
+                    //         color: Colors.black, fontSize: 25, height: 1)),
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(height: 20),
+            BlackRoundedButton(
+              function: () {
+                vals.addToCartList(data);
+                // print(vals.cartItems);
+              },
+              title: 'Add to basket',
+            ),
+            const SizedBox(height: 25),
+          ],
+        ),
+      );
+    });
   }
 }
 

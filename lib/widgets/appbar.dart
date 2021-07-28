@@ -1,3 +1,5 @@
+import 'package:commerce_app/screens/cart_screen.dart';
+import 'package:commerce_app/screens/favorites_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,40 +41,37 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           width: 40,
           child: IconButton(
             padding: const EdgeInsets.symmetric(),
-            icon: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, "/Cart");
-              },
-              child: Stack(children: const [
-                Center(
-                  child: Icon(
-                    MyFlutterApp.cart,
-                    color: appBargrey,
-                    size: 26,
-                  ),
+            icon: Stack(children: const [
+              Center(
+                child: Icon(
+                  MyFlutterApp.cart,
+                  color: appBargrey,
+                  size: 26,
                 ),
-                Positioned(
-                  right: -1,
-                  top: 9,
+              ),
+              Positioned(
+                right: -1,
+                top: 9,
+                child: CircleAvatar(
+                  radius: 9,
+                  backgroundColor: Colors.white,
                   child: CircleAvatar(
-                    radius: 9,
-                    backgroundColor: Colors.white,
-                    child: CircleAvatar(
-                      radius: 6,
-                      backgroundColor: Colors.grey,
-                      child: Text(
-                        "1",
-                        style: TextStyle(
-                            fontSize: 7,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    radius: 6,
+                    backgroundColor: Colors.grey,
+                    child: Text(
+                      "1",
+                      style: TextStyle(
+                          fontSize: 7,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-              ]),
-            ),
+              ),
+            ]),
             onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CartScreen()));
               // do something
             },
           ),
@@ -84,15 +83,15 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           width: 40,
           child: IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, "/Favorite");
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) {
-              //       return const ListedItemsScreen();
-              //     },
-              //   ),
-              // );
+              // Navigator.pushNamed(context, "/Favorite");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return FavoriteScreen();
+                  },
+                ),
+              );
             },
             padding: const EdgeInsets.symmetric(),
             icon: const Icon(
