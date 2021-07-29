@@ -203,15 +203,15 @@ class CartScreen extends StatelessWidget {
                             fontSize: 14, color: Colors.black)),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Shopping fee",
-                        style: itemBrandFontStyle.copyWith(fontSize: 13)),
-                    Text("${(val.totalPriceFee).toStringAsFixed(2)} \$",
-                        style: itemBrandFontStyle.copyWith(fontSize: 13)),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text("Shopping fee",
+                //         style: itemBrandFontStyle.copyWith(fontSize: 13)),
+                //     Text("${(val.totalPriceFee).toStringAsFixed(2)} \$",
+                //         style: itemBrandFontStyle.copyWith(fontSize: 13)),
+                //   ],
+                // ),
                 const Divider(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
