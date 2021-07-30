@@ -11,7 +11,7 @@ class CartScreen extends StatelessWidget {
 
 // class _CartScreenState extends State<CartScreen> {
   List<Widget> testItems(
-      List itemsList, Function discartFunction, Function countChange) {
+      List itemsList, Function discartFunction, Function countChange, context) {
     var b = [];
     final List<Widget> a = [];
     for (var i = 0; i < itemsList.length; i++) {
@@ -113,7 +113,22 @@ class CartScreen extends StatelessWidget {
                 child: Material(
                   color: Colors.red,
                   child: InkWell(
-                    onTap: () => discartFunction(itemsList[i]),
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            duration: Duration(milliseconds: 900),
+                            backgroundColor: Colors.redAccent[700],
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Item has been added to cart.",
+                                    style: itemBrandFontStyle.copyWith(
+                                        color: Colors.white, fontSize: 15))
+                              ],
+                            )),
+                      );
+                      return discartFunction(itemsList[i]);
+                    },
                     child: Container(
                       width: 30,
                       height: 30,
@@ -184,7 +199,7 @@ class CartScreen extends StatelessWidget {
                     val.discartItem(e);
                   }, (element, operation) {
                     val.countChange(element, operation);
-                  }))),
+                  }, context))),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
@@ -203,15 +218,15 @@ class CartScreen extends StatelessWidget {
                             fontSize: 14, color: Colors.black)),
                   ],
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Text("Shopping fee",
-                //         style: itemBrandFontStyle.copyWith(fontSize: 13)),
-                //     Text("${(val.totalPriceFee).toStringAsFixed(2)} \$",
-                //         style: itemBrandFontStyle.copyWith(fontSize: 13)),
-                //   ],
-                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Shopping fee",
+                        style: itemBrandFontStyle.copyWith(fontSize: 13)),
+                    Text("${(val.totalPriceFee).toStringAsFixed(2)} \$",
+                        style: itemBrandFontStyle.copyWith(fontSize: 13)),
+                  ],
+                ),
                 const Divider(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),

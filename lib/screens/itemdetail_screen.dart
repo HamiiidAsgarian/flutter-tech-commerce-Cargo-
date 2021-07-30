@@ -111,6 +111,21 @@ class ItemFooter extends StatelessWidget {
             BlackRoundedButton(
               function: () {
                 vals.addToCartList(data);
+                // Scaffold.of(context).showSnackBar(snackbar)
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      duration: Duration(milliseconds: 600),
+                      backgroundColor: Colors.blueAccent[700],
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Item has been added to cart.",
+                              style: itemBrandFontStyle.copyWith(
+                                  color: Colors.white, fontSize: 15))
+                        ],
+                      )),
+                );
+                //PREVIEW
                 // print(vals.cartItems);
               },
               title: 'Add to basket',
