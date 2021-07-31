@@ -1,12 +1,54 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ProviderModel extends ChangeNotifier {
+  List<Map<String, dynamic>> favoriteItems = [];
+
   List<Map<String, dynamic>> cartItems = [];
   double totalPriceNumber = 0;
   double totalPriceFee = 0;
 
+//////////////////////////////////////////////////* favorite operators
+  bool heartIconTriger(item) {
+    bool res = false;
+    favoriteItems.forEach((element) {
+      if (element['title'] == item['title']) {
+        res = true;
+      } else
+        res = false;
+    });
+
+    return res;
+  }
+
+  addToFavoritesList(Map item) {
+    var foundedItem;
+
+    for (Map<String, dynamic> e in favoriteItems) {
+      if (e['title'] == item['title']) {
+        foundedItem = e;
+      }
+    }
+    if (foundedItem == null) {
+      favoriteItems.add({...item});
+    } else {
+      favoriteItems.removeWhere((e) => e['title'] == item['title']);
+      favoriteItems.add({...item});
+    }
+    // totalPrice();
+    notifyListeners();
+  }
+
+  discartFavoriteItem(itemD) {
+    favoriteItems
+        .removeWhere((element) => (element['title'] == itemD['title']));
+    // totalPrice();
+    notifyListeners();
+  }
+
+////////////////////////////////////////////////* cart operators
   totalPrice() {
     double price = 0;
     cartItems.forEach((element) {
@@ -60,6 +102,8 @@ class ProviderModel extends ChangeNotifier {
     totalPrice();
     notifyListeners();
   }
+
+  //////////////////////////*API operators
 
   Future<Map<String, dynamic>> getDataFromApi({String url = ""}) async {
     var response = await http.get(Uri.parse(url));

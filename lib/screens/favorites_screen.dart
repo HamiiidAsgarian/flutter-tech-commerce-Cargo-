@@ -1,16 +1,19 @@
 import 'package:commerce_app/consts.dart';
+import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class FavoriteScreen extends StatefulWidget {
-  @override
-  _FavoriteScreenState createState() => _FavoriteScreenState();
-}
+class FavoriteScreen extends StatelessWidget {
+//   _FavoriteScreenState createState() => _FavoriteScreenState();
+// }
 
-class _FavoriteScreenState extends State<FavoriteScreen> {
-  List<Widget> testItems() {
+// class _FavoriteScreenState extends State<FavoriteScreen> {
+
+  List<Widget> testItems(List favoritesList, Function addToCartFunction,
+      Function removeFromCart, context) {
     final List<Widget> a = [];
-    for (var i = 0; i < 20; i++) {
+    favoritesList.forEach((element) {
       a.add(Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
 
@@ -20,6 +23,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Container(
+                child: Image.network(element['thumbnail']),
                 color: Colors.grey,
                 width: 90,
                 height: 90,
@@ -34,7 +38,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Big hoodies",
+                      element['title'],
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       maxLines: 1,
@@ -44,7 +48,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       ),
                     ),
                     Text(
-                      "Bifor the yooth",
+                      element['company'],
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       maxLines: 1,
@@ -53,61 +57,17 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         fontSize: 11,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    // const SizedBox(height: 10),
                     Text(
-                      "150\$",
+                      "Currently ${element['status'] ?? "unavailable"}",
+                      style: priceFontStyle.copyWith(
+                          fontSize: 12, color: Colors.black87),
+                    ),
+                    Text(
+                      "${element['price']} \$",
                       style: priceFontStyle.copyWith(
                           fontSize: 18, color: Colors.black87),
                     ),
-                    // SizedBox(height: 5),
-                    // Row(
-                    //   children: [
-                    //     ClipRRect(
-                    //       borderRadius: BorderRadius.circular(10),
-                    //       child: Material(
-                    //         color: Colors.black87,
-                    //         child: InkWell(
-                    //           onTap: () {
-                    //             print("-");
-                    //           },
-                    //           child: Container(
-                    //             width: 25,
-                    //             height: 25,
-                    //             child: Center(
-                    //                 child: Icon(Icons.remove,
-                    //                     color: Colors.white, size: 15)),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     Padding(
-                    //       padding: EdgeInsets.symmetric(horizontal: 10),
-                    //       child: Text(
-                    //         "3",
-                    //         style: priceFontStyle.copyWith(fontSize: 15),
-                    //       ),
-                    //     ),
-                    //     //////////////////////////////////////////////////////////* add botton
-                    //     ClipRRect(
-                    //       borderRadius: BorderRadius.circular(10),
-                    //       child: Material(
-                    //         color: Colors.black87,
-                    //         child: InkWell(
-                    //           onTap: () {
-                    //             print("+");
-                    //           },
-                    //           child: Container(
-                    //             width: 25,
-                    //             height: 25,
-                    //             child: Center(
-                    //                 child: Icon(Icons.add,
-                    //                     color: Colors.white, size: 15)),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     )
-                    //   ],
-                    // )
                   ],
                 ),
               ),
@@ -118,25 +78,33 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Material(
-                    color: Colors.blueAccent,
-                    child: InkWell(
-                      onTap: () {
-                        print("X");
-                      },
-                      child: Container(
-                        width: 30,
-                        height: 30,
-                        child: const Center(
-                            child: Padding(
-                          padding: EdgeInsets.only(bottom: 7),
-                          child: Icon(
-                            MyFlutterApp.cart,
-                            color: Colors.white,
-                            size: 20,
+                  child: Container(
+                    color: Colors.blueAccent[700],
+                    height: 30,
+                    width: 30,
+                    child: IconButton(
+                      padding: EdgeInsets.all(0),
+                      iconSize: 20,
+                      icon: Icon(MyFlutterApp.cart, color: Colors.white),
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            duration: Duration(milliseconds: 600),
+                            backgroundColor: Colors.blueAccent[700],
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Item has been added to the cart.",
+                                  style: itemBrandFontStyle.copyWith(
+                                      color: Colors.white, fontSize: 15),
+                                )
+                              ],
+                            ),
                           ),
-                        )),
-                      ),
+                        );
+                        addToCartFunction(element);
+                      },
                     ),
                   ),
                 ),
@@ -145,22 +113,32 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Material(
-                    color: Colors.red,
-                    child: InkWell(
-                      onTap: () {
-                        print("X");
-                      },
-                      child: Container(
-                        width: 30,
-                        height: 30,
-                        child: const Center(
-                            child: Icon(
-                          Icons.close,
-                          color: Colors.white,
-                        )),
-                      ),
-                    ),
+                  child: Container(
+                    color: Colors.redAccent[700],
+                    height: 30,
+                    width: 30,
+                    child: IconButton(
+                        padding: EdgeInsets.all(0),
+                        iconSize: 20,
+                        icon: Icon(Icons.close, color: Colors.white),
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              duration: Duration(milliseconds: 600),
+                              backgroundColor: Colors.redAccent[700],
+                              content: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Item has been removed from the cart.",
+                                      style: itemBrandFontStyle.copyWith(
+                                          color: Colors.white, fontSize: 15))
+                                ],
+                              ),
+                            ),
+                          );
+
+                          return removeFromCart(element);
+                        }),
                   ),
                 ),
               ],
@@ -168,71 +146,80 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           ],
         ),
       ));
-    }
+    });
+
     return a;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   backgroundColor: Colors.white, ////////////////////////* appbar color
-      //   leading: GestureDetector(
-      //     onTap: () {
-      //       Navigator.pushNamed(context, "/");
-      //     },
-      //     child: Icon(
-      //       MyFlutterApp.left_open,
-      //       // MdiIcons.walletPlusOutline,
-      //       color: appBargrey,
-      //     ),
-      //   ),
-      // ),
-      body: Column(
-        children: [
-          Container(
-              decoration: const BoxDecoration(
-                color: Colors
-                    .white, //////////////////////// * MY cart section color
+    return Consumer<ProviderModel>(builder: (context, vals, child) {
+      return Scaffold(
+        // appBar: AppBar(
+        //   elevation: 0,
+        //   backgroundColor: Colors.white, ////////////////////////* appbar color
+        //   leading: GestureDetector(
+        //     onTap: () {
+        //       Navigator.pushNamed(context, "/");
+        //     },
+        //     child: Icon(
+        //       MyFlutterApp.left_open,
+        //       // MdiIcons.walletPlusOutline,
+        //       color: appBargrey,
+        //     ),
+        //   ),
+        // ),
+        body: Column(
+          children: [
+            Container(
+                decoration: const BoxDecoration(
+                  color: Colors
+                      .white, //////////////////////// * MY cart section color
 
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)),
-              ),
-              padding: const EdgeInsets.only(
-                  left: 25, bottom: 15, top: 25, right: 25),
-              // margin: EdgeInsets.only(bottom: 10),
-              alignment: Alignment.topLeft,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("My Favorites",
-                              style: itemTitleFontStyle.copyWith(
-                                  fontSize: 20, fontWeight: FontWeight.w700)),
-                          IconButton(
-                              icon: const Icon(Icons.close),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              })
-                        ]),
-                    Text("you have 2 itrms in your Favorites",
-                        style: itemTitleFontStyle.copyWith(
-                            fontSize: 11, fontWeight: FontWeight.w500)),
-                  ])),
-          const Divider(height: 1),
-          Expanded(
-            //////////////////////////////////////////////* items
-            flex: 13,
-            child: Padding(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20)),
+                ),
+                padding: const EdgeInsets.only(
+                    left: 25, bottom: 15, top: 25, right: 25),
+                // margin: EdgeInsets.only(bottom: 10),
+                alignment: Alignment.topLeft,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("My Favorites",
+                                style: itemTitleFontStyle.copyWith(
+                                    fontSize: 20, fontWeight: FontWeight.w700)),
+                            IconButton(
+                                icon: const Icon(Icons.close),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                })
+                          ]),
+                      Text("you have 2 itrms in your Favorites",
+                          style: itemTitleFontStyle.copyWith(
+                              fontSize: 11, fontWeight: FontWeight.w500)),
+                    ])),
+            const Divider(height: 1),
+            Expanded(
+              //////////////////////////////////////////////* items
+              flex: 13,
+              child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: ListView(children: testItems())),
-          ),
-        ],
-      ),
-    );
+                child: ListView(
+                    children: testItems(
+                        vals.favoriteItems,
+                        (e) => vals.addToCartList(e),
+                        (e) => vals.discartFavoriteItem(e),
+                        context)),
+              ),
+            )
+          ],
+        ),
+      );
+    });
   }
 }

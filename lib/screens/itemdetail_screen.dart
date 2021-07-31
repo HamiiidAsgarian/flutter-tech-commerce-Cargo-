@@ -37,6 +37,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
               ItemsSlideView(images: (widget.data?['imageUrl'])),
               SizedBox(height: 20),
               ItemTitle(
+                  data: widget.data,
                   title: (widget.data?['title']) ?? "NO TITLE",
                   score: widget.data?['rate'],
                   company: widget.data?['company']),
@@ -170,58 +171,75 @@ class ItemTitle extends StatelessWidget {
   final String? title;
   final String? company;
   final double? score;
+  final Map? data;
 
-  const ItemTitle({this.title, tite, this.company, this.score});
+  const ItemTitle({this.title, tite, this.company, this.score, this.data});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // height: 200,
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      // color: Colors.white,
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Consumer<ProviderModel>(
+      builder: (context, vals, child) {
+        return Container(
+          // height: 200,
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          // color: Colors.white,
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(title ?? "",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style:
-                                forMenFontStyle.copyWith(color: Colors.black)),
-                      ),
-                      const SizedBox(width: 5),
-                      const Icon(
-                        MyFlutterApp.star_3,
-                        size: 10,
-                        color: Colors.yellow,
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        score.toString(),
-                        style: priceFontStyle.copyWith(fontSize: 12),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(width: 20),
                 Row(
-                  children: const [
-                    Icon(MyFlutterApp.share_alt),
-                    SizedBox(width: 25),
-                    Icon(MyFlutterApp.heart_empty),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(title ?? "",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: forMenFontStyle.copyWith(
+                                    color: Colors.black)),
+                          ),
+                          const SizedBox(width: 5),
+                          const Icon(
+                            MyFlutterApp.star_3,
+                            size: 10,
+                            color: Colors.yellow,
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            score.toString(),
+                            style: priceFontStyle.copyWith(fontSize: 12),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Row(
+                      children: [
+                        Icon(MyFlutterApp.share_alt),
+                        SizedBox(width: 25),
+                        //NOTE if this item exists in the favoriteList then remove and change icon otherwise add to the list
+                        IconButton(
+                          icon: vals.heartIconTriger(data) != true
+                              ? Icon(MyFlutterApp.heart_empty)
+                              : Icon(MyFlutterApp.heart_1,
+                                  color: Colors.redAccent),
+                          onPressed: () {
+                            if (vals.heartIconTriger(data) != true) {
+                              return vals.addToFavoritesList(data!);
+                            } else
+                              vals.discartFavoriteItem(data!);
+                          },
+                        )
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
-            Text(company ?? "NA", style: itemTitleFontStyle)
-          ]),
+                ),
+                Text(company ?? "NA", style: itemTitleFontStyle)
+              ]),
+        );
+      },
     );
   }
 }
