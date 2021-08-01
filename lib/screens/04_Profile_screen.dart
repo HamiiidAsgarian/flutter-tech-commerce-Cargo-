@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:commerce_app/consts.dart';
 import 'package:commerce_app/widgets/my_rounded_button/my_rounded_button.dart';
 import 'package:commerce_app/widgets/my_rounded_textfield/my_rounded_textfield.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:js' as js;
 
 class ProfileScreen2 extends StatefulWidget {
   const ProfileScreen2({Key? key}) : super(key: key);
@@ -35,35 +40,118 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
                       },
                     )),
                 const SizedBox(height: 30),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
-                      children: listMaker(list: [
-                    IcondataString(
-                        iconData: Icons.money, string: 'Price Changes'),
-                    IcondataString(
-                        iconData: Icons.favorite_border_outlined,
-                        string: 'Favorites'),
-                    IcondataString(
-                        iconData: Icons.recent_actors, string: 'Recent views'),
-                    IcondataString(
-                        iconData: Icons.settings_applications_rounded,
-                        string: 'Setting'),
-                  ])),
-                ),
-                Container(
-                    color: appBargrey,
-                    height: 1,
-                    margin: const EdgeInsets.symmetric(vertical: 20)),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                      children: listMaker(list: [
-                    IcondataString(string: 'About Us'),
-                    IcondataString(string: 'Contacts'),
-                    IcondataString(string: 'Version'),
-                    IcondataString(string: 'Our team'),
-                  ], myIcon: false, context: context)),
+                      children: [
+                    [
+                      Text(
+                        'About Us',
+                        style: itemBrandFontStyle.copyWith(fontSize: 17),
+                      ),
+                      Icon(
+                        Icons.table_chart_outlined,
+                        color: Colors.grey[700],
+                      )
+                    ],
+                    [
+                      Text(
+                        'version',
+                        style: itemBrandFontStyle.copyWith(fontSize: 17),
+                      ),
+                      Icon(
+                        Icons.upgrade_outlined,
+                        color: Colors.grey[700],
+                      )
+                    ],
+                    [
+                      Text(
+                        'Contact',
+                        style: itemBrandFontStyle.copyWith(fontSize: 17),
+                      ),
+                      Icon(
+                        Icons.support_agent,
+                        color: Colors.grey[700],
+                      )
+                    ],
+                    [
+                      Text(
+                        'Our team',
+                        style: itemBrandFontStyle.copyWith(fontSize: 17),
+                      ),
+                      Icon(
+                        Icons.group_outlined,
+                        color: Colors.grey[700],
+                      )
+                    ],
+                  ]
+                          .map(
+                            (List<Widget> e) => Column(children: [
+                              RawMaterialButton(
+                                onPressed: () async {
+                                  if (kIsWeb) {
+                                    js.context.callMethod('open', [
+                                      'https://stackoverflow.com/questions/ask'
+                                    ]);
+                                    print("platform is windows");
+                                  } else if (Platform.isAndroid) {
+                                    const url = 'https://flutter.io';
+                                    if (await canLaunch(url)) {
+                                      await launch(url);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
+                                  }
+                                },
+                                child: Container(
+                                  // color: Colors.red,
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: Container(
+                                                  padding: EdgeInsets.all(7),
+                                                  color: Colors.grey[200],
+                                                  child: e[1]
+                                                  //  Icon(e[1],
+                                                  //     color: Colors.grey[700])
+                                                  ),
+                                            ),
+                                            SizedBox(width: 10),
+                                            e[0]
+                                          ],
+                                        ),
+                                        Icon(
+                                          Icons.arrow_forward_ios,
+                                          size: 15,
+                                          color: Colors.grey[700],
+                                        )
+                                      ]),
+                                ),
+                              ),
+                              Divider(
+                                thickness: 1.0,
+                                color: Colors.grey[200],
+                                // height: 10,
+                              )
+                            ]),
+                          )
+                          .toList()
+                      // listMaker(list: [
+                      //   IcondataString(
+                      //       string: 'About Us', iconData: Icons.ac_unit),
+                      //   IcondataString(string: 'Contacts'),
+                      //   IcondataString(string: 'Version'),
+                      //   IcondataString(string: 'Our team'),
+                      // ], myIcon: false, context: context),
+                      ),
                 )
               ],
             ),
