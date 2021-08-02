@@ -49,7 +49,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         future: _firstPageData,
                         builder: (context,
                             AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                          var a = {};
+                          List<Widget> b = [];
                           if (snapshot.hasData) {
+                            a = snapshot.data!['scrollableItems'];
+                            a.forEach((key, value) {
+                              b.add(HorizontalItemsList(
+                                  sectionTitle: key,
+                                  ListItemsMargin: EdgeInsets.only(right: 10),
+                                  ListFramePadding:
+                                      EdgeInsets.symmetric(horizontal: 15),
+                                  itemsList: value));
+                            });
                             return Column(children: [
                               CarouselSection(
                                   items: snapshot.data!['Carousels']
@@ -63,7 +74,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ['Watches']),
                               WindowsCategorySection(
                                   items: snapshot.data!['Windows']
-                                      ['FirstWindow'])
+                                      ['FirstWindow']),
+                              Column(children: b)
                             ]);
                           }
                           return Container(

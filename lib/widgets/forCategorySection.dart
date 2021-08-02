@@ -43,6 +43,7 @@ class HorizontalItemsList extends StatelessWidget {
         //               child: Item(title: e)))
         //           .toList()),
         // ),
+        SizedBox(height: 25),
       ]),
     );
   }
