@@ -1,0 +1,30 @@
+,
+        {
+          "index": 1,
+          "imageURL": "https://i.ibb.co/7rf26dj/c-1.jpg",
+          "label": "25% off",
+          "ctegory": "Watches"
+        },
+        {
+          "index": 2,
+          "imageURL": "https://i.ibb.co/JdNHPvZ/c-4.jpg",
+          "ctegory": "Watches"
+        },
+        {
+          "index": 3,
+          "imageURL": "https://i.ibb.co/XxkDymH/c-6.jpg",
+          "label": "15% off",
+          "ctegory": "Watches"
+        },
+        {
+          "index": 4,
+          "imageURL": "https://i.ibb.co/VqqLLQs/c-1.jpg",
+          "label": "",
+          "ctegory": "Watches"
+        },
+        {
+          "index": 5,
+          "imageURL": "https://i.ibb.co/YDzGzbM/c-1.png",
+          "label": "New",
+          "ctegory": "Watches"
+        }

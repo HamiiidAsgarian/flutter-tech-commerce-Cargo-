@@ -266,31 +266,26 @@
       "FirstCarousel": [
         {
           "index": 1,
-          "imageURL": "https://i.ibb.co/7rf26dj/c-1.jpg",
+          "imageURL": "https://i.ibb.co/16pPRXC/watches.png",
           "label": "25% off",
           "ctegory": "Watches"
         },
         {
-          "index": 2,
-          "imageURL": "https://i.ibb.co/JdNHPvZ/c-4.jpg",
+          "index": 1,
+          "imageURL": "https://i.ibb.co/z5CbXFw/headset.png",
+          "label": "25% off",
           "ctegory": "Watches"
         },
         {
-          "index": 3,
-          "imageURL": "https://i.ibb.co/XxkDymH/c-6.jpg",
-          "label": "15% off",
+          "index": 1,
+          "imageURL": "https://i.ibb.co/cwgtHyp/laptops.png",
+          "label": "25% off",
           "ctegory": "Watches"
         },
         {
-          "index": 4,
-          "imageURL": "https://i.ibb.co/VqqLLQs/c-1.jpg",
-          "label": "",
-          "ctegory": "Watches"
-        },
-        {
-          "index": 5,
-          "imageURL": "https://i.ibb.co/YDzGzbM/c-1.png",
-          "label": "New",
+          "index": 1,
+          "imageURL": "https://i.ibb.co/PN73wFC/phones.png",
+          "label": "25% off",
           "ctegory": "Watches"
         }
       ],
@@ -326,26 +321,26 @@
       "FirstWindow": [
         {
           "index": 1,
-          "imageURL": "https://i.ibb.co/s9BrJL8/w-1.jpg",
-          "label": "Limon Tea",
+          "imageURL": "https://i.ibb.co/2W1mk4R/s3.png",
+          "label": "Headsets",
           "ctegory": "Watches"
         },
         {
           "index": 2,
-          "imageURL": "https://i.ibb.co/Vqy52Qz/w-2.jpg",
-          "label": "Coffee",
+          "imageURL": "https://i.ibb.co/PgcmRtx/s4.png",
+          "label": "Microphones",
           "ctegory": "Watches"
         },
         {
           "index": 3,
-          "imageURL": "https://i.ibb.co/VQrDxpv/w-3.jpg",
-          "label": "Banana Tea",
+          "imageURL": "https://i.ibb.co/0yK2GXn/s1.png",
+          "label": "Laptops",
           "ctegory": "Watches"
         },
         {
           "index": 4,
-          "imageURL": "https://i.ibb.co/zR6tdZv/w-4.jpg",
-          "label": "Choklate",
+          "imageURL": "https://i.ibb.co/fFKQ7ww/s2.png",
+          "label": "Hardwares",
           "ctegory": "Watches"
         }
       ]

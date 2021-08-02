@@ -91,12 +91,12 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
                               RawMaterialButton(
                                 onPressed: () async {
                                   if (kIsWeb) {
-                                    js.context.callMethod('open', [
-                                      'https://stackoverflow.com/questions/ask'
-                                    ]);
+                                    js.context.callMethod('open',
+                                        ['https://github.com/HamiiidAsgarian']);
                                     print("platform is windows");
                                   } else if (Platform.isAndroid) {
-                                    const url = 'https://flutter.io';
+                                    const url =
+                                        'https://github.com/HamiiidAsgarian';
                                     if (await canLaunch(url)) {
                                       await launch(url);
                                     } else {
