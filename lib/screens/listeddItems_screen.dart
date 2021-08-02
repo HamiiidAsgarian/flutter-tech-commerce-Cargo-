@@ -51,43 +51,43 @@ class BrandItemsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        // gridview.count
-        // childAspectRatio: MediaQuery.of(context).size.height / 900,
-        // // childAspectRatio: 2,
-        // crossAxisSpacing: 10,
-        // mainAxisSpacing: 10,
-        // crossAxisCount: 2,
-        child: Wrap(
-          children: itemsList
-              .map<Widget>((data) => Container(
-                    // color: Colors.amber,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Container(
-                        color: Colors.white,
-                        // width:
-                        //     (MediaQuery.of(context).size.width / 2) - 5,
-                        child: Item(
-                          id: data['id'],
-                          title: data['title'],
-                          company: data['company'],
-                          price: data['price'],
-                          imgTumbnailUrl: data['thumbnail'],
-                          imgUrl: "data['imageUrl']",
-                          imageWidth:
-                              (MediaQuery.of(context).size.width / 2) - 34,
-                          data: data,
-                        ),
+      child: GridView.count(
+        // crossAxisSpacing: 20, // Left and right spacing between Widget
+        // mainAxisSpacing: 10, //upper and lower spacing
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        crossAxisCount: 2, //The number of Widgets in each row
+        childAspectRatio: .65, //The ratio of width to height
+        shrinkWrap: true,
+        children: itemsList
+            .map<Widget>((data) => Container(
+                  // height: 200,
+                  // width: 20,
+                  // color: Colors.amber,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Container(
+                      color: Colors.white,
+                      // width:
+                      //     (MediaQuery.of(context).size.width / 2) - 5,
+                      child: Item(
+                        id: data['id'],
+                        title: data['title'],
+                        company: data['company'],
+                        price: data['price'],
+                        imgTumbnailUrl: data['thumbnail'],
+                        imgUrl: "data['imageUrl']",
+                        imageWidth:
+                            (MediaQuery.of(context).size.width / 2) - 34,
+                        data: data,
                       ),
                     ),
-                  ))
-              .toList(),
-        ),
+                  ),
+                ))
+            .toList(),
       ),
+      // ),
     );
   }
 }

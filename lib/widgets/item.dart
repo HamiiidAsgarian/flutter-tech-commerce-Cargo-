@@ -11,7 +11,7 @@ class Item extends StatelessWidget {
 
   final String? title;
   final String? company;
-  final int? price;
+  final double? price;
 
   final double imageWidth;
 
