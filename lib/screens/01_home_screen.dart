@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return MaterialPageRoute(builder: (context) {
           return Scaffold(
             backgroundColor: cBackgroundGrey,
-            appBar: const MyAppBar(
+            appBar: MyAppBar(
                 // leadingIcon: Icon(
                 //   MyFlutterApp.menu,
                 //   color: cIconGrey,
