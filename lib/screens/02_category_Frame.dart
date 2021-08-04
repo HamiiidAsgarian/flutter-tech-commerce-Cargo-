@@ -20,7 +20,7 @@ class _CategoryFramePageState extends State<CategoryFramePage> {
     _secondPageData = Provider.of<ProviderModel>(context,
             listen:
                 false) //NOTE maybe better to delete this and pass it to provider totally
-        .getDataFromApi(url: "http://localhost:3000/secondPage");
+        .getDataFromApi(url: "http://192.168.1.6:4000/secondPage");
   }
 
   @override

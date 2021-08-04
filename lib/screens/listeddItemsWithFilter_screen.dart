@@ -164,7 +164,7 @@ class BrandItemsList extends StatelessWidget {
                           id: data['id'],
                           title: data['title'],
                           company: data['company'],
-                          price: data['price'],
+                          price: data['price'].toDouble(),
                           imgTumbnailUrl: data['thumbnail'],
                           imgUrl: "data['imageUrl']",
                           imageWidth:

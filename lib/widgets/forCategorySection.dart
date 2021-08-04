@@ -9,8 +9,8 @@ class HorizontalItemsList extends StatelessWidget {
   HorizontalItemsList({
     this.sectionTitle,
     required this.itemsList,
-    this.ListFramePadding = const EdgeInsets.all(0),
-    this.ListItemsMargin = const EdgeInsets.all(0),
+    this.ListFramePadding = const EdgeInsets.all(0.0),
+    this.ListItemsMargin = const EdgeInsets.all(0.0),
   });
   final String? sectionTitle;
   final List<dynamic> itemsList;
@@ -27,22 +27,13 @@ class HorizontalItemsList extends StatelessWidget {
         // SizedBox(height: 10),
         CategoryTitle(sectionTitle: sectionTitle, data: itemsList),
         Container(
-          alignment: Alignment(-1, 0),
+          alignment: Alignment(-1.0, 0.0),
           // color: Colors.black,
           // height: 270,
-          child: RowListedItems(itemsList: itemsList, margin: ListItemsMargin),
+          child: RowListedItems(
+              itemsList: itemsList,
+              margin: ListItemsMargin), //REVIEW margin is changed to 0
         ),
-        // SingleChildScrollView(
-        //   scrollDirection: Axis.horizontal,
-        //   child: Row(
-        //       children: itemsList!
-        //           .map((e) => Container(
-        //               // color: Colors.white,
-        //               padding:
-        //                   const EdgeInsets.only(right: 10, bottom: 10, top: 10),
-        //               child: Item(title: e)))
-        //           .toList()),
-        // ),
         SizedBox(height: 25),
       ]),
     );
@@ -51,9 +42,7 @@ class HorizontalItemsList extends StatelessWidget {
 
 //////*********************************************************/*///////////////////////////////////////////////////////
 class RowListedItems extends StatelessWidget {
-  RowListedItems(
-      {Key? key, this.itemsList, this.margin = const EdgeInsets.all(0)})
-      : super(key: key);
+  RowListedItems({this.itemsList, this.margin = const EdgeInsets.all(0)});
   final List? itemsList;
   final EdgeInsets margin;
 
@@ -72,24 +61,13 @@ class RowListedItems extends StatelessWidget {
                 // padding: const EdgeInsets.only(right: 0, bottom: 0, top: 0),
                 child: Item(
                     title: e['title'],
-                    price: e['price'],
+                    price: e['price'].toDouble(),
                     company: e['company'],
                     id: e['id'],
                     imgTumbnailUrl: e["thumbnail"],
                     data: e));
           }).toList()),
     );
-
-    // ListView.builder(
-    //     // cacheExtent: 500,
-    //     // addAutomaticKeepAlives: false,
-    //     shrinkWrap: true,
-    //     scrollDirection: Axis.horizontal,
-    //     itemCount: itemsList!.length,
-    //     itemBuilder: (context, index) => Container(
-    //         // color: Colors.white,
-    //         // padding: const EdgeInsets.only(right: 0, bottom: 10, top: 10),
-    //         child: Item(title: itemsList![index])));
   }
 }
 

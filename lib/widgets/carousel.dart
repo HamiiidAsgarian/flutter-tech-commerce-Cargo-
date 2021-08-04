@@ -170,7 +170,8 @@ class _SlideState extends State<Slide> {
             child: GestureDetector(
               onTap: () async {
                 var categoryData = await vals.getDataFromApiToList(
-                    url: 'http://localhost:3000/${widget.title}');
+                    url:
+                        'http://192.168.1.6:4000/${widget.title}'); //REVIEW better move to outside of the widget
 
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return ListedItemsScreen(

@@ -59,16 +59,19 @@ class CategoryScreen extends StatelessWidget {
                         onTap: () {
                           var result;
                           Type type = data.values.elementAt(index).runtimeType;
-                          type == List
-                              ? result = ListedItemsWithFilterScreen(
-                                  otherBrands: data,
-                                  title: data.keys.elementAt(index),
-                                  itemsList: (data.values.elementAt(index)),
-                                )
-                              : result = CategoryScreen(
-                                  title: data.keys.elementAt(index),
-                                  hasBack: true,
-                                  data: data.values.elementAt(index));
+
+                          if (type.toString() == "List<dynamic>") {
+                            result = ListedItemsWithFilterScreen(
+                              otherBrands: data,
+                              title: data.keys.elementAt(index),
+                              itemsList: (data.values.elementAt(index)),
+                            );
+                          } else {
+                            result = CategoryScreen(
+                                title: data.keys.elementAt(index),
+                                hasBack: true,
+                                data: data.values.elementAt(index));
+                          }
 
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
@@ -78,10 +81,10 @@ class CategoryScreen extends StatelessWidget {
                         },
 
                         ///NOTE if the list is nested adds back(pop) icon.
-                        trailing:
-                            iconBuilder(data.values.elementAt(index)) == false
-                                ? SizedBox()
-                                : Icon(Icons.keyboard_arrow_right, size: 30),
+                        // trailing:
+                        //     iconBuilder(data.values.elementAt(index)) == false
+                        //         ? SizedBox()
+                        //         : Icon(Icons.keyboard_arrow_right, size: 30),
                         title: Text(data.keys.elementAt(index),
                             style: itemBrandFontStyle.copyWith(fontSize: 17)),
                       ),

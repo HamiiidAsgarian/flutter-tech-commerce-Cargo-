@@ -22,7 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     setState(() {
       _firstPageData = Provider.of<ProviderModel>(context, listen: false)
-          .getDataFromApi(url: "http://localhost:3000/firstPage");
+          .getDataFromApi(url: "http://192.168.1.6:4000/firstPage");
+
+      // .getDataFromApi(url: "http://localhost:3000/firstPage");
     });
   }
 
@@ -56,9 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             a.forEach((key, value) {
                               b.add(HorizontalItemsList(
                                   sectionTitle: key,
-                                  ListItemsMargin: EdgeInsets.only(right: 10),
+                                  ListItemsMargin: EdgeInsets.only(right: 10.0),
                                   ListFramePadding:
-                                      EdgeInsets.symmetric(horizontal: 15),
+                                      EdgeInsets.symmetric(horizontal: 15.0),
                                   itemsList: value));
                             });
                             return Column(children: [
@@ -67,9 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ['FirstCarousel']),
                               HorizontalItemsList(
                                   sectionTitle: "Watches",
-                                  ListItemsMargin: EdgeInsets.only(right: 10),
+                                  ListItemsMargin: EdgeInsets.only(right: 10.0),
                                   ListFramePadding:
-                                      EdgeInsets.symmetric(horizontal: 15),
+                                      EdgeInsets.symmetric(horizontal: 15.0),
                                   itemsList: snapshot.data!['scrollableItems']
                                       ['Watches']),
                               WindowsCategorySection(

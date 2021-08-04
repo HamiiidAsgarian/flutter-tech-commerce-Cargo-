@@ -39,13 +39,13 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
               ItemTitle(
                   data: widget.data,
                   title: (widget.data?['title']) ?? "NO TITLE",
-                  score: widget.data?['rate'],
+                  score: widget.data?['rate'].toDouble(),
                   company: widget.data?['company']),
               ItemDescription(
                   description: (widget.data?['description']) ?? "NO TITLE"),
               SizedBox(height: 10),
               ItemFooter(
-                price: widget.data?['price'],
+                price: widget.data?['price'].toDouble(),
                 data: widget.data!,
               )
             ],

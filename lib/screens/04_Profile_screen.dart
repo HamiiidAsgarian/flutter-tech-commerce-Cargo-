@@ -6,7 +6,8 @@ import 'package:commerce_app/widgets/my_rounded_textfield/my_rounded_textfield.d
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:js' as js;
+
+// import 'dart:js' as js;
 
 class ProfileScreen2 extends StatefulWidget {
   const ProfileScreen2({Key? key}) : super(key: key);
@@ -90,11 +91,12 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
                             (List<Widget> e) => Column(children: [
                               RawMaterialButton(
                                 onPressed: () async {
-                                  if (kIsWeb) {
-                                    js.context.callMethod('open',
-                                        ['https://github.com/HamiiidAsgarian']);
-                                    print("platform is windows");
-                                  } else if (Platform.isAndroid) {
+                                  // if (kIsWeb) {
+                                  //   js.context.callMethod('open',
+                                  //       ['https://github.com/HamiiidAsgarian']);
+                                  //   print("platform is windows");
+                                  // } else
+                                  if (Platform.isAndroid) {
                                     const url =
                                         'https://github.com/HamiiidAsgarian';
                                     if (await canLaunch(url)) {

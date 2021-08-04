@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:math';
 
 import 'package:commerce_app/screens/itemdetail_screen.dart';
@@ -26,7 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     _allProducts = Provider.of<ProviderModel>(context, listen: false)
-        .getDataFromApiToList(url: "http://localhost:3000/allProducts");
+        .getDataFromApiToList(url: "http://192.168.1.6:4000/allProducts");
   }
 
   String selectedOption = 'Popular';
@@ -120,7 +119,7 @@ class SearchItemsSection extends StatelessWidget {
               //REVIEW makes loading the new page a bit slower
               List<dynamic> allProducts =
                   await Provider.of<ProviderModel>(context, listen: false)
-                      .getDataFromApiToList(url: "http://localhost:3000/$e");
+                      .getDataFromApiToList(url: "http://192.168.1.6:4000/$e");
 
               Navigator.push(
                   context,
@@ -198,11 +197,10 @@ class SearchItemsSection extends StatelessWidget {
                                 color: myColors[i % myColors.length],
                                 onPressed: () async {
                                   //REVIEW makes loading the new page a bit slower
-                                  List<dynamic> allProducts =
-                                      await Provider.of<ProviderModel>(context,
-                                              listen: false)
-                                          .getDataFromApiToList(
-                                              url: "http://localhost:3000/$e");
+                                  List<dynamic> allProducts = await Provider.of<
+                                          ProviderModel>(context, listen: false)
+                                      .getDataFromApiToList(
+                                          url: "http://192.168.1.6:4000/$e");
 
                                   Navigator.push(
                                       context,

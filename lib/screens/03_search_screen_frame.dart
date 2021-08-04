@@ -18,7 +18,7 @@ class _SearchFramePageState extends State<SearchFramePage> {
     super.initState();
 
     _thirdPageData = Provider.of<ProviderModel>(context, listen: false)
-        .getDataFromApi(url: "http://localhost:3000/thirdPage");
+        .getDataFromApi(url: "http://192.168.1.6:4000/thirdPage");
   }
 
   @override

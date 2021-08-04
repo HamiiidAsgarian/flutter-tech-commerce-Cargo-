@@ -75,7 +75,8 @@ class ScreenWidthSizedContainer extends StatelessWidget {
               // fillColor: color,
               onPressed: () async {
                 var categoryData = await vals.getDataFromApiToList(
-                    url: 'http://localhost:3000/$referenceTitle');
+                    url:
+                        'http://192.168.1.6:4000/$referenceTitle'); //REVIEW better move to outside of the widget
 
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return ListedItemsScreen(
