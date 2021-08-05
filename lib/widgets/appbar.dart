@@ -64,7 +64,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Center(
                         child: Text(
                           vals.cartItems.length.toString(),
+                          textAlign: TextAlign.center,
                           style: TextStyle(
+                              wordSpacing: 0,
+                              letterSpacing: 0,
                               fontSize: 7,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
@@ -108,8 +111,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                       backgroundColor: Colors.grey,
                       child: Center(
                         child: Text(
+                          // "1",
                           vals.favoriteItems.length.toString(),
+                          textAlign: TextAlign.center,
                           style: TextStyle(
+                              wordSpacing: 0,
+                              letterSpacing: 0,
                               fontSize: 7,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),

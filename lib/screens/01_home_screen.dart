@@ -64,9 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemsList: value));
                             });
                             return Column(children: [
-                              CarouselSection(
-                                  items: snapshot.data!['Carousels']
-                                      ['FirstCarousel']),
+                              // CarouselSection(
+                              //     items: snapshot.data!['Carousels']
+                              //         ['FirstCarousel']),
                               HorizontalItemsList(
                                   sectionTitle: "Watches",
                                   ListItemsMargin: EdgeInsets.only(right: 10.0),
@@ -74,10 +74,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       EdgeInsets.symmetric(horizontal: 15.0),
                                   itemsList: snapshot.data!['scrollableItems']
                                       ['Watches']),
-                              WindowsCategorySection(
-                                  items: snapshot.data!['Windows']
-                                      ['FirstWindow']),
-                              Column(children: b)
+                              // WindowsCategorySection(
+                              //     items: snapshot.data!['Windows']
+                              //         ['FirstWindow']),
+                              // Column(children: b)
                             ]);
                           }
                           return Container(

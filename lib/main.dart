@@ -7,14 +7,16 @@ import 'package:commerce_app/screens/00_main_frame_screen.dart';
 import 'package:commerce_app/screens/profile_screen0.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-void main() => {
-      SystemChrome.setSystemUIOverlayStyle(
-          SystemUiOverlayStyle(statusBarColor: Colors.pink)),
-      runApp(MyApp())
-    };
+void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  //     .then((_) {
+  runApp(new MyApp());
+  // });
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -29,7 +31,7 @@ class _MyAppState extends State<MyApp> {
     return ChangeNotifierProvider(
       create: (BuildContext context) => ProviderModel(),
       child: MaterialApp(
-        // navigatorKey: key00,
+        theme: ThemeData.light(),
         debugShowCheckedModeBanner: false,
         routes: {
           "/": (context) => MainScreen(),
@@ -38,8 +40,6 @@ class _MyAppState extends State<MyApp> {
           "/Favorite": (context) => FavoriteScreen(),
           "/Category": (context) => const CategoryFramePage(),
           "/Profile": (context) => const ProfileScreen(),
-          // "/ListedItems": (context) =>
-          //     ListedItemsWithFilterScreen(title: "Items"),
         },
         initialRoute: "/",
       ),
