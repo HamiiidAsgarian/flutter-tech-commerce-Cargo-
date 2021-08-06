@@ -16,7 +16,6 @@ class HorizontalItemsList extends StatelessWidget {
   final List<dynamic> itemsList;
   final EdgeInsets ListFramePadding;
   final EdgeInsets ListItemsMargin;
-  // final Future<List<Watches>>? productsMap;
 
   @override
   Widget build(BuildContext context) {
@@ -41,36 +40,78 @@ class HorizontalItemsList extends StatelessWidget {
 }
 
 //////*********************************************************/*///////////////////////////////////////////////////////
-class RowListedItems extends StatelessWidget {
-  RowListedItems({this.itemsList, this.margin = const EdgeInsets.all(0)});
+class RowListedItems extends StatefulWidget {
+  RowListedItems({
+    this.itemsList,
+    this.margin = const EdgeInsets.all(0),
+  });
   final List? itemsList;
   final EdgeInsets margin;
 
   @override
+  _RowListedItemsState createState() => _RowListedItemsState();
+}
+
+class _RowListedItemsState extends State<RowListedItems> {
+  List _mylist = [];
+  int _ListLimit = 3;
+
+  ScrollController _itemsScrollController = new ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _mylist = List.generate(3, (i) => widget.itemsList![i]);
+    // setState(() {});
+
+    // int totalListItems = widget.itemsList.length;
+    _itemsScrollController.addListener(() {
+      if (_itemsScrollController.position.pixels ==
+          _itemsScrollController.position.maxScrollExtent) {
+        setState(() {
+          if (_ListLimit < widget.itemsList!.length) {
+            for (int i = _ListLimit; i < _ListLimit + 3; i++) {
+              _mylist.add(widget.itemsList![i]);
+            }
+            _ListLimit = _ListLimit + 3;
+          }
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return
-        //  SingleChildScrollView(
-        //     scrollDirection: Axis.horizontal,
-        //     child:
-        Container(
-            height: 270,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (cotext, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5),
-                    child: Item(
-                        rate: itemsList![index]['rate'].toDouble(),
-                        title: itemsList![index]['title'],
-                        price: itemsList![index]['price'].toDouble(),
-                        company: itemsList![index]['company'],
-                        id: itemsList![index]['id'],
-                        imgTumbnailUrl: itemsList![index]["thumbnail"],
-                        data: itemsList![index]),
-                  );
-                  // itemsList![index];
-                }));
+    return Container(
+        height: 270,
+        child: ListView.builder(
+            controller: _itemsScrollController,
+            scrollDirection: Axis.horizontal,
+            itemCount: _ListLimit + 1 <= widget.itemsList!.length
+                ? _ListLimit + 1
+                : _ListLimit,
+            itemBuilder: (cotext, index) {
+              if (index == _mylist.length &&
+                  index != widget.itemsList!.length) {
+                print(
+                    "$index  ${widget.itemsList!.length} $_ListLimit"); //NOTE for showing progress indicator we creat an imaginary +1 item and indicated it as progress indicator
+                return Center(child: CircularProgressIndicator());
+              }
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: Item(
+                    rate: _mylist[index]['rate'].toDouble(),
+                    // title: widget.itemsList![index]['title'],
+                    title: _mylist[index]['title'],
+                    price: _mylist[index]['price'].toDouble(),
+                    company: _mylist[index]['company'],
+                    id: _mylist[index]['id'],
+                    imgTumbnailUrl: _mylist[index]["thumbnail"],
+                    data: _mylist[index]),
+              );
+              // itemsList![index];
+            }));
     // (
     //     mainAxisAlignment: MainAxisAlignment.start,
     //     crossAxisAlignment: CrossAxisAlignment.start,

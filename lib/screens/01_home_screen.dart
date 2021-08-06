@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               // WindowsCategorySection(
                               //     items: snapshot.data!['Windows']
                               //         ['FirstWindow']),
-                              // Column(children: b)
+                              Column(children: b)
                             ]);
                           }
                           return Container(
