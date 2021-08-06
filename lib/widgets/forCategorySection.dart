@@ -48,26 +48,47 @@ class RowListedItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: itemsList!.map((e) {
-            // print(e.title);
-            return Container(
-                margin: margin,
-                // color: Colors.red,
-                // padding: const EdgeInsets.only(right: 0, bottom: 0, top: 0),
-                child: Item(
-                    title: e['title'],
-                    price: e['price'].toDouble(),
-                    company: e['company'],
-                    id: e['id'],
-                    imgTumbnailUrl: e["thumbnail"],
-                    data: e));
-          }).toList()),
-    );
+    return
+        //  SingleChildScrollView(
+        //     scrollDirection: Axis.horizontal,
+        //     child:
+        Container(
+            height: 270,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (cotext, index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    child: Item(
+                        rate: itemsList![index]['rate'].toDouble(),
+                        title: itemsList![index]['title'],
+                        price: itemsList![index]['price'].toDouble(),
+                        company: itemsList![index]['company'],
+                        id: itemsList![index]['id'],
+                        imgTumbnailUrl: itemsList![index]["thumbnail"],
+                        data: itemsList![index]),
+                  );
+                  // itemsList![index];
+                }));
+    // (
+    //     mainAxisAlignment: MainAxisAlignment.start,
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: itemsList!.map((e) {
+    //       // print(e.title);
+    //       return Container(
+    //           margin: margin,
+    //           // color: Colors.red,
+    //           // padding: const EdgeInsets.only(right: 0, bottom: 0, top: 0),
+    //           child: Item(
+    //               title: e['title'],
+    //               price: e['price'].toDouble(),
+    //               company: e['company'],
+    //               id: e['id'],
+    //               imgTumbnailUrl: e["thumbnail"],
+    //               data: e));
+    //     }).toList()),
+    // );
   }
 }
 
@@ -97,14 +118,16 @@ class CategoryTitle extends StatelessWidget {
             // //.pushNamed(context, "/ListedItems");
           },
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: const [
               Text(
                 "View More ",
                 style: viewMoreFontStyle,
+                // textAlign: TextAlign.center,
               ),
               Icon(
                 MyFlutterApp.right_open,
-                size: 13,
+                size: 15,
                 color: appBargrey,
               )
             ],

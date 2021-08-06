@@ -12,6 +12,7 @@ class Item extends StatelessWidget {
   final String? title;
   final String? company;
   final double? price;
+  final double? rate;
 
   final double imageWidth;
 
@@ -25,6 +26,7 @@ class Item extends StatelessWidget {
       this.imgTumbnailUrl,
       this.company,
       this.price,
+      this.rate,
       this.imgUrl,
       required this.data})
       : super(key: key);
@@ -52,6 +54,7 @@ class Item extends StatelessWidget {
                       )));
         },
         child: Container(
+          height: 270, //* item size,
           // color: Colors.white,
           padding: EdgeInsets.symmetric(
               horizontal: 7, vertical: 7), //NOTE Item main margin
@@ -76,7 +79,26 @@ class Item extends StatelessWidget {
                       // color: Colors.amber,
                       child: (imgTumbnailUrl == "" || imgTumbnailUrl == null)
                           ? Center(child: CircularProgressIndicator())
-                          : (Image.network(imgTumbnailUrl!)),
+                          : (Image.network(imgTumbnailUrl!,
+                              loadingBuilder: (context, child, progress) {
+                              return progress == null
+                                  ? child
+                                  : Container(
+                                      color: Colors.blueGrey[900],
+                                      child: Center(
+                                        child: Container(
+                                            width: 100,
+                                            height: 100,
+                                            child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.white),
+                                                strokeWidth: 15,
+                                                backgroundColor:
+                                                    Colors.white10)),
+                                      ),
+                                    );
+                            })),
                       // (Image.network(imgTumbnailUrl)) ?? Container(),
                       // decoration: BoxDecoration(
                       //   image: DecorationImage(
@@ -104,12 +126,45 @@ class Item extends StatelessWidget {
                         style:
                             itemBrandFontStyle), // NOTE changed from company ?? ""
                     // SizedBox(height: 2),
+                    Text(" $price \$", style: priceFontStyle),
+                    Divider(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(" $price", style: priceFontStyle),
-                        Icon(MyFlutterApp.heart_2, size: 15)
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 2),
+                            color: Colors.pinkAccent[400],
+                            // height: 25,
+                            child: Center(
+                              child: Text(
+                                "25% off",
+                                style: priceFontStyle.copyWith(
+                                    color: Colors.white, fontSize: 15),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              MyFlutterApp.star,
+                              size: 15,
+                              color: Colors.amber,
+                            ),
+                            SizedBox(width: 2),
+                            Text(
+                              "$rate",
+                              style: priceFontStyle.copyWith(
+                                  color: Colors.amber, fontSize: 15),
+                            )
+                          ],
+                        ),
+                        // Icon(MyFlutterApp.heart_2, size: 15, color: Colors.red),
                       ],
                     ),
                     const SizedBox(

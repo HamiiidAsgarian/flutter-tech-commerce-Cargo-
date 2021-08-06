@@ -170,7 +170,26 @@ class SearchItemsSection extends StatelessWidget {
                                                   title: '', data: e)));
                                 },
                                 child: Image.network(e['thumbnail'],
-                                    fit: BoxFit.fill),
+                                    loadingBuilder: (context, child, progress) {
+                                  return progress == null
+                                      ? child
+                                      : Container(
+                                          color: Colors.blueGrey[900],
+                                          child: Center(
+                                            child: Container(
+                                                width: 100,
+                                                height: 100,
+                                                child: CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                                Color>(
+                                                            Colors.white),
+                                                    strokeWidth: 15,
+                                                    backgroundColor:
+                                                        Colors.white10)),
+                                          ),
+                                        );
+                                }, fit: BoxFit.fill),
                               )),
                         ),
                       ),

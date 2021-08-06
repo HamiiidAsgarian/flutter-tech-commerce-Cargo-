@@ -22,37 +22,41 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // if (pageController.hasClients) pageController.jumpToPage(currentpage);//NOTE:if it was pageView
-    // return Consumer<ProviderModel>(builder: (context, vals, child) {
     return WillPopScope(
       onWillPop: () async {
+        //REVIEW
         bool res = false;
 
-        Function a(e) {
-          res = true;
-          return e;
+        a(e) {
+          res = e;
+          Navigator.pop(context);
         }
 
-        await showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-                  title: Text('Dialog Title'),
-                  content: Row(
-                    children: [
-                      ElevatedButton(
-                          onPressed: () => a(true), child: Text("T")),
-                      ElevatedButton(
-                          onPressed: () => a(false), child: Text("F"))
-                    ],
-                  ),
-                ));
+        print(ModalRoute.of(context)!.settings.name);
+        if (ModalRoute.of(context)!.settings.name != "/") {
+          Navigator.pop(context);
+        } else
+          await showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                    title: Text(
+                      'Do you want to exit?',
+                      textAlign: TextAlign.center,
+                    ),
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                            onPressed: () => a(true), child: Text("Exit")),
+                        ElevatedButton(
+                            onPressed: () => a(false), child: Text("Cancel"))
+                      ],
+                    ),
+                  ));
         print(res);
-        Duration t = Duration(seconds: 5);
-        var z = Future.delayed(t);
-        return z.then((value) {
-          print(res);
-          return res;
-        });
+        print(context);
+
+        return res;
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,

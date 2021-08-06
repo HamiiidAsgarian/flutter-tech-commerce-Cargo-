@@ -79,32 +79,13 @@ class _CarouselSectionState extends State<CarouselSection> {
         constraints: BoxConstraints(maxHeight: 700), //REVIEW
         child: AspectRatio(
           //REVIEW main frame aspect ratio
-          aspectRatio: 1.5 / 1,
+          // aspectRatio: 1.5 / 1,
+          aspectRatio: 16 / 9,
+
           child: Container(
               // height: 200,
               // color: Colors.pink,
               child: Column(children: [
-            // FutureBuilder(
-            //     future: vals.getDataFromApi(
-            //         url:
-            //             'http://localhost:3000/scrollableItems'), //NOTE internal data recieve for generating selected items products page
-            //     builder:
-            //         (context, AsyncSnapshot<Map<dynamic, dynamic>> snapshot) {
-            //       if (snapshot.hasData) {
-            //         return Expanded(
-            //           child: PageView(
-            //               onPageChanged: (value) {
-            //                 setState(() {
-            //                   currentpage = value;
-            //                 });
-            //               },
-            //               controller: controller,
-            //               children: slideBuilder(
-            //                   widget.items, controller, snapshot.data!)),
-            //         );
-            //       }
-            //       return CircularProgressIndicator();
-            //     }),
             Expanded(
               child: PageView(
                   onPageChanged: (value) {
@@ -115,7 +96,6 @@ class _CarouselSectionState extends State<CarouselSection> {
                   controller: controller,
                   children: slideBuilder(widget.items, controller)),
             ),
-
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: counterDotsBuilder(widget.items, currentpage))
@@ -179,14 +159,6 @@ class _SlideState extends State<Slide> {
                 }));
               },
 
-              // onTap: () {
-              //   //NOTE sending to new items page
-              //   Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //           builder: (context) => ListedItemsScreen(
-              //               title: widget.title, itemsList: widget.data)));
-              // },
               ////////////////////////////////////////////////* slide's main frame
               child: Stack(
                 children: [
@@ -196,14 +168,34 @@ class _SlideState extends State<Slide> {
                     child: Align(
                       //NOTE slides animating aspect ratio
                       child: AspectRatio(
-                        aspectRatio: 1.7 / Curves.easeOut.transform(_value),
+                        aspectRatio:
+                            (16 / 9) / Curves.easeOut.transform(_value),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(5),
                             child: Image.network(widget.imageUrl ?? "",
-                                fit: BoxFit.cover)),
+                                loadingBuilder: (context, child, progress) {
+                              return progress == null
+                                  ? child
+                                  : Container(
+                                      color: Colors.blueGrey[900],
+                                      child: Center(
+                                        child: Container(
+                                            width: 100,
+                                            height: 100,
+                                            child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.white),
+                                                strokeWidth: 15,
+                                                backgroundColor:
+                                                    Colors.white10)),
+                                      ),
+                                    );
+                            }, fit: BoxFit.cover)),
                       ),
                     ),
                   ),
+
                   //////////////////////////////////////////////////////// * label
                   if ((widget.label != "") && (widget.label != null))
                     Align(
@@ -211,14 +203,15 @@ class _SlideState extends State<Slide> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Container(
-                          color: Colors.white,
+                          color: Colors.blueGrey[900],
                           width: 80,
                           height: 25,
                           child: Center(
                             child: Text(
                               widget
                                   .label!, ////////////////////////* label text
-                              style: standardSearchFontStyle,
+                              style: standardSearchFontStyle.copyWith(
+                                  color: Colors.white),
                             ),
                           ),
                         ),

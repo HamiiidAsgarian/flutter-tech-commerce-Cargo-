@@ -22,7 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     setState(() {
       _firstPageData = Provider.of<ProviderModel>(context, listen: false)
-          .getDataFromApi(url: "http://192.168.1.6:4000/firstPage");
+          .getDataFromApi(url: "http://192.168.1.6:4000/firstPage")
+          .timeout(Duration(seconds: 30));
 
       // .getDataFromApi(url: "http://localhost:3000/firstPage");
     });
@@ -45,15 +46,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 setState(() {});
               },
               child: SingleChildScrollView(
+                //REVIEW
                 child: Column(
                   children: [
                     FutureBuilder(
-                        future: _firstPageData,
+                        future: _firstPageData.timeout(Duration(seconds: 15)),
                         builder: (context,
                             AsyncSnapshot<Map<String, dynamic>> snapshot) {
                           var a = {};
                           List<Widget> b = [];
-                          if (snapshot.hasData) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            if (snapshot.hasError) {
+                              return Center(
+                                  child: Text(snapshot.error.toString()));
+                            }
                             a = snapshot.data!['scrollableItems'];
                             a.forEach((key, value) {
                               b.add(HorizontalItemsList(
@@ -63,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       EdgeInsets.symmetric(horizontal: 15.0),
                                   itemsList: value));
                             });
+
                             return Column(children: [
                               // CarouselSection(
                               //     items: snapshot.data!['Carousels']
@@ -81,10 +89,27 @@ class _HomeScreenState extends State<HomeScreen> {
                             ]);
                           }
                           return Container(
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
+                              child: Column(
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                height: 200,
+                                // color: Colors.blueGrey[900],
+                                child: Center(
+                                  child: Container(
+                                    width: 100,
+                                    height: 100,
+                                    child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                Color(0xff263238)),
+                                        strokeWidth: 15,
+                                        backgroundColor: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ));
                         }),
                     SizedBox(height: 10),
                   ],
