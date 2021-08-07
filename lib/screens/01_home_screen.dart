@@ -22,8 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     setState(() {
       _firstPageData = Provider.of<ProviderModel>(context, listen: false)
-          .getDataFromApi(url: "http://192.168.1.6:4000/firstPage")
-          .timeout(Duration(seconds: 30));
+          .getDataFromApi(url: "http://192.168.1.6:4000/firstPage");
 
       // .getDataFromApi(url: "http://localhost:3000/firstPage");
     });
@@ -45,76 +44,71 @@ class _HomeScreenState extends State<HomeScreen> {
               onRefresh: () async {
                 setState(() {});
               },
-              child: SingleChildScrollView(
-                //REVIEW
-                child: Column(
-                  children: [
-                    FutureBuilder(
-                        future: _firstPageData.timeout(Duration(seconds: 15)),
-                        builder: (context,
-                            AsyncSnapshot<Map<String, dynamic>> snapshot) {
-                          var a = {};
-                          List<Widget> b = [];
-                          if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            if (snapshot.hasError) {
-                              return Center(
-                                  child: Text(snapshot.error.toString()));
-                            }
-                            a = snapshot.data!['scrollableItems'];
-                            a.forEach((key, value) {
-                              b.add(HorizontalItemsList(
-                                  sectionTitle: key,
-                                  ListItemsMargin: EdgeInsets.only(right: 10.0),
-                                  ListFramePadding:
-                                      EdgeInsets.symmetric(horizontal: 15.0),
-                                  itemsList: value));
-                            });
+              child: FutureBuilder(
+                  future: _firstPageData.timeout(Duration(minutes: 2)),
+                  builder:
+                      (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                    var scrollableItemsHolder = {};
 
-                            return Column(children: [
-                              // CarouselSection(
-                              //     items: snapshot.data!['Carousels']
-                              //         ['FirstCarousel']),
-                              HorizontalItemsList(
-                                  sectionTitle: "Watches",
-                                  ListItemsMargin: EdgeInsets.only(right: 10.0),
-                                  ListFramePadding:
-                                      EdgeInsets.symmetric(horizontal: 15.0),
-                                  itemsList: snapshot.data!['scrollableItems']
-                                      ['Watches']),
-                              // WindowsCategorySection(
-                              //     items: snapshot.data!['Windows']
-                              //         ['FirstWindow']),
-                              Column(children: b)
-                            ]);
-                          }
-                          return Container(
-                              child: Column(
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                height: 200,
-                                // color: Colors.blueGrey[900],
-                                child: Center(
-                                  child: Container(
-                                    width: 100,
-                                    height: 100,
-                                    child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                Color(0xff263238)),
-                                        strokeWidth: 15,
-                                        backgroundColor: Colors.white),
-                                  ),
-                                ),
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      List<Widget> scrollableWidgetsHolder = [
+                        CarouselSection(
+                            items: snapshot.data!['Carousels']
+                                ['FirstCarousel']),
+                        HorizontalItemsList(
+                            sectionTitle: "Watches",
+                            ListItemsMargin: EdgeInsets.only(right: 10.0),
+                            ListFramePadding:
+                                EdgeInsets.symmetric(horizontal: 15.0),
+                            itemsList: snapshot.data!['scrollableItems']
+                                ['Watches']),
+                        WindowsCategorySection(
+                            items: snapshot.data!['Windows']['FirstWindow']),
+                      ];
+                      if (snapshot.hasError) {
+                        return Center(child: Text(snapshot.error.toString()));
+                      }
+                      scrollableItemsHolder = snapshot.data!['scrollableItems'];
+                      scrollableItemsHolder.forEach((key, value) {
+                        scrollableWidgetsHolder.add(HorizontalItemsList(
+                            sectionTitle: key,
+                            ListItemsMargin: EdgeInsets.only(right: 10.0),
+                            ListFramePadding:
+                                EdgeInsets.symmetric(horizontal: 15.0),
+                            itemsList: value));
+                      });
+
+                      return ListView.builder(
+                          itemCount: 7,
+                          itemBuilder: (context, index) {
+                            return scrollableWidgetsHolder[index];
+                          });
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(
+                          child: Column(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: 200,
+                            // color: Colors.blueGrey[900],
+                            child: Center(
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Color(0xff263238)),
+                                    strokeWidth: 15,
+                                    backgroundColor: Colors.white),
                               ),
-                            ],
-                          ));
-                        }),
-                    SizedBox(height: 10),
-                  ],
-                ),
-              ),
+                            ),
+                          ),
+                        ],
+                      ));
+                    }
+                    return CircularProgressIndicator();
+                  }),
             ),
           );
         });
