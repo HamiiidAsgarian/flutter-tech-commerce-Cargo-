@@ -3,6 +3,7 @@ import 'package:commerce_app/screens/listeddItems_screen.dart';
 // import 'package:commerce_app/http_classed.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HorizontalItemsList extends StatelessWidget {
@@ -94,9 +95,9 @@ class _RowListedItemsState extends State<RowListedItems> {
             itemBuilder: (cotext, index) {
               if (index == _mylist.length &&
                   index != widget.itemsList!.length) {
-                print(
-                    "$index  ${widget.itemsList!.length} $_ListLimit"); //NOTE for showing progress indicator we creat an imaginary +1 item and indicated it as progress indicator
-                return Center(child: CircularProgressIndicator());
+                // print(
+                //     "$index  ${widget.itemsList!.length} $_ListLimit"); //NOTE for showing progress indicator we creat an imaginary +1 item and indicated it as progress indicator
+                return Center(child: CupertinoActivityIndicator());
               }
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5),

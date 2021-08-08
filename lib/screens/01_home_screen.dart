@@ -3,29 +3,71 @@ import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/carousel.dart';
 import 'package:commerce_app/widgets/forCategorySection.dart';
 import 'package:commerce_app/widgets/windows_category-section.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../consts.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({this.data});
 
+  final Map? data;
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<Map<String, dynamic>> _firstPageData;
+  // late Future<Map<String, dynamic>> _firstPageData;
+  ScrollController _scrollController = new ScrollController();
+  int _ListMaxLimit = 3;
+  List<HorizontalItemsList> _listScrollableItems = [];
+  List _shrinkedList = [];
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _firstPageData = Provider.of<ProviderModel>(context, listen: false)
-          .getDataFromApi(url: "http://192.168.1.6:4000/firstPage");
 
-      // .getDataFromApi(url: "http://localhost:3000/firstPage");
+    widget.data!['scrollableItems'].forEach((key, value) {
+      _listScrollableItems.add(HorizontalItemsList(
+          sectionTitle: key,
+          ListItemsMargin: EdgeInsets.only(right: 10.0),
+          ListFramePadding: EdgeInsets.symmetric(horizontal: 15.0),
+          itemsList: value));
     });
+
+    // _shrinkedList = List.generate(3, (i) => _listScrollableItems[i]);
+    _shrinkedList = [
+      CarouselSection(items: widget.data!['Carousels']['FirstCarousel']),
+      HorizontalItemsList(
+          sectionTitle: "Watches",
+          ListItemsMargin: EdgeInsets.only(right: 10.0),
+          ListFramePadding: EdgeInsets.symmetric(horizontal: 15.0),
+          itemsList: widget.data!['scrollableItems']['Watches']),
+      WindowsCategorySection(items: widget.data!['Windows']['FirstWindow']),
+      // ..._shrinkedList,
+    ];
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        print("end");
+
+        setState(() {
+          if (_ListMaxLimit + 3 <= _listScrollableItems.length + (3)) {
+            //NOTE values inside the paranteces are because of the three static added to the firts of the list
+            for (int i = _ListMaxLimit; i < _ListMaxLimit + 3; i++) {
+              _shrinkedList.add(_listScrollableItems[i - (3)]);
+            }
+            _ListMaxLimit += 3;
+          }
+        });
+      }
+    });
+
+    // _shrinkedList =
+    //     List.generate(_loadedItemsNumber, (i) => _firstPageData['scrollableItems'][i]);
+
+    // .getDataFromApi(url: "http://localhost:3000/firstPage");
   }
 
   Widget build(BuildContext context) {
@@ -34,82 +76,20 @@ class _HomeScreenState extends State<HomeScreen> {
         return MaterialPageRoute(builder: (context) {
           return Scaffold(
             backgroundColor: cBackgroundGrey,
-            appBar: MyAppBar(
-                // leadingIcon: Icon(
-                //   MyFlutterApp.menu,
-                //   color: cIconGrey,
-                // ),
-                ),
-            body: RefreshIndicator(
-              onRefresh: () async {
-                setState(() {});
-              },
-              child: FutureBuilder(
-                  future: _firstPageData.timeout(Duration(minutes: 2)),
-                  builder:
-                      (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
-                    var scrollableItemsHolder = {};
-
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      List<Widget> scrollableWidgetsHolder = [
-                        CarouselSection(
-                            items: snapshot.data!['Carousels']
-                                ['FirstCarousel']),
-                        HorizontalItemsList(
-                            sectionTitle: "Watches",
-                            ListItemsMargin: EdgeInsets.only(right: 10.0),
-                            ListFramePadding:
-                                EdgeInsets.symmetric(horizontal: 15.0),
-                            itemsList: snapshot.data!['scrollableItems']
-                                ['Watches']),
-                        WindowsCategorySection(
-                            items: snapshot.data!['Windows']['FirstWindow']),
-                      ];
-                      if (snapshot.hasError) {
-                        return Center(child: Text(snapshot.error.toString()));
-                      }
-                      scrollableItemsHolder = snapshot.data!['scrollableItems'];
-                      scrollableItemsHolder.forEach((key, value) {
-                        scrollableWidgetsHolder.add(HorizontalItemsList(
-                            sectionTitle: key,
-                            ListItemsMargin: EdgeInsets.only(right: 10.0),
-                            ListFramePadding:
-                                EdgeInsets.symmetric(horizontal: 15.0),
-                            itemsList: value));
-                      });
-
-                      return ListView.builder(
-                          itemCount: 7,
-                          itemBuilder: (context, index) {
-                            return scrollableWidgetsHolder[index];
-                          });
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Container(
-                          child: Column(
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: 200,
-                            // color: Colors.blueGrey[900],
-                            child: Center(
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Color(0xff263238)),
-                                    strokeWidth: 15,
-                                    backgroundColor: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ));
-                    }
-                    return CircularProgressIndicator();
-                  }),
-            ),
+            appBar: MyAppBar(),
+            body: ListView.builder(
+                controller: _scrollController,
+                itemCount: _ListMaxLimit,
+                // _shrinkedList.length < ListScrollableItems.length + 3
+                //     ? _shrinkedList.length
+                //     : _shrinkedList.length,
+                itemBuilder: (context, index) {
+                  if (index == _ListMaxLimit &&
+                      index != _listScrollableItems.length) {
+                    return CupertinoActivityIndicator();
+                  }
+                  return _shrinkedList[index];
+                }),
           );
         });
       });

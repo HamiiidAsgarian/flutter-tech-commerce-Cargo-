@@ -1,9 +1,15 @@
+import 'dart:io';
+
 import 'package:commerce_app/screens/01_home_screen.dart';
 // import 'package:commerce_app/screens/02_category_Frame.dart';
 // import 'package:commerce_app/screens/03_search_screen_frame.dart';
 // import 'package:commerce_app/screens/04_Profile_screen.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider_model.dart';
 
 // import '02_category_Frame.dart';
 // import '03_search_screen_frame.dart';
@@ -16,6 +22,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentpage = 0;
+  late Future<Map<String, dynamic>> _firstPageData;
   List<Widget> screens = [
     // TestScreen(),
     HomeScreen(),
@@ -23,6 +30,14 @@ class _MainScreenState extends State<MainScreen> {
     // SearchFramePage(),
     // ProfileScreen2(),
   ];
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _firstPageData = Provider.of<ProviderModel>(context, listen: false)
+          .getDataFromApi(url: "http://192.168.1.6:4000/firstPage");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,26 +77,59 @@ class _MainScreenState extends State<MainScreen> {
 
         return res;
       },
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        bottomNavigationBar: MyBottomNavigationBar(
-          newvalue: currentpage,
-          function: (int e) {
-            setState(() {
-              currentpage = e;
-            });
-          },
-        ),
-        body: IndexedStack(
-          index: currentpage,
-          // onPageChanged: (e) {
-          //   setState(() {
-          //     currentpage = e;
-          //   });
-          // },
-          children: screens,
-          // controller: pageController
-        ),
+      child: RefreshIndicator(
+        onRefresh: () async {
+          setState(() {
+            _firstPageData = Provider.of<ProviderModel>(context, listen: false)
+                .getDataFromApi(url: "http://192.168.1.6:4000/firstPage");
+          });
+        },
+        child: Scaffold(
+            extendBodyBehindAppBar: true,
+            bottomNavigationBar: MyBottomNavigationBar(
+              newvalue: currentpage,
+              function: (int e) {
+                setState(() {
+                  currentpage = e;
+                });
+              },
+            ),
+            body: FutureBuilder(
+                future: _firstPageData,
+                builder:
+                    (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                  // if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData) {
+                    return IndexedStack(
+                      index: currentpage,
+                      children: [
+                        // TestScreen(),
+                        HomeScreen(data: snapshot.data),
+                        // CategoryFramePage(),
+                        // SearchFramePage(),
+                        // ProfileScreen2(),
+                      ],
+                      // controller: pageController
+                    );
+                  }
+                  // if (!snapshot.hasData) {
+                  //   return Center(
+                  //       child: ElevatedButton(
+                  //           onPressed: () {
+                  //             setState(() {});
+                  //           },
+                  //           child: Text("Try Again")));
+                  // }
+                  if (snapshot.hasError) {
+                    return Center(child: Text(snapshot.error.toString()));
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CupertinoActivityIndicator());
+                  }
+                  // }
+                  print(snapshot.connectionState);
+                  return Center(child: CupertinoActivityIndicator());
+                })),
       ),
     );
     // });
