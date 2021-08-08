@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:commerce_app/screens/01_home_screen.dart';
 // import 'package:commerce_app/screens/02_category_Frame.dart';
 // import 'package:commerce_app/screens/03_search_screen_frame.dart';
@@ -82,6 +80,7 @@ class _MainScreenState extends State<MainScreen> {
           setState(() {
             _firstPageData = Provider.of<ProviderModel>(context, listen: false)
                 .getDataFromApi(url: "http://192.168.1.6:4000/firstPage");
+            print("firstScreen refreshed");
           });
         },
         child: Scaffold(

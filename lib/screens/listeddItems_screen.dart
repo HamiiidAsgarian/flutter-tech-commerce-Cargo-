@@ -2,7 +2,9 @@ import 'package:commerce_app/screens/search_limit_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/appbar.dart';
 import 'package:commerce_app/widgets/item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../consts.dart';
 
@@ -44,22 +46,45 @@ class ListedItemsScreen extends StatelessWidget {
   }
 }
 
-class BrandItemsList extends StatelessWidget {
+class BrandItemsList extends StatefulWidget {
   const BrandItemsList({Key? key, required this.itemsList}) : super(key: key);
   final List<dynamic> itemsList;
 
   @override
+  _BrandItemsListState createState() => _BrandItemsListState();
+}
+
+class _BrandItemsListState extends State<BrandItemsList> {
+  ScrollController _scrollControllerGrid = new ScrollController();
+  int _maxLimit = 6;
+  @override
+  void initState() {
+    super.initState();
+    _scrollControllerGrid.addListener(() {
+      if (_scrollControllerGrid.position.pixels ==
+          _scrollControllerGrid.position.maxScrollExtent) {
+        print("ended");
+        setState(() {
+          print(
+              "listLength => ${widget.itemsList.length} | maxLimit=> $_maxLimit");
+          _maxLimit = (_maxLimit + 6 <= widget.itemsList.length)
+              ? _maxLimit + 6
+              : _maxLimit;
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: GridView.count(
-        // crossAxisSpacing: 20, // Left and right spacing between Widget
-        // mainAxisSpacing: 10, //upper and lower spacing
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        crossAxisCount: 2, //The number of Widgets in each row
-        childAspectRatio: .65, //The ratio of width to height
-        shrinkWrap: true,
-        children: itemsList
-            .map<Widget>((data) => Container(
+        child: GridView.builder(
+            controller: _scrollControllerGrid,
+            itemCount: _maxLimit,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, childAspectRatio: 3 / 5),
+            itemBuilder: (context, index) {
+              return Container(
                   // height: 200,
                   // width: 20,
                   // color: Colors.amber,
@@ -72,23 +97,57 @@ class BrandItemsList extends StatelessWidget {
                       // width:
                       //     (MediaQuery.of(context).size.width / 2) - 5,
                       child: Item(
-                        id: data['id'],
-                        title: data['title'],
-                        company: data['company'],
-                        price: data['price'].toDouble(),
-                        imgTumbnailUrl: data['thumbnail'],
+                        id: widget.itemsList[index]['id'],
+                        title: widget.itemsList[index]['title'],
+                        company: widget.itemsList[index]['company'],
+                        price: widget.itemsList[index]['price'].toDouble(),
+                        imgTumbnailUrl: widget.itemsList[index]['thumbnail'],
                         imgUrl: "data['imageUrl']",
-                        imageWidth:
-                            (MediaQuery.of(context).size.width / 2) - 34,
-                        data: data,
+                        rate: widget.itemsList[index]['rate'].toDouble(),
+                        data: widget.itemsList[index],
                       ),
                     ),
-                  ),
-                ))
-            .toList(),
-      ),
-      // ),
-    );
+                  ));
+            })
+
+        //  (
+        //   // crossAxisSpacing: 20, // Left and right spacing between Widget
+        //   // mainAxisSpacing: 10, //upper and lower spacing
+        //   padding: EdgeInsets.symmetric(horizontal: 10),
+        //   crossAxisCount: 2, //The number of Widgets in each row
+        //   childAspectRatio: 3 / 5, //The ratio of width to height
+        //   shrinkWrap: true,
+        //   children: itemsList
+        //       .map<Widget>((data) => Container(
+        //             // height: 200,
+        //             // width: 20,
+        //             // color: Colors.amber,
+        //             padding:
+        //                 const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        //             child: ClipRRect(
+        //               borderRadius: BorderRadius.circular(5),
+        //               child: Container(
+        //                 color: Colors.white,
+        //                 // width:
+        //                 //     (MediaQuery.of(context).size.width / 2) - 5,
+        //                 child: Item(
+        //                   id: data['id'],
+        //                   title: data['title'],
+        //                   company: data['company'],
+        //                   price: data['price'].toDouble(),
+        //                   imgTumbnailUrl: data['thumbnail'],
+        //                   imgUrl: "data['imageUrl']",
+        //                   // imageWidth: double.infinity,
+        //                   // (MediaQuery.of(context).size.width / 2) - 34,
+        //                   data: data,
+        //                 ),
+        //               ),
+        //             ),
+        //           ))
+        //       .toList(),
+        // ),
+        // ),
+        );
   }
 }
 
