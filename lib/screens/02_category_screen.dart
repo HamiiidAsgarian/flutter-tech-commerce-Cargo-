@@ -13,10 +13,10 @@ class CategoryScreen extends StatelessWidget {
   final dynamic data;
   final String title;
 
-  iconBuilder(var currentIndexData) {
-    bool result = currentIndexData.runtimeType.toString() == "_JsonMap";
-    return result;
-  }
+  // iconBuilder(var currentIndexData) {
+  //   bool result = currentIndexData.runtimeType.toString() == "_JsonMap";
+  //   return result;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -81,10 +81,13 @@ class CategoryScreen extends StatelessWidget {
                         },
 
                         ///NOTE if the list is nested adds back(pop) icon.
-                        // trailing:
-                        //     iconBuilder(data.values.elementAt(index)) == false
-                        //         ? SizedBox()
-                        //         : Icon(Icons.keyboard_arrow_right, size: 30),
+                        trailing: data.values
+                                    .elementAt(index)
+                                    .runtimeType
+                                    .toString() ==
+                                "List<dynamic>"
+                            ? SizedBox()
+                            : Icon(Icons.keyboard_arrow_right, size: 30),
                         title: Text(data.keys.elementAt(index),
                             style: itemBrandFontStyle.copyWith(fontSize: 17)),
                       ),

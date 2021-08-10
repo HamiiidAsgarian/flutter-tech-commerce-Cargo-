@@ -1,3 +1,2 @@
 json-server --watch db.json
-json-server --host 192.168.1.6 db.json --port 4000
-json-server --host 192.168.1.6 db.json --port 4000
+json-server --host 192.168.1.6 db.json --port 4000json-server --host 192.168.1.6 db.json --port 4000

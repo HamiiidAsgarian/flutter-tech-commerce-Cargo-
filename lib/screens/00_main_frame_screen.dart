@@ -1,7 +1,7 @@
 import 'package:commerce_app/screens/01_home_screen.dart';
-// import 'package:commerce_app/screens/02_category_Frame.dart';
-// import 'package:commerce_app/screens/03_search_screen_frame.dart';
-// import 'package:commerce_app/screens/04_Profile_screen.dart';
+import 'package:commerce_app/screens/02_category_Frame.dart';
+import 'package:commerce_app/screens/03_search_screen_frame.dart';
+import 'package:commerce_app/screens/04_Profile_screen.dart';
 import 'package:commerce_app/widgets/navAndAppbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,13 +21,13 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentpage = 0;
   late Future<Map<String, dynamic>> _firstPageData;
-  List<Widget> screens = [
-    // TestScreen(),
-    HomeScreen(),
-    // CategoryFramePage(),
-    // SearchFramePage(),
-    // ProfileScreen2(),
-  ];
+  // List<Widget> screens = [
+  //   // TestScreen(),
+  //   HomeScreen(),
+  //   // CategoryFramePage(),
+  //   // SearchFramePage(),
+  //   // ProfileScreen2(),
+  // ];
   @override
   void initState() {
     super.initState();
@@ -104,9 +104,9 @@ class _MainScreenState extends State<MainScreen> {
                       children: [
                         // TestScreen(),
                         HomeScreen(data: snapshot.data),
-                        // CategoryFramePage(),
-                        // SearchFramePage(),
-                        // ProfileScreen2(),
+                        CategoryFramePage(),
+                        SearchFramePage(),
+                        ProfileScreen2(),
                       ],
                       // controller: pageController
                     );
