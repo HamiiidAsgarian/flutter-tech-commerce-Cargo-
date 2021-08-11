@@ -1,7 +1,8 @@
+import 'package:commerce_app/screens/listeddItems_screen.dart';
 import 'package:commerce_app/screens/search_limit_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/appbar.dart';
-import 'package:commerce_app/widgets/item.dart';
+// import 'package:commerce_app/widgets/item.dart';
 import 'package:flutter/material.dart';
 
 import '../consts.dart';
@@ -134,52 +135,53 @@ class _ListedItemsWithFilterScreenState
                     .toList()),
           ),
           const SizedBox(height: 7),
+          BrandItemsList(itemsList: myFilter.filterHandler()),
           //NOTE making Listed items with filter(if is on)
-          BrandItemsList(itemsList: myFilter.filterHandler())
+          // BrandItemsList(itemsList: myFilter.filterHandler())
         ]));
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////*BrandItemsList
-class BrandItemsList extends StatelessWidget {
-  const BrandItemsList({required this.itemsList});
-  final List<dynamic> itemsList;
+// class BrandItemsList extends StatelessWidget {
+//   const BrandItemsList({required this.itemsList});
+//   final List<dynamic> itemsList;
 
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Wrap(
-          children: itemsList
-              .map<Widget>((data) => Container(
-                    // color: Colors.amber,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Container(
-                        color: Colors.white,
-                        child: Item(
-                          id: data['id'],
-                          title: data['title'],
-                          company: data['company'],
-                          price: data['price'].toDouble(),
-                          imgTumbnailUrl: data['thumbnail'],
-                          imgUrl: "data['imageUrl']",
-                          imageWidth:
-                              (MediaQuery.of(context).size.width / 2) - 34,
-                          data: data,
-                        ),
-                      ),
-                    ),
-                  ))
-              .toList(),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Expanded(
+//       child: SingleChildScrollView(
+//         padding: EdgeInsets.symmetric(horizontal: 10),
+//         child: Wrap(
+//           children: itemsList
+//               .map<Widget>((data) => Container(
+//                     // color: Colors.amber,
+//                     padding:
+//                         const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+//                     child: ClipRRect(
+//                       borderRadius: BorderRadius.circular(5),
+//                       child: Container(
+//                         color: Colors.white,
+//                         child: Item(
+//                           id: data['id'],
+//                           title: data['title'],
+//                           company: data['company'],
+//                           price: data['price'].toDouble(),
+//                           imgTumbnailUrl: data['thumbnail'],
+//                           imgUrl: "data['imageUrl']",
+//                           imageWidth:
+//                               (MediaQuery.of(context).size.width / 2) - 34,
+//                           data: data,
+//                         ),
+//                       ),
+//                     ),
+//                   ))
+//               .toList(),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 ////////////////////////////////////////////////////////////////////////////////////*
 class OtherBrandsSection extends StatelessWidget {
@@ -190,12 +192,14 @@ class OtherBrandsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(data);
     List<Widget> test = [];
 
     //NOTE making otherBrands
     data.forEach((key, value) {
       //NOTE from all data if it is a list(does not have sub category/reached to the end) and is not current category, add to the other brands scroll
-      if (value.runtimeType == List && key != currentTitle)
+      if (value.runtimeType.toString() == "List<dynamic>" &&
+          key != currentTitle)
         test.add(Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
           child: Container(

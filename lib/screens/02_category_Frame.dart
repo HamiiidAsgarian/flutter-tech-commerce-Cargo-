@@ -1,5 +1,6 @@
 import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/screens/02_category_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,11 +39,9 @@ class _CategoryFramePageState extends State<CategoryFramePage> {
                   builder: (context, AsyncSnapshot<Map> snapshot) {
                     if (snapshot.hasData) {
                       return CategoryScreen(
-                        data: snapshot.data,
-                        title: "Category",
-                      );
+                          data: snapshot.data, title: "Category");
                     }
-                    return Center(child: CircularProgressIndicator());
+                    return Center(child: CupertinoActivityIndicator());
                   }),
             ),
           );
