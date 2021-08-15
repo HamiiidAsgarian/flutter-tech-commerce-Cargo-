@@ -79,65 +79,69 @@ class _ListedItemsWithFilterScreenState
               });
             },
           ),
-          const SizedBox(height: 7),
+          // const SizedBox(height: 7),
           //NOTE making a scroll list of sibling items
           widget.otherBrands != null
               ? OtherBrandsSection(
                   currentTitle: widget.title, data: widget.otherBrands!)
               : const SizedBox(),
-          const SizedBox(height: 7),
           //NOTE making a scroll list of Chosen/Active filters
           SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 20),
             scrollDirection: Axis.horizontal,
             child: Row(
                 children: myFilter.Activefilters()
-                    .map((e) => Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: MaterialButton(
-                              color: Colors.red,
-                              minWidth: 5,
-                              child: Row(
-                                  //NOTE making the visualized filters witch with taping on the Filter its value turns to null to deActivate the filter
-                                  children: [
-                                    Text("${e.keys.first} : ${e.values.first}",
-                                        style: itemTitleFontStyle.copyWith(
-                                            fontSize: 14, color: Colors.white)),
-                                    Icon(Icons.close,
-                                        size: 15, color: Colors.white),
-                                  ]),
-                              onPressed: () {
-                                setState(() {
-                                  switch (e.keys.first) {
-                                    case ("Brand"):
-                                      myFilter.brandFilter = null;
-                                      break;
-                                    case ("Max"):
-                                      myFilter.maximumFilter = null;
-                                      break;
-                                    case ("Min"):
-                                      myFilter..minimumFilter = null;
-                                      break;
-                                    case ("Present"):
-                                      myFilter.statusFilter = null;
-                                      break;
-                                    case ("SortType"):
-                                      myFilter.sortTypeFilter = null;
-                                      break;
-                                  }
-                                });
-                              },
-                            ),
+                    .map((e) => Container(
+                          padding: EdgeInsets.all(0),
+                          color: Colors.amber,
+                          child: RawMaterialButton(
+                            constraints: BoxConstraints(minHeight: 10),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25)),
+                            fillColor: Colors.black,
+                            padding: EdgeInsets.all(0),
+                            // color: Colors.red,
+                            // minWidth: 5,
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                //NOTE making the visualized filters witch with taping on the Filter its value turns to null to deActivate the filter
+                                children: [
+                                  Text("${e.keys.first} : ${e.values.first}",
+                                      style: itemTitleFontStyle.copyWith(
+                                          fontSize: 14, color: Colors.white)),
+                                  Icon(Icons.close,
+                                      size: 15, color: Colors.white),
+                                ]),
+                            onPressed: () {
+                              setState(() {
+                                switch (e.keys.first) {
+                                  case ("Brand"):
+                                    myFilter.brandFilter = null;
+                                    break;
+                                  case ("Max"):
+                                    myFilter.maximumFilter = null;
+                                    break;
+                                  case ("Min"):
+                                    myFilter..minimumFilter = null;
+                                    break;
+                                  case ("Present"):
+                                    myFilter.statusFilter = null;
+                                    break;
+                                  case ("SortType"):
+                                    myFilter.sortTypeFilter = null;
+                                    break;
+                                }
+                              });
+                            },
                           ),
                         ))
                     .toList()),
           ),
-          const SizedBox(height: 7),
+          // const SizedBox(height: 7),
           BrandItemsList(itemsList: myFilter.filterHandler()),
           //NOTE making Listed items with filter(if is on)
-          // BrandItemsList(itemsList: myFilter.filterHandler())
+          // BrandItemsList(itemsList: myFilter.filterHandler()),
         ]));
   }
 }
@@ -201,7 +205,7 @@ class OtherBrandsSection extends StatelessWidget {
       if (value.runtimeType.toString() == "List<dynamic>" &&
           key != currentTitle)
         test.add(Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 0),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
@@ -235,8 +239,12 @@ class OtherBrandsSection extends StatelessWidget {
     });
 
     return Container(
-      height: 40,
+      padding: EdgeInsets.symmetric(vertical: 5),
+      // color: Colors.amber,
+      height: 50,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(width: 25),
           Text("Other brands",
