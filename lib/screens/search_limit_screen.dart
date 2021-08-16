@@ -10,6 +10,7 @@ class SearchLimitScreen extends StatefulWidget {
     required this.function,
     this.sliderMin,
     this.slidermax,
+    this.sliderMaxRange,
     this.statusCheckValue,
     this.filterText,
   });
@@ -18,6 +19,7 @@ class SearchLimitScreen extends StatefulWidget {
 
   final int? sliderMin;
   final int? slidermax;
+  final int? sliderMaxRange;
   final bool? statusCheckValue;
   final String? filterText;
 
@@ -28,7 +30,7 @@ class SearchLimitScreen extends StatefulWidget {
 class _SearchLimitScreenState extends State<SearchLimitScreen> {
   final List<bool> _isOpen = [false, false];
   static const double sliderStartingRange = 0;
-  static const double sliderEndingRange = 500;
+  double sliderEndingRange = 500;
 
   String? searchedText;
   late int _sliderMin;
@@ -41,6 +43,8 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
     super.initState();
     _sliderMin = widget.sliderMin!;
     _slidermax = widget.slidermax!;
+    sliderEndingRange = widget.sliderMaxRange!
+        .toDouble(); // NOTE changin default max range to the given max
     _statusCheckValue = widget.statusCheckValue!;
     _sliderMin = widget.sliderMin!;
     _filterText = widget.filterText!;
@@ -90,23 +94,7 @@ class _SearchLimitScreenState extends State<SearchLimitScreen> {
                   setState(() {
                     _filterText = e;
                   });
-                }
-
-                // (String e) {
-                //   setState(() {
-                //     searchedText = e;
-                //   });
-                // },
-                //  ,
-                // // textInputType: TextInputType.text,
-                // hint: "Searching in Fashion category",
-                // func: (String e) {
-                //   setState(() {
-                //     searchedText = e;
-                //   });
-                // print(testText);
-                // },
-                )),
+                })),
         Divider(height: 1, color: cBackgroundGrey),
         ExpansionPanelList(
             // dividerColor: (Colors.yellow),

@@ -25,6 +25,7 @@ class _ListedItemsWithFilterScreenState
     extends State<ListedItemsWithFilterScreen> {
   late List data;
   late Filter myFilter = new Filter();
+  late int maxPrice;
 
   @override
   void initState() {
@@ -32,6 +33,18 @@ class _ListedItemsWithFilterScreenState
         .initState(); //REVIEW  should i use direct data to data inside filter class?
     data = widget.itemsList;
     myFilter.filterdata = data;
+    maxPrice = maxPriceFinder(data);
+    // maxPriceFinder(data);
+  }
+
+  maxPriceFinder(List<dynamic> list) {
+    List<int> a = [];
+    list.forEach((element) {
+      a.add(element['price'].toInt());
+    });
+    int res = a.reduce((curr, next) => curr > next ? curr : next);
+    // print(res);
+    return res;
   }
 
   @override
@@ -59,8 +72,9 @@ class _ListedItemsWithFilterScreenState
           FilterAndSortSection(
             //NOTE sending the previus written search text to the filter screen and the rest of information too
             filterText: myFilter.brandFilter ?? "",
+            sliderMaxRange: maxPrice,
+            sliderMax: myFilter.maximumFilter ?? maxPrice,
             sliderMin: myFilter.minimumFilter ?? 0,
-            sliderMax: myFilter.maximumFilter ?? 500,
             statusCheck: myFilter.statusFilter ?? false,
             data: data,
             //NOTE recieving a list of selected filters from the widget [min,max,isAvailable?,written text to search]
@@ -77,6 +91,7 @@ class _ListedItemsWithFilterScreenState
               setState(() {
                 myFilter.sortTypeFilter = sortType;
               });
+              Navigator.of(context).pop();
             },
           ),
           // const SizedBox(height: 7),
@@ -87,54 +102,60 @@ class _ListedItemsWithFilterScreenState
               : const SizedBox(),
           //NOTE making a scroll list of Chosen/Active filters
           SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            padding: EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: myFilter.Activefilters().length == 0 ? 0 : 5),
             scrollDirection: Axis.horizontal,
             child: Row(
                 children: myFilter.Activefilters()
-                    .map((e) => RawMaterialButton(
-                          elevation: 0,
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
+                    .map((e) => Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 2.5),
+                          child: RawMaterialButton(
+                            elevation: 0,
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
 
-                          constraints: BoxConstraints(minHeight: 10),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25)),
-                          fillColor: Colors.amberAccent[700],
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          // color: Colors.red,
-                          // minWidth: 5,
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              //NOTE making the visualized filters witch with taping on the Filter its value turns to null to deActivate the filter
-                              children: [
-                                Text("${e.keys.first} : ${e.values.first}",
-                                    style: itemTitleFontStyle.copyWith(
-                                        fontSize: 14, color: Colors.white)),
-                                Icon(Icons.close,
-                                    size: 15, color: Colors.white),
-                              ]),
-                          onPressed: () {
-                            setState(() {
-                              switch (e.keys.first) {
-                                case ("Brand"):
-                                  myFilter.brandFilter = null;
-                                  break;
-                                case ("Max"):
-                                  myFilter.maximumFilter = null;
-                                  break;
-                                case ("Min"):
-                                  myFilter..minimumFilter = null;
-                                  break;
-                                case ("Present"):
-                                  myFilter.statusFilter = null;
-                                  break;
-                                case ("SortType"):
-                                  myFilter.sortTypeFilter = null;
-                                  break;
-                              }
-                            });
-                          },
+                            constraints: BoxConstraints(minHeight: 10),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25)),
+                            fillColor: Colors.amberAccent[700],
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            // color: Colors.red,
+                            // minWidth: 5,
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                //NOTE making the visualized filters witch with taping on the Filter its value turns to null to deActivate the filter
+                                children: [
+                                  Text("${e.keys.first} : ${e.values.first}",
+                                      style: itemTitleFontStyle.copyWith(
+                                          fontSize: 14, color: Colors.white)),
+                                  Icon(Icons.close,
+                                      size: 15, color: Colors.white),
+                                ]),
+                            onPressed: () {
+                              setState(() {
+                                switch (e.keys.first) {
+                                  case ("Brand"):
+                                    myFilter.brandFilter = null;
+                                    break;
+                                  case ("Max"):
+                                    myFilter.maximumFilter = null;
+                                    break;
+                                  case ("Min"):
+                                    myFilter..minimumFilter = null;
+                                    break;
+                                  case ("Present"):
+                                    myFilter.statusFilter = null;
+                                    break;
+                                  case ("SortType"):
+                                    myFilter.sortTypeFilter = null;
+                                    break;
+                                }
+                              });
+                            },
+                          ),
                         ))
                     .toList()),
           ),
@@ -196,43 +217,36 @@ class OtherBrandsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data);
-    List<Widget> test = [];
+    List<Widget> otherBrandsItems = [];
 
     //NOTE making otherBrands
     data.forEach((key, value) {
       //NOTE from all data if it is a list(does not have sub category/reached to the end) and is not current category, add to the other brands scroll
       if (value.runtimeType.toString() == "List<dynamic>" &&
           key != currentTitle)
-        test.add(Padding(
+        otherBrandsItems.add(Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 0),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(5)),
-              border: Border.all(color: cBorderGrey),
+          child: RawMaterialButton(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.grey),
+              borderRadius: BorderRadius.circular(15),
             ),
-            height: 30,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: RawMaterialButton(
-                fillColor: Colors.white,
-                constraints: BoxConstraints(minWidth: 50),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ListedItemsWithFilterScreen(
-                              itemsList: value,
-                              title: key,
-                              otherBrands: data)));
-                },
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(key,
-                      style: itemBrandFontStyle.copyWith(
-                          fontWeight: FontWeight.w600)),
-                ),
-              ),
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            fillColor: Colors.white,
+            constraints: BoxConstraints(minWidth: 50),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListedItemsWithFilterScreen(
+                          itemsList: value, title: key, otherBrands: data)));
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Text(key,
+                  style:
+                      itemBrandFontStyle.copyWith(fontWeight: FontWeight.w600)),
             ),
           ),
         ));
@@ -240,18 +254,21 @@ class OtherBrandsSection extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5),
-      // color: Colors.amber,
-      height: 50,
+      // color: Colors.amber.withOpacity(0.1),
+      height: 45,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(width: 25),
-          Text("Other brands",
-              style: itemBrandFontStyle.copyWith(fontSize: 15)),
-          const SizedBox(width: 7),
+          FittedBox(
+            child: Text("Other brands",
+                style: itemBrandFontStyle.copyWith(fontSize: 15)),
+          ),
+          // const SizedBox(width: 7),
           Expanded(
-              child: ListView(scrollDirection: Axis.horizontal, children: test))
+              child: ListView(
+                  scrollDirection: Axis.horizontal, children: otherBrandsItems))
         ],
       ),
     );
@@ -265,6 +282,7 @@ class FilterAndSortSection extends StatelessWidget {
       required this.function,
       this.sliderMin,
       this.sliderMax,
+      this.sliderMaxRange,
       this.statusCheck,
       required this.sortFunction,
       this.filterText});
@@ -274,6 +292,7 @@ class FilterAndSortSection extends StatelessWidget {
 
   final int? sliderMin;
   final int? sliderMax;
+  final int? sliderMaxRange;
   final bool? statusCheck;
   final String? filterText;
 
@@ -356,6 +375,7 @@ class FilterAndSortSection extends StatelessWidget {
                     filterText: filterText!,
                     sliderMin: sliderMin!,
                     slidermax: sliderMax!,
+                    sliderMaxRange: sliderMaxRange!,
                     statusCheckValue: statusCheck!,
                     data: data,
                     function: function);

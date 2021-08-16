@@ -26,23 +26,25 @@ class _SearchFramePageState extends State<SearchFramePage> {
     return Consumer<ProviderModel>(builder: (context, vals, child) {
       return Navigator(onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute(builder: (context) {
-          return Scaffold(
-            body: RefreshIndicator(
-              onRefresh: () async {
-                setState(() {});
-              },
-              child: FutureBuilder(
-                  future: _thirdPageData,
-                  builder:
-                      (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
-                    if (snapshot.hasData) {
-                      return SearchScreen(
-                        data: snapshot.data!,
-                        // title: "Category",
-                      );
-                    }
-                    return Center(child: CircularProgressIndicator());
-                  }),
+          return SafeArea(
+            child: Scaffold(
+              body: RefreshIndicator(
+                onRefresh: () async {
+                  setState(() {});
+                },
+                child: FutureBuilder(
+                    future: _thirdPageData,
+                    builder: (context,
+                        AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                      if (snapshot.hasData) {
+                        return SearchScreen(
+                          data: snapshot.data!,
+                          // title: "Category",
+                        );
+                      }
+                      return Center(child: CircularProgressIndicator());
+                    }),
+              ),
             ),
           );
         });

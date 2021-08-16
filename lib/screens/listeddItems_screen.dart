@@ -41,6 +41,7 @@ class ListedItemsScreen extends StatelessWidget {
           // const SizedBox(height: 7),
           // const OtherBrandsSection(),
           const SizedBox(height: 7),
+
           BrandItemsList(itemsList: itemsList!)
         ]));
   }
@@ -56,17 +57,21 @@ class BrandItemsList extends StatefulWidget {
 
 class _BrandItemsListState extends State<BrandItemsList> {
   ScrollController _scrollControllerGrid = new ScrollController();
-  int _maxLimit = 6;
+  late int _maxLimit =
+      widget.itemsList.length > 6 ? 4 : widget.itemsList.length;
   @override
   void initState() {
     super.initState();
+    // _maxLimit = widget.itemsList.length > 6 ? 6 : widget.itemsList.length;
+    print("widget.itemsList.length ${widget.itemsList.length} init");
+
     _scrollControllerGrid.addListener(() {
       if (_scrollControllerGrid.position.pixels ==
           _scrollControllerGrid.position.maxScrollExtent) {
         print("ended");
         setState(() {
-          print(
-              "listLength => ${widget.itemsList.length} | maxLimit=> $_maxLimit");
+          // print(
+          //     "listLength => ${widget.itemsList.length} | maxLimit=> $_maxLimit");
           _maxLimit = (_maxLimit + 6 <= widget.itemsList.length)
               ? _maxLimit + 6
               : _maxLimit;
@@ -80,7 +85,9 @@ class _BrandItemsListState extends State<BrandItemsList> {
     return Expanded(
         child: GridView.builder(
             controller: _scrollControllerGrid,
-            itemCount: _maxLimit,
+            itemCount: widget.itemsList.length > 6
+                ? _maxLimit
+                : widget.itemsList.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, childAspectRatio: 3 / 5),
             itemBuilder: (context, index) {
@@ -169,7 +176,7 @@ class OtherBrandsSection extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(width: 25),
-          Text("Other brands",
+          Text("Other brands :",
               style: itemBrandFontStyle.copyWith(fontSize: 15)),
           const SizedBox(width: 7),
           Expanded(

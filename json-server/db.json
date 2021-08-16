@@ -13696,12 +13696,11 @@
         }
       ],
       "categories": [
-        "Microphones ",
-        "Phones ",
+        "Microphones",
+        "Phones",
         "Watches",
-        "Keyboards",
         "Cases",
-        "Laptops ",
+        "Laptops",
         "Headsets"
       ]
     },
@@ -13917,7 +13916,7 @@
         }
       ],
       "categories": [
-        "Laptops ",
+        "Laptops",
         "Headsets"
       ]
     },
@@ -13957,9 +13956,8 @@
         }
       ],
       "categories": [
-        "Phones ",
+        "Phones",
         "Watches",
-        "Keyboards",
         "Cases"
       ]
     }
