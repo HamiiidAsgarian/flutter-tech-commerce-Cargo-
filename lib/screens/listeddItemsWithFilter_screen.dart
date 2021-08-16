@@ -87,54 +87,54 @@ class _ListedItemsWithFilterScreenState
               : const SizedBox(),
           //NOTE making a scroll list of Chosen/Active filters
           SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             scrollDirection: Axis.horizontal,
             child: Row(
                 children: myFilter.Activefilters()
-                    .map((e) => Container(
-                          padding: EdgeInsets.all(0),
-                          color: Colors.amber,
-                          child: RawMaterialButton(
-                            constraints: BoxConstraints(minHeight: 10),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25)),
-                            fillColor: Colors.black,
-                            padding: EdgeInsets.all(0),
-                            // color: Colors.red,
-                            // minWidth: 5,
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                //NOTE making the visualized filters witch with taping on the Filter its value turns to null to deActivate the filter
-                                children: [
-                                  Text("${e.keys.first} : ${e.values.first}",
-                                      style: itemTitleFontStyle.copyWith(
-                                          fontSize: 14, color: Colors.white)),
-                                  Icon(Icons.close,
-                                      size: 15, color: Colors.white),
-                                ]),
-                            onPressed: () {
-                              setState(() {
-                                switch (e.keys.first) {
-                                  case ("Brand"):
-                                    myFilter.brandFilter = null;
-                                    break;
-                                  case ("Max"):
-                                    myFilter.maximumFilter = null;
-                                    break;
-                                  case ("Min"):
-                                    myFilter..minimumFilter = null;
-                                    break;
-                                  case ("Present"):
-                                    myFilter.statusFilter = null;
-                                    break;
-                                  case ("SortType"):
-                                    myFilter.sortTypeFilter = null;
-                                    break;
-                                }
-                              });
-                            },
-                          ),
+                    .map((e) => RawMaterialButton(
+                          elevation: 0,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+
+                          constraints: BoxConstraints(minHeight: 10),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25)),
+                          fillColor: Colors.amberAccent[700],
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          // color: Colors.red,
+                          // minWidth: 5,
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //NOTE making the visualized filters witch with taping on the Filter its value turns to null to deActivate the filter
+                              children: [
+                                Text("${e.keys.first} : ${e.values.first}",
+                                    style: itemTitleFontStyle.copyWith(
+                                        fontSize: 14, color: Colors.white)),
+                                Icon(Icons.close,
+                                    size: 15, color: Colors.white),
+                              ]),
+                          onPressed: () {
+                            setState(() {
+                              switch (e.keys.first) {
+                                case ("Brand"):
+                                  myFilter.brandFilter = null;
+                                  break;
+                                case ("Max"):
+                                  myFilter.maximumFilter = null;
+                                  break;
+                                case ("Min"):
+                                  myFilter..minimumFilter = null;
+                                  break;
+                                case ("Present"):
+                                  myFilter.statusFilter = null;
+                                  break;
+                                case ("SortType"):
+                                  myFilter.sortTypeFilter = null;
+                                  break;
+                              }
+                            });
+                          },
                         ))
                     .toList()),
           ),
