@@ -77,23 +77,6 @@ class ItemFooter extends StatelessWidget {
                     Text("Price:",
                         style: priceFontStyle.copyWith(
                             color: Colors.black, fontSize: 23)),
-                    // SizedBox(height: 10),
-                    // Row(
-                    //   children: [
-                    //     Container(
-                    //       padding: const EdgeInsets.only(left: 7),
-                    //       child: const CircleAvatar(
-                    //         radius: 12.5,
-                    //       ),
-                    //     ),
-                    //     const Padding(
-                    //       padding: EdgeInsets.only(left: 7),
-                    //       child: CircleAvatar(
-                    //         radius: 12.5,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // )
                   ],
                 ),
                 Column(
