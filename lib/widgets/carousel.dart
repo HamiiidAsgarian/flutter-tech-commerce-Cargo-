@@ -1,5 +1,6 @@
 import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/screens/listeddItems_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -182,13 +183,15 @@ class _SlideState extends State<Slide> {
                                         child: Container(
                                             width: 100,
                                             height: 100,
-                                            child: CircularProgressIndicator(
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                        Color>(Colors.white),
-                                                strokeWidth: 15,
-                                                backgroundColor:
-                                                    Colors.white10)),
+                                            child: CupertinoActivityIndicator()
+                                            // CircularProgressIndicator(
+                                            //     valueColor:
+                                            //         AlwaysStoppedAnimation<
+                                            //             Color>(Colors.white),
+                                            //     strokeWidth: 15,
+                                            //     backgroundColor:
+                                            //         Colors.white10)
+                                            ),
                                       ),
                                     );
                             }, fit: BoxFit.cover)),

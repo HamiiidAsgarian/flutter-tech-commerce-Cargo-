@@ -28,23 +28,18 @@ class _SearchFramePageState extends State<SearchFramePage> {
         return MaterialPageRoute(builder: (context) {
           return SafeArea(
             child: Scaffold(
-              body: RefreshIndicator(
-                onRefresh: () async {
-                  setState(() {});
-                },
-                child: FutureBuilder(
-                    future: _thirdPageData,
-                    builder: (context,
-                        AsyncSnapshot<Map<String, dynamic>> snapshot) {
-                      if (snapshot.hasData) {
-                        return SearchScreen(
-                          data: snapshot.data!,
-                          // title: "Category",
-                        );
-                      }
-                      return Center(child: CircularProgressIndicator());
-                    }),
-              ),
+              body: FutureBuilder(
+                  future: _thirdPageData,
+                  builder:
+                      (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                    if (snapshot.hasData) {
+                      return SearchScreen(
+                        data: snapshot.data!,
+                        // title: "Category",
+                      );
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  }),
             ),
           );
         });

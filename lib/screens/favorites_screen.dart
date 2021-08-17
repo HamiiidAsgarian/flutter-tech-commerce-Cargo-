@@ -199,7 +199,8 @@ class FavoriteScreen extends StatelessWidget {
                                   Navigator.pop(context);
                                 })
                           ]),
-                      Text("you have 2 itrms in your Favorites",
+                      Text(
+                          "you have ${vals.favoriteItems.length} itrms in your Favorites",
                           style: itemTitleFontStyle.copyWith(
                               fontSize: 11, fontWeight: FontWeight.w500)),
                     ])),

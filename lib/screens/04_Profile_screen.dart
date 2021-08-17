@@ -26,16 +26,17 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
           body: SingleChildScrollView(
             child: Column(
               children: [
+                SizedBox(height: 40),
                 Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                  // child: const Icon(Icons.access_alarm, size: 50),
+                  child: FlutterLogo(size: 80),
                 ),
                 // SizedBox(height: 20),
                 Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     child: MyRoundedButton(
-                      title: "Profile screen",
+                      title: "Sign in into account",
                       function: () {
                         print("Profile screen");
                       },

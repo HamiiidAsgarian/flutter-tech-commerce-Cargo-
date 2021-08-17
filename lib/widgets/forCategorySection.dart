@@ -113,24 +113,6 @@ class _RowListedItemsState extends State<RowListedItems> {
               );
               // itemsList![index];
             }));
-    // (
-    //     mainAxisAlignment: MainAxisAlignment.start,
-    //     crossAxisAlignment: CrossAxisAlignment.start,
-    //     children: itemsList!.map((e) {
-    //       // print(e.title);
-    //       return Container(
-    //           margin: margin,
-    //           // color: Colors.red,
-    //           // padding: const EdgeInsets.only(right: 0, bottom: 0, top: 0),
-    //           child: Item(
-    //               title: e['title'],
-    //               price: e['price'].toDouble(),
-    //               company: e['company'],
-    //               id: e['id'],
-    //               imgTumbnailUrl: e["thumbnail"],
-    //               data: e));
-    //     }).toList()),
-    // );
   }
 }
 

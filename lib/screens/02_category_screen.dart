@@ -59,8 +59,9 @@ class CategoryScreen extends StatelessWidget {
                         onTap: () {
                           var result;
                           Type type = data.values.elementAt(index).runtimeType;
-
-                          if (type.toString() == "List<dynamic>") {
+                          print(type);
+                          if (type.toString() == "List<dynamic>" ||
+                              type.toString() == "_GrowableList<dynamic>") {
                             result = ListedItemsWithFilterScreen(
                               otherBrands: data,
                               title: data.keys.elementAt(index),
@@ -82,10 +83,15 @@ class CategoryScreen extends StatelessWidget {
 
                         ///NOTE if the list is nested adds back(pop) icon.
                         trailing: data.values
-                                    .elementAt(index)
-                                    .runtimeType
-                                    .toString() ==
-                                "List<dynamic>"
+                                        .elementAt(index)
+                                        .runtimeType
+                                        .toString() ==
+                                    "List<dynamic>" ||
+                                data.values
+                                        .elementAt(index)
+                                        .runtimeType
+                                        .toString() ==
+                                    "_GrowableList<dynamic>"
                             ? SizedBox()
                             : Icon(Icons.keyboard_arrow_right, size: 30),
                         title: Text(data.keys.elementAt(index),

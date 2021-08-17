@@ -74,25 +74,26 @@ class ItemFooter extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    Text("Colors:",
-                        style: priceFontStyle.copyWith(color: Colors.black)),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(left: 7),
-                          child: const CircleAvatar(
-                            radius: 12.5,
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 7),
-                          child: CircleAvatar(
-                            radius: 12.5,
-                          ),
-                        ),
-                      ],
-                    )
+                    Text("Price:",
+                        style: priceFontStyle.copyWith(
+                            color: Colors.black, fontSize: 23)),
+                    // SizedBox(height: 10),
+                    // Row(
+                    //   children: [
+                    //     Container(
+                    //       padding: const EdgeInsets.only(left: 7),
+                    //       child: const CircleAvatar(
+                    //         radius: 12.5,
+                    //       ),
+                    //     ),
+                    //     const Padding(
+                    //       padding: EdgeInsets.only(left: 7),
+                    //       child: CircleAvatar(
+                    //         radius: 12.5,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // )
                   ],
                 ),
                 Column(
@@ -278,7 +279,24 @@ class _ItemsSlideViewState extends State<ItemsSlideView> {
   List<Widget> imagesBuilder(List images) {
     List<Widget> imagesList = [];
     for (var item in images) {
-      imagesList.add(Image.network(item));
+      imagesList
+          .add(Image.network(item, loadingBuilder: (context, child, progress) {
+        return progress == null
+            ? child
+            : Container(
+                color: Colors.blueGrey[900],
+                child: Center(
+                  child: Container(
+                      width: 100,
+                      height: 100,
+                      child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                          strokeWidth: 15,
+                          backgroundColor: Colors.white10)),
+                ),
+              );
+      }));
     }
     return imagesList;
   }

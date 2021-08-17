@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:commerce_app/consts.dart';
 import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/widgets/blackroundedbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CartScreen extends StatelessWidget {
 //   @override
@@ -213,7 +216,7 @@ class CartScreen extends StatelessWidget {
                     Text("Subtotal",
                         style: itemBrandFontStyle.copyWith(
                             fontSize: 14, color: Colors.black)),
-                    Text("${val.totalPriceNumber.toString()} \$",
+                    Text("${val.totalPriceNumber.toStringAsFixed(2)} \$",
                         style: itemBrandFontStyle.copyWith(
                             fontSize: 14, color: Colors.black)),
                   ],
@@ -236,15 +239,28 @@ class CartScreen extends StatelessWidget {
                       Text("Total",
                           style: itemBrandFontStyle.copyWith(
                               fontSize: 25, color: Colors.black)),
-                      Text("${val.totalPriceNumber - val.totalPriceFee} \$",
+                      Text(
+                          "${(val.totalPriceNumber - val.totalPriceFee).toStringAsFixed(2)} \$",
                           style: itemBrandFontStyle.copyWith(
                               fontSize: 18, color: Colors.black)),
                     ],
                   ),
                 ),
                 BlackRoundedButton(
-                  function: () {
-                    print("object");
+                  function: () async {
+                    // if (kIsWeb) {
+                    //   js.context.callMethod('open',
+                    //       ['https://github.com/HamiiidAsgarian']);
+                    //   print("platform is windows");
+                    // } else
+                    if (Platform.isAndroid) {
+                      const url = 'https://github.com/HamiiidAsgarian';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    }
                   },
                   title: 'Submit',
                 )

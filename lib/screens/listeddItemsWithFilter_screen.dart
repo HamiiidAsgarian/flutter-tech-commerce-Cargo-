@@ -222,7 +222,8 @@ class OtherBrandsSection extends StatelessWidget {
     //NOTE making otherBrands
     data.forEach((key, value) {
       //NOTE from all data if it is a list(does not have sub category/reached to the end) and is not current category, add to the other brands scroll
-      if (value.runtimeType.toString() == "List<dynamic>" &&
+      if ((value.runtimeType.toString() == "List<dynamic>" ||
+              value.runtimeType.toString() == "_GrowableList<dynamic>") &&
           key != currentTitle)
         otherBrandsItems.add(Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 0),
