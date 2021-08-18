@@ -18,7 +18,8 @@ class _SearchFramePageState extends State<SearchFramePage> {
     super.initState();
 
     _thirdPageData = Provider.of<ProviderModel>(context, listen: false)
-        .getDataFromApi(url: "http://192.168.1.6:4000/thirdPage");
+        .getDataFromApi(
+            url: "https://api.npoint.io/6c77447c9c8e9dac5898/thirdPage");
   }
 
   @override

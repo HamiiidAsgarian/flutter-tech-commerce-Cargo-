@@ -246,7 +246,3 @@ class SearchField2 extends StatelessWidget {
         cntrl: cntrl, func: func, hint: hint, textInputType: textInputType);
   }
 }
-
-
-
-////////////////////////////

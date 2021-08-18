@@ -155,20 +155,6 @@ class FavoriteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ProviderModel>(builder: (context, vals, child) {
       return Scaffold(
-        // appBar: AppBar(
-        //   elevation: 0,
-        //   backgroundColor: Colors.white, ////////////////////////* appbar color
-        //   leading: GestureDetector(
-        //     onTap: () {
-        //       Navigator.pushNamed(context, "/");
-        //     },
-        //     child: Icon(
-        //       MyFlutterApp.left_open,
-        //       // MdiIcons.walletPlusOutline,
-        //       color: appBargrey,
-        //     ),
-        //   ),
-        // ),
         body: Column(
           children: [
             Container(

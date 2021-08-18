@@ -13,11 +13,6 @@ class CategoryScreen extends StatelessWidget {
   final dynamic data;
   final String title;
 
-  // iconBuilder(var currentIndexData) {
-  //   bool result = currentIndexData.runtimeType.toString() == "_JsonMap";
-  //   return result;
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ProviderModel>(

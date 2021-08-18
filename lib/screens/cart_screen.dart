@@ -8,11 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CartScreen extends StatelessWidget {
-//   @override
-//   _CartScreenState createState() => _CartScreenState();
-// }
-
-// class _CartScreenState extends State<CartScreen> {
   List<Widget> testItems(
       List itemsList, Function discartFunction, Function countChange, context) {
     var b = [];
@@ -54,7 +49,7 @@ class CartScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        itemsList[i]['price'].toString(),
+                        "${itemsList[i]['price'].toString()} \$",
                         style: priceFontStyle.copyWith(
                             fontSize: 18, color: Colors.black87),
                       ),

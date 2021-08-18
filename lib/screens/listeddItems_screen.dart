@@ -25,7 +25,6 @@ class ListedItemsScreen extends StatelessWidget {
           ),
           leadingIcon: const Icon(
             MyFlutterApp.left_open,
-            // MdiIcons.walletPlusOutline,
             color: appBargrey,
           ),
           leadingIconFunction: () {
@@ -37,11 +36,7 @@ class ListedItemsScreen extends StatelessWidget {
             height: 1,
             color: cBackgroundGrey,
           ),
-          // const FilterAndSortSection(),
-          // const SizedBox(height: 7),
-          // const OtherBrandsSection(),
           const SizedBox(height: 7),
-
           BrandItemsList(itemsList: itemsList!)
         ]));
   }
@@ -92,9 +87,6 @@ class _BrandItemsListState extends State<BrandItemsList> {
                 crossAxisCount: 2, childAspectRatio: 3 / 5),
             itemBuilder: (context, index) {
               return Container(
-                  // height: 200,
-                  // width: 20,
-                  // color: Colors.amber,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                   child: ClipRRect(
@@ -115,46 +107,7 @@ class _BrandItemsListState extends State<BrandItemsList> {
                       ),
                     ),
                   ));
-            })
-
-        //  (
-        //   // crossAxisSpacing: 20, // Left and right spacing between Widget
-        //   // mainAxisSpacing: 10, //upper and lower spacing
-        //   padding: EdgeInsets.symmetric(horizontal: 10),
-        //   crossAxisCount: 2, //The number of Widgets in each row
-        //   childAspectRatio: 3 / 5, //The ratio of width to height
-        //   shrinkWrap: true,
-        //   children: itemsList
-        //       .map<Widget>((data) => Container(
-        //             // height: 200,
-        //             // width: 20,
-        //             // color: Colors.amber,
-        //             padding:
-        //                 const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        //             child: ClipRRect(
-        //               borderRadius: BorderRadius.circular(5),
-        //               child: Container(
-        //                 color: Colors.white,
-        //                 // width:
-        //                 //     (MediaQuery.of(context).size.width / 2) - 5,
-        //                 child: Item(
-        //                   id: data['id'],
-        //                   title: data['title'],
-        //                   company: data['company'],
-        //                   price: data['price'].toDouble(),
-        //                   imgTumbnailUrl: data['thumbnail'],
-        //                   imgUrl: "data['imageUrl']",
-        //                   // imageWidth: double.infinity,
-        //                   // (MediaQuery.of(context).size.width / 2) - 34,
-        //                   data: data,
-        //                 ),
-        //               ),
-        //             ),
-        //           ))
-        //       .toList(),
-        // ),
-        // ),
-        );
+            }));
   }
 }
 
@@ -167,13 +120,8 @@ class OtherBrandsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // margin: const EdgeInsets.symmetric(), //NOTE section margin
-      // color: Colors.amber,
-      // padding: EdgeInsets.symmetric(horizontal: 25),
       height: 40,
-      // color: Colors.yellowAccent,
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(width: 25),
           Text("Other brands :",
@@ -187,8 +135,6 @@ class OtherBrandsSection extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 2.5, vertical: 5),
                       child: Container(
-                        //   width: 5,
-
                         decoration: BoxDecoration(
                           // color: Colors.red,
                           borderRadius:

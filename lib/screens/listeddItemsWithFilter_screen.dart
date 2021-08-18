@@ -167,48 +167,6 @@ class _ListedItemsWithFilterScreenState
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////*BrandItemsList
-// class BrandItemsList extends StatelessWidget {
-//   const BrandItemsList({required this.itemsList});
-//   final List<dynamic> itemsList;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Expanded(
-//       child: SingleChildScrollView(
-//         padding: EdgeInsets.symmetric(horizontal: 10),
-//         child: Wrap(
-//           children: itemsList
-//               .map<Widget>((data) => Container(
-//                     // color: Colors.amber,
-//                     padding:
-//                         const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-//                     child: ClipRRect(
-//                       borderRadius: BorderRadius.circular(5),
-//                       child: Container(
-//                         color: Colors.white,
-//                         child: Item(
-//                           id: data['id'],
-//                           title: data['title'],
-//                           company: data['company'],
-//                           price: data['price'].toDouble(),
-//                           imgTumbnailUrl: data['thumbnail'],
-//                           imgUrl: "data['imageUrl']",
-//                           imageWidth:
-//                               (MediaQuery.of(context).size.width / 2) - 34,
-//                           data: data,
-//                         ),
-//                       ),
-//                     ),
-//                   ))
-//               .toList(),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-////////////////////////////////////////////////////////////////////////////////////*
 class OtherBrandsSection extends StatelessWidget {
   const OtherBrandsSection({required this.data, this.currentTitle});
 

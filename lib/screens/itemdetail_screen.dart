@@ -1,6 +1,7 @@
 import 'package:commerce_app/provider_model.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
 import 'package:commerce_app/widgets/blackroundedbutton.dart';
+import 'package:flutter/cupertino.dart';
 // import 'package:commerce_app/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -135,7 +136,7 @@ class ItemDescription extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Describtin",
+          Text("Descriptin",
               style: itemBrandFontStyle.copyWith(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
@@ -267,16 +268,12 @@ class _ItemsSlideViewState extends State<ItemsSlideView> {
         return progress == null
             ? child
             : Container(
-                color: Colors.blueGrey[900],
+                // color: Colors.blueGrey[900],
                 child: Center(
                   child: Container(
                       width: 100,
                       height: 100,
-                      child: CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.white),
-                          strokeWidth: 15,
-                          backgroundColor: Colors.white10)),
+                      child: CupertinoActivityIndicator(radius: 30)),
                 ),
               );
       }));

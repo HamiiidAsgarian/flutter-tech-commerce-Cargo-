@@ -63,11 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     });
-
-    // _shrinkedList =
-    //     List.generate(_loadedItemsNumber, (i) => _firstPageData['scrollableItems'][i]);
-
-    // .getDataFromApi(url: "http://localhost:3000/firstPage");
   }
 
   Widget build(BuildContext context) {
@@ -80,9 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
             body: ListView.builder(
                 controller: _scrollController,
                 itemCount: _ListMaxLimit,
-                // _shrinkedList.length < ListScrollableItems.length + 3
-                //     ? _shrinkedList.length
-                //     : _shrinkedList.length,
                 itemBuilder: (context, index) {
                   if (index == _ListMaxLimit &&
                       index != _listScrollableItems.length) {

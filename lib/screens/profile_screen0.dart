@@ -192,18 +192,6 @@ class _GenderRadioSectionState extends State<GenderRadioSection> {
           ),
         )
       ])
-
-      // Container(
-      //   color: greySearchbarBackground,
-      //   child: RadioListTile(
-      //       title: Text("Male",
-      //           style: itemBrandFontStyle.copyWith(fontSize: 16)),
-      //       value: 1,
-      //       groupValue: 1,
-      //       onChanged: (a) {
-      //         print(a);
-      //       }),
-      // ),
     ]);
     return column;
   }

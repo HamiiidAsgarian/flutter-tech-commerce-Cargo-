@@ -9,10 +9,6 @@ import 'package:provider/provider.dart';
 
 import '../provider_model.dart';
 
-// import '02_category_Frame.dart';
-// import '03_search_screen_frame.dart';
-// import '04_Profile_screen.dart';
-
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -21,19 +17,13 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentpage = 0;
   late Future<Map<String, dynamic>> _firstPageData;
-  // List<Widget> screens = [
-  //   // TestScreen(),
-  //   HomeScreen(),
-  //   // CategoryFramePage(),
-  //   // SearchFramePage(),
-  //   // ProfileScreen2(),
-  // ];
   @override
   void initState() {
     super.initState();
     setState(() {
       _firstPageData = Provider.of<ProviderModel>(context, listen: false)
-          .getDataFromApi(url: "http://192.168.1.6:4000/firstPage");
+          .getDataFromApi(
+              url: "https://api.npoint.io/6c77447c9c8e9dac5898/firstPage");
     });
   }
 
@@ -79,7 +69,9 @@ class _MainScreenState extends State<MainScreen> {
         onRefresh: () async {
           setState(() {
             _firstPageData = Provider.of<ProviderModel>(context, listen: false)
-                .getDataFromApi(url: "http://192.168.1.6:4000/firstPage");
+                .getDataFromApi(
+                    url:
+                        "https://api.npoint.io/6c77447c9c8e9dac5898/firstPage");
             print("firstScreen refreshed");
           });
         },
@@ -111,14 +103,6 @@ class _MainScreenState extends State<MainScreen> {
                       // controller: pageController
                     );
                   }
-                  // if (!snapshot.hasData) {
-                  //   return Center(
-                  //       child: ElevatedButton(
-                  //           onPressed: () {
-                  //             setState(() {});
-                  //           },
-                  //           child: Text("Try Again")));
-                  // }
                   if (snapshot.hasError) {
                     return Center(child: Text(snapshot.error.toString()));
                   }

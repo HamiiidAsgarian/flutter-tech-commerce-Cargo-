@@ -152,7 +152,7 @@ class _SlideState extends State<Slide> {
               onTap: () async {
                 var categoryData = await vals.getDataFromApiToList(
                     url:
-                        'http://192.168.1.6:4000/${widget.title}'); //REVIEW better move to outside of the widget
+                        'https://api.npoint.io/6c77447c9c8e9dac5898/${widget.title}'); //REVIEW better move to outside of the widget
 
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return ListedItemsScreen(
@@ -178,20 +178,13 @@ class _SlideState extends State<Slide> {
                               return progress == null
                                   ? child
                                   : Container(
-                                      color: Colors.blueGrey[900],
+                                      // color: Colors.blueGrey[900],
                                       child: Center(
                                         child: Container(
                                             width: 100,
                                             height: 100,
-                                            child: CupertinoActivityIndicator()
-                                            // CircularProgressIndicator(
-                                            //     valueColor:
-                                            //         AlwaysStoppedAnimation<
-                                            //             Color>(Colors.white),
-                                            //     strokeWidth: 15,
-                                            //     backgroundColor:
-                                            //         Colors.white10)
-                                            ),
+                                            child:
+                                                CupertinoActivityIndicator()),
                                       ),
                                     );
                             }, fit: BoxFit.cover)),

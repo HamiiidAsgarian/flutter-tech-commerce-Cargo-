@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:commerce_app/consts.dart';
 import 'package:commerce_app/widgets/my_rounded_button/my_rounded_button.dart';
 import 'package:commerce_app/widgets/my_rounded_textfield/my_rounded_textfield.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -26,13 +27,20 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 40),
+                SizedBox(height: 30),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                  child: FlutterLogo(size: 80),
+                    // color: Colors.amber,
+                    child: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Image.asset("assets/images/AR.png",
+                            fit: BoxFit.fill))),
+                Text(
+                  "Lampstack©️ 2021",
+                  style: itemTitleFontStyle.copyWith(
+                      color: Colors.blueGrey.withOpacity(0.5)),
                 ),
-                // SizedBox(height: 20),
+                SizedBox(height: 20),
                 Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     child: MyRoundedButton(
@@ -42,7 +50,6 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
                       },
                     )),
                 const SizedBox(height: 30),
-
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
@@ -146,15 +153,7 @@ class _ProfileScreen2State extends State<ProfileScreen2> {
                               )
                             ]),
                           )
-                          .toList()
-                      // listMaker(list: [
-                      //   IcondataString(
-                      //       string: 'About Us', iconData: Icons.ac_unit),
-                      //   IcondataString(string: 'Contacts'),
-                      //   IcondataString(string: 'Version'),
-                      //   IcondataString(string: 'Our team'),
-                      // ], myIcon: false, context: context),
-                      ),
+                          .toList()),
                 )
               ],
             ),

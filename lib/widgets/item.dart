@@ -2,6 +2,7 @@ import 'package:commerce_app/consts.dart';
 // import 'package:commerce_app/models/api_first_page_model.dart';
 import 'package:commerce_app/screens/itemdetail_screen.dart';
 import 'package:commerce_app/style/my_flutter_app_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Item extends StatelessWidget {
@@ -84,30 +85,16 @@ class Item extends StatelessWidget {
                               return progress == null
                                   ? child
                                   : Container(
-                                      color: Colors.blueGrey[900],
+                                      // color: Colors.blueGrey[900],
                                       child: Center(
                                         child: Container(
                                             width: 100,
                                             height: 100,
-                                            child: CircularProgressIndicator(
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                        Color>(Colors.white),
-                                                strokeWidth: 15,
-                                                backgroundColor:
-                                                    Colors.white10)),
+                                            child:
+                                                CupertinoActivityIndicator()),
                                       ),
                                     );
                             })),
-                      // (Image.network(imgTumbnailUrl)) ?? Container(),
-                      // decoration: BoxDecoration(
-                      //   image: DecorationImage(
-                      //     image: NetworkImage(
-                      //         "https://i.picsum.photos/id/77/200/300.jpg?grayscale&hmac=0XOpv5k16oN2OIdXA51RRwpKHuMnidcPYoVk6X5iUaI"),
-                      //     //whatever image you can put here
-                      //     fit: BoxFit.cover,
-                      //   ),
-                      // ),
                     ),
                   ),
                 ),

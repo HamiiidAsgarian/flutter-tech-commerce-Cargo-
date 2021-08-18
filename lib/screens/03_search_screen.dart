@@ -4,6 +4,7 @@ import 'package:commerce_app/screens/itemdetail_screen.dart';
 import 'package:commerce_app/screens/listeddItemsWithFilter_screen.dart';
 import 'package:commerce_app/widgets/searchSection.dart';
 import 'package:commerce_app/widgets/text_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,8 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     _allProducts = Provider.of<ProviderModel>(context, listen: false)
-        .getDataFromApiToList(url: "http://192.168.1.6:4000/allProducts");
+        .getDataFromApiToList(
+            url: "https://api.npoint.io/6c77447c9c8e9dac5898/allProducts");
   }
 
   String selectedOption = 'Popular';
@@ -119,7 +121,8 @@ class SearchItemsSection extends StatelessWidget {
               //REVIEW makes loading the new page a bit slower
               List<dynamic> allProducts =
                   await Provider.of<ProviderModel>(context, listen: false)
-                      .getDataFromApiToList(url: "http://192.168.1.6:4000/$e");
+                      .getDataFromApiToList(
+                          url: "https://api.npoint.io/6c77447c9c8e9dac5898/$e");
 
               Navigator.push(
                   context,
@@ -174,19 +177,13 @@ class SearchItemsSection extends StatelessWidget {
                                   return progress == null
                                       ? child
                                       : Container(
-                                          color: Colors.blueGrey[900],
+                                          // color: Colors.blueGrey[900],
                                           child: Center(
                                             child: Container(
                                                 width: 100,
                                                 height: 100,
-                                                child: CircularProgressIndicator(
-                                                    valueColor:
-                                                        AlwaysStoppedAnimation<
-                                                                Color>(
-                                                            Colors.white),
-                                                    strokeWidth: 15,
-                                                    backgroundColor:
-                                                        Colors.white10)),
+                                                child:
+                                                    CupertinoActivityIndicator()),
                                           ),
                                         );
                                 }, fit: BoxFit.fill),
@@ -219,7 +216,8 @@ class SearchItemsSection extends StatelessWidget {
                                   List<dynamic> allProducts = await Provider.of<
                                           ProviderModel>(context, listen: false)
                                       .getDataFromApiToList(
-                                          url: "http://192.168.1.6:4000/$e");
+                                          url:
+                                              "https://api.npoint.io/6c77447c9c8e9dac5898/$e");
 
                                   Navigator.push(
                                       context,
@@ -238,47 +236,11 @@ class SearchItemsSection extends StatelessWidget {
                         ))
                     .values
                     .toList(),
-                // .map(
-                //   (e) =>
-                // Padding(
-                //     padding: const EdgeInsets.symmetric(
-                //         horizontal: 5, vertical: 5),
-                //     child: ClipRRect(
-                //       borderRadius: BorderRadius.circular(5),
-                //       child: MaterialButton(
-                //         elevation: 0,
-                //         minWidth: 20,
-                //         color: myColors[Random().nextInt(myColors.length)],
-                //         onPressed: () async {
-                //           //REVIEW makes loading the new page a bit slower
-                //           List<dynamic> allProducts =
-                //               await Provider.of<ProviderModel>(context,
-                //                       listen: false)
-                //                   .getDataFromApiToList(
-                //                       url: "http://localhost:3000/$e");
-
-                //           Navigator.push(
-                //               context,
-                //               MaterialPageRoute(
-                //                   builder: (context) =>
-                //                       ListedItemsWithFilterScreen(
-                //                           itemsList: allProducts,
-                //                           title: e)));
-                //         },
-                //         child: Text(e,
-                //             style: itemTitleFontStyle.copyWith(
-                //                 fontSize: 12, color: Colors.white)),
-                //       ),
-                //     ),
-                //   ),
-                // )
-                // .toList(),
               ),
             )
           ],
         ),
       );
-////
     });
   }
 }
@@ -297,22 +259,7 @@ class SearchSection extends StatelessWidget {
       width: double.infinity,
       color: Colors.white, //NOTE search section bg color
       padding: const EdgeInsets.symmetric(horizontal: 25),
-      child:
-          //  Column(children: [
-          //   const SizedBox(height: 25),
-          // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          //   Expanded(
-          //       child: TextFieldWithIcon(
-          //     function: function,
-          //     hint: 'Type something to search',
-          //     icon: MyFlutterApp.search_5,
-          //   )),
-          // ]),
-          //   Container(
-          // width: double.infinity,
-          // height: 50,
-          // child:
-          SingleChildScrollView(
+      child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
             // mainAxisAlignment: MainAxisAlignment.center,
@@ -322,35 +269,8 @@ class SearchSection extends StatelessWidget {
                     isChosen: chosenOption == e ? true : false,
                     text: e,
                     function: optionsFunctions!))
-                .toList()
-
-            //  [
-
-            //   CategoryTextButton(
-            //     isChosen: _chosenOption == "Recommended" ? true : false,
-            //     text: "Recommended",
-            //     function: (String e) {
-            //       setState(() {
-            //         _chosenOption = e;
-            //       });
-            //       // print(this._chosenOption);
-            //     },
-            //   ),
-            //   CategoryTextButton(
-            //     isChosen: _chosenOption == "Top Brands" ? true : false,
-            //     text: "Top Brands",
-            //     function: (String e) {
-            //       setState(() {
-            //         _chosenOption = e;
-            //       });
-            //       // print(this._chosenOption);
-            //     },
-            //   ),
-            // ],
-            ),
+                .toList()),
       ),
-      // )
-      // ]),
     );
   }
 }
