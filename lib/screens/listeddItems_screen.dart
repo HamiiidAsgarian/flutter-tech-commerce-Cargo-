@@ -53,7 +53,7 @@ class BrandItemsList extends StatefulWidget {
 class _BrandItemsListState extends State<BrandItemsList> {
   ScrollController _scrollControllerGrid = new ScrollController();
   late int _maxLimit =
-      widget.itemsList.length > 6 ? 4 : widget.itemsList.length;
+      widget.itemsList.length > 6 ? 6 : widget.itemsList.length;
   @override
   void initState() {
     super.initState();
