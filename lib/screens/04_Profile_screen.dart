@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:commerce_app/consts.dart';
 import 'package:commerce_app/widgets/my_rounded_button/my_rounded_button.dart';
 import 'package:commerce_app/widgets/my_rounded_textfield/my_rounded_textfield.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

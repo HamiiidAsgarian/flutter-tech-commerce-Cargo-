@@ -76,7 +76,7 @@ class ScreenWidthSizedContainer extends StatelessWidget {
               onPressed: () async {
                 var categoryData = await vals.getDataFromApiToList(
                     url:
-                        'https://api.npoint.io/6c77447c9c8e9dac5898/$referenceTitle'); //REVIEW better move to outside of the widget
+                        'http://api.npoint.io/6c77447c9c8e9dac5898/$referenceTitle'); //REVIEW better move to outside of the widget
 
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return ListedItemsScreen(

@@ -10,7 +10,7 @@ main() async {
 }
 
 fun1() {
-  Duration a = new Duration(seconds: 5);
+  // Duration a = new Duration(seconds: 5);
   // print("1");
   return ("1");
 }

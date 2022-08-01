@@ -27,7 +27,7 @@ class _SearchScreenState extends State<SearchScreen> {
     super.initState();
     _allProducts = Provider.of<ProviderModel>(context, listen: false)
         .getDataFromApiToList(
-            url: "https://api.npoint.io/6c77447c9c8e9dac5898/allProducts");
+            url: "http://api.npoint.io/6c77447c9c8e9dac5898/allProducts");
   }
 
   String selectedOption = 'Popular';
@@ -122,7 +122,7 @@ class SearchItemsSection extends StatelessWidget {
               List<dynamic> allProducts =
                   await Provider.of<ProviderModel>(context, listen: false)
                       .getDataFromApiToList(
-                          url: "https://api.npoint.io/6c77447c9c8e9dac5898/$e");
+                          url: "http://api.npoint.io/6c77447c9c8e9dac5898/$e");
 
               Navigator.push(
                   context,
@@ -217,7 +217,7 @@ class SearchItemsSection extends StatelessWidget {
                                           ProviderModel>(context, listen: false)
                                       .getDataFromApiToList(
                                           url:
-                                              "https://api.npoint.io/6c77447c9c8e9dac5898/$e");
+                                              "http://api.npoint.io/6c77447c9c8e9dac5898/$e");
 
                                   Navigator.push(
                                       context,

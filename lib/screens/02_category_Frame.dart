@@ -22,7 +22,7 @@ class _CategoryFramePageState extends State<CategoryFramePage> {
             listen:
                 false) //NOTE maybe better to delete this and pass it to provider totally
         .getDataFromApi(
-            url: "https://api.npoint.io/6c77447c9c8e9dac5898/secondPage");
+            url: "http://api.npoint.io/6c77447c9c8e9dac5898/secondPage");
   }
 
   @override

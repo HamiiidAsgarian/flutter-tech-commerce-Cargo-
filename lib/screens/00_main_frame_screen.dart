@@ -23,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _firstPageData = Provider.of<ProviderModel>(context, listen: false)
           .getDataFromApi(
-              url: "https://api.npoint.io/6c77447c9c8e9dac5898/firstPage");
+              url: "http://api.npoint.io/6c77447c9c8e9dac5898/firstPage");
     });
   }
 
@@ -70,8 +70,7 @@ class _MainScreenState extends State<MainScreen> {
           setState(() {
             _firstPageData = Provider.of<ProviderModel>(context, listen: false)
                 .getDataFromApi(
-                    url:
-                        "https://api.npoint.io/6c77447c9c8e9dac5898/firstPage");
+                    url: "http://api.npoint.io/6c77447c9c8e9dac5898/firstPage");
             print("firstScreen refreshed");
           });
         },
